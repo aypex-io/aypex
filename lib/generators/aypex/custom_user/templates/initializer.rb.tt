@@ -1,0 +1,1 @@
+Aypex::Config.user_class = "<%= class_name %>"

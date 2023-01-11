@@ -1,0 +1,88 @@
+---
+ignore:
+- app/models/aypex/gateway.rb:
+  - Style/MissingRespondToMissing
+- app/models/aypex/gateway/bogus.rb:
+  - Lint/AssignmentInCondition
+- app/models/aypex/order.rb:
+  - Lint/FloatComparison
+- app/models/aypex/payment_method/store_credit.rb:
+  - Lint/AssignmentInCondition
+- app/models/aypex/product.rb:
+  - Lint/AssignmentInCondition
+- app/models/aypex/promotion/rules/taxon.rb:
+  - Lint/UselessAssignment
+- app/models/aypex/reimbursement_type/credit.rb:
+  - Lint/UselessAssignment
+- app/models/aypex/reimbursement_type/original_payment.rb:
+  - Lint/UselessAssignment
+- app/models/aypex/shipment_handler.rb:
+  - Lint/AssignmentInCondition
+- app/models/aypex/stock/coordinator.rb:
+  - Lint/UselessAssignment
+- app/models/aypex/stock_location.rb:
+  - Lint/AssignmentInCondition
+- app/models/aypex/store_credit.rb:
+  - Lint/AssignmentInCondition
+- app/models/aypex/tax_category.rb:
+  - Lint/AssignmentInCondition
+- app/models/aypex/taxon.rb:
+  - Lint/UselessAssignment
+- app/models/aypex/zone.rb:
+  - Lint/AssignmentInCondition
+- config/initializers/active_storage.rb:
+  - Style/StringLiterals
+- config/initializers/state_machine.rb:
+  - Style/SlicingWithRange
+- db/migrate/20210921090344_add_unique_stock_item_stock_location_variant_deleted_at_index.rb:
+  - Style/StringLiterals
+- db/migrate/20210929090344_create_stock_item_stock_location_id_variant_id_coalesce_deleted_at_unique_index.rb:
+  - Style/StringLiterals
+- db/migrate/20220103082046_add_status_and_make_active_at_to_aypex_products.rb:
+  - Style/StringLiterals
+- lib/aypex/configuration.rb:
+  - Style/TrivialAccessors
+- lib/aypex/controller_helpers/currency.rb:
+  - Style/RedundantBegin
+  - Style/StringLiterals
+  - Layout/DotPosition
+- lib/aypex/importer/order.rb:
+  - Lint/AssignmentInCondition
+  - Lint/UselessAssignment
+- lib/aypex/search/base.rb:
+  - Style/MissingRespondToMissing
+- lib/aypex/localized_number.rb:
+  - Lint/UselessAssignment
+- lib/aypex/testing_support/i18n.rb:
+  - Lint/IneffectiveAccessModifier
+- lib/generators/aypex/dummy/dummy_generator.rb:
+  - Style/RedundantInterpolation
+  - Style/SlicingWithRange
+- lib/generators/aypex/dummy/templates/rails/application.rb:
+  - Lint/Syntax
+- lib/generators/aypex/dummy/templates/rails/script/rails:
+  - Style/StringLiterals
+  - Layout/ExtraSpacing
+- lib/generators/aypex/install/templates/config/initializers/aypex.rb:
+  - Lint/Syntax
+- script/rails:
+  - Style/StringLiterals
+  - Layout/TrailingEmptyLines
+- spec/lib/aypex/token_generator_spec.rb:
+  - Lint/ConstantDefinitionInBlock
+- spec/lib/aypex/service_module_spec.rb:
+  - Lint/ConstantDefinitionInBlock
+- spec/models/aypex/gateway_spec.rb:
+  - Lint/ConstantDefinitionInBlock
+- spec/models/aypex/order/checkout_spec.rb:
+  - Lint/ConstantDefinitionInBlock
+- spec/models/aypex/payment_method_spec.rb:
+  - Lint/ConstantDefinitionInBlock
+- spec/models/aypex/promotion_rule_spec.rb:
+  - Lint/ConstantDefinitionInBlock
+- spec/models/aypex/reimbursement/reimbursement_type_validator_spec.rb:
+  - Lint/ConstantDefinitionInBlock
+- spec/models/aypex/reimbursement_type/credit_spec.rb:
+  - Lint/ConstantDefinitionInBlock
+- spec/validators/email_validator_spec.rb:
+  - Lint/ConstantDefinitionInBlock

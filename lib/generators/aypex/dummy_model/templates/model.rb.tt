@@ -1,0 +1,6 @@
+module Aypex
+  class DummyModel < Aypex::Base
+    acts_as_list
+    validates :name, presence: true
+  end
+end

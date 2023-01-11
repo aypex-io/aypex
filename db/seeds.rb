@@ -1,0 +1,1 @@
+Aypex::Seeds::All.call

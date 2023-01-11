@@ -1,0 +1,36 @@
+module Aypex
+  module CurrentUserHelpers
+    def self.included(receiver)
+      receiver.send :helper_method, :try_aypex_current_user
+    end
+
+    def try_aypex_current_user
+      current_user
+    end
+  end
+
+  module AuthenticationHelpers
+    def self.included(receiver)
+      receiver.send :helper_method, :aypex_login_path
+      receiver.send :helper_method, :aypex_signup_path
+      receiver.send :helper_method, :aypex_logout_path
+    end
+
+    def aypex_login_path
+      main_app.login_path
+    end
+
+    def aypex_signup_path
+      main_app.signup_path
+    end
+
+    def aypex_logout_path
+      main_app.logout_path
+    end
+  end
+end
+
+ApplicationController.include Aypex::AuthenticationHelpers
+ApplicationController.include Aypex::CurrentUserHelpers
+
+Aypex::Api::BaseController.include Aypex::CurrentUserHelpers
