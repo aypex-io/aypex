@@ -17,7 +17,7 @@ module Aypex
 
       # Needs to be overridden so that we use Aypex's Ability rather than anyone else's.
       def current_ability
-        @current_ability ||= Aypex::Dependencies.ability_class.constantize.new(try_aypex_current_user)
+        @current_ability ||= Aypex::Dependency.ability_class.constantize.new(try_aypex_current_user)
       end
 
       def redirect_back_or_default(default)

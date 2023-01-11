@@ -76,7 +76,7 @@ module Aypex
           line_item = order.find_line_item_by_variant(item.variant)
           next if line_item.blank?
 
-          Aypex::Dependencies.cart_remove_item_service.constantize.call(order: order, variant: item.variant, quantity: item.quantity)
+          Aypex::Dependency.cart_remove_item_service.constantize.call(order: order, variant: item.variant, quantity: item.quantity)
         end
       end
 

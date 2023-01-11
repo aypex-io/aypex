@@ -66,7 +66,7 @@ module Aypex
       end
 
       def current_store_finder
-        Aypex::Dependencies.current_store_finder.constantize
+        Aypex::Dependency.current_store_finder.constantize
       end
     end
   end

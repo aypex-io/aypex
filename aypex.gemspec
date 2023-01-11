@@ -6,8 +6,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Matthew Kennedy"]
   spec.email = ["m.kennedy@me.com"]
   spec.homepage = "https://aypex.io"
-  spec.summary = "The bare bones necessary for Aypex"
-  spec.description = "Aypex Models, Helpers, Services and core libraries"
+  spec.summary = "Aypex the centerpiece for Aypex Commerce"
+  spec.description = "Aypex Models, Helpers, Services and libraries"
   spec.license = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"

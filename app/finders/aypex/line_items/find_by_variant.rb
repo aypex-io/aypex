@@ -5,7 +5,7 @@ module Aypex
         order.line_items.detect do |line_item|
           next unless line_item.variant_id == variant.id
 
-          Aypex::Dependencies.cart_compare_line_items_service.constantize.call(order: order, line_item: line_item, options: options).value
+          Aypex::Dependency.cart_compare_line_items_service.constantize.call(order: order, line_item: line_item, options: options).value
         end
       end
     end

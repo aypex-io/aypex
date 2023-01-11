@@ -29,7 +29,7 @@ module Aypex
       def extended_base_scope
         base_scope = current_store.products.aypex_base_scopes
         base_scope = get_products_conditions_for(base_scope, keywords)
-        base_scope = Aypex::Dependencies.products_finder.constantize.new(**product_finder_params(base_scope)).execute
+        base_scope = Aypex::Dependency.products_finder.constantize.new(**product_finder_params(base_scope)).execute
         base_scope = add_search_scopes(base_scope)
         add_eagerload_scopes(base_scope)
       end

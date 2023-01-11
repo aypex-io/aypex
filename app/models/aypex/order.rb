@@ -315,7 +315,7 @@ module Aypex
     def find_line_item_by_variant(variant, options = {})
       line_items.detect do |line_item|
         line_item.variant_id == variant.id &&
-          Aypex::Dependencies.cart_compare_line_items_service.constantize.new.call(order: self, line_item: line_item, options: options).value
+          Aypex::Dependency.cart_compare_line_items_service.constantize.new.call(order: self, line_item: line_item, options: options).value
       end
     end
 

@@ -27,7 +27,7 @@ module Aypex
 
         def stub_authorization!
           ability = build_ability
-          ability_class = Aypex::Dependencies.ability_class.constantize
+          ability_class = Aypex::Dependency.ability_class.constantize
 
           after(:all) do
             ability_class.remove_ability(ability)
@@ -51,7 +51,7 @@ module Aypex
 
         def custom_authorization!(&block)
           ability = build_ability(&block)
-          ability_class = Aypex::Dependencies.ability_class.constantize
+          ability_class = Aypex::Dependency.ability_class.constantize
 
           after(:all) do
             ability_class.remove_ability(ability)

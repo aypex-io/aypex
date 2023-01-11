@@ -6,7 +6,7 @@ module Aypex
       def call(order:, variant:, quantity: nil, public_metadata: {}, private_metadata: {}, options: {})
         ApplicationRecord.transaction do
           run :add_to_line_item
-          run Aypex::Dependencies.cart_recalculate_service.constantize
+          run Aypex::Dependency.cart_recalculate_service.constantize
         end
       end
 
@@ -16,7 +16,7 @@ module Aypex
         options ||= {}
         quantity ||= 1
 
-        line_item = Aypex::Dependencies.line_item_by_variant_finder.constantize.new.execute(order: order, variant: variant, options: options)
+        line_item = Aypex::Dependency.line_item_by_variant_finder.constantize.new.execute(order: order, variant: variant, options: options)
 
         line_item_created = line_item.nil?
         if line_item.nil?

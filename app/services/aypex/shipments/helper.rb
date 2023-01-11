@@ -12,11 +12,11 @@ module Aypex
       end
 
       def add_item_service
-        Aypex::Dependencies.cart_add_item_service.constantize
+        Aypex::Dependency.cart_add_item_service.constantize
       end
 
       def remove_item_service
-        Aypex::Dependencies.cart_remove_item_service.constantize
+        Aypex::Dependency.cart_remove_item_service.constantize
       end
     end
   end

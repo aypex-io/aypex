@@ -13,6 +13,7 @@ require "auto_strip_attributes"
 require "awesome_nested_set"
 require "cancan"
 require "friendly_id"
+require "friendly_id/paranoia"
 require "image_processing/mini_magick"
 require "kaminari"
 require "monetize"
@@ -56,7 +57,7 @@ module Aypex
   # This method is defined within the core gem on purpose.
   # Some people may only wish to use the Core part of Aypex.
   def self.dependencies
-    yield(Aypex::Dependencies)
+    yield(Aypex::Dependency)
   end
 end
 

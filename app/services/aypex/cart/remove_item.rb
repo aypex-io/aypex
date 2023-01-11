@@ -9,7 +9,7 @@ module Aypex
 
         ActiveRecord::Base.transaction do
           line_item = remove_from_line_item(order: order, variant: variant, quantity: quantity, options: options)
-          Aypex::Dependencies.cart_recalculate_service.constantize.call(
+          Aypex::Dependency.cart_recalculate_service.constantize.call(
             line_item: line_item,
             order: order,
             options: options
@@ -21,7 +21,7 @@ module Aypex
       private
 
       def remove_from_line_item(order:, variant:, quantity:, options:)
-        line_item = Aypex::Dependencies.line_item_by_variant_finder.constantize.new.execute(order: order, variant: variant, options: options)
+        line_item = Aypex::Dependency.line_item_by_variant_finder.constantize.new.execute(order: order, variant: variant, options: options)
 
         raise ActiveRecord::RecordNotFound if line_item.nil?
 

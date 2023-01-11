@@ -7,7 +7,7 @@ module Aypex
         options ||= {}
         ActiveRecord::Base.transaction do
           line_item.destroy!
-          Aypex::Dependencies.cart_recalculate_service.constantize.new.call(
+          Aypex::Dependency.cart_recalculate_service.constantize.new.call(
             order: order,
             line_item: line_item,
             options: options

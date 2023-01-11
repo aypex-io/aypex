@@ -4,7 +4,7 @@ module Aypex
       prepend Aypex::ServiceModule::Base
 
       def call(order:)
-        Aypex::Dependencies.checkout_next_service.constantize.call(order: order) until cannot_make_transition?(order)
+        Aypex::Dependency.checkout_next_service.constantize.call(order: order) until cannot_make_transition?(order)
 
         if order.reload.complete?
           success(order)

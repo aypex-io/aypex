@@ -44,7 +44,7 @@ module Aypex
             current_quantity = order.quantity_of(item.variant)
             next unless current_quantity < item.quantity && item_available?(item)
 
-            line_item = Aypex::Dependencies.cart_add_item_service.constantize.call(order: order,
+            line_item = Aypex::Dependency.cart_add_item_service.constantize.call(order: order,
               variant: item.variant,
               quantity: item.quantity - current_quantity).value
             action_taken = true if line_item.try(:valid?)
@@ -65,7 +65,7 @@ module Aypex
             line_item = order.find_line_item_by_variant(item.variant)
             next unless line_item.present?
 
-            Aypex::Dependencies.cart_remove_item_service.constantize.call(order: order,
+            Aypex::Dependency.cart_remove_item_service.constantize.call(order: order,
               variant: item.variant,
               quantity: (item.quantity || 1))
             action_taken = true

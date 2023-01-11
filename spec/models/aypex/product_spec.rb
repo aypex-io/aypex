@@ -313,7 +313,7 @@ describe Aypex::Product, type: :model do
     end
 
     context "hard deletion" do
-      it "doesnt raise ActiveRecordError error" do
+      it "doesn't raise ActiveRecordError error" do
         expect { product.really_destroy! }.not_to raise_error(ActiveRecord::ActiveRecordError)
       end
     end

@@ -6,7 +6,7 @@ module Aypex
       def call(order:, line_item:, quantity: nil)
         ActiveRecord::Base.transaction do
           run :change_item_quantity
-          run Aypex::Dependencies.cart_recalculate_service.constantize
+          run Aypex::Dependency.cart_recalculate_service.constantize
         end
       end
 

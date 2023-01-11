@@ -37,7 +37,7 @@ module Aypex
       app.config.aypex = Environment.new(AypexCalculators.new, Aypex::Configuration.new, Aypex::Dependencies.new)
       app.config.active_record.yaml_column_permitted_classes = [Symbol, BigDecimal]
       Aypex::Config = app.config.aypex.preferences
-      Aypex::Dependencies = app.config.aypex.dependencies
+      Aypex::Dependency = app.config.aypex.dependencies
     end
 
     initializer "aypex.register.calculators", before: :after_initialize do |app|

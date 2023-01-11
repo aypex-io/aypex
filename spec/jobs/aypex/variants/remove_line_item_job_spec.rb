@@ -7,7 +7,7 @@ module Aypex
     let(:remove_line_item_service_double) { double("RemoveLineItemService") }
 
     it "calls the cart_remove_item_service service" do
-      expect(Aypex::Dependencies.cart_remove_line_item_service).to receive(:constantize).and_return(remove_line_item_service_double)
+      expect(Aypex::Dependency.cart_remove_line_item_service).to receive(:constantize).and_return(remove_line_item_service_double)
       expect(remove_line_item_service_double).to receive(:call).with(order: order, line_item: line_item)
 
       described_class.perform_now(line_item: line_item)

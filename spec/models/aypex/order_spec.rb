@@ -546,12 +546,12 @@ describe Aypex::Order, type: :model do
 
       it "matches line item when options match" do
         allow(order).to receive(:foos_match).and_return(true)
-        expect(Aypex::Dependencies.cart_compare_line_items_service.constantize.new.call(order: order, line_item: line_items.first, options: {foos: {bar: :zoo}}).value).to be true
+        expect(Aypex::Dependency.cart_compare_line_items_service.constantize.new.call(order: order, line_item: line_items.first, options: {foos: {bar: :zoo}}).value).to be true
       end
 
       it "does not match line item without options" do
         allow(order).to receive(:foos_match).and_return(false)
-        expect(Aypex::Dependencies.cart_compare_line_items_service.constantize.new.call(order: order, line_item: line_items.first).value).to be false
+        expect(Aypex::Dependency.cart_compare_line_items_service.constantize.new.call(order: order, line_item: line_items.first).value).to be false
       end
     end
   end
