@@ -30,7 +30,7 @@ describe Aypex::Ability, type: :model do
   end
 
   context "register_ability" do
-    it "adds the ability to the list of abilties" do
+    it "adds the ability to the list of abilities" do
       Aypex::Ability.register_ability(FooAbility)
       expect(Aypex::Ability.new(user).abilities).not_to be_empty
     end

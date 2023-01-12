@@ -96,21 +96,21 @@ describe Aypex::Shipment, type: :model do
   end
 
   context "display_amount" do
-    it "retuns a Aypex::Money" do
+    it "returns a Aypex::Money" do
       allow(shipment).to receive(:cost).and_return(21.22)
       expect(shipment.display_amount).to eq(Aypex::Money.new(21.22))
     end
   end
 
   context "display_final_price" do
-    it "retuns a Aypex::Money" do
+    it "returns a Aypex::Money" do
       allow(shipment).to receive(:final_price).and_return(21.22)
       expect(shipment.display_final_price).to eq(Aypex::Money.new(21.22))
     end
   end
 
   context "display_item_cost" do
-    it "retuns a Aypex::Money" do
+    it "returns a Aypex::Money" do
       allow(shipment).to receive(:item_cost).and_return(21.22)
       expect(shipment.display_item_cost).to eq(Aypex::Money.new(21.22))
     end
