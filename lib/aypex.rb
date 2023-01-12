@@ -30,6 +30,7 @@ module Aypex
   autoload :TokenGenerator, "aypex/token_generator"
 
   class GatewayError < RuntimeError; end
+
   class DestroyWithOrdersError < StandardError; end
 
   # Used to configure Aypex.
@@ -62,7 +63,6 @@ module Aypex
 end
 
 require "aypex/version"
-
 require "aypex/number_generator"
 require "aypex/migrations"
 require "aypex/engine"

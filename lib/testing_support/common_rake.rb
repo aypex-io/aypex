@@ -1,7 +1,4 @@
-unless defined?(Aypex::InstallGenerator)
-  require "generators/aypex/install/install_generator"
-end
-
+require "generators/aypex/install/install_generator" unless defined?(Aypex::InstallGenerator)
 require "generators/aypex/dummy/dummy_generator"
 require "generators/aypex/dummy_model/dummy_model_generator"
 
@@ -14,7 +11,7 @@ namespace :common do
     ENV["RAILS_ENV"] = "test"
     Rails.env = "test"
 
-    $stdout.puts "(1 of 4) Building dummy app for testing #{ENV.fetch("LIB_NAME", nil)}"
+    $stdout.puts "Building dummy app for testing #{ENV.fetch("LIB_NAME", nil)}"
     Aypex::DummyGenerator.start ["--lib_name=#{ENV.fetch("LIB_NAME", nil)}", "--quiet"]
     Aypex::InstallGenerator.start [
       "--lib_name=#{ENV.fetch("LIB_NAME", nil)}",
@@ -32,22 +29,24 @@ namespace :common do
       "--user_class=#{args[:user_class]}"
     ]
 
-    $stdout.puts "(2 of 4) Setting up dummy database..."
+    $stdout.puts "Setting up dummy database..."
     system("bin/rails db:environment:set RAILS_ENV=test")
     system("bundle exec rake db:drop db:create")
     Aypex::DummyModelGenerator.start
     system("bundle exec rake db:migrate")
 
-    $stdout.puts "(3 of 4) Running installation generator for #{ENV["LIB_NAME"]}..."
-    begin
-      require "generators/#{ENV["LIB_NAME"]}/install/install_generator"
-      $stdout.puts "Running extension installation generator..."
-      "#{ENV["LIB_NAME"].camelize}::InstallGenerator".constantize.start(["--auto-run-migrations"])
-    rescue LoadError
-      $stdout.puts "Skipping installation no generator to run..."
+    unless ENV["LIB_NAME"] == "aypex"
+      begin
+        $stdout.puts "Running installation generator for #{ENV["LIB_NAME"]}..."
+        require "generators/#{ENV["LIB_NAME"]}/install/install_generator"
+        $stdout.puts "Running extension installation generator..."
+        "#{ENV["LIB_NAME"].camelize}::Generators::InstallGenerator".constantize.start(["--auto-run-migrations"])
+      rescue LoadError
+        $stdout.puts "Skipping installation no generator to run..."
+      end
     end
 
-    $stdout.puts "(4 of 4) Precompiling assets..."
+    $stdout.puts "Precompiling assets..."
     system("bundle exec rake assets:precompile")
 
     $stdout.puts "Fin!"
