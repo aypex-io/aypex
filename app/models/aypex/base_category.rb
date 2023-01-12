@@ -1,5 +1,5 @@
 module Aypex
-  class Taxonomy < Aypex::Base
+  class BaseCategory < Aypex::Base
     include Metadata
     if defined?(Aypex::Webhooks)
       include Aypex::Webhooks::HasWebhooks
@@ -10,12 +10,12 @@ module Aypex
     validates :name, presence: true, uniqueness: {case_sensitive: false, allow_blank: true, scope: :store_id}
     validates :store, presence: true
 
-    has_many :taxons, inverse_of: :taxonomy
-    has_one :root, -> { where parent_id: nil }, class_name: "Aypex::Taxon", dependent: :destroy
+    has_many :categories, inverse_of: :base_category
+    has_one :root, -> { where parent_id: nil }, class_name: "Aypex::Category", dependent: :destroy
     belongs_to :store, class_name: "Aypex::Store"
 
     after_create :set_root
-    after_update :set_root_taxon_name
+    after_update :set_root_categoty_name
 
     default_scope { order("#{table_name}.position, #{table_name}.created_at") }
 
@@ -24,10 +24,10 @@ module Aypex
     private
 
     def set_root
-      self.root ||= Taxon.create!(taxonomy_id: id, name: name)
+      self.root ||= Category.create!(base_category_id: id, name: name)
     end
 
-    def set_root_taxon_name
+    def set_root_category_name
       return unless saved_change_to_name?
       return if name.to_s == root.name.to_s
 
