@@ -21,7 +21,7 @@ module Aypex
         subject.validate(line_item)
       end
 
-      it "is invalid when supply is insufficent" do
+      it "is invalid when supply is insufficient" do
         allow_any_instance_of(Stock::Quantifier).to receive_messages(can_supply?: false)
         expect(line_item.errors[:quantity]).to eq []
         subject.validate(line_item)
