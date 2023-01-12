@@ -1,3 +1,5 @@
+# Auto generated files with errors to ignore.
+# Remove from this list as you refactor files.
 ---
 ignore:
 - app/models/aypex/gateway.rb:
@@ -49,12 +51,10 @@ ignore:
 - lib/aypex/importer/order.rb:
   - Lint/AssignmentInCondition
   - Lint/UselessAssignment
-- lib/aypex/search/base.rb:
-  - Style/MissingRespondToMissing
 - lib/aypex/localized_number.rb:
   - Lint/UselessAssignment
-- lib/aypex/testing_support/i18n.rb:
-  - Lint/IneffectiveAccessModifier
+- lib/aypex/search/base.rb:
+  - Style/MissingRespondToMissing
 - lib/generators/aypex/dummy/dummy_generator.rb:
   - Style/RedundantInterpolation
   - Style/SlicingWithRange
@@ -65,10 +65,9 @@ ignore:
   - Layout/ExtraSpacing
 - lib/generators/aypex/install/templates/config/initializers/aypex.rb:
   - Lint/Syntax
-- script/rails:
-  - Style/StringLiterals
-  - Layout/TrailingEmptyLines
-- spec/lib/aypex/token_generator_spec.rb:
+- lib/testing_support/i18n.rb:
+  - Lint/IneffectiveAccessModifier
+- spec/lib/aypex/core/token_generator_spec.rb:
   - Lint/ConstantDefinitionInBlock
 - spec/lib/aypex/service_module_spec.rb:
   - Lint/ConstantDefinitionInBlock
