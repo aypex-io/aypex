@@ -57,14 +57,14 @@ describe Aypex::Product, type: :model do
 
     describe "#duplicate" do
       before do
-        allow(product).to receive_messages taxons: [create(:taxon)], stores: [store]
+        allow(product).to receive_messages categories: [create(:category)], stores: [store]
       end
 
       it "duplicates product" do
         clone = product.duplicate
         expect(clone.name).to eq("COPY OF " + product.name)
         expect(clone.master.sku).to eq("COPY OF " + product.master.sku)
-        expect(clone.taxons).to eq(product.taxons)
+        expect(clone.categories).to eq(product.categories)
         expect(clone.stores).to eq(product.stores)
         expect(clone.images.size).to eq(product.images.size)
       end
@@ -539,9 +539,9 @@ describe Aypex::Product, type: :model do
   end
 
   # Regression tests for #2352
-  context "classifications and taxons" do
+  context "classifications and categories" do
     it "is joined through classifications" do
-      reflection = Aypex::Product.reflect_on_association(:taxons)
+      reflection = Aypex::Product.reflect_on_association(:categories)
       expect(reflection.options[:through]).to eq(:classifications)
     end
 
@@ -630,20 +630,20 @@ describe Aypex::Product, type: :model do
   end
 
   describe "#brand" do
-    let(:taxonomy) { create(:taxonomy, name: I18n.t("aypex.taxonomy_brands_name")) }
-    let(:product) { create(:product, taxons: [taxonomy.taxons.first], stores: [store]) }
+    let(:base_category) { create(:base_category, name: I18n.t("aypex.base_category_brands_name")) }
+    let(:product) { create(:product, categories: [base_category.categories.first], stores: [store]) }
 
-    it "fetches Brand Taxon" do
-      expect(product.brand).to eql(taxonomy.taxons.first)
+    it "fetches Brand Category" do
+      expect(product.brand).to eql(base_category.categories.first)
     end
   end
 
   describe "#category" do
-    let(:taxonomy) { create(:taxonomy, name: I18n.t("aypex.taxonomy_categories_name")) }
-    let(:product) { create(:product, taxons: [taxonomy.taxons.first], stores: [store]) }
+    let(:base_category) { create(:base_category, name: I18n.t("aypex.base_category_categories_name")) }
+    let(:product) { create(:product, categories: [base_category.categories.first], stores: [store]) }
 
-    it "fetches Category Taxon" do
-      expect(product.category).to eql(taxonomy.taxons.first)
+    it "fetches Category Category" do
+      expect(product.category).to eql(base_category.categories.first)
     end
   end
 
@@ -822,22 +822,22 @@ describe Aypex::Product, type: :model do
     end
   end
 
-  describe "#taxons_for_store" do
+  describe "#categories_for_store" do
     let(:store) { create(:store) }
     let(:store_2) { create(:store) }
-    let(:product) { create(:product, stores: [store, store_2], taxons: [taxon, taxon_2]) }
-    let(:taxonomy) { create(:taxonomy, store: store) }
-    let(:taxonomy_2) { create(:taxonomy, store: store_2) }
-    let(:taxon) { create(:taxon, taxonomy: taxonomy) }
-    let(:taxon_2) { create(:taxon, taxonomy: taxonomy_2) }
-    let(:taxon_3) { create(:taxon, taxonomy: taxonomy) }
+    let(:product) { create(:product, stores: [store, store_2], categories: [category, category_2]) }
+    let(:base_category) { create(:base_category, store: store) }
+    let(:base_category_2) { create(:base_category, store: store_2) }
+    let(:category) { create(:category, base_category: base_category) }
+    let(:category_2) { create(:category, base_category: base_category_2) }
+    let(:category_3) { create(:category, base_category: base_category) }
 
-    it "returns product taxons for specified store" do
-      expect(product.taxons_for_store(store)).to eq([taxon])
-      expect(product.taxons_for_store(store_2)).to eq([taxon_2])
+    it "returns product categories for specified store" do
+      expect(product.categories_for_store(store)).to eq([category])
+      expect(product.categories_for_store(store_2)).to eq([category_2])
     end
 
-    it { expect(product.taxons_for_store(store)).to be_a(ActiveRecord::Relation) }
+    it { expect(product.categories_for_store(store)).to be_a(ActiveRecord::Relation) }
   end
 
   describe "#any_variant_in_stock_or_backorderable?" do

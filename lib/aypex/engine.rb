@@ -116,7 +116,7 @@ module Aypex
         Aypex::Promotion::Rules::FirstOrder,
         Aypex::Promotion::Rules::UserLoggedIn,
         Aypex::Promotion::Rules::OneUsePerUser,
-        Aypex::Promotion::Rules::Taxon,
+        Aypex::Promotion::Rules::Category,
         Aypex::Promotion::Rules::OptionValue,
         Aypex::Promotion::Rules::Country
       ]

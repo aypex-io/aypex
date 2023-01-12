@@ -1,8 +1,8 @@
-class AddMetadataToAypexTaxonsAndTaxonomies < ActiveRecord::Migration[5.2]
+class AddMetadataToAypexCategoriesAndBaseCategories < ActiveRecord::Migration[5.2]
   def change
     %i[
-      aypex_taxons
-      aypex_taxonomies
+      aypex_categories
+      aypex_base_categories
     ].each do |table_name|
       change_table table_name do |t|
         if t.respond_to? :jsonb

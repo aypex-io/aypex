@@ -41,18 +41,18 @@ describe "Product scopes", type: :model do
   describe ".for_filters" do
     subject { Aypex::Product.method(:for_filters) }
 
-    let(:taxon_1) { create(:taxon) }
-    let(:taxon_2) { create(:taxon) }
+    let(:category_1) { create(:category) }
+    let(:category_2) { create(:category) }
 
-    let!(:product_1) { create(:product, currency: "GBP", taxons: [taxon_1], stores: [store]) }
-    let!(:product_2) { create(:product, currency: "GBP", taxons: [taxon_2], stores: [store]) }
+    let!(:product_1) { create(:product, currency: "GBP", categories: [category_1], stores: [store]) }
+    let!(:product_2) { create(:product, currency: "GBP", categories: [category_2], stores: [store]) }
 
     before do
-      create(:product, currency: "USD", taxons: [create(:taxon)], stores: [store])
+      create(:product, currency: "USD", categories: [create(:category)], stores: [store])
     end
 
-    context "when giving a taxon" do
-      it { expect(subject.call("GBP", taxon: taxon_1)).to contain_exactly(product_1) }
+    context "when giving a category" do
+      it { expect(subject.call("GBP", category: category_1)).to contain_exactly(product_1) }
     end
 
     context "when giving a currency with no products" do
@@ -60,43 +60,43 @@ describe "Product scopes", type: :model do
     end
   end
 
-  context "A product assigned to parent and child taxons" do
+  context "A product assigned to parent and child categories" do
     before do
-      @taxonomy = create(:taxonomy)
-      @root_taxon = @taxonomy.root
+      @base_category = create(:base_category)
+      @root_category = @base_category.root
 
-      @parent_taxon = create(:taxon, name: "Parent", taxonomy_id: @taxonomy.id, parent: @root_taxon)
-      @child_taxon = create(:taxon, name: "Child 1", taxonomy_id: @taxonomy.id, parent: @parent_taxon)
-      @parent_taxon.reload # Need to reload for descendents to show up
+      @parent_category = create(:category, name: "Parent", base_category_id: @base_category.id, parent: @root_category)
+      @child_category = create(:category, name: "Child 1", base_category_id: @base_category.id, parent: @parent_category)
+      @parent_category.reload # Need to reload for descendents to show up
 
-      product.taxons << @parent_taxon
-      product.taxons << @child_taxon
+      product.categories << @parent_category
+      product.categories << @child_category
     end
 
-    it "calling Product.in_taxon returns products in child taxons" do
-      product.taxons -= [@child_taxon]
-      expect(product.taxons.count).to eq(1)
+    it "calling Product.in_category returns products in child categories" do
+      product.categories -= [@child_category]
+      expect(product.categories.count).to eq(1)
 
-      expect(Aypex::Product.in_taxon(@parent_taxon)).to include(product)
+      expect(Aypex::Product.in_category(@parent_category)).to include(product)
     end
 
-    it "calling Product.in_taxon should not return duplicate records" do
-      expect(Aypex::Product.in_taxon(@parent_taxon).to_a.size).to eq(1)
+    it "calling Product.in_category should not return duplicate records" do
+      expect(Aypex::Product.in_category(@parent_category).to_a.size).to eq(1)
     end
 
     context "orders products based on their ordering within the classifications" do
-      let(:other_taxon) { create(:taxon, products: [product]) }
-      let!(:product_2) { create(:product, taxons: [@child_taxon, other_taxon], stores: [store]) }
+      let(:other_category) { create(:category, products: [product]) }
+      let!(:product_2) { create(:product, categories: [@child_category, other_category], stores: [store]) }
 
       it "by initial ordering" do
-        expect(Aypex::Product.in_taxon(@child_taxon)).to eq([product, product_2])
-        expect(Aypex::Product.in_taxon(other_taxon)).to eq([product, product_2])
+        expect(Aypex::Product.in_category(@child_category)).to eq([product, product_2])
+        expect(Aypex::Product.in_category(other_category)).to eq([product, product_2])
       end
 
       it "after ordering changed" do
-        [@child_taxon, other_taxon].each do |taxon|
-          Aypex::Classification.find_by(taxon: taxon, product: product).insert_at(2)
-          expect(Aypex::Product.in_taxon(taxon)).to eq([product_2, product])
+        [@child_category, other_category].each do |category|
+          Aypex::Classification.find_by(category: category, product: product).insert_at(2)
+          expect(Aypex::Product.in_category(category)).to eq([product_2, product])
         end
       end
     end
@@ -256,46 +256,46 @@ describe "Product scopes", type: :model do
     end
   end
 
-  describe "#ascend_by_taxons_min_position" do
-    subject(:ordered_products) { Aypex::Product.ascend_by_taxons_min_position(taxons) }
+  describe "#ascend_by_categories_min_position" do
+    subject(:ordered_products) { Aypex::Product.ascend_by_categories_min_position(categories) }
 
-    let(:taxons) { [parent_taxon, child_taxon_1, child_taxon_2, child_taxon_1_1, child_taxon_2_1] }
+    let(:categories) { [parent_category, child_category_1, child_category_2, child_category_1_1, child_category_2_1] }
 
-    let(:parent_taxon) { create(:taxon) }
+    let(:parent_category) { create(:category) }
 
-    let(:child_taxon_1) { create(:taxon, parent: parent_taxon, taxonomy: parent_taxon.taxonomy) }
-    let(:child_taxon_1_1) { create(:taxon, parent: child_taxon_1, taxonomy: child_taxon_1.taxonomy) }
+    let(:child_category_1) { create(:category, parent: parent_category, base_category: parent_category.base_category) }
+    let(:child_category_1_1) { create(:category, parent: child_category_1, base_category: child_category_1.base_category) }
 
-    let(:child_taxon_2) { create(:taxon, parent: parent_taxon, taxonomy: parent_taxon.taxonomy) }
-    let(:child_taxon_2_1) { create(:taxon, parent: child_taxon_2, taxonomy: child_taxon_2.taxonomy) }
+    let(:child_category_2) { create(:category, parent: parent_category, base_category: parent_category.base_category) }
+    let(:child_category_2_1) { create(:category, parent: child_category_2, base_category: child_category_2.base_category) }
 
     let!(:product_1) { create(:product, stores: [store]) }
-    let!(:classification_1_1) { create(:classification, position: 5, product: product_1, taxon: parent_taxon) }
-    let!(:classification_1_2) { create(:classification, position: 4, product: product_1, taxon: child_taxon_1_1) }
+    let!(:classification_1_1) { create(:classification, position: 5, product: product_1, category: parent_category) }
+    let!(:classification_1_2) { create(:classification, position: 4, product: product_1, category: child_category_1_1) }
 
     let!(:product_2) { create(:product, stores: [store]) }
-    let!(:classification_2_1) { create(:classification, position: 1, product: product_2, taxon: parent_taxon) }
-    let!(:classification_2_2) { create(:classification, position: 2, product: product_2, taxon: child_taxon_2_1) }
+    let!(:classification_2_1) { create(:classification, position: 1, product: product_2, category: parent_category) }
+    let!(:classification_2_2) { create(:classification, position: 2, product: product_2, category: child_category_2_1) }
 
     let!(:product_3) { create(:product, stores: [store]) }
-    let!(:classification_3_1) { create(:classification, position: 3, product: product_3, taxon: child_taxon_1) }
-    let!(:classification_3_2) { create(:classification, position: 4, product: product_3, taxon: child_taxon_2_1) }
+    let!(:classification_3_1) { create(:classification, position: 3, product: product_3, category: child_category_1) }
+    let!(:classification_3_2) { create(:classification, position: 4, product: product_3, category: child_category_2_1) }
 
     let!(:product_4) { create(:product, stores: [store]) }
-    let!(:classification_4_1) { create(:classification, position: 2, product: product_4, taxon: child_taxon_2) }
+    let!(:classification_4_1) { create(:classification, position: 2, product: product_4, category: child_category_2) }
 
     let!(:product_5) { create(:product, stores: [store]) }
-    let!(:classification_5_1) { create(:classification, position: 1, product: product_5, taxon: child_taxon_1_1) }
+    let!(:classification_5_1) { create(:classification, position: 1, product: product_5, category: child_category_1_1) }
 
     let!(:product_6) { create(:product, stores: [store]) }
-    let!(:classification_6_1) { create(:classification, position: 6, product: product_6, taxon: child_taxon_2) }
-    let!(:classification_6_2) { create(:classification, position: 3, product: product_6, taxon: child_taxon_1) }
+    let!(:classification_6_1) { create(:classification, position: 6, product: product_6, category: child_category_2) }
+    let!(:classification_6_2) { create(:classification, position: 3, product: product_6, category: child_category_1) }
 
     before do
-      create_list(:product, 3, taxons: [create(:taxon)], stores: [store])
+      create_list(:product, 3, categories: [create(:category)], stores: [store])
     end
 
-    it "orders products by ascending taxons minimum position" do
+    it "orders products by ascending categories minimum position" do
       expect(ordered_products).to eq(
         [
           product_2, product_5, # position: 1

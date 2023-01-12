@@ -21,22 +21,22 @@ describe Aypex::Cms::Sections::ImageGallery, type: :model do
       expect(section.settings[:layout_style]).to eq("Default")
     end
 
-    it "sets link_type_one to Aypex::Taxon" do
+    it "sets link_type_one to Aypex::Category" do
       section = Aypex::CmsSection.find(image_gallery_section.id)
 
-      expect(section.content[:link_type_one]).to eq("Aypex::Taxon")
+      expect(section.content[:link_type_one]).to eq("Aypex::Category")
     end
 
-    it "sets link_type_two to Aypex::Taxon" do
+    it "sets link_type_two to Aypex::Category" do
       section = Aypex::CmsSection.find(image_gallery_section.id)
 
-      expect(section.content[:link_type_two]).to eq("Aypex::Taxon")
+      expect(section.content[:link_type_two]).to eq("Aypex::Category")
     end
 
-    it "sets link_type_three to Aypex::Taxon" do
+    it "sets link_type_three to Aypex::Category" do
       section = Aypex::CmsSection.find(image_gallery_section.id)
 
-      expect(section.content[:link_type_three]).to eq("Aypex::Taxon")
+      expect(section.content[:link_type_three]).to eq("Aypex::Category")
     end
 
     it "sets fit to Container" do
@@ -87,9 +87,9 @@ describe Aypex::Cms::Sections::ImageGallery, type: :model do
     it "link_one, link_two and link_three are reset to nil" do
       section = Aypex::CmsSection.find(image_gallery_section.id)
 
-      section.content[:link_type_one] = "Aypex::Taxon"
-      section.content[:link_type_two] = "Aypex::Taxon"
-      section.content[:link_type_three] = "Aypex::Taxon"
+      section.content[:link_type_one] = "Aypex::Category"
+      section.content[:link_type_two] = "Aypex::Category"
+      section.content[:link_type_three] = "Aypex::Category"
       section.save!
       section.reload
 

@@ -3,7 +3,7 @@ module Aypex::Cms::Sections
     after_initialize :default_values
     validate :reset_multiple_link_attributes
 
-    LINKED_RESOURCE_TYPE = ["Aypex::Taxon", "Aypex::Product"].freeze
+    LINKED_RESOURCE_TYPE = ["Aypex::Category", "Aypex::Product"].freeze
 
     LAYOUT_OPTIONS = ["Default", "Reversed"].freeze
     LABEL_OPTIONS = ["Show", "Hide"].freeze
@@ -89,9 +89,9 @@ module Aypex::Cms::Sections
     def default_values
       self.layout_style ||= "Default"
       self.fit ||= "Container"
-      self.link_type_one ||= "Aypex::Taxon"
-      self.link_type_two ||= "Aypex::Taxon"
-      self.link_type_three ||= "Aypex::Taxon"
+      self.link_type_one ||= "Aypex::Category"
+      self.link_type_two ||= "Aypex::Category"
+      self.link_type_three ||= "Aypex::Category"
     end
   end
 end

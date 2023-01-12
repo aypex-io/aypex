@@ -60,8 +60,8 @@ module Aypex
     has_many :store_credits, class_name: "Aypex::StoreCredit"
     has_many :store_credit_events, through: :store_credits, class_name: "Aypex::StoreCreditEvent"
 
-    has_many :taxonomies, class_name: "Aypex::Taxonomy"
-    has_many :taxons, through: :taxonomies, class_name: "Aypex::Taxon"
+    has_many :base_categories, class_name: "Aypex::BaseCategory"
+    has_many :categories, through: :base_categories, class_name: "Aypex::Category"
 
     has_many :store_promotions, class_name: "Aypex::StorePromotion"
     has_many :promotions, through: :store_promotions, class_name: "Aypex::Promotion"

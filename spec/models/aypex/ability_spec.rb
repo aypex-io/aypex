@@ -247,16 +247,16 @@ describe Aypex::Ability, type: :model do
       end
     end
 
-    context "for Taxons" do
-      let(:resource) { Aypex::Taxon.new }
+    context "for Categories" do
+      let(:resource) { Aypex::Category.new }
 
       context "requested by any user" do
         it_behaves_like "read only"
       end
     end
 
-    context "for Taxonomy" do
-      let(:resource) { Aypex::Taxonomy.new }
+    context "for BaseCategory" do
+      let(:resource) { Aypex::BaseCategory.new }
 
       context "requested by any user" do
         it_behaves_like "read only"

@@ -20,8 +20,8 @@ module Aypex
             skus: "",
             price: "",
             currency: "USD",
-            taxons: "",
-            concat_taxons: "",
+            categories: "",
+            concat_categories: "",
             name: false,
             options: false,
             show_deleted: false,
@@ -46,9 +46,9 @@ module Aypex
             ids: "",
             skus: "",
             price: "",
-            taxons: "",
+            categories: "",
             currency: "USD",
-            concat_taxons: "",
+            concat_categories: "",
             name: false,
             options: false,
             show_deleted: true,
@@ -73,9 +73,9 @@ module Aypex
             ids: "",
             skus: "",
             price: "",
-            taxons: "",
+            categories: "",
             currency: "USD",
-            concat_taxons: "",
+            concat_categories: "",
             name: false,
             options: false,
             show_deleted: false,
@@ -100,9 +100,9 @@ module Aypex
             ids: "",
             skus: "",
             price: "",
-            taxons: "",
+            categories: "",
             currency: "USD",
-            concat_taxons: "",
+            concat_categories: "",
             name: false,
             options: false,
             show_deleted: false,
@@ -128,9 +128,9 @@ module Aypex
             ids: "",
             skus: "",
             price: "",
-            taxons: "",
+            categories: "",
             currency: "USD",
-            concat_taxons: "",
+            concat_categories: "",
             name: false,
             options: false,
             show_deleted: false,
@@ -158,8 +158,8 @@ module Aypex
             skus: "",
             price: "",
             currency: "USD",
-            taxons: "",
-            concat_taxons: "",
+            categories: "",
+            concat_categories: "",
             name: false,
             options: false,
             show_deleted: false,
@@ -246,7 +246,7 @@ module Aypex
       end
     end
 
-    describe "filter by taxons" do
+    describe "filter by categories" do
       subject(:products) do
         described_class.new(
           scope: scope,
@@ -255,86 +255,86 @@ module Aypex
       end
 
       let!(:scope) { Aypex::Product.all }
-      let(:parent_taxon) { child_taxon.parent }
-      let(:child_taxon) { create(:taxon) }
+      let(:parent_category) { child_category.parent }
+      let(:child_category) { create(:category) }
 
-      context "one taxon is requested in params" do
-        let(:params) { {store: store, filter: {taxons: parent_taxon.id}} }
+      context "one category is requested in params" do
+        let(:params) { {store: store, filter: {categories: parent_category.id}} }
 
         shared_examples "returns distinct products associated both to self and descendants" do
           it { expect(products).to match_array [product, product_2] }
         end
 
         before do
-          parent_taxon.products << product
-          child_taxon.products << product_2
+          parent_category.products << product
+          child_category.products << product_2
         end
 
         it_behaves_like "returns distinct products associated both to self and descendants"
 
-        context "when product is already related to both taxons" do
-          before { parent_taxon.products << product_2 }
+        context "when product is already related to both categories" do
+          before { parent_category.products << product_2 }
 
           it_behaves_like "returns distinct products associated both to self and descendants"
         end
       end
 
-      context "multiple taxons are requested" do
-        let(:params) { {store: store, filter: {taxons: "#{taxon.id},#{taxon_2.id}"}} }
-        let(:taxon) { create(:taxon) }
-        let(:taxon_2) { create(:taxon) }
+      context "multiple categories are requested" do
+        let(:params) { {store: store, filter: {categories: "#{category.id},#{category_2.id}"}} }
+        let(:category) { create(:category) }
+        let(:category_2) { create(:category) }
 
         before do
-          taxon.products << product
-          taxon_2.products << product_2
+          category.products << product
+          category_2.products << product_2
         end
 
         it { expect(products).to match_array [product, product_2] }
       end
 
-      context "multiple taxons + 1 concat_taxons are requested" do
-        let(:params) { {store: store, filter: {taxons: "#{taxon.id},#{taxon_2.id}", concat_taxons: taxon_3.id.to_s}} }
-        let(:taxon) { create(:taxon) }
-        let(:taxon_2) { create(:taxon) }
-        let(:taxon_3) { create(:taxon) }
+      context "multiple categories + 1 concat_categories are requested" do
+        let(:params) { {store: store, filter: {categories: "#{category.id},#{category_2.id}", concat_categories: category_3.id.to_s}} }
+        let(:category) { create(:category) }
+        let(:category_2) { create(:category) }
+        let(:category_3) { create(:category) }
 
         before do
-          taxon.products << product
-          taxon_2.products << product_2
-          taxon_3.products << product_2
-          taxon_3.products << product_3
+          category.products << product
+          category_2.products << product_2
+          category_3.products << product_2
+          category_3.products << product_3
         end
 
         it { expect(products).to match_array [product_2] }
       end
 
-      context "only multiple concat_taxons are requested" do
-        let(:params) { {store: store, filter: {concat_taxons: "#{taxon_2.id},#{taxon_3.id}"}} }
-        let(:taxon) { create(:taxon) }
-        let(:taxon_2) { create(:taxon) }
-        let(:taxon_3) { create(:taxon) }
+      context "only multiple concat_categories are requested" do
+        let(:params) { {store: store, filter: {concat_categories: "#{category_2.id},#{category_3.id}"}} }
+        let(:category) { create(:category) }
+        let(:category_2) { create(:category) }
+        let(:category_3) { create(:category) }
 
         before do
-          taxon.products << product
-          taxon_2.products << product_2
-          taxon_3.products << product_2
-          taxon_3.products << product_3
+          category.products << product
+          category_2.products << product_2
+          category_3.products << product_2
+          category_3.products << product_3
         end
 
         it { expect(products).to match_array [product_2] }
       end
 
-      context "only one concat_taxons is requested" do
-        let(:params) { {store: store, filter: {concat_taxons: taxon_3.id.to_s}} }
-        let(:taxon) { create(:taxon) }
-        let(:taxon_2) { create(:taxon) }
-        let(:taxon_3) { create(:taxon) }
+      context "only one concat_categories is requested" do
+        let(:params) { {store: store, filter: {concat_categories: category_3.id.to_s}} }
+        let(:category) { create(:category) }
+        let(:category_2) { create(:category) }
+        let(:category_3) { create(:category) }
 
         before do
-          taxon.products << product
-          taxon_2.products << product_2
-          taxon_3.products << product_2
-          taxon_3.products << product_3
+          category.products << product
+          category_2.products << product_2
+          category_3.products << product_2
+          category_3.products << product_3
         end
 
         it { expect(products).to match_array [product_2, product_3] }
@@ -343,12 +343,12 @@ module Aypex
       context "products scope is another store" do
         let!(:scope) { store.products }
 
-        context "passed store has no taxons" do
+        context "passed store has no categories" do
           let(:store) { create(:store) }
-          let(:params) { {store: store, filter: {taxons: parent_taxon.id}} }
+          let(:params) { {store: store, filter: {categories: parent_category.id}} }
 
           before do
-            parent_taxon.products << product
+            parent_category.products << product
           end
 
           it { expect(products).to be_empty }
@@ -463,7 +463,7 @@ module Aypex
           ).execute
         end
 
-        context "when not filtering by taxons" do
+        context "when not filtering by categories" do
           let(:params) { {sort_by: "default"} }
 
           it "returns products in default order" do
@@ -471,27 +471,27 @@ module Aypex
           end
         end
 
-        context "when filtering by taxons" do
+        context "when filtering by categories" do
           let(:params) do
-            {store: store, sort_by: "default", filter: {taxons: taxonomy.root.id}}
+            {store: store, sort_by: "default", filter: {categories: base_category.root.id}}
           end
 
-          let(:taxonomy) { create(:taxonomy) }
-          let(:child_taxon_1) { create(:taxon, taxonomy: taxonomy) }
-          let(:child_taxon_2) { create(:taxon, taxonomy: taxonomy) }
+          let(:base_category) { create(:base_category) }
+          let(:child_category_1) { create(:category, base_category: base_category) }
+          let(:child_category_2) { create(:category, base_category: base_category) }
 
           before do
-            product.taxons << child_taxon_1
-            product_2.taxons << child_taxon_1
-            product_3.taxons << child_taxon_2
+            product.categories << child_category_1
+            product_2.categories << child_category_1
+            product_3.categories << child_category_2
 
             # swap products positions
-            product.classifications.find_by(taxon: child_taxon_1).update(position: 3)
-            product_3.classifications.find_by(taxon: child_taxon_2).update(position: 2)
-            product_2.classifications.find_by(taxon: child_taxon_1).update(position: 1)
+            product.classifications.find_by(category: child_category_1).update(position: 3)
+            product_3.classifications.find_by(category: child_category_2).update(position: 2)
+            product_2.classifications.find_by(category: child_category_1).update(position: 1)
           end
 
-          it "returns products ordered by associated taxon position" do
+          it "returns products ordered by associated category position" do
             expect(products).to eq [product_2, product_3, product]
           end
         end

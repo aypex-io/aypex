@@ -21,7 +21,7 @@ module Aypex
   #  * a name, for displaying on pages
   #  * a named scope which will 'execute' the filter
   #  * a mapping of presentation labels to the relevant condition (in the context of the named scope)
-  #  * an optional list of labels and values (for use with object selection - see taxons examples below)
+  #  * an optional list of labels and values (for use with object selection - see categories examples below)
   #
   # The named scopes here have a suffix '_any', following Ransack's convention for a
   # scope which returns results which match any of the inputs. This is purely a convention,
@@ -38,7 +38,7 @@ module Aypex
   # relating to the labels, all relative to the scope's context.
   #
   # The details of how/when filters are used is a detail for specific models (eg products
-  # or taxons), eg see the taxon model/controller.
+  # or categories), eg see the category model/controller.
 
   # See specific filters below for concrete examples.
   module ProductFilters
@@ -106,7 +106,7 @@ module Aypex
       pp = Aypex::ProductProperty.arel_table
       conds = Hash[*brands.map { |b| [b, pp[:value].eq(b)] }.flatten]
       {
-        name: I18n.t("aypex.taxonomy_brands_name"),
+        name: I18n.t("aypex.base_category_brands_name"),
         scope: :brand_any,
         conds: conds,
         labels: brands.sort.map { |k| [k, k] }
@@ -114,8 +114,8 @@ module Aypex
     end
 
     # Example: a parameterized filter
-    #   The filter above may show brands which aren't applicable to the current taxon,
-    #   so this one only shows the brands that are relevant to a particular taxon and
+    #   The filter above may show brands which aren't applicable to the current category,
+    #   so this one only shows the brands that are relevant to a particular category and
     #   its descendants.
     #
     #   We don't have to give a new scope since the conditions here are a subset of the
@@ -125,8 +125,8 @@ module Aypex
     #
     #   HOWEVER: what happens if we want a more precise scope?  we can't pass
     #   parametrized scope names to Ransack, only atomic names, so couldn't ask
-    #   for taxon T's customized filter to be used. BUT: we can arrange for the form
-    #   to pass back a hash instead of an array, where the key acts as the (taxon)
+    #   for category T's customized filter to be used. BUT: we can arrange for the form
+    #   to pass back a hash instead of an array, where the key acts as the (category)
     #   parameter and value is its label array, and then get a modified named scope
     #   to get its conditions from a particular filter.
     #
@@ -136,12 +136,12 @@ module Aypex
       Aypex::Product.brand_any(*opts)
     end
 
-    def self.selective_brand_filter(taxon = nil)
-      taxon ||= Aypex::Taxonomy.first.root
+    def self.selective_brand_filter(category = nil)
+      category ||= Aypex::BaseCategory.first.root
       brand_property = Aypex::Property.find_by(name: "brand")
       scope = Aypex::ProductProperty.where(property: brand_property)
-        .joins(product: :taxons)
-        .where("#{Aypex::Taxon.table_name}.id" => [taxon] + taxon.descendants)
+        .joins(product: :categories)
+        .where("#{Aypex::Category.table_name}.id" => [category] + category.descendants)
       brands = scope.pluck(:value).uniq
       {
         name: "Applicable Brands",
@@ -150,7 +150,7 @@ module Aypex
       }
     end
 
-    # Provide filtering on the immediate children of a taxon
+    # Provide filtering on the immediate children of a category
     #
     # This doesn't fit the pattern of the examples above, so there's a few changes.
     # Firstly, it uses an existing scope which was not built for filtering - and so
@@ -160,31 +160,31 @@ module Aypex
     # This technique is useful for filtering on objects (by passing ids) or with a
     # scope that can be used directly (eg. testing only ever on a single property).
     #
-    # This scope selects products in any of the active taxons or their children.
+    # This scope selects products in any of the active categories or their children.
     #
-    def self.taxons_below(taxon)
-      return Aypex::ProductFilters.all_taxons if taxon.nil?
+    def self.categories_below(category)
+      return Aypex::ProductFilters.all_categories if category.nil?
 
       {
-        name: "Taxons under " + taxon.name,
-        scope: :taxons_id_in_tree_any,
-        labels: taxon.children.sort_by(&:position).map { |t| [t.name, t.id] },
+        name: "Categories under " + category.name,
+        scope: :categories_id_in_tree_any,
+        labels: category.children.sort_by(&:position).map { |t| [t.name, t.id] },
         conds: nil
       }
     end
 
-    # Filtering by the list of all taxons
+    # Filtering by the list of all categories
     #
     # Similar idea as above, but we don't want the descendants' products, hence
     # it uses one of the auto-generated scopes from Ransack.
     #
     # idea: expand the format to allow nesting of labels?
-    def self.all_taxons
-      taxons = Aypex::Taxonomy.all.map { |t| [t.root] + t.root.descendants }.flatten
+    def self.all_categories
+      categories = Aypex::BaseCategory.all.map { |t| [t.root] + t.root.descendants }.flatten
       {
-        name: "All taxons",
-        scope: :taxons_id_equals_any,
-        labels: taxons.sort_by(&:name).map { |t| [t.name, t.id] },
+        name: "All categories",
+        scope: :categories_id_equals_any,
+        labels: categories.sort_by(&:name).map { |t| [t.name, t.id] },
         conds: nil # not needed
       }
     end

@@ -15,7 +15,7 @@ module Aypex
     belongs_to :store, class_name: "Aypex::Store"
 
     after_create :set_root
-    after_update :set_root_categoty_name
+    after_update :set_root_category_name
 
     default_scope { order("#{table_name}.position, #{table_name}.created_at") }
 

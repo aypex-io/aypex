@@ -28,8 +28,8 @@ module Aypex
       :stock_movement_attributes,
       :store_attributes,
       :store_credit_attributes,
-      :taxon_attributes,
-      :taxonomy_attributes,
+      :category_attributes,
+      :base_category_attributes,
       :user_attributes,
       :variant_attributes,
       :wishlist_attributes,
@@ -53,7 +53,7 @@ module Aypex
     ]
 
     @@classification_attributes = [
-      :position, :taxon_id, :product_id
+      :position, :category_id, :product_id
     ]
 
     @@cms_page_attributes = [:title, :meta_title, :content, :meta_description, :visible, :slug, :locale]
@@ -94,7 +94,7 @@ module Aypex
       :option_values_hash, :weight, :height, :width, :depth,
       :shipping_category_id, :tax_category_id,
       :cost_currency, :cost_price, :compare_at_price,
-      {option_type_ids: [], taxon_ids: []}
+      {option_type_ids: [], category_ids: []}
     ]
 
     @@property_attributes = [:name, :presentation]
@@ -138,11 +138,11 @@ module Aypex
 
     @@store_credit_attributes = %i[amount currency category_id memo]
 
-    @@taxonomy_attributes = [:name]
+    @@base_category_attributes = [:name]
 
-    @@taxon_attributes = [
+    @@category_attributes = [
       :name, :parent_id, :position, :icon, :description, :permalink, :hide_from_nav,
-      :taxonomy_id, :meta_description, :meta_keywords, :meta_title, :child_index
+      :base_category_id, :meta_description, :meta_keywords, :meta_title, :child_index
     ]
 
     # TODO: Should probably use something like Aypex::Config.user_class.attributes

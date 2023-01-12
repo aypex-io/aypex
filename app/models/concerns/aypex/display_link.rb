@@ -7,10 +7,10 @@ module Aypex
 
       def link
         case linked_resource_type
-        when "Aypex::Taxon"
+        when "Aypex::Category"
           return if linked_resource&.permalink.blank?
 
-          "/#{Aypex::Config.storefront_taxons_path}/#{linked_resource.permalink}"
+          "/#{Aypex::Config.storefront_categories_path}/#{linked_resource.permalink}"
         when "Aypex::Product"
           return if linked_resource&.slug.blank?
 

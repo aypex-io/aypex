@@ -159,11 +159,11 @@ en:
         amount: Rate
         included_in_price: Included in Price
         show_rate_in_label: Show rate in label
-      aypex/taxon:
+      aypex/category:
         name: Name
         permalink: Permalink
         position: Position
-      aypex/taxonomy:
+      aypex/base_category:
         name: Name
       aypex/user:
         email: Email
@@ -290,12 +290,12 @@ en:
       aypex/tax_rate:
         one: Tax Rate
         other: Tax Rates
-      aypex/taxon:
-        one: Taxon
-        other: Taxons
-      aypex/taxonomy:
-        one: Taxonomy
-        other: Taxonomies
+      aypex/category:
+        one: Category
+        other: Categories
+      aypex/base_category:
+        one: Base Category
+        other: Base Categories
       aypex/tracker:
         one: Tracker
         other: Trackers
@@ -325,7 +325,7 @@ en:
               should_be_hash: "should be a hash"
         aypex/classification:
           attributes:
-            taxon_id:
+            category_id:
               already_linked: "is already linked to this product"
         aypex/credit_card:
           attributes:
@@ -406,7 +406,7 @@ en:
             attachment:
               not_allowed_content_type: has not allowed content type
               attachment_must_be_present: must be present
-        aypex/taxon_image:
+        aypex/category_image:
           attributes:
             attachment:
               not_allowed_content_type: has not allowed content type
@@ -662,7 +662,7 @@ en:
       header: Checkout
       product: Product
     choose_a_customer: Choose a customer
-    choose_a_taxon_to_sort_products_for: "Choose a taxon to sort products for"
+    choose_a_category_to_sort_products_for: "Choose a category to sort products for"
     choose_currency: Choose Currency
     choose_dashboard_locale: Choose Dashboard Locale
     choose_location: Choose location
@@ -762,7 +762,7 @@ en:
     default_wishlist_name: Wishlist
     delete: Delete
     deleted: Deleted
-    delete_from_taxon: Delete From Taxon
+    delete_from_category: Delete From Category
     digital:
       digital_delivery: Digital Delivery
     discontinued_variants_present: Some line items in this order have products that are no longer available.
@@ -794,9 +794,9 @@ en:
         item_total_more_than_or_equal: This coupon code can't be applied to orders higher than or equal to %{amount}.
         limit_once_per_user: This coupon code can only be used once per user.
         missing_product: This coupon code can't be applied because you don't have all of the necessary products in your cart.
-        missing_taxon: You need to add a product from all applicable categories before applying this coupon code.
+        missing_category: You need to add a product from all applicable categories before applying this coupon code.
         no_applicable_products: You need to add an applicable product before applying this coupon code.
-        no_matching_taxons: You need to add a product from an applicable category before applying this coupon code.
+        no_matching_categories: You need to add a product from an applicable category before applying this coupon code.
         no_user_or_email_specified: You need to login or provide your email before applying this coupon code.
         no_user_specified: You need to login before applying this coupon code.
         not_first_order: This coupon code can only be applied to your first order.
@@ -814,7 +814,7 @@ en:
         store_association_can_not_be_changed: The store association can not be changed
         store_is_already_set: Store is already set
         blank: can't be blank
-        could_not_create_taxon: Could not create taxon
+        could_not_create_category: Could not create category
         no_shipping_methods_available: No shipping methods available for selected location, please change your address and try again.
         cannot_remove_icon: Cannot remove image
       services:
@@ -860,7 +860,7 @@ en:
     filterable: Filterable
     filter_results: Filter Results
     finalize: Finalize
-    find_a_taxon: Find a Taxon
+    find_a_category: Find a Category
     finalized: Finalized
     first_item: First Item
     first_name: First Name
@@ -1074,8 +1074,8 @@ en:
     new_store_credit_category: New Store Credit Category
     new_tax_category: New Tax Category
     new_tax_rate: New Tax Rate
-    new_taxon: New Taxon
-    new_taxonomy: New Taxonomy
+    new_category: New Category
+    new_base_category: New BaseCategory
     new_tracker: New Tracker
     new_user: New User
     new_variant: New Variant
@@ -1125,7 +1125,7 @@ en:
     open: Open
     open_all_adjustments: Open All Adjustments
     option_type: Option Type
-    option_type_filterable_info: 'When an option type is set to Filterable, your storefront visitors are presented with the option to filter a taxon of products based on the option type. A typical example of this would be to filter clothing by size and color.<br><br><b>Please Note:</b> Filters will only be visible in the storefront taxons that contain products with this option type set.'
+    option_type_filterable_info: 'When an option type is set to Filterable, your storefront visitors are presented with the option to filter a category of products based on the option type. A typical example of this would be to filter clothing by size and color.<br><br><b>Please Note:</b> Filters will only be visible in the storefront categories that contain products with this option type set.'
     option_type_placeholder: Choose an option type
     option_types: Option Types
     option_value: Option Value
@@ -1279,7 +1279,7 @@ en:
     preferred_reimbursement_type: Preferred Reimbursement Type
     presentation: Presentation
     preview_product: Preview Product
-    preview_taxon: Preview Taxon
+    preview_category: Preview Category
     previous: Previous
     previous_state_missing: "n/a"
     previously_used_card: Previously Used Cards
@@ -1355,9 +1355,9 @@ en:
       user_logged_in:
         description: Available only to logged in users
         name: User Logged In
-      taxon:
-        description: Order includes products with specified taxon(s)
-        name: Taxon(s)
+      category:
+        description: Order includes products with specified categories
+        name: Categories
     promotions: Promotions
     promotion_uses: Promotion uses
     propagate_all_variants: Propagate all variants
@@ -1542,7 +1542,7 @@ en:
         including_tax: "%{price} (incl. %{tax_amount} %{tax_rate_name})"
         excluding_tax: "%{price} (+ %{tax_amount} %{tax_rate_name})"
     shipping_total: Shipping total
-    shop_by_taxonomy: Shop by %{taxonomy}
+    shop_by_base_category: Shop by %{base_category}
     shopping_cart: Shopping Cart
     show: Show
     show_active: Show Active
@@ -1697,25 +1697,23 @@ en:
     tax_code: Tax Code
     tax_rate_amount_explanation: Tax rates are a decimal amount to aid in calculations, (i.e. if the tax rate is 5% then enter 0.05)
     tax_rates: Tax Rates
-    taxon: Taxon
-    taxon_edit: Edit Taxon
-    taxon_placeholder: Add a Taxon
+    category_edit: Edit Category
+    category_placeholder: Add a Category
     tags: Tags
     tags_placeholder: Add Tags
-    taxon_missing_alt: Category banner description
-    taxon_rule:
-      choose_taxons: Choose taxons
-      label: Order must contain x amount of these taxons
+    category_missing_alt: Category banner description
+    category_rule:
+      choose_categories: Choose categories
+      label: Order must contain x amount of these categories
       match_all: all
       match_any: at least one
-    taxonomies: Taxonomies
-    taxonomy: Taxonomy
-    taxonomy_brands_name: Brands
-    taxonomy_categories_name: Categories
-    taxonomy_edit: Edit taxonomy
-    taxonomy_tree_error: The requested change has not been accepted and the tree has been returned to its previous state, please try again.
-    taxonomy_tree_instruction: ! '* Right click (or double tap on iOS device) a child in the tree to access the menu for adding, deleting or sorting a child.'
-    taxons: Taxons
+    base_categories: Base Categories
+    base_category: Base Category
+    base_category_brands_name: Brands
+    base_category_categories_name: Categories
+    base_category_edit: Edit base_category
+    base_category_tree_error: The requested change has not been accepted and the tree has been returned to its previous state, please try again.
+    base_category_tree_instruction: ! '* Right click (or double tap on iOS device) a child in the tree to access the menu for adding, deleting or sorting a child.'
     test: Test
     test_mailer:
       test_email:

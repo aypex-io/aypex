@@ -15,16 +15,16 @@ describe Aypex::Cms::Sections::SideBySideImages, type: :model do
   context "when a new Image Gallery section is created" do
     let!(:side_by_side_images_section) { create(:cms_side_by_side_images_section, cms_page: homepage) }
 
-    it "sets link_type_one to Aypex::Taxon" do
+    it "sets link_type_one to Aypex::Category" do
       section = Aypex::CmsSection.find(side_by_side_images_section.id)
 
-      expect(section.content[:link_type_one]).to eq("Aypex::Taxon")
+      expect(section.content[:link_type_one]).to eq("Aypex::Category")
     end
 
-    it "sets link_type_two to Aypex::Taxon" do
+    it "sets link_type_two to Aypex::Category" do
       section = Aypex::CmsSection.find(side_by_side_images_section.id)
 
-      expect(section.content[:link_type_two]).to eq("Aypex::Taxon")
+      expect(section.content[:link_type_two]).to eq("Aypex::Category")
     end
 
     it "sets fit to Container" do
@@ -72,8 +72,8 @@ describe Aypex::Cms::Sections::SideBySideImages, type: :model do
     it "link_one and link_two are reset to nil when type is changed" do
       section = Aypex::CmsSection.find(side_by_side_images_section.id)
 
-      section.content[:link_type_one] = "Aypex::Taxon"
-      section.content[:link_type_two] = "Aypex::Taxon"
+      section.content[:link_type_one] = "Aypex::Category"
+      section.content[:link_type_two] = "Aypex::Category"
       section.save!
       section.reload
 

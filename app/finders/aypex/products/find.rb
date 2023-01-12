@@ -16,8 +16,8 @@ module Aypex
         @store = params[:store] || Aypex::Store.default
         @price = map_prices(String(params.dig(:filter, :price)).split(","))
         @currency = current_currency || params.dig(:filter, :currency) || params[:currency]
-        @taxons = taxon_ids(params.dig(:filter, :taxons))
-        @concat_taxons = taxon_ids(params.dig(:filter, :concat_taxons))
+        @categories = category_ids(params.dig(:filter, :categories))
+        @concat_categories = category_ids(params.dig(:filter, :concat_categories))
         @name = params.dig(:filter, :name)
         @options = params.dig(:filter, :options).try(:to_unsafe_hash)
         @option_value_ids = params.dig(:filter, :option_value_ids)
@@ -35,8 +35,8 @@ module Aypex
         products = by_skus(products)
         products = by_price(products)
         products = by_currency(products)
-        products = by_taxons(products)
-        products = by_concat_taxons(products)
+        products = by_categories(products)
+        products = by_concat_categories(products)
         products = by_name(products)
         products = by_options(products)
         products = by_option_value_ids(products)
@@ -53,7 +53,7 @@ module Aypex
 
       private
 
-      attr_reader :ids, :skus, :price, :currency, :taxons, :concat_taxons, :name, :options, :option_value_ids, :scope,
+      attr_reader :ids, :skus, :price, :currency, :categories, :concat_categories, :name, :options, :option_value_ids, :scope,
         :sort_by, :deleted, :discontinued, :properties, :store, :in_stock, :backorderable, :purchasable
 
       def ids?
@@ -72,12 +72,12 @@ module Aypex
         currency.present?
       end
 
-      def taxons?
-        taxons.present?
+      def categories?
+        categories.present?
       end
 
-      def concat_taxons?
-        concat_taxons.present?
+      def concat_categories?
+        concat_categories.present?
       end
 
       def name?
@@ -124,20 +124,20 @@ module Aypex
         products.with_currency(currency)
       end
 
-      def by_taxons(products)
-        return products unless taxons?
+      def by_categories(products)
+        return products unless categories?
 
-        products.joins(:classifications).where(Classification.table_name => {taxon_id: taxons})
+        products.joins(:classifications).where(Classification.table_name => {category_id: categories})
       end
 
-      def by_concat_taxons(products)
-        return products unless concat_taxons?
+      def by_concat_categories(products)
+        return products unless concat_categories?
 
         product_ids = Aypex::Product
           .joins(:classifications)
-          .where(Classification.table_name => {taxon_id: concat_taxons})
+          .where(Classification.table_name => {category_id: concat_categories})
           .group("#{Aypex::Product.table_name}.id")
-          .having("COUNT(#{Aypex::Product.table_name}.id) = ?", concat_taxons.length)
+          .having("COUNT(#{Aypex::Product.table_name}.id) = ?", concat_categories.length)
           .ids
 
         products.where(id: product_ids)
@@ -203,8 +203,8 @@ module Aypex
 
         case sort_by
         when "default"
-          if taxons?
-            products.ascend_by_taxons_min_position(taxons)
+          if categories?
+            products.ascend_by_categories_min_position(categories)
           else
             products
           end
@@ -259,11 +259,11 @@ module Aypex
         end
       end
 
-      def taxon_ids(taxons_ids)
-        return if taxons_ids.nil? || taxons_ids.to_s.blank?
+      def category_ids(category_ids)
+        return if category_ids.nil? || category_ids.to_s.blank?
 
-        taxons = store.taxons.where(id: taxons_ids.to_s.split(","))
-        taxons.map(&:cached_self_and_descendants_ids).flatten.compact.uniq.map(&:to_s)
+        categories = store.categories.where(id: category_ids.to_s.split(","))
+        categories.map(&:cached_self_and_descendants_ids).flatten.compact.uniq.map(&:to_s)
       end
     end
   end

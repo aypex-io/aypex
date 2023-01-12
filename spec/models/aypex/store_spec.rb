@@ -117,19 +117,19 @@ describe Aypex::Store, type: :model do
       end
     end
 
-    describe "#taxonomies" do
-      let!(:taxonomy) { create(:taxonomy, store: subject) }
-      let!(:taxonomy_2) { create(:taxonomy, store: create(:store)) }
+    describe "#base_categories" do
+      let!(:base_category) { create(:base_category, store: subject) }
+      let!(:base_category_2) { create(:base_category, store: create(:store)) }
 
-      it { expect(subject.taxonomies).to eq([taxonomy]) }
+      it { expect(subject.base_categories).to eq([base_category]) }
 
-      describe "#taxons" do
-        let!(:taxon) { create(:taxon, taxonomy: taxonomy) }
-        let!(:taxon_2) { create(:taxon, taxonomy: taxonomy_2) }
+      describe "#categories" do
+        let!(:category) { create(:category, base_category: base_category) }
+        let!(:category_2) { create(:category, base_category: base_category_2) }
 
-        it { expect(taxon).not_to be_nil }
-        it { expect(taxon_2).not_to be_nil }
-        it { expect(subject.taxons).to match_array([taxonomy.root, taxon]) }
+        it { expect(category).not_to be_nil }
+        it { expect(category_2).not_to be_nil }
+        it { expect(subject.categories).to match_array([base_category.root, category]) }
       end
     end
 

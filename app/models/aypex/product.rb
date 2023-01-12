@@ -21,20 +21,16 @@
 module Aypex
   class Product < Aypex::Base
     extend FriendlyId
+
     include ProductScopes
     include MultiStoreResource
     include MemoizedData
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
-    if defined?(Aypex::VendorConcern)
-      include Aypex::VendorConcern
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
+    include Aypex::VendorConcern if defined?(Aypex::VendorConcern)
 
-    MEMOIZED_METHODS = %w[total_on_hand taxonomy_ids taxon_and_ancestors category
-      default_variant_id tax_category default_variant
-      purchasable? in_stock? backorderable?]
+    MEMOIZED_METHODS = %w[total_on_hand base_category_ids category_and_ancestors category
+      default_variant_id tax_category default_variant purchasable? in_stock? backorderable?]
 
     friendly_id :slug_candidates, use: :history
 
@@ -53,7 +49,7 @@ module Aypex
     has_many :menu_items, as: :linked_resource
 
     has_many :classifications, dependent: :delete_all, inverse_of: :product
-    has_many :taxons, through: :classifications, before_remove: :remove_taxon
+    has_many :categories, through: :classifications, before_remove: :remove_category
 
     has_many :product_promotion_rules, class_name: "Aypex::ProductPromotionRule"
     has_many :promotion_rules, through: :product_promotion_rules, class_name: "Aypex::PromotionRule"
@@ -108,7 +104,7 @@ module Aypex
     after_save :save_master
     after_save :run_touch_callbacks, if: :anything_changed?
     after_save :reset_nested_changes
-    after_touch :touch_taxons
+    after_touch :touch_categories
 
     before_validation :downcase_slug
     before_validation :normalize_slug, on: :update
@@ -135,9 +131,9 @@ module Aypex
 
     alias_method :options, :product_option_types
 
-    self.whitelisted_ransackable_associations = %w[taxons stores variants_including_master master variants]
+    self.whitelisted_ransackable_associations = %w[categories stores variants_including_master master variants]
     self.whitelisted_ransackable_attributes = %w[description name slug discontinue_on status]
-    self.whitelisted_ransackable_scopes = %w[not_discontinued search_by_name in_taxon price_between]
+    self.whitelisted_ransackable_scopes = %w[not_discontinued search_by_name in_category price_between]
 
     [
       :sku, :barcode, :price, :currency, :weight, :height, :width, :depth, :is_master,
@@ -337,16 +333,16 @@ module Aypex
     end
 
     def brand
-      @brand ||= taxons.joins(:taxonomy).find_by(aypex_taxonomies: {name: Aypex.t(:taxonomy_brands_name)})
+      @brand ||= categories.joins(:base_category).find_by(aypex_base_categories: {name: Aypex.t(:base_category_brands_name)})
     end
 
     def category
-      @category ||= taxons.joins(:taxonomy).order(depth: :desc).find_by(aypex_taxonomies: {name: Aypex.t(:taxonomy_categories_name)})
+      @category ||= categories.joins(:base_category).order(depth: :desc).find_by(aypex_base_categories: {name: Aypex.t(:base_category_categories_name)})
     end
 
-    def taxons_for_store(store)
-      Rails.cache.fetch("#{cache_key_with_version}/taxons-per-store/#{store.id}") do
-        taxons.for_store(store)
+    def categories_for_store(store)
+      Rails.cache.fetch("#{cache_key_with_version}/categories-per-store/#{store.id}") do
+        categories.for_store(store)
       end
     end
 
@@ -370,7 +366,7 @@ module Aypex
           product_properties.create(property: property, value: "Placeholder")
         end
         self.option_types = prototype.option_types
-        self.taxons = prototype.taxons
+        self.categories = prototype.categories
       end
     end
 
@@ -480,19 +476,19 @@ module Aypex
       run_callbacks(:touch)
     end
 
-    def taxon_and_ancestors
-      @taxon_and_ancestors ||= taxons.map(&:self_and_ancestors).flatten.uniq
+    def category_and_ancestors
+      @category_and_ancestors ||= categories.map(&:self_and_ancestors).flatten.uniq
     end
 
-    # Get the taxonomy ids of all taxons assigned to this product and their ancestors.
-    def taxonomy_ids
-      @taxonomy_ids ||= taxon_and_ancestors.map(&:taxonomy_id).flatten.uniq
+    # Get the base category ids of all category assigned to this product and their ancestors.
+    def base_category_ids
+      @base_category_ids ||= category_and_ancestors.map(&:base_category_id).flatten.uniq
     end
 
-    # Iterate through this products taxons and taxonomies and touch their timestamps in a batch
-    def touch_taxons
-      Aypex::Taxon.where(id: taxon_and_ancestors.map(&:id)).update_all(updated_at: Time.current)
-      Aypex::Taxonomy.where(id: taxonomy_ids).update_all(updated_at: Time.current)
+    # Iterate through this products categories and base_categories and touch their timestamps in a batch
+    def touch_categories
+      Aypex::Category.where(id: category_and_ancestors.map(&:id)).update_all(updated_at: Time.current)
+      Aypex::BaseCategory.where(id: base_category_ids).update_all(updated_at: Time.current)
     end
 
     def ensure_not_in_complete_orders
@@ -502,8 +498,8 @@ module Aypex
       end
     end
 
-    def remove_taxon(taxon)
-      removed_classifications = classifications.where(taxon: taxon)
+    def remove_category(category)
+      removed_classifications = classifications.where(category: category)
       removed_classifications.each(&:remove_from_list)
     end
 

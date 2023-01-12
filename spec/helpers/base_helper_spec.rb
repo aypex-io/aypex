@@ -42,7 +42,7 @@ describe Aypex::BaseHelper do
 
   describe "#aypex_storefront_resource_url" do
     let!(:store) { create(:store) }
-    let!(:taxon) { create(:taxon) }
+    let!(:category) { create(:category) }
     let!(:product) { create(:product) }
 
     before do
@@ -71,11 +71,11 @@ describe Aypex::BaseHelper do
       end
     end
 
-    context "for Taxon URL" do
-      it { expect(helper.aypex_storefront_resource_url(taxon)).to eq("http://www.example.com/t/#{taxon.permalink}") }
+    context "for Category URL" do
+      it { expect(helper.aypex_storefront_resource_url(category)).to eq("http://www.example.com/t/#{category.permalink}") }
 
       context "when a locale is passed" do
-        it { expect(helper.aypex_storefront_resource_url(taxon, locale: :de)).to eq("http://www.example.com/de/t/#{taxon.permalink}") }
+        it { expect(helper.aypex_storefront_resource_url(category, locale: :de)).to eq("http://www.example.com/de/t/#{category.permalink}") }
       end
 
       context "when locale_param is present" do
@@ -83,7 +83,7 @@ describe Aypex::BaseHelper do
           allow(helper).to receive(:locale_param).and_return(:fr)
         end
 
-        it { expect(helper.aypex_storefront_resource_url(taxon)).to eq("http://www.example.com/fr/t/#{taxon.permalink}") }
+        it { expect(helper.aypex_storefront_resource_url(category)).to eq("http://www.example.com/fr/t/#{category.permalink}") }
       end
     end
   end

@@ -27,10 +27,10 @@ describe Aypex::Cms::Sections::FeaturedArticle, type: :model do
       expect(section.fit).to eq("Screen")
     end
 
-    it "sets linked_resource_type to Aypex::Taxon" do
+    it "sets linked_resource_type to Aypex::Category" do
       section = Aypex::CmsSection.find(featured_article_section.id)
 
-      expect(section.linked_resource_type).to eq("Aypex::Taxon")
+      expect(section.linked_resource_type).to eq("Aypex::Category")
     end
 
     it "#gutters? is false" do

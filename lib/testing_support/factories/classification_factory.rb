@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :classification, class: Aypex::Classification do
     product
-    taxon
+    category
 
     position { 1 }
   end

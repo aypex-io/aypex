@@ -19,10 +19,10 @@ module Aypex
     has_many :menu_items, as: :linked_resource
     has_many :cms_sections, as: :linked_resource
 
-    has_many :prototype_categories, class_name: "Aypex::PrototypeTaxon", dependent: :destroy
+    has_many :prototype_categories, class_name: "Aypex::PrototypeCategory", dependent: :destroy
     has_many :prototypes, through: :prototype_categories, class_name: "Aypex::Prototype"
 
-    has_many :promotion_rule_categories, class_name: "Aypex::PromotionRuleTaxon", dependent: :destroy
+    has_many :promotion_rule_categories, class_name: "Aypex::PromotionRuleCategory", dependent: :destroy
     has_many :promotion_rules, through: :promotion_rule_categories, class_name: "Aypex::PromotionRule"
 
     validates :name, presence: true, uniqueness: {scope: [:parent_id, :base_category_id], allow_blank: true, case_sensitive: false}
@@ -43,9 +43,9 @@ module Aypex
     after_update :sync_base_category_name
     after_touch :touch_ancestors_and_base_category
 
-    has_one :icon, as: :viewable, dependent: :destroy, class_name: "Aypex::TaxonImage"
+    has_one :icon, as: :viewable, dependent: :destroy, class_name: "Aypex::CategoryImage"
 
-    scope :for_store, ->(store) { joins(:base_category).where(aypex_categories: {store_id: store.id}) }
+    scope :for_store, ->(store) { joins(:base_category).where(aypex_base_categories: {store_id: store.id}) }
 
     self.whitelisted_ransackable_associations = %w[base_category]
     self.whitelisted_ransackable_attributes = %w[name permalink]

@@ -3,7 +3,7 @@ module Aypex::Cms::Sections
     after_initialize :default_values
     validate :reset_multiple_link_attributes
 
-    LINKED_RESOURCE_TYPE = ["Aypex::Taxon", "Aypex::Product"].freeze
+    LINKED_RESOURCE_TYPE = ["Aypex::Category", "Aypex::Product"].freeze
 
     store :content, accessors: [:link_type_one, :link_one, :title_one, :subtitle_one,
       :link_type_two, :link_two, :title_two, :subtitle_two], coder: JSON
@@ -61,8 +61,8 @@ module Aypex::Cms::Sections
     def default_values
       self.gutters ||= "Gutters"
       self.fit ||= "Container"
-      self.link_type_one ||= "Aypex::Taxon"
-      self.link_type_two ||= "Aypex::Taxon"
+      self.link_type_one ||= "Aypex::Category"
+      self.link_type_two ||= "Aypex::Category"
     end
   end
 end

@@ -7,7 +7,7 @@ module Aypex
       :disable_sku_validation, :disable_store_presence_validation, :expedited_exchanges,
       :expedited_exchanges_days_window, :non_expiring_credit_types, :products_per_page,
       :restock_inventory, :require_master_price, :send_core_emails, :track_inventory_levels,
-      :show_products_without_price, :storefront_products_path, :storefront_taxons_path,
+      :show_products_without_price, :storefront_products_path, :storefront_categories_path,
       :storefront_pages_path, :searcher_class, :public_storage_service_name, :private_storage_service_name,
       :user_class, :admin_user_class, :cdn_host
 
@@ -241,13 +241,13 @@ module Aypex
       end
     end
 
-    def storefront_taxons_path
-      self.storefront_taxons_path = "t" unless @storefront_taxons_path
+    def storefront_categories_path
+      self.storefront_categories_path = "t" unless @storefront_categories_path
 
-      if @storefront_taxons_path.is_a?(String)
-        @storefront_taxons_path
+      if @storefront_categories_path.is_a?(String)
+        @storefront_categories_path
       else
-        raise "Aypex::Config.storefront_taxons_path MUST be an String"
+        raise "Aypex::Config.storefront_categories_path MUST be an String"
       end
     end
 

@@ -8,7 +8,7 @@ module Aypex
     acts_as_nested_set dependent: :destroy
 
     ITEM_TYPE = %w[Link Container]
-    LINKED_RESOURCE_TYPE = ["Aypex::Linkable::Uri", "Aypex::Linkable::Homepage", "Aypex::Product", "Aypex::Taxon", "Aypex::CmsPage"]
+    LINKED_RESOURCE_TYPE = ["Aypex::Linkable::Uri", "Aypex::Linkable::Homepage", "Aypex::Product", "Aypex::Category", "Aypex::CmsPage"]
 
     belongs_to :menu, touch: true
 

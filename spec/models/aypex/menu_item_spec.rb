@@ -106,7 +106,7 @@ describe Aypex::MenuItem, type: :model do
 
   describe "#link" do
     let(:product) { create(:product, stores: [store]) }
-    let(:taxon) { create(:taxon) }
+    let(:category) { create(:category) }
     let(:cms_page) { create(:cms_standard_page) }
     let(:cms_page_with_no_slug) { create(:cms_homepage) }
 
@@ -114,14 +114,14 @@ describe Aypex::MenuItem, type: :model do
     let(:item_empty_url) { create(:menu_item, name: "URL To Random Site", item_type: "Link", menu: menu, linked_resource_type: "Aypex::Linkable::Uri", destination: nil) }
     let(:item_home) { create(:menu_item, name: "Home", item_type: "Link", menu: menu, linked_resource_type: "Aypex::Linkable::Homepage") }
     let(:item_product) { create(:menu_item, name: product.name, item_type: "Link", menu: menu, linked_resource_type: "Aypex::Product") }
-    let(:item_taxon) { create(:menu_item, name: taxon.name, item_type: "Link", menu: menu, linked_resource_type: "Aypex::Taxon") }
+    let(:item_category) { create(:menu_item, name: category.name, item_type: "Link", menu: menu, linked_resource_type: "Aypex::Category") }
     let(:item_cms_page) { create(:menu_item, name: cms_page.title, item_type: "Link", menu: menu, linked_resource_type: "Aypex::CmsPage") }
     let(:item_cms_page_with_no_slug) { create(:menu_item, name: cms_page_with_no_slug.title, item_type: "Link", menu: menu, linked_resource_type: "Aypex::CmsPage") }
 
-    it "returns correct taxon path" do
-      item_taxon.update(linked_resource: taxon)
+    it "returns correct category path" do
+      item_category.update(linked_resource: category)
 
-      expect(item_taxon.link).to eql "/t/#{taxon.permalink}"
+      expect(item_category.link).to eql "/t/#{category.permalink}"
     end
 
     it "returns correct cms_standard_page path" do
@@ -136,11 +136,11 @@ describe Aypex::MenuItem, type: :model do
       expect(item_cms_page_with_no_slug.link).to be_nil
     end
 
-    it "returns nil for destination when taxon is removed" do
-      item_taxon.update(linked_resource: taxon)
-      item_taxon.update(linked_resource_id: nil)
+    it "returns nil for destination when category is removed" do
+      item_category.update(linked_resource: category)
+      item_category.update(linked_resource_id: nil)
 
-      expect(item_taxon.link).to be_nil
+      expect(item_category.link).to be_nil
     end
 
     it "returns correct product path" do
