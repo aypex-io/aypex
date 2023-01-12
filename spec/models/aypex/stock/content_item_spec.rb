@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Stock::ContentItem, type: :model do
+describe Aypex::Stock::ContentItem do
   subject { described_class.new(inventory_unit) }
 
   let(:inventory_unit) { create(:inventory_unit, variant: variant) }

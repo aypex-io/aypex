@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::State, type: :model do
+describe Aypex::State do
   it "can find a state by name or abbr" do
     state = create(:state, name: "California", abbr: "CA")
     expect(Aypex::State.find_all_by_name_or_abbr("California")).to include(state)

@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe ReturnsCalculator, type: :model do
+  describe ReturnsCalculator do
     subject { ReturnsCalculator.new }
 
     let(:return_item) { build(:return_item) }

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Calculator::Returns::DefaultRefundAmount, type: :model do
+describe Aypex::Calculator::Returns::DefaultRefundAmount do
   subject { calculator.compute(return_item) }
 
   let(:order) { create(:order) }

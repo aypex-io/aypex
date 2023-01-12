@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Price, type: :model do
+describe Aypex::Price do
   describe "#amount=" do
     let(:price) { build(:price) }
     let(:amount) { "3,0A0" }

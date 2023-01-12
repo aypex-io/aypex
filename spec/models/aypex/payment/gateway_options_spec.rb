@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe Aypex::Payment::GatewayOptions, type: :model do
+RSpec.describe Aypex::Payment::GatewayOptions do
   let(:options) { Aypex::Payment::GatewayOptions.new(payment) }
 
   let(:payment) do

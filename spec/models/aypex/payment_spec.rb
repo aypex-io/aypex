@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Payment, type: :model do
+describe Aypex::Payment do
   let(:store) { create(:store) }
   let(:order) { store.orders.create }
   let(:refund_reason) { create(:refund_reason) }

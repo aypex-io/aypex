@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Aypex::TaxonImage, type: :model do
+describe Aypex::CategoryImage do
   context "validation" do
-    let(:aypex_image) { Aypex::TaxonImage.new }
+    let(:aypex_image) { Aypex::CategoryImage.new }
     let(:image_file) { File.open(Aypex::Engine.root + "spec/fixtures" + "thinking-cat.jpg") }
     let(:text_file) { File.open(Aypex::Engine.root + "spec/fixtures" + "text-file.txt") }
 

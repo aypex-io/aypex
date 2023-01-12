@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Image, type: :model do
+describe Aypex::Image do
   let(:aypex_image) { described_class.new }
   let(:image_file) { File.open("#{Aypex::Engine.root}/spec/fixtures/thinking-cat.jpg") }
   let(:text_file) { File.open("#{Aypex::Engine.root}/spec/fixtures/text-file.txt") }

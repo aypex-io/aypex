@@ -10,7 +10,7 @@ end
 
 module Aypex
   module Stock
-    describe Quantifier, type: :model do
+    describe Quantifier do
       subject { described_class.new(stock_item.variant) }
 
       before(:all) { Aypex::StockLocation.destroy_all } # FIXME: leaky database

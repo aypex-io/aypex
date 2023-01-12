@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Promotion::Rules::FirstOrder, type: :model do
+describe Aypex::Promotion::Rules::FirstOrder do
   let(:store) { create(:store) }
   let(:rule) { described_class.new }
   let(:user) { create(:user) }

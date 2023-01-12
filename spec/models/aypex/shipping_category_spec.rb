@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::ShippingCategory, type: :model do
+describe Aypex::ShippingCategory do
   describe "#validations" do
     it "has a valid factory" do
       expect(FactoryBot.build(:shipping_category)).to be_valid

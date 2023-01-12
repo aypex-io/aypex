@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe Reimbursement::ReimbursementTypeValidator, type: :model do
+  describe Reimbursement::ReimbursementTypeValidator do
     class DummyClass
       include Aypex::Reimbursement::ReimbursementTypeValidator
 

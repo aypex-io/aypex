@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::CustomerReturn, type: :model do
+describe Aypex::CustomerReturn do
   before do
     allow_any_instance_of(Aypex::Order).to receive_messages(return!: true)
   end

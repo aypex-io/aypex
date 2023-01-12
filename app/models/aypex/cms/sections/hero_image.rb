@@ -5,7 +5,7 @@ module Aypex::Cms::Sections
     store :content, accessors: [:title, :button_text], coder: JSON
     store :settings, accessors: [:gutters], coder: JSON
 
-    LINKED_RESOURCE_TYPE = ["Aypex::Taxon", "Aypex::Product", "Aypex::CmsPage"]
+    LINKED_RESOURCE_TYPE = ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"]
 
     def gutters?
       gutters == "Gutters"
@@ -32,7 +32,7 @@ module Aypex::Cms::Sections
     def default_values
       self.gutters ||= "No Gutters"
       self.fit ||= "Screen"
-      self.linked_resource_type ||= "Aypex::Taxon"
+      self.linked_resource_type ||= "Aypex::Category"
     end
   end
 end

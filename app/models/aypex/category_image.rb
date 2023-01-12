@@ -1,5 +1,5 @@
 module Aypex
-  class TaxonImage < Asset
+  class CategoryImage < Asset
     include Configuration::ActiveStorage
     include Rails.application.routes.url_helpers
     include ::Aypex::ImageMethods

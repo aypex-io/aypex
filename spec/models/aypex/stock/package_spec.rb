@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module Stock
-    describe Package, type: :model do
+    describe Package do
       subject { Package.new(stock_location) }
 
       let(:variant) { create(:variant, weight: 25.0) }

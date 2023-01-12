@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module Calculator::Shipping
-    describe FlatRate, type: :model do
+    describe FlatRate do
       subject { Calculator::Shipping::FlatRate.new(amount: 4.00) }
 
       it "always returns the same rate" do

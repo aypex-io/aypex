@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::OptionType, type: :model do
+describe Aypex::OptionType do
   it_behaves_like "metadata"
 
   context "touching" do

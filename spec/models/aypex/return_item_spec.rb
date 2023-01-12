@@ -8,7 +8,7 @@ shared_examples "an invalid state transition" do |status, expected_status|
   end
 end
 
-describe Aypex::ReturnItem, type: :model do
+describe Aypex::ReturnItem do
   all_reception_statuses = Aypex::ReturnItem.state_machines[:reception_status].states.map(&:name).map(&:to_s)
   all_acceptance_statuses = Aypex::ReturnItem.state_machines[:acceptance_status].states.map(&:name).map(&:to_s)
 

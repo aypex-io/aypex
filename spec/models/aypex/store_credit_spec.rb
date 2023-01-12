@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::StoreCredit, type: :model do
+describe Aypex::StoreCredit do
   let(:currency) { "TEST" }
   let(:store_credit) { build(:store_credit, store_credit_attrs) }
   let(:store_credit_attrs) { {} }

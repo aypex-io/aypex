@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Calculator, type: :model do
+describe Aypex::Calculator do
   let(:order) { create(:order) }
   let!(:line_item) { create(:line_item, order: order) }
   let(:shipment) { create(:shipment, order: order, stock_location: create(:stock_location_with_items)) }

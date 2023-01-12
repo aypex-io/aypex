@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe ShippingCalculator, type: :model do
+  describe ShippingCalculator do
     subject { ShippingCalculator.new }
 
     let(:variant1) { build(:variant, price: 10) }

@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module Stock
-    describe Coordinator, type: :model do
+    describe Coordinator do
       subject { Coordinator.new(order) }
 
       let(:store) { create(:store) }

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Property, type: :model do
+describe Aypex::Property do
   let(:store) { create(:store) }
 
   it_behaves_like "metadata"

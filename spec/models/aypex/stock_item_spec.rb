@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::StockItem, type: :model do
+describe Aypex::StockItem do
   subject { stock_location.stock_items.order(:id).first }
 
   let(:stock_location) { create(:stock_location_with_items) }

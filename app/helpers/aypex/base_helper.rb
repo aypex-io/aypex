@@ -136,8 +136,8 @@ module Aypex
       [I18n.l(date.to_date, format: :long)].join(" ")
     end
 
-    def seo_url(taxon, options = {})
-      aypex.nested_taxons_path(taxon.permalink, options.merge(locale: locale_param))
+    def seo_url(category, options = {})
+      aypex.nested_categories_path(category.permalink, options.merge(locale: locale_param))
     end
 
     def storefront_available?
@@ -157,8 +157,8 @@ module Aypex
 
       if resource.instance_of?(Aypex::Product)
         "#{current_store.formatted_url + localize}/#{Aypex::Config.storefront_products_path}/#{resource.slug}"
-      elsif resource.instance_of?(Aypex::Taxon)
-        "#{current_store.formatted_url + localize}/#{Aypex::Config.storefront_taxons_path}/#{resource.permalink}"
+      elsif resource.instance_of?(Aypex::Category)
+        "#{current_store.formatted_url + localize}/#{Aypex::Config.storefront_categories_path}/#{resource.permalink}"
       elsif resource.instance_of?(Aypex::Cms::Pages::FeaturePage) || resource.instance_of?(Aypex::Cms::Pages::StandardPage)
         "#{current_store.formatted_url + localize}/#{Aypex::Config.storefront_pages_path}/#{resource.slug}"
       elsif localize.blank?

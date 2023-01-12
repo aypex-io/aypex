@@ -3,7 +3,7 @@ require "spec_helper"
 module Aypex
   module Stock
     module Splitter
-      describe Weight, type: :model do
+      describe Weight do
         subject(:result) do
           described_class.new(packer).split(packages)
         end

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Menu, type: :model do
+describe Aypex::Menu do
   it "responds to for_header" do
     expect(described_class).to respond_to(:for_header)
   end

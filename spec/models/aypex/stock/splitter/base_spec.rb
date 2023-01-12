@@ -3,7 +3,7 @@ require "spec_helper"
 module Aypex
   module Stock
     module Splitter
-      describe Base, type: :model do
+      describe Base do
         let(:splitter1) { described_class.new(packer) }
         let(:splitter2) { described_class.new(packer, splitter1) }
 

@@ -3,7 +3,7 @@ require "spec_helper"
 module Aypex
   module Stock
     module Splitter
-      describe Digital, type: :model do
+      describe Digital do
         subject { described_class.new(packer) }
 
         let(:packer) { build(:stock_packer) }

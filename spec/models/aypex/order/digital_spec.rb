@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Order, type: :model do
+describe Aypex::Order do
   context "line_item analysis" do
     it "understands that all products are digital" do
       order = create(:order)

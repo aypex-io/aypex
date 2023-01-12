@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::TaxRate, type: :model do
+describe Aypex::TaxRate do
   context "match" do
     let(:order) { create(:order) }
     let(:country) { create(:country) }

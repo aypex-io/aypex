@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Variant scopes", type: :model do
+describe "Variant scopes" do
   let!(:product_1) { create(:product, name: "First product") }
   let!(:product_2) { create(:product, name: "Second product") }
   let!(:product_3) { create(:product, name: "Third product") }

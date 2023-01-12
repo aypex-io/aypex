@@ -6,7 +6,7 @@ class FakeCalculator < Aypex::Calculator
   end
 end
 
-describe Aypex::Order, type: :model do
+describe Aypex::Order do
   let(:user) { create(:user) }
   let!(:store) { create(:store, default: true) }
   let(:order) { create(:order, user: user, store: store) }

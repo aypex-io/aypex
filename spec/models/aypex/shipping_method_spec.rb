@@ -3,7 +3,7 @@ require "spec_helper"
 class DummyShippingCalculator < Aypex::ShippingCalculator
 end
 
-describe Aypex::ShippingMethod, type: :model do
+describe Aypex::ShippingMethod do
   let(:shipping_method) { create(:shipping_method) }
   let(:frontend_shipping_method) { create(:shipping_method, display_on: "front_end") }
   let(:admin_shipping_method) { create(:shipping_method, display_on: "back_end") }

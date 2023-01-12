@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe Aypex::ProductDuplicator, type: :model do
+  describe Aypex::ProductDuplicator do
     let(:store) { create(:store) }
     let!(:product_property) { create(:product_property, product: product) }
     let!(:product) { create(:product, stores: [store]) }

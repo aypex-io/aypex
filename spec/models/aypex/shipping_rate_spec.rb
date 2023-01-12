@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::ShippingRate, type: :model do
+describe Aypex::ShippingRate do
   let(:shipment) { create(:shipment) }
   let(:shipping_method) { create(:shipping_method) }
   let(:shipping_rate) do

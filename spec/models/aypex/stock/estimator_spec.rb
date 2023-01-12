@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module Stock
-    describe Estimator, type: :model do
+    describe Estimator do
       subject { Estimator.new(order) }
 
       let(:store) { create(:store) }

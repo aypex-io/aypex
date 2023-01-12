@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module ReturnItem::ExchangeVariantEligibility
-    describe SameOptionValue, type: :model do
+    describe SameOptionValue do
       describe ".eligible_variants" do
         subject { SameOptionValue.eligible_variants(variant.reload) }
 

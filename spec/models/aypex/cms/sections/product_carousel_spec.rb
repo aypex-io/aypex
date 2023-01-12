@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Cms::Sections::ProductCarousel, type: :model do
+describe Aypex::Cms::Sections::ProductCarousel do
   let!(:store) { create(:store) }
   let!(:homepage) { create(:cms_homepage, store: store) }
 
@@ -21,10 +21,10 @@ describe Aypex::Cms::Sections::ProductCarousel, type: :model do
       expect(section.fit).to eq("Screen")
     end
 
-    it "sets linked_resource_type to Aypex::Taxon" do
+    it "sets linked_resource_type to Aypex::Category" do
       section = Aypex::CmsSection.find(product_carousel_section.id)
 
-      expect(section.linked_resource_type).to eq("Aypex::Taxon")
+      expect(section.linked_resource_type).to eq("Aypex::Category")
     end
   end
 end

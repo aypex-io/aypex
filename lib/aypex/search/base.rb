@@ -1,13 +1,13 @@
 module Aypex
   module Search
     class Base
-      attr_accessor :properties, :current_user, :current_currency, :current_store, :taxon
+      attr_accessor :properties, :current_user, :current_currency, :current_store, :category
 
       def initialize(params)
         @properties = {}
         @current_store = params[:current_store] || Aypex::Store.default
         @current_currency = @current_store.default_currency
-        @taxon = params[:taxon]
+        @category = params[:category]
 
         prepare(params)
       end
@@ -43,7 +43,7 @@ module Aypex
               price: price,
               option_value_ids: option_value_ids,
               properties: product_properties,
-              taxons: taxon&.id,
+              categories: category&.id,
               currency: current_currency
             },
             sort_by: sort_by

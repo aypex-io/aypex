@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Variant, type: :model do
+describe Aypex::Variant do
   let!(:store) { create(:store) }
   let!(:variant) { create(:variant) }
   let(:master_variant) { create(:master_variant) }

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::StoreProduct, type: :model do
+describe Aypex::StoreProduct do
   let!(:store) { create(:store) }
   let!(:another_store) { create(:store) }
   let!(:product) { create(:product, stores: [store]) }

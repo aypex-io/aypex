@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Country, type: :model do
+describe Aypex::Country do
   let(:store) { create(:store, default: true, default_country: america) }
   let(:america) { create(:country) }
   let(:canada) { create(:country, name: "Canada", iso_name: "CANADA", iso: "CA", iso3: "CAN", numcode: "124") }

@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe ProductsHelper, type: :helper do
+  describe ProductsHelper do
     include ProductsHelper
 
     let(:store) { create(:store) }
@@ -160,7 +160,7 @@ module Aypex
       let(:price_options) { {tax_zone: zone} }
       let!(:products) { create_list(:product, 5, stores: [store]) }
       let(:product_ids) { products.map(&:id).join("-") }
-      let(:taxon) { create(:taxon) }
+      let(:category) { create(:category) }
 
       before do
         allow(helper).to receive(:params).and_return(page: 10)
@@ -190,15 +190,15 @@ module Aypex
         it { is_expected.to eq("en/USD/aypex/zones/new/aypex/products/#{product_ids}-10--20131211-") }
       end
 
-      context "with Taxon ID present" do
+      context "with Category ID present" do
         let(:updated_at) { Date.new(2011, 12, 13) }
 
         before do
-          @taxon = taxon
+          @category = category
           allow(products).to receive(:maximum).with(:updated_at) { updated_at }
         end
 
-        it { is_expected.to eq("en/USD/aypex/zones/new/aypex/products/#{product_ids}-10--20111213-#{taxon.id}") }
+        it { is_expected.to eq("en/USD/aypex/zones/new/aypex/products/#{product_ids}-10--20111213-#{category.id}") }
       end
 
       context "with `additional_cache_key` passed" do
@@ -207,11 +207,11 @@ module Aypex
         let(:updated_at) { Date.new(2011, 12, 13) }
 
         before do
-          @taxon = taxon
+          @category = category
           allow(products).to receive(:maximum).with(:updated_at) { updated_at }
         end
 
-        it { is_expected.to eq("en/USD/aypex/zones/new/aypex/products/#{product_ids}-10--20111213-#{taxon.id}/json-ld") }
+        it { is_expected.to eq("en/USD/aypex/zones/new/aypex/products/#{product_ids}-10--20111213-#{category.id}/json-ld") }
       end
     end
 

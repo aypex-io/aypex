@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   describe StockLocations::StockItems::CreateJob, :job do
-    let!(:stock_location) { create :stock_location }
+    let!(:stock_location) { create(:stock_location) }
 
     it "enqueues the creation of the stock location stock items" do
       expect { described_class.perform_later(stock_location) }.to(

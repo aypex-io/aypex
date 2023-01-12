@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe StockTransfer, type: :model do
+  describe StockTransfer do
     subject { StockTransfer.create(reference: "PO123") }
 
     let(:destination_location) { create(:stock_location_with_items) }

@@ -79,15 +79,15 @@ module Aypex
         joins(:variants_including_master).merge(Aypex::Variant.in_stock_or_backorderable)
       end
 
-      # This scope selects products in taxon AND all its descendants
-      # If you need products only within one taxon use
+      # This scope selects products in category AND all its descendants
+      # If you need products only within one category use
       #
-      #   Aypex::Product.joins(:taxons).where(Taxon.table_name => { id: taxon.id })
+      #   Aypex::Product.joins(:categories).where(Category.table_name => { id: category.id })
       #
       # If you're using count on the result of this scope, you must use the
       # `:distinct` option as well:
       #
-      #   Aypex::Product.in_taxon(taxon).count(distinct: true)
+      #   Aypex::Product.in_category(category).count(distinct: true)
       #
       # This is so that the count query is distinct'd:
       #
@@ -96,24 +96,24 @@ module Aypex
       #   vs.
       #
       #   SELECT COUNT(*) ...
-      add_search_scope :in_taxon do |taxon|
+      add_search_scope :in_category do |category|
         includes(:classifications)
-          .where("aypex_products_taxons.taxon_id" => taxon.cached_self_and_descendants_ids)
-          .order("aypex_products_taxons.position ASC")
+          .where("aypex_products_categories.category_id" => category.cached_self_and_descendants_ids)
+          .order("aypex_products_categories.position ASC")
       end
 
-      # This scope selects products in all taxons AND all its descendants
-      # If you need products only within one taxon use
+      # This scope selects products in all categories AND all its descendants
+      # If you need products only within one category use
       #
-      #   Aypex::Product.taxons_id_eq([x,y])
-      add_search_scope :in_taxons do |*taxons|
-        taxons = get_taxons(taxons)
-        taxons.first ? prepare_taxon_conditions(taxons) : where(nil)
+      #   Aypex::Product.categories_id_eq([x,y])
+      add_search_scope :in_categories do |*categories|
+        categories = get_categories(categories)
+        categories.first ? prepare_category_conditions(categories) : where(nil)
       end
 
-      add_search_scope :ascend_by_taxons_min_position do |taxon_ids|
+      add_search_scope :ascend_by_categories_min_position do |category_ids|
         joins(:classifications)
-          .where(Classification.table_name => {taxon_id: taxon_ids})
+          .where(Classification.table_name => {category_id: category_ids})
           .select(
             [
               "#{Product.table_name}.*",
@@ -273,9 +273,9 @@ module Aypex
       end
       search_scopes << :active
 
-      def self.for_filters(currency, taxon: nil)
+      def self.for_filters(currency, category: nil)
         scope = active(currency)
-        scope = scope.in_taxon(taxon) if taxon.present?
+        scope = scope.in_category(category) if category.present?
         scope
       end
       search_scopes << :for_filters
@@ -288,8 +288,8 @@ module Aypex
         end
       end
 
-      add_search_scope :taxons_name_eq do |name|
-        group("aypex_products.id").joins(:taxons).where(Taxon.arel_table[:name].eq(name))
+      add_search_scope :categories_name_eq do |name|
+        group("aypex_products.id").joins(:categories).where(Category.arel_table[:name].eq(name))
       end
 
       # .search_by_name
@@ -317,12 +317,12 @@ module Aypex
       end
       private_class_method :price_table_name
 
-      # specifically avoid having an order for taxon search (conflicts with main order)
-      def self.prepare_taxon_conditions(taxons)
-        ids = taxons.map(&:cached_self_and_descendants_ids).flatten.uniq
-        joins(:classifications).where(Classification.table_name => {taxon_id: ids})
+      # specifically avoid having an order for category search (conflicts with main order)
+      def self.prepare_category_conditions(categories)
+        ids = categories.map(&:cached_self_and_descendants_ids).flatten.uniq
+        joins(:classifications).where(Classification.table_name => {category_id: ids})
       end
-      private_class_method :prepare_taxon_conditions
+      private_class_method :prepare_category_conditions
 
       # Produce an array of keywords for use in scopes.
       # Always return array with at least an empty string to avoid SQL errors
@@ -334,16 +334,16 @@ module Aypex
       end
       private_class_method :prepare_words
 
-      def self.get_taxons(*ids_or_records_or_names)
+      def self.get_categories(*ids_or_records_or_names)
         ids_or_records_or_names.flatten.map do |t|
           case t
           when ApplicationRecord then t
           else
-            Taxon.where(Taxon.arel_table[:name].eq(t)).or(Taxon.where(Taxon.arel_table[:id].eq(t))).or(Taxon.where(Taxon.arel_table[:permalink].matches("%/#{t}/"))).or(Taxon.where(Taxon.arel_table[:permalink].matches("#{t}/"))).first
+            Category.where(Category.arel_table[:name].eq(t)).or(Category.where(Category.arel_table[:id].eq(t))).or(Category.where(Category.arel_table[:permalink].matches("%/#{t}/"))).or(Category.where(Category.arel_table[:permalink].matches("#{t}/"))).first
           end
         end.compact.flatten.uniq
       end
-      private_class_method :get_taxons
+      private_class_method :get_categories
     end
   end
 end

@@ -3,13 +3,13 @@ require "spec_helper"
 describe Aypex::Search::Base do
   let(:product1) { create(:product, name: "RoR Mug", price: 9.00) }
   let!(:product2) { create(:product, name: "RoR Shirt", price: 11.00) }
-  let(:taxon) { create(:taxon, name: "Ruby on Rails") }
+  let(:category) { create(:category, name: "Ruby on Rails") }
   let(:pln_price) { create(:price, variant_id: product1.master.id, price: 5, currency: "PLN") }
 
   before do
     include Aypex::ProductFilters
 
-    product1.taxons << taxon
+    product1.categories << category
   end
 
   it "returns all products by default" do
@@ -21,7 +21,7 @@ describe Aypex::Search::Base do
   context "when include_images is included in the initialization params" do
     subject { described_class.new(params).retrieve_products }
 
-    let(:params) { {include_images: true, keyword: product1.name, taxon: taxon} }
+    let(:params) { {include_images: true, keyword: product1.name, category: category} }
 
     before do
       product1.master.images << create(:image, position: 2)

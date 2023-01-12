@@ -744,32 +744,32 @@ RSpec.describe Aypex::Configuration do
     end
   end
 
-  describe "#storefront_taxons_path" do
-    after { test_subject.storefront_taxons_path = "t" }
+  describe "#storefront_categories_path" do
+    after { test_subject.storefront_categories_path = "t" }
 
     it "defaults to 't' / accessible through Rails.application.config.aypex.preferences" do
-      expect(Rails.application.config.aypex.preferences.storefront_taxons_path).to eq "t"
+      expect(Rails.application.config.aypex.preferences.storefront_categories_path).to eq "t"
     end
 
     it "defaults to 't' / accessible through Aypex::Config" do
-      expect(Aypex::Config.storefront_taxons_path).to eq "t"
+      expect(Aypex::Config.storefront_categories_path).to eq "t"
     end
 
     it "is settable directly" do
-      test_subject.storefront_taxons_path = "cats"
-      expect(test_subject.storefront_taxons_path).to eq "cats"
+      test_subject.storefront_categories_path = "cats"
+      expect(test_subject.storefront_categories_path).to eq "cats"
     end
 
     it "is settable via block" do
       Aypex.config do |config|
-        config.storefront_taxons_path = "categories"
+        config.storefront_categories_path = "categories"
       end
-      expect(test_subject.storefront_taxons_path).to eq "categories"
+      expect(test_subject.storefront_categories_path).to eq "categories"
     end
 
     it "returns error if not an String" do
-      test_subject.storefront_taxons_path = true
-      expect { raise "Aypex::Config.storefront_taxons_path MUST be an String" }.to raise_error(RuntimeError)
+      test_subject.storefront_categories_path = true
+      expect { raise "Aypex::Config.storefront_categories_path MUST be an String" }.to raise_error(RuntimeError)
     end
   end
 

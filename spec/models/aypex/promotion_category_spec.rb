@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::PromotionCategory, type: :model do
+describe Aypex::PromotionCategory do
   describe "validation" do
     subject { Aypex::PromotionCategory.new name: name }
 

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::DigitalLink, type: :model do
+describe Aypex::DigitalLink do
   let(:store) { Aypex::Store.default }
   let(:digital) { create(:digital) }
   let(:variant) { digital.variant }

@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module PromotionHandler
-    describe FreeShipping, type: :model do
+    describe FreeShipping do
       subject { Aypex::PromotionHandler::FreeShipping.new(order) }
 
       let(:order) { create(:order) }

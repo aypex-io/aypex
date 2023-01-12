@@ -82,8 +82,8 @@ module Aypex
       can [:show, :update, :destroy], ::Aypex::Config.user_class, id: user.id
       can :read, ::Aypex::State
       can :read, ::Aypex::Store
-      can :read, ::Aypex::Taxon
-      can :read, ::Aypex::Taxonomy
+      can :read, ::Aypex::Category
+      can :read, ::Aypex::BaseCategory
       can :read, ::Aypex::Variant
       can :read, ::Aypex::Zone
       can :manage, ::Aypex::Wishlist, user_id: user.id

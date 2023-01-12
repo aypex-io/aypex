@@ -1,7 +1,7 @@
 require "spec_helper"
 require "aypex/product_filters"
 
-describe "product filters", type: :model do
+describe "product filters" do
   let(:store) { create(:store) }
 
   # Regression test for #1709

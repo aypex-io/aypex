@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::StoreFaviconImage, type: :model do
+describe Aypex::StoreFaviconImage do
   describe "validations" do
     it "validates image properties" do
       expect(build(:favicon_image, filepath: file_fixture("icon_256x256.png"))).to be_valid

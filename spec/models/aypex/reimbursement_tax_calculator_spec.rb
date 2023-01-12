@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::ReimbursementTaxCalculator, type: :model do
+describe Aypex::ReimbursementTaxCalculator do
   subject do
     Aypex::ReimbursementTaxCalculator.call(reimbursement)
   end

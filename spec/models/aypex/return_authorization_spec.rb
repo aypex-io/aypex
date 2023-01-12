@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::ReturnAuthorization, type: :model do
+describe Aypex::ReturnAuthorization do
   let(:order) { create(:shipped_order) }
   let(:stock_location) { create(:stock_location) }
   let(:rma_reason) { create(:return_authorization_reason) }

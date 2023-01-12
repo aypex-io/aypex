@@ -1,5 +1,5 @@
 module Aypex
-  class TaxonImage < Asset
+  class CategoryImage < Asset
     module Configuration
       module ActiveStorage
         extend ActiveSupport::Concern

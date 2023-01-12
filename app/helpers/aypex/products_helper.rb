@@ -55,7 +55,7 @@ module Aypex
 
     def cache_key_for_products(products = @products, additional_cache_key = nil)
       max_updated_at = (products.except(:group, :order).maximum(:updated_at) || Date.today).to_s(:number)
-      products_cache_keys = "aypex/products/#{products.map(&:id).join("-")}-#{params[:page]}-#{params[:sort_by]}-#{max_updated_at}-#{@taxon&.id}"
+      products_cache_keys = "aypex/products/#{products.map(&:id).join("-")}-#{params[:page]}-#{params[:sort_by]}-#{max_updated_at}-#{@category&.id}"
       (common_product_cache_keys + [products_cache_keys] + [additional_cache_key]).compact.join("/")
     end
 

@@ -4,7 +4,7 @@ class CustomPromotionAction < Aypex::PromotionAction
   include Aypex::AdjustmentSource
 end
 
-describe Aypex::Adjustable::Adjuster::Promotion, type: :model do
+describe Aypex::Adjustable::Adjuster::Promotion do
   let(:order) { create(:order_with_line_items, line_items_count: 1) }
   let(:line_item) { order.line_items.first }
   let(:subject) { Aypex::Adjustable::AdjustmentsUpdater.new(line_item) }

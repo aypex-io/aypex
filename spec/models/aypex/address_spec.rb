@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Address, type: :model do
+describe Aypex::Address do
   it_behaves_like "metadata"
 
   describe "clone" do

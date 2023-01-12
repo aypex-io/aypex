@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module ReturnItem::ExchangeVariantEligibility
-    describe SameProduct, type: :model do
+    describe SameProduct do
       let(:store) { create(:store) }
 
       describe ".eligible_variants" do

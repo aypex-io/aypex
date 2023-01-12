@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Promotion::Actions::CreateLineItems, type: :model do
+describe Aypex::Promotion::Actions::CreateLineItems do
   let(:order) { create(:order) }
   let(:action) { Aypex::Promotion::Actions::CreateLineItems.create }
   let(:promotion) { create(:promotion) }

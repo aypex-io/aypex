@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module PromotionHandler
-    describe Cart, type: :model do
+    describe Cart do
       subject { Cart.new(order, line_item) }
 
       let(:line_item) { create(:line_item) }

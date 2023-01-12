@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module Stock
-    describe InventoryUnitBuilder, type: :model do
+    describe InventoryUnitBuilder do
       subject { InventoryUnitBuilder.new(order) }
 
       let(:line_item_1) { create(:line_item) }

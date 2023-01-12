@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module Stock
-    describe Packer, type: :model do
+    describe Packer do
       subject { Packer.new(stock_location, inventory_units) }
 
       let(:inventory_units) { [InventoryUnit.new(variant: create(:variant))] }

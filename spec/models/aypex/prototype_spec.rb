@@ -1,5 +1,5 @@
 require "spec_helper"
 
-describe Aypex::Prototype, type: :model do
+describe Aypex::Prototype do
   it_behaves_like "metadata"
 end

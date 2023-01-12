@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Refund, type: :model do
+describe Aypex::Refund do
   describe "metadata" do
     before do
       allow_any_instance_of(Aypex::Refund).to receive(:amount_is_less_than_or_equal_to_allowed_amount)

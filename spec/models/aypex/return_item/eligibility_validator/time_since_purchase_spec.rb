@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::ReturnItem::EligibilityValidator::TimeSincePurchase, type: :model do
+describe Aypex::ReturnItem::EligibilityValidator::TimeSincePurchase do
   let(:inventory_unit) { create(:inventory_unit, order: create(:shipped_order)) }
   let(:return_item) { create(:return_item, inventory_unit: inventory_unit) }
   let(:validator) { Aypex::ReturnItem::EligibilityValidator::TimeSincePurchase.new(return_item) }

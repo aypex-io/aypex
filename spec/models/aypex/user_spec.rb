@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::LegacyUser, type: :model do # rubocop:disable RSpec/MultipleDescribes
+describe Aypex::LegacyUser do # rubocop:disable RSpec/MultipleDescribes
   # Regression test for #2844 + #3346
   describe "#last_incomplete_order" do
     let!(:user) { create(:user) }
@@ -69,7 +69,7 @@ describe Aypex::LegacyUser, type: :model do # rubocop:disable RSpec/MultipleDesc
   end
 end
 
-describe Aypex::Config.user_class, type: :model do
+describe Aypex::Config.user_class do
   context "reporting" do
     let!(:orders) { create_list(:order, order_count, user: subject, store: store, total: order_value, completed_at: Date.today, currency: currency) }
     let(:currency) { "USD" }

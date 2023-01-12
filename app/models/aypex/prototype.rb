@@ -11,8 +11,8 @@ module Aypex
     has_many :option_type_prototypes, class_name: "Aypex::OptionTypePrototype"
     has_many :option_types, through: :option_type_prototypes, class_name: "Aypex::OptionType"
 
-    has_many :prototype_taxons, class_name: "Aypex::PrototypeTaxon"
-    has_many :taxons, through: :prototype_taxons, class_name: "Aypex::Taxon"
+    has_many :prototype_categories, class_name: "Aypex::PrototypeCategory"
+    has_many :categories, through: :prototype_categories, class_name: "Aypex::Category"
 
     validates :name, presence: true
   end

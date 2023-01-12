@@ -536,16 +536,16 @@ class AypexFourThree < ActiveRecord::Migration[5.2]
       t.index ["store_id"], name: "index_aypex_products_stores_on_store_id"
     end
 
-    create_table "aypex_products_taxons", force: :cascade do |t|
+    create_table "aypex_products_categories", force: :cascade do |t|
       t.bigint "product_id"
-      t.bigint "taxon_id"
+      t.bigint "category_id"
       t.integer "position"
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.index ["position"], name: "index_aypex_products_taxons_on_position"
-      t.index ["product_id", "taxon_id"], name: "index_aypex_products_taxons_on_product_id_and_taxon_id", unique: true
-      t.index ["product_id"], name: "index_aypex_products_taxons_on_product_id"
-      t.index ["taxon_id"], name: "index_aypex_products_taxons_on_taxon_id"
+      t.index ["position"], name: "index_aypex_products_categories_on_position"
+      t.index ["product_id", "category_id"], name: "index_aypex_products_categories_on_product_id_and_category_id", unique: true
+      t.index ["product_id"], name: "index_aypex_products_categories_on_product_id"
+      t.index ["category_id"], name: "index_aypex_products_categories_on_category_id"
     end
 
     create_table "aypex_promotion_action_line_items", force: :cascade do |t|
@@ -577,13 +577,13 @@ class AypexFourThree < ActiveRecord::Migration[5.2]
       t.string "code"
     end
 
-    create_table "aypex_promotion_rule_taxons", force: :cascade do |t|
-      t.bigint "taxon_id"
+    create_table "aypex_promotion_rule_categories", force: :cascade do |t|
+      t.bigint "category_id"
       t.bigint "promotion_rule_id"
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.index ["promotion_rule_id"], name: "index_aypex_promotion_rule_taxons_on_promotion_rule_id"
-      t.index ["taxon_id"], name: "index_aypex_promotion_rule_taxons_on_taxon_id"
+      t.index ["promotion_rule_id"], name: "index_aypex_promotion_rule_categories_on_promotion_rule_id"
+      t.index ["category_id"], name: "index_aypex_promotion_rule_categories_on_category_id"
     end
 
     create_table "aypex_promotion_rule_users", force: :cascade do |t|
@@ -664,14 +664,14 @@ class AypexFourThree < ActiveRecord::Migration[5.2]
       t.index ["prototype_id"], name: "index_aypex_property_prototypes_on_prototype_id"
     end
 
-    create_table "aypex_prototype_taxons", force: :cascade do |t|
-      t.bigint "taxon_id"
+    create_table "aypex_prototype_categories", force: :cascade do |t|
+      t.bigint "category_id"
       t.bigint "prototype_id"
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.index ["prototype_id", "taxon_id"], name: "index_aypex_prototype_taxons_on_prototype_id_and_taxon_id"
-      t.index ["prototype_id"], name: "index_aypex_prototype_taxons_on_prototype_id"
-      t.index ["taxon_id"], name: "index_aypex_prototype_taxons_on_taxon_id"
+      t.index ["prototype_id", "category_id"], name: "index_aypex_prototype_categories_on_prototype_and_category"
+      t.index ["prototype_id"], name: "index_aypex_prototype_categories_on_prototype_id"
+      t.index ["category_id"], name: "index_aypex_prototype_categories_on_category_id"
     end
 
     create_table "aypex_prototypes", force: :cascade do |t|
@@ -1079,23 +1079,23 @@ class AypexFourThree < ActiveRecord::Migration[5.2]
       t.index ["zone_id"], name: "index_aypex_tax_rates_on_zone_id"
     end
 
-    create_table "aypex_taxonomies", force: :cascade do |t|
+    create_table "aypex_base_categories", force: :cascade do |t|
       t.string "name", null: false
       t.datetime "created_at", precision: 6, null: false
       t.datetime "updated_at", precision: 6, null: false
       t.integer "position", default: 0
       t.bigint "store_id"
-      t.index ["name", "store_id"], name: "index_aypex_taxonomies_on_name_and_store_id", unique: true
-      t.index ["position"], name: "index_aypex_taxonomies_on_position"
-      t.index ["store_id"], name: "index_aypex_taxonomies_on_store_id"
+      t.index ["name", "store_id"], name: "index_aypex_base_categories_on_name_and_store_id", unique: true
+      t.index ["position"], name: "index_aypex_base_categories_on_position"
+      t.index ["store_id"], name: "index_aypex_base_categories_on_store_id"
     end
 
-    create_table "aypex_taxons", force: :cascade do |t|
+    create_table "aypex_categories", force: :cascade do |t|
       t.bigint "parent_id"
       t.integer "position", default: 0
       t.string "name", null: false
       t.string "permalink"
-      t.bigint "taxonomy_id"
+      t.bigint "base_category_id"
       t.bigint "lft"
       t.bigint "rgt"
       t.text "description"
@@ -1106,15 +1106,15 @@ class AypexFourThree < ActiveRecord::Migration[5.2]
       t.string "meta_keywords"
       t.integer "depth"
       t.boolean "hide_from_nav", default: false
-      t.index ["lft"], name: "index_aypex_taxons_on_lft"
-      t.index ["name", "parent_id", "taxonomy_id"], name: "index_aypex_taxons_on_name_and_parent_id_and_taxonomy_id", unique: true
-      t.index ["name"], name: "index_aypex_taxons_on_name"
-      t.index ["parent_id"], name: "index_taxons_on_parent_id"
-      t.index ["permalink", "parent_id", "taxonomy_id"], name: "index_aypex_taxons_on_permalink_and_parent_id_and_taxonomy_id", unique: true
-      t.index ["permalink"], name: "index_taxons_on_permalink"
-      t.index ["position"], name: "index_aypex_taxons_on_position"
-      t.index ["rgt"], name: "index_aypex_taxons_on_rgt"
-      t.index ["taxonomy_id"], name: "index_taxons_on_taxonomy_id"
+      t.index ["lft"], name: "index_aypex_categories_on_lft"
+      t.index ["name", "parent_id", "base_category_id"], name: "index_aypex_categories_on_name_and_parent_and_base_category", unique: true
+      t.index ["name"], name: "index_aypex_categories_on_name"
+      t.index ["parent_id"], name: "index_categories_on_parent_id"
+      t.index ["permalink", "parent_id", "base_category_id"], name: "index_categories_on_permalink_and_parent_and_base_category", unique: true
+      t.index ["permalink"], name: "index_categories_on_permalink"
+      t.index ["position"], name: "index_aypex_categories_on_position"
+      t.index ["rgt"], name: "index_aypex_categories_on_rgt"
+      t.index ["base_category_id"], name: "index_categories_on_base_category_id"
     end
 
     create_table "aypex_trackers", force: :cascade do |t|

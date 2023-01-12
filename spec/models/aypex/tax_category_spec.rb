@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::TaxCategory, type: :model do
+describe Aypex::TaxCategory do
   context "default tax category" do
     let(:tax_category) { create(:tax_category) }
     let(:new_tax_category) { create(:tax_category) }

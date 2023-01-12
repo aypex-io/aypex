@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe Aypex::PromotionRule, type: :model do
+  describe Aypex::PromotionRule do
     class BadTestRule < Aypex::PromotionRule; end
 
     class TestRule < Aypex::PromotionRule

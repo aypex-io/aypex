@@ -12,7 +12,7 @@ ignore:
   - Lint/AssignmentInCondition
 - app/models/aypex/product.rb:
   - Lint/AssignmentInCondition
-- app/models/aypex/promotion/rules/taxon.rb:
+- app/models/aypex/promotion/rules/category.rb:
   - Lint/UselessAssignment
 - app/models/aypex/reimbursement_type/credit.rb:
   - Lint/UselessAssignment
@@ -28,7 +28,7 @@ ignore:
   - Lint/AssignmentInCondition
 - app/models/aypex/tax_category.rb:
   - Lint/AssignmentInCondition
-- app/models/aypex/taxon.rb:
+- app/models/aypex/category.rb:
   - Lint/UselessAssignment
 - app/models/aypex/zone.rb:
   - Lint/AssignmentInCondition

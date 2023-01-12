@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Order, type: :model do
+describe Aypex::Order do
   let(:order) { Aypex::Order.new }
 
   context "validation" do

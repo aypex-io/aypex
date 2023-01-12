@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::ReturnItem::EligibilityValidator::RMARequired, type: :model do
+describe Aypex::ReturnItem::EligibilityValidator::RMARequired do
   let(:return_item) { create(:return_item) }
   let(:validator) { Aypex::ReturnItem::EligibilityValidator::RMARequired.new(return_item) }
 
