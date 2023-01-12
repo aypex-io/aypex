@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Product scopes", type: :model do
+describe "Product scopes" do
   let(:store) { create(:store) }
   let!(:product) { create(:product, stores: [store]) }
 

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::BaseCategory, type: :model do
+describe Aypex::BaseCategory do
   it_behaves_like "metadata"
 
   describe "#destroy" do

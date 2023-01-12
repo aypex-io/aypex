@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::MenuItem, type: :model do
+describe Aypex::MenuItem do
   let!(:store) { create(:store, default_locale: "en") }
   let!(:menu) { create(:menu, name: "Main Menu", store: store) }
 

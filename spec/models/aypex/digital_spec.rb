@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Digital, type: :model do
+describe Aypex::Digital do
   include ActionDispatch::TestProcess::FixtureFile
 
   let(:file_upload) { fixture_file_upload(file_fixture("icon_256x256.png"), "image/png") }

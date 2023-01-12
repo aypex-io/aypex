@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe StockLocation, type: :model do
+  describe StockLocation do
     subject { create(:stock_location_with_items, backorderable_default: true) }
 
     let(:stock_item) { subject.stock_items.order(:id).first }

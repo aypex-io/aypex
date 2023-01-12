@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Promotion::Rules::OneUsePerUser, type: :model do
+describe Aypex::Promotion::Rules::OneUsePerUser do
   let(:rule) { described_class.new }
 
   describe "#eligible?(order)" do

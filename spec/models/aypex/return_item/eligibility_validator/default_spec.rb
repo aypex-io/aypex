@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::ReturnItem::EligibilityValidator::Default, type: :model do
+describe Aypex::ReturnItem::EligibilityValidator::Default do
   let(:return_item) { create(:return_item) }
   let(:validator) { Aypex::ReturnItem::EligibilityValidator::Default.new(return_item) }
 

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Order, type: :model do
+describe Aypex::Order do
   context "CurrencyUpdater" do
     context "when changing order currency" do
       let!(:line_item) { create(:line_item) }

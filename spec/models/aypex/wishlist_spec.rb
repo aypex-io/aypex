@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Wishlist, type: :model do
+describe Aypex::Wishlist do
   let!(:store) { Aypex::Store.default }
   let!(:other_store) { create(:store) }
   let!(:user) { create(:user) }

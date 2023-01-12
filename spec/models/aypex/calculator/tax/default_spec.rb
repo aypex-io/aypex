@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Calculator::Tax::Default, type: :model do
+describe Aypex::Calculator::Tax::Default do
   let!(:country) { create(:country) }
   let!(:zone) { create(:zone, name: "Country Zone", default_tax: true, zone_members: []) }
   let!(:tax_category) { create(:tax_category, tax_rates: []) }

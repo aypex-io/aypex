@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe ReimbursementType::Credit, type: :model do
+  describe ReimbursementType::Credit do
     subject { Aypex::ReimbursementType::Credit.reimburse(reimbursement, [return_item], simulate) }
 
     let(:reimbursement) { create(:reimbursement, return_items_count: 1) }

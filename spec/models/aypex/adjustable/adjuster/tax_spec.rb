@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Adjustable::Adjuster::Tax, type: :model do
+describe Aypex::Adjustable::Adjuster::Tax do
   let(:order) { create :order_with_line_items, line_items_count: 1 }
   let(:line_item) { order.line_items.first }
 

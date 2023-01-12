@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::CreditCard, type: :model do
+describe Aypex::CreditCard do
   before { allow(payment).to receive_messages payment_method: payment_method }
 
   let(:payment_method) { create(:payment_method) }

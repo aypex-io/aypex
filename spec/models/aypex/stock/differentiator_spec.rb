@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module Stock
-    describe Differentiator, type: :model do
+    describe Differentiator do
       subject { Differentiator.new(order, packages) }
 
       let(:variant1) { create(:variant) }

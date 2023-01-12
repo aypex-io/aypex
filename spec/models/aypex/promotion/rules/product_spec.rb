@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Promotion::Rules::Product, type: :model do
+describe Aypex::Promotion::Rules::Product do
   let(:rule) { Aypex::Promotion::Rules::Product.new(rule_options) }
   let(:rule_options) { {} }
 

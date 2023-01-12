@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::CmsSection, type: :model do
+describe Aypex::CmsSection do
   let!(:store_a) { create(:store) }
   let!(:homepage) { create(:cms_homepage, store: store_a) }
 

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Promotion::Rules::Category, type: :model do
+describe Aypex::Promotion::Rules::Category do
   let(:rule) { subject }
 
   let(:store) { create(:store) }

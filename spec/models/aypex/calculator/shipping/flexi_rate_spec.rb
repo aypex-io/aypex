@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module Calculator::Shipping
-    describe FlexiRate, type: :model do
+    describe FlexiRate do
       let(:variant1) { build(:variant, price: 10) }
       let(:variant2) { build(:variant, price: 20) }
 

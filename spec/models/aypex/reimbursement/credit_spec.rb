@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe Reimbursement::Credit, type: :model do
+  describe Reimbursement::Credit do
     context "class methods" do
       describe ".total_amount_reimbursed_for" do
         subject { Aypex::Reimbursement::Credit.total_amount_reimbursed_for(reimbursement) }

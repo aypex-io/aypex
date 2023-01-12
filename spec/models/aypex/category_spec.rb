@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Category, type: :model do
+describe Aypex::Category do
   let(:base_category) { create(:base_category) }
   let(:category) { build(:category, name: "Ruby on Rails", parent: nil) }
 

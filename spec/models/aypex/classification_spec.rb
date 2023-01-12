@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe Classification, type: :model do
+  describe Classification do
     let(:store) { create(:store) }
 
     # Regression test for #3494

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Promotion::Rules::User, type: :model do
+describe Aypex::Promotion::Rules::User do
   let(:rule) { Aypex::Promotion::Rules::User.new }
   let(:random_user) { create :user }
   let(:user_placing_order) { create :user }

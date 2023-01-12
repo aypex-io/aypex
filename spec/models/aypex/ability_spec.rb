@@ -19,7 +19,7 @@ class FooAbility
   end
 end
 
-describe Aypex::Ability, type: :model do
+describe Aypex::Ability do
   let(:store) { create(:store) }
   let(:user) { build(:user) }
   let(:ability) { Aypex::Ability.new(user) }

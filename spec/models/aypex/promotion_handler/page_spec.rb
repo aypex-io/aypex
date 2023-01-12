@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module PromotionHandler
-    describe Page, type: :model do
+    describe Page do
       let(:order) { create(:order_with_line_items, line_items_count: 1) }
 
       let(:promotion) { create(:promotion, name: "10% off", path: "10off", stores: [order.store]) }

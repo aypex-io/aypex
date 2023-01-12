@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe ReimbursementType::Exchange, type: :model do
+  describe ReimbursementType::Exchange do
     describe ".reimburse" do
       subject { Aypex::ReimbursementType::Exchange.reimburse(reimbursement, return_items, simulate) }
 

@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe Reimbursement::ReimbursementTypeEngine, type: :model do
+  describe Reimbursement::ReimbursementTypeEngine do
     describe "#calculate_reimbursement_types" do
       subject { reimbursement_type_engine.calculate_reimbursement_types }
 

@@ -1,7 +1,7 @@
 require "spec_helper"
 require "testing_support/order_walkthrough"
 
-describe Aypex::Order, type: :model do
+describe Aypex::Order do
   let!(:store) { create(:store, default: true) }
   let(:order) { build(:order, store: store) }
   let(:country) { create(:country) }

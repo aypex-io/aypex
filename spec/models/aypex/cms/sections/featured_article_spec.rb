@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Cms::Sections::FeaturedArticle, type: :model do
+describe Aypex::Cms::Sections::FeaturedArticle do
   let!(:store) { create(:store) }
   let!(:homepage) { create(:cms_homepage, store: store) }
 

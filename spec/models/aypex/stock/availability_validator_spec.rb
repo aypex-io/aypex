@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module Stock
-    describe AvailabilityValidator, type: :model do
+    describe AvailabilityValidator do
       subject { described_class.new }
 
       let!(:order) { create(:order_with_line_item_quantity, line_items_quantity: 5) }

@@ -3,7 +3,7 @@ require "spec_helper"
 class MyCustomCreateService
 end
 
-describe Aypex::Dependencies, type: :model do
+describe Aypex::Dependencies do
   let(:deps) { described_class.new }
 
   it "returns the default value" do

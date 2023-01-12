@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::OrderPromotion, type: :model do
+describe Aypex::OrderPromotion do
   subject { create(:order_promotion, order: order, promotion: promotion) }
 
   let(:order) { create(:order_with_line_items) }

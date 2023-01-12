@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Adjustable::Adjuster::Base, type: :model do
+describe Aypex::Adjustable::Adjuster::Base do
   let(:line_item) { create(:line_item) }
   let(:subject) { Aypex::Adjustable::Adjuster::Base }
 

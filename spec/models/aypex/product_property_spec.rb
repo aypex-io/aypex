@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::ProductProperty, type: :model do
+describe Aypex::ProductProperty do
   describe "#validations" do
     let!(:product_property) { create(:product_property) }
 

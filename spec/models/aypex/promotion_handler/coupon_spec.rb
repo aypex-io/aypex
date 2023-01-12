@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module PromotionHandler
-    describe Coupon, type: :model do
+    describe Coupon do
       subject { Coupon.new(order) }
 
       let(:store) { Aypex::Store.default }

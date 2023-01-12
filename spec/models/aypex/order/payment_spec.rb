@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe Aypex::Order, type: :model do
+  describe Aypex::Order do
     let(:order) { create(:order) }
     let(:updater) { Aypex::OrderUpdater.new(order) }
 

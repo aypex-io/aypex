@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Store, type: :model do
+describe Aypex::Store do
   describe "associations" do
     subject { create(:store) }
 

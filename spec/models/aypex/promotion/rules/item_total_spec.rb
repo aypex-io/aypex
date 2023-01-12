@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Promotion::Rules::ItemTotal, type: :model do
+describe Aypex::Promotion::Rules::ItemTotal do
   let!(:store) { create(:store, default: true) }
   let(:rule) { Aypex::Promotion::Rules::ItemTotal.new }
   let(:order) { double(:order) }

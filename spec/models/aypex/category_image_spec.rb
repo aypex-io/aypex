@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::CategoryImage, type: :model do
+describe Aypex::CategoryImage do
   context "validation" do
     let(:aypex_image) { Aypex::CategoryImage.new }
     let(:image_file) { File.open(Aypex::Engine.root + "spec/fixtures" + "thinking-cat.jpg") }

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::OptionValueVariant, type: :model do
+describe Aypex::OptionValueVariant do
   let(:option_value_variant) { create(:option_value_variant) }
 
   describe "touching" do

@@ -3,7 +3,7 @@ require "spec_helper"
 module Aypex
   module Stock
     module Splitter
-      describe Backordered, type: :model do
+      describe Backordered do
         subject(:result) do
           described_class.new(packer).split([package])
         end

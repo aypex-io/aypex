@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Promotion::Rules::UserLoggedIn, type: :model do
+describe Aypex::Promotion::Rules::UserLoggedIn do
   let(:rule) { Aypex::Promotion::Rules::UserLoggedIn.new }
 
   context "#eligible?(order)" do

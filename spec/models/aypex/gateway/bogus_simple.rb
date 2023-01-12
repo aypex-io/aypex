@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Gateway::BogusSimple, type: :model do
+describe Aypex::Gateway::BogusSimple do
   subject { Aypex::Gateway::BogusSimple.new }
 
   # regression test for #3824

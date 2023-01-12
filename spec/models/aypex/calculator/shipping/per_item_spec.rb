@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module Calculator::Shipping
-    describe PerItem, type: :model do
+    describe PerItem do
       subject { PerItem.new(amount: 10) }
 
       let(:variant1) { build(:variant) }

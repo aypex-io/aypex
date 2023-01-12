@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe Aypex::Order, type: :model do
+  describe Aypex::Order do
     context "validations" do
       # Regression test for #2214
       it "does not return two error messages when email is blank" do

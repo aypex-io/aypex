@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe Exchange, type: :model do
+  describe Exchange do
     let(:order) { Aypex::Order.new }
 
     let(:return_item_1) { build(:exchange_return_item) }

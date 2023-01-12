@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Shipment, type: :model do
+describe Aypex::Shipment do
   let(:inventory_units) { create_list(:inventory_unit, 2) }
   let(:variant) { line_item.variant }
   let!(:line_item) { create(:line_item) }

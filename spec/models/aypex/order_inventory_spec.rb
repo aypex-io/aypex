@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::OrderInventory, type: :model do
+describe Aypex::OrderInventory do
   subject { described_class.new(order, line_item) }
 
   let(:order) { create(:completed_order_with_totals) }

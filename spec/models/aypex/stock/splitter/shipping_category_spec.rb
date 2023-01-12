@@ -3,7 +3,7 @@ require "spec_helper"
 module Aypex
   module Stock
     module Splitter
-      describe ShippingCategory, type: :model do
+      describe ShippingCategory do
         subject(:result) do
           described_class.new(packer).split(packages)
         end

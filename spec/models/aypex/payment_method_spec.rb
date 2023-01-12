@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::PaymentMethod, type: :model do
+describe Aypex::PaymentMethod do
   let(:store) { create(:store) }
 
   it_behaves_like "metadata"

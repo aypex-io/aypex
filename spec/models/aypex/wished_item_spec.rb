@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe Aypex::WishedItem, type: :model do
+RSpec.describe Aypex::WishedItem do
   describe ".quantity" do
     subject { build(:wished_item) }
 

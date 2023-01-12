@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Promotion::Rules::Country, type: :model do
+describe Aypex::Promotion::Rules::Country do
   let!(:store) { create(:store, default_country: other_country) }
   let(:rule) { described_class.new }
   let(:order) { create(:order, store: store) }

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::ZoneMember, type: :model do
+describe Aypex::ZoneMember do
   let(:country) { create(:country) }
   let(:state) { create(:state) }
   let(:zone) { create(:zone, kind: "country") }

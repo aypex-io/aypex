@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Reimbursement, type: :model do
+describe Aypex::Reimbursement do
   describe "#display_total" do
     subject { reimbursement.display_total }
 

@@ -2,7 +2,7 @@ require "spec_helper"
 require "testing_support/order_walkthrough"
 
 module Aypex
-  describe OrderUpdater, type: :model do
+  describe OrderUpdater do
     let(:order) { create(:order) }
     let(:updater) { Aypex::OrderUpdater.new(order) }
 

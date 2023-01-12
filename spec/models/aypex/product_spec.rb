@@ -7,7 +7,7 @@ module ThirdParty
   end
 end
 
-describe Aypex::Product, type: :model do
+describe Aypex::Product do
   let!(:store) { create(:store) }
 
   it_behaves_like "metadata"

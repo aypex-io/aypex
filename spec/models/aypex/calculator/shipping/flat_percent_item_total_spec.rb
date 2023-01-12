@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Aypex
   module Calculator::Shipping
-    describe FlatPercentItemTotal, type: :model do
+    describe FlatPercentItemTotal do
       subject { FlatPercentItemTotal.new(flat_percent: 10) }
 
       let(:variant1) { build(:variant, price: 10.11) }
