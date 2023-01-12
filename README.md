@@ -1,5 +1,6 @@
-[![CI](https://github.com/aypex-io/aypex/actions/workflows/core_ci.yml/badge.svg)](https://github.com/aypex-io/aypex/actions/workflows/core_ci.yml)
+[![AYPEX CI](https://github.com/aypex-io/aypex/actions/workflows/ci.yml/badge.svg)](https://github.com/aypex-io/aypex/actions/workflows/ci.yml)
 [![Standard RB](https://github.com/aypex-io/aypex/actions/workflows/standard_rb_core.yml/badge.svg)](https://github.com/aypex-io/aypex/actions/workflows/standard_rb_core.yml)
+[![Lint Code Spelling](https://github.com/aypex-io/aypex/actions/workflows/spelling_lint.yml/badge.svg)](https://github.com/aypex-io/aypex/actions/workflows/spelling_lint.yml)
 
 ## Aypex eCommerce Kit
 

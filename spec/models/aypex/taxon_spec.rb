@@ -14,7 +14,7 @@ describe Aypex::Taxon, type: :model do
 
   context "validations" do
     describe "#check_for_root" do
-      let(:valid_taxon) { build(:taxon, name: "Vaild Rails", parent_id: 1, taxonomy: taxonomy) }
+      let(:valid_taxon) { build(:taxon, name: "Valid Rails", parent_id: 1, taxonomy: taxonomy) }
 
       it "does not validate the taxon" do
         expect(taxon.valid?).to eq false

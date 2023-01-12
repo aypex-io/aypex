@@ -1319,7 +1319,7 @@ describe Aypex::Order, type: :model do
           expect(order.promotions).to include(line_item_promotion)
         end
 
-        it "reeturns -100.0" do
+        it "returns -100.0" do
           # 10 items x -10 discount
           expect(subject).to eq(BigDecimal("-100.00"))
         end
@@ -1406,7 +1406,7 @@ describe Aypex::Order, type: :model do
     context "when user has default bill address" do
       let!(:user) { create(:user_with_addresses) }
 
-      it "does not change user default bill addresss" do
+      it "does not change user default bill address" do
         expect(user.bill_address_id).not_to be_nil
 
         expect { subject }.not_to change { user.bill_address_id }
@@ -1416,7 +1416,7 @@ describe Aypex::Order, type: :model do
     context "when user does not have any addresses" do
       let!(:user) { create(:user) }
 
-      it "changes user default bill addresss" do
+      it "changes user default bill address" do
         expect(user.bill_address_id).to be_nil
         expect(user.addresses).to be_empty
 
@@ -1430,7 +1430,7 @@ describe Aypex::Order, type: :model do
 
       before { user.bill_address = nil }
 
-      it "changes user default bill addresss" do
+      it "changes user default bill address" do
         expect(user.bill_address_id).to be_nil
         expect(user.addresses).not_to be_empty
 
@@ -1471,7 +1471,7 @@ describe Aypex::Order, type: :model do
     context "when user has default ship address" do
       let!(:user) { create(:user_with_addresses) }
 
-      it "does not change user default ship addresss" do
+      it "does not change user default ship address" do
         expect(user.ship_address_id).not_to be_nil
 
         expect { subject }.not_to change { user.ship_address_id }
@@ -1481,7 +1481,7 @@ describe Aypex::Order, type: :model do
     context "when user does not have any addresses" do
       let!(:user) { create(:user) }
 
-      it "changes user default ship addresss" do
+      it "changes user default ship address" do
         expect(user.ship_address_id).to be_nil
         expect(user.addresses).to be_empty
 
@@ -1495,7 +1495,7 @@ describe Aypex::Order, type: :model do
 
       before { user.update(ship_address: nil) }
 
-      it "changes user default ship addresss" do
+      it "changes user default ship address" do
         expect(user.ship_address_id).to be_nil
         expect(user.addresses).not_to be_empty
 
