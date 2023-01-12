@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::CurrencyHelper, type: :helper do
+describe Aypex::CurrencyHelper do
   let(:current_store) { create(:store, default_currency: "EUR", supported_currencies: "EUR,PLN,GBP") }
 
   describe "#supported_currency_options" do

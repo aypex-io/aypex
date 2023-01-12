@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Aypex
-  describe ProductsHelper, type: :helper do
+  describe ProductsHelper do
     include ProductsHelper
 
     let(:store) { create(:store) }

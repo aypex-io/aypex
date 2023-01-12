@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::LocaleHelper, type: :helper do
+describe Aypex::LocaleHelper do
   let(:germany) { create(:country, name: "Germany", iso: "GR") }
   let(:eu_store) { create(:store, default_currency: "EUR", default_locale: "de", default_country: germany, supported_locales: "fr,de") }
   let(:available_locales) { Aypex::Store.available_locales }
