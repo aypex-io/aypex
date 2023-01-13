@@ -1,4 +1,4 @@
-[![AYPEX CI](https://github.com/aypex-io/aypex/actions/workflows/ci.yml/badge.svg)](https://github.com/aypex-io/aypex/actions/workflows/ci.yml)
+[![Aypex CI](https://github.com/aypex-io/aypex/actions/workflows/ci.yml/badge.svg)](https://github.com/aypex-io/aypex/actions/workflows/ci.yml)
 [![Standard RB](https://github.com/aypex-io/aypex/actions/workflows/standard_rb_core.yml/badge.svg)](https://github.com/aypex-io/aypex/actions/workflows/standard_rb_core.yml)
 
 ## Aypex eCommerce Kit
