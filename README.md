@@ -25,7 +25,7 @@ Below are some example setups.
 
 ## Documentation
 
-```shell
+```bash
 bin/rails g aypex:install --user_class=Aypex::User
 ```
 
