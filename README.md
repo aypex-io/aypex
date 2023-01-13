@@ -39,7 +39,7 @@ And then execute:
 bundle
 ```
 
-And then run the Aypex install command
+And then run the Aypex install command:
 ```bash
 bin/rails g aypex:install --user_class=Aypex::User
 ```
