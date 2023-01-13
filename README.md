@@ -1,6 +1,5 @@
 [![AYPEX CI](https://github.com/aypex-io/aypex/actions/workflows/ci.yml/badge.svg)](https://github.com/aypex-io/aypex/actions/workflows/ci.yml)
 [![Standard RB](https://github.com/aypex-io/aypex/actions/workflows/standard_rb_core.yml/badge.svg)](https://github.com/aypex-io/aypex/actions/workflows/standard_rb_core.yml)
-[![Lint Code Spelling](https://github.com/aypex-io/aypex/actions/workflows/spelling_lint.yml/badge.svg)](https://github.com/aypex-io/aypex/actions/workflows/spelling_lint.yml)
 
 ## Aypex eCommerce Kit
 
@@ -16,12 +15,12 @@ Below are some example setups.
 - Aypex API
 
 ### Full Rails Stack
-- Aypex CORE
-- Aypex API
-- Aypex EMAILS
-- Aypex STOREFRONT
-- Aypex ADMIN
-- Aypex CHECKOUT
+- Aypex
+- Aypex::Api
+- Aypex::Emails
+- Aypex::Storefront
+- Aypex::Admin
+- Aypex::Checkout
 
 ## Documentation
 
@@ -31,4 +30,4 @@ bin/rails g aypex:install --user_class=Aypex::User
 
 ## License
 
-Aypex is released under the [New BSD License](https://github.com/aypex-io/aypex/blob/main/license.md).
+Aypex is released under the [New MIT License](https://github.com/aypex-io/aypex/blob/main/MIT-LICENSE).
