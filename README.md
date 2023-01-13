@@ -24,8 +24,34 @@ Below are some example setups.
 
 ## Documentation
 
+Create a new rails app (Rails >=7.0 using Propshaft)
+```bash
+rails new [app_name] --database=postgresql -a propshaft
+```
+
+Add this line to your application's Gemfile:
+```ruby
+gem "aypex"
+```
+
+And then execute:
+```bash
+bundle
+```
+
+And then run the Aypex install command
 ```bash
 bin/rails g aypex:install --user_class=Aypex::User
+```
+
+## Testing
+
+```bash
+bundle exec rake test_app
+```
+
+```bash
+bundle exec rspec spec
 ```
 
 ## License
