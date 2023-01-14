@@ -4,7 +4,7 @@ require "aypex/version"
 
 module Aypex
   class DummyGenerator < Rails::Generators::Base
-    AYPEX_GEMS = %w[aypex_admin aypex_storefront aypex_api aypex_emails aypex_checkout].freeze
+    AYPEX_GEMS = %w[aypex-admin aypex-storefront aypex-api aypex-emails aypex-checkout].freeze
 
     desc "Creates blank Rails application, installs Aypex and all sample data"
 
@@ -147,13 +147,7 @@ end
     end
 
     def gemfile_path
-      core_gems = ["aypex/core", "aypex/api"]
-
-      if core_gems.include?(lib_name)
-        "../../../../../Gemfile"
-      else
-        "../../../../Gemfile"
-      end
+      "../../../../Gemfile"
     end
   end
 end

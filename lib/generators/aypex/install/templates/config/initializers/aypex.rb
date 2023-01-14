@@ -12,12 +12,12 @@ end
 # Note: If a dependency is set here it will NOT be stored within the cache & database upon initialization.
 #       removing an entry from this initializer will make the dependency value go away.
 #
-Aypex.dependencies do |dependency|
+Aypex.dependency do |dependent|
   # Examples:
   # Un-comment to change the default Service handling adding Items to Cart
-  # dependency.cart_add_item_service = "MyNewAwesomeService"
+  # dependent.cart_add_item_service = "MyNewAwesomeService"
 
   # Un-comment to set the default storefront cart serializer
-  # dependency.storefront_cart_serializer = "MyRailsApp::CartSerializer"
+  # dependent.storefront_cart_serializer = "MyRailsApp::CartSerializer"
 end
 

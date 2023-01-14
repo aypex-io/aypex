@@ -5,7 +5,7 @@ FactoryBot.define do
     company { "Company" }
     sequence(:address1) { |n| "#{n} Lovely Street" }
     address2 { "Northwest" }
-    city { "London" }
+    city { "Leeds" }
     zipcode { "35005" }
     phone { "555-555-0199" }
     alternative_phone { "555-555-0199" }
