@@ -37,7 +37,7 @@ module Aypex
   #
   # Example:
   #
-  #   Aypex.configureure do |config|
+  #   Aypex.configure do |config|
   #     config.track_inventory_levels = false
   #   end
   #
@@ -51,13 +51,13 @@ module Aypex
   #
   # Example:
   #
-  #   Aypex.dependency do |dependent|
-  #     dependent.cart_add_item_service = MyCustomAddToCart
+  #   Aypex.set_dependency do |dependency|
+  #     dependency.cart_add_item_service = MyCustomAddToCart
   #   end
   #
   # This method is defined within the core gem on purpose.
   # Some people may only wish to use the Core part of Aypex.
-  def self.dependency
+  def self.set_dependency
     yield(Aypex::Dependency)
   end
 end
