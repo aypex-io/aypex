@@ -75,11 +75,11 @@ describe Aypex::PaymentMethod do
 
     context "when auto_capture is nil" do
       before do
-        Aypex.config { |config| config.auto_capture = auto_capture }
+        Aypex.configure { |config| config.auto_capture = auto_capture }
       end
 
       after do
-        Aypex.config { |config| config.auto_capture = false }
+        Aypex.configure { |config| config.auto_capture = false }
       end
 
       context "and when Aypex::Config.auto_capture is false" do
@@ -164,11 +164,11 @@ describe Aypex::PaymentMethod do
 
       context "preference set" do
         before do
-          Aypex.config { |config| config.disable_store_presence_validation = true }
+          Aypex.configure { |config| config.disable_store_presence_validation = true }
         end
 
         after do
-          Aypex.config { |config| config.disable_store_presence_validation = false }
+          Aypex.configure { |config| config.disable_store_presence_validation = false }
         end
 
         it { expect(valid_record).to be_valid }

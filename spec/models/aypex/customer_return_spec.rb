@@ -185,14 +185,14 @@ describe Aypex::CustomerReturn do
 
       context "with Config.track_inventory_levels == false" do
         before do
-          Aypex.config { |config| config.track_inventory_levels = false }
+          Aypex.configure { |config| config.track_inventory_levels = false }
 
           expect(Aypex::StockItem).not_to receive(:find_by)
           expect(Aypex::StockMovement).not_to receive(:create!)
         end
 
         after do
-          Aypex.config { |config| config.track_inventory_levels = true }
+          Aypex.configure { |config| config.track_inventory_levels = true }
         end
 
         it "does not update the stock item counts in the stock location" do

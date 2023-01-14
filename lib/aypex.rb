@@ -37,7 +37,7 @@ module Aypex
   #
   # Example:
   #
-  #   Aypex.configure do |config|
+  #   Aypex.configureure do |config|
   #     config.track_inventory_levels = false
   #   end
   #

@@ -51,11 +51,11 @@ describe Aypex::Variant do
 
       context "disabled validation" do
         before do
-          Aypex.config { |config| config.disable_sku_validation = true }
+          Aypex.configure { |config| config.disable_sku_validation = true }
         end
 
         after do
-          Aypex.config { |config| config.disable_sku_validation = false }
+          Aypex.configure { |config| config.disable_sku_validation = false }
         end
 
         context "valid" do
@@ -688,11 +688,11 @@ describe Aypex::Variant do
 
   describe "#total_on_hand" do
     after do
-      Aypex.config { |config| config.track_inventory_levels = true }
+      Aypex.configure { |config| config.track_inventory_levels = true }
     end
 
     it "is infinite if track_inventory_levels is false" do
-      Aypex.config { |config| config.track_inventory_levels = false }
+      Aypex.configure { |config| config.track_inventory_levels = false }
 
       expect(build(:variant).total_on_hand).to eql(Float::INFINITY)
     end
@@ -795,11 +795,11 @@ describe Aypex::Variant do
 
   describe "#should_track_inventory?" do
     after do
-      Aypex.config { |config| config.track_inventory_levels = true }
+      Aypex.configure { |config| config.track_inventory_levels = true }
     end
 
     it "does not track inventory when global setting is off" do
-      Aypex.config { |config| config.track_inventory_levels = false }
+      Aypex.configure { |config| config.track_inventory_levels = false }
 
       expect(build(:variant).should_track_inventory?).to eq(false)
     end
@@ -947,11 +947,11 @@ describe Aypex::Variant do
 
     context "require_master_price set false" do
       before do
-        Aypex.config { |config| config.require_master_price = false }
+        Aypex.configure { |config| config.require_master_price = false }
       end
 
       after do
-        Aypex.config { |config| config.require_master_price = true }
+        Aypex.configure { |config| config.require_master_price = true }
       end
 
       context "price present and currency present" do

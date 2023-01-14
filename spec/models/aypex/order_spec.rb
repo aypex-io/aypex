@@ -132,7 +132,7 @@ describe Aypex::Order do
     end
 
     after do
-      Aypex.config { |config| config.track_inventory_levels = true }
+      Aypex.configure { |config| config.track_inventory_levels = true }
     end
 
     it "sets completed_at" do
@@ -166,7 +166,7 @@ describe Aypex::Order do
     end
 
     it "does not sell inventory units if track_inventory_levels is false" do
-      Aypex.config { |config| config.track_inventory_levels = false }
+      Aypex.configure { |config| config.track_inventory_levels = false }
 
       expect(Aypex::InventoryUnit).not_to receive(:sell_units)
       order.finalize!

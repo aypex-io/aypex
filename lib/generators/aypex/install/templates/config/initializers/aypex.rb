@@ -3,7 +3,7 @@
 #       removing a config entry from this initializer will make the setting
 #       revert back it's default value.
 #
-Aypex.config do |config|
+Aypex.configure do |config|
   config.user_class = <%= (options[:user_class].blank? ? "Aypex::LegacyUser" : options[:user_class]).inspect %>
 end
 

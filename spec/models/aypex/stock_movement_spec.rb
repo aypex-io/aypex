@@ -54,14 +54,14 @@ describe Aypex::StockMovement do
     describe "#update_stock_item_quantity" do
       context "when track inventory levels is false" do
         before do
-          Aypex.config { |config| config.track_inventory_levels = false }
+          Aypex.configure { |config| config.track_inventory_levels = false }
           stock_movement.quantity = 1
           stock_movement.save
           stock_item.reload
         end
 
         after do
-          Aypex.config { |config| config.track_inventory_levels = true }
+          Aypex.configure { |config| config.track_inventory_levels = true }
         end
 
         it "does not update count on hand" do
