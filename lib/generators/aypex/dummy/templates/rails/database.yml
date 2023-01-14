@@ -26,13 +26,13 @@ mysql: &mysql
 
 development:
   <<: *mysql
-  database: <%= database_prefix %><%= lib_name %>_aypex_development
+  database: <%= database_prefix %><%= lib_name %>_development
 test:
   <<: *mysql
-  database: <%= database_prefix %><%= lib_name %>_aypex_test
+  database: <%= database_prefix %><%= lib_name %>_test
 production:
   <<: *mysql
-  database: <%= database_prefix %><%= lib_name %>_aypex_production
+  database: <%= database_prefix %><%= lib_name %>_production
 <% when 'postgres' %>
 postgres: &postgres
   adapter: postgresql
@@ -49,13 +49,13 @@ postgres: &postgres
 
 development:
   <<: *postgres
-  database: <%= database_prefix %><%= lib_name %>_aypex_development
+  database: <%= database_prefix %><%= lib_name %>_development
 test:
   <<: *postgres
-  database: <%= database_prefix %><%= lib_name %>_aypex_test
+  database: <%= database_prefix %><%= lib_name %>_test
 production:
   <<: *postgres
-  database: <%= database_prefix %><%= lib_name %>_aypex_production
+  database: <%= database_prefix %><%= lib_name %>_production
 <% else %>
 postgres: &postgres
   adapter: postgresql
@@ -72,11 +72,11 @@ postgres: &postgres
 
 development:
   <<: *postgres
-  database: <%= database_prefix %><%= lib_name %>_aypex_development
+  database: <%= database_prefix %><%= lib_name %>_development
 test:
   <<: *postgres
-  database: <%= database_prefix %><%= lib_name %>_aypex_test
+  database: <%= database_prefix %><%= lib_name %>_test
 production:
   <<: *postgres
-  database: <%= database_prefix %><%= lib_name %>_aypex_production
+  database: <%= database_prefix %><%= lib_name %>_production
 <% end %>

@@ -60,11 +60,11 @@ module Aypex
           let(:inventory_units) { Array.new(2) { InventoryUnit.new(variant: create(:variant)) } }
 
           before do
-            Aypex.config { |config| config.track_inventory_levels = false }
+            Aypex.configure { |config| config.track_inventory_levels = false }
           end
 
           after do
-            Aypex.config { |config| config.track_inventory_levels = true }
+            Aypex.configure { |config| config.track_inventory_levels = true }
           end
 
           it "doesn't bother stock items status in stock location" do

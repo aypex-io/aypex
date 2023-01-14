@@ -491,11 +491,11 @@ describe Aypex::StoreCredit do
 
       context "credit_to_new_allocation is set" do
         before do
-          Aypex.config { |config| config.credit_to_new_allocation = true }
+          Aypex.configure { |config| config.credit_to_new_allocation = true }
         end
 
         after do
-          Aypex.config { |config| config.credit_to_new_allocation = false }
+          Aypex.configure { |config| config.credit_to_new_allocation = false }
         end
 
         it "returns true" do

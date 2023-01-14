@@ -72,11 +72,11 @@ describe Aypex::ReturnItem do
 
       context "when the restock_inventory preference is false" do
         before do
-          Aypex.config { |config| config.restock_inventory = false }
+          Aypex.configure { |config| config.restock_inventory = false }
         end
 
         after do
-          Aypex.config { |config| config.restock_inventory = true }
+          Aypex.configure { |config| config.restock_inventory = true }
         end
 
         it "does not increase the count on hand" do
@@ -745,11 +745,11 @@ describe Aypex::ReturnItem do
 
       context "when restock inventory preference false" do
         before do
-          Aypex.config { |config| config.restock_inventory = false }
+          Aypex.configure { |config| config.restock_inventory = false }
         end
 
         after do
-          Aypex.config { |config| config.restock_inventory = true }
+          Aypex.configure { |config| config.restock_inventory = true }
         end
 
         it { expect(subject).to be_nil }

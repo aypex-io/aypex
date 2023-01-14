@@ -19,7 +19,7 @@ describe "exchanges:charge_unreturned_items" do
     let!(:tax_rate) { create(:tax_rate, zone: order.tax_zone, tax_category: return_item_2.exchange_variant.tax_category) }
 
     before do
-      Aypex.config { |config| config.expedited_exchanges = true }
+      Aypex.configure { |config| config.expedited_exchanges = true }
       Aypex::StockItem.update_all(count_on_hand: 10)
       rma.save!
       Aypex::Shipment.last.ship!
@@ -29,7 +29,7 @@ describe "exchanges:charge_unreturned_items" do
 
     after do
       Timecop.return
-      Aypex.config { |config| config.expedited_exchanges = false }
+      Aypex.configure { |config| config.expedited_exchanges = false }
     end
 
     context "fewer than the config allowed days have passed" do

@@ -45,11 +45,11 @@ describe Aypex::OrderInventory do
       let(:variant) { create(:variant) }
 
       before do
-        Aypex.config { |config| config.track_inventory_levels = false }
+        Aypex.configure { |config| config.track_inventory_levels = false }
       end
 
       after do
-        Aypex.config { |config| config.track_inventory_levels = true }
+        Aypex.configure { |config| config.track_inventory_levels = true }
       end
 
       it "creates only on hand inventory units" do

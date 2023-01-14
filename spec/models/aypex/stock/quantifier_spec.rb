@@ -33,11 +33,11 @@ module Aypex
 
           context "when track_inventory_levels is false" do
             before do
-              Aypex.config { |config| config.track_inventory_levels = false }
+              Aypex.configure { |config| config.track_inventory_levels = false }
             end
 
             after do
-              Aypex.config { |config| config.track_inventory_levels = true }
+              Aypex.configure { |config| config.track_inventory_levels = true }
             end
 
             specify {

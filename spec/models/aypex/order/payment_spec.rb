@@ -8,14 +8,14 @@ module Aypex
     context "processing payments" do
       before do
         # So that Payment#purchase! is called during processing
-        Aypex.config { |config| config.auto_capture = true }
+        Aypex.configure { |config| config.auto_capture = true }
 
         allow(order).to receive_message_chain(:line_items, :empty?).and_return(false)
         allow(order).to receive_messages total: 100
       end
 
       after do
-        Aypex.config { |config| config.auto_capture = false }
+        Aypex.configure { |config| config.auto_capture = false }
       end
 
       it "processes all checkout payments" do
@@ -186,7 +186,7 @@ module Aypex
         before { expect(payment).to receive(:process!).and_raise(Aypex::GatewayError) }
 
         after do
-          Aypex.config { |config| config.auto_capture = false }
+          Aypex.configure { |config| config.auto_capture = false }
         end
 
         it "returns true when configured to allow checkout on gateway failures" do
@@ -203,7 +203,7 @@ module Aypex
       # Regression spec for https://github.com/aypex/aypex/issues/8148
 
       it "updates order with correct payment total" do
-        Aypex.config { |config| config.auto_capture = true }
+        Aypex.configure { |config| config.auto_capture = true }
         order.process_payments!
 
         expect(payment).to be_completed

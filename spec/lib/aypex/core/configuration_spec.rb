@@ -212,7 +212,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.cdn_host = "https://foam.com"
       end
       expect(test_subject.cdn_host).to eq "https://foam.com"
@@ -236,7 +236,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.restock_inventory = false
       end
       expect(test_subject.restock_inventory).to be false
@@ -265,7 +265,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.track_inventory_levels = false
       end
       expect(test_subject.track_inventory_levels).to be false
@@ -294,7 +294,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.disable_store_presence_validation = true
       end
       expect(test_subject.disable_store_presence_validation).to be true
@@ -323,7 +323,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.address_requires_phone = false
       end
       expect(test_subject.address_requires_phone).to be false
@@ -352,7 +352,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.allow_checkout_on_gateway_error = true
       end
       expect(test_subject.allow_checkout_on_gateway_error).to be true
@@ -382,7 +382,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.auto_capture = true
       end
       expect(test_subject.auto_capture).to be true
@@ -412,7 +412,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.auto_capture_on_dispatch = true
       end
       expect(test_subject.auto_capture_on_dispatch).to be true
@@ -442,7 +442,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.expedited_exchanges = true
       end
       expect(test_subject.expedited_exchanges).to be true
@@ -471,7 +471,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.binary_inventory_cache = true
       end
       expect(test_subject.binary_inventory_cache).to be true
@@ -500,7 +500,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.credit_to_new_allocation = true
       end
       expect(test_subject.credit_to_new_allocation).to be true
@@ -529,7 +529,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.disable_sku_validation = true
       end
       expect(test_subject.disable_sku_validation).to be true
@@ -558,7 +558,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.expedited_exchanges_days_window = 66
       end
       expect(test_subject.expedited_exchanges_days_window).to eq 66
@@ -587,7 +587,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.non_expiring_credit_types = ["some", "type"]
       end
       expect(test_subject.non_expiring_credit_types).to eq ["some", "type"]
@@ -616,7 +616,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.products_per_page = 78
       end
       expect(test_subject.products_per_page).to eq 78
@@ -645,7 +645,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.require_master_price = false
       end
       expect(test_subject.require_master_price).to be false
@@ -674,7 +674,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.send_core_emails = false
       end
       expect(test_subject.send_core_emails).to be false
@@ -703,7 +703,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.show_products_without_price = true
       end
       expect(test_subject.show_products_without_price).to be true
@@ -732,7 +732,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.storefront_products_path = "prods"
       end
       expect(test_subject.storefront_products_path).to eq "prods"
@@ -761,7 +761,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.storefront_categories_path = "categories"
       end
       expect(test_subject.storefront_categories_path).to eq "categories"
@@ -790,7 +790,7 @@ RSpec.describe Aypex::Configuration do
     end
 
     it "is settable via block" do
-      Aypex.config do |config|
+      Aypex.configure do |config|
         config.storefront_pages_path = "page"
       end
       expect(test_subject.storefront_pages_path).to eq "page"

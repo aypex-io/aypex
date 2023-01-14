@@ -29,12 +29,12 @@ describe Aypex::ReturnAuthorization do
       let(:return_item) { create(:return_item, inventory_unit: order.inventory_units.last) }
 
       before do
-        Aypex.config { |config| config.expedited_exchanges = true }
+        Aypex.configure { |config| config.expedited_exchanges = true }
         @pre_exchange_hooks = subject.class.pre_expedited_exchange_hooks
       end
 
       after do
-        Aypex.config { |config| config.expedited_exchanges = false }
+        Aypex.configure { |config| config.expedited_exchanges = false }
         subject.class.pre_expedited_exchange_hooks = Array(@pre_exchange_hooks)
       end
 

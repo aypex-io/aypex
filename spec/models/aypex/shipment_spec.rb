@@ -57,7 +57,7 @@ describe Aypex::Shipment do
     end
 
     after do
-      Aypex.config { |config| config.auto_capture_on_dispatch = false }
+      Aypex.configure { |config| config.auto_capture_on_dispatch = false }
     end
 
     it "returns canceled if order is canceled?" do
@@ -90,7 +90,7 @@ describe Aypex::Shipment do
     end
 
     it "returns ready when Config.auto_capture_on_dispatch" do
-      Aypex.config { |config| config.auto_capture_on_dispatch = true }
+      Aypex.configure { |config| config.auto_capture_on_dispatch = true }
       expect(shipment.determine_state(order)).to eq "ready"
     end
   end
@@ -428,7 +428,7 @@ describe Aypex::Shipment do
 
   context "when order is completed" do
     after do
-      Aypex.config { |config| config.track_inventory_levels = true }
+      Aypex.configure { |config| config.track_inventory_levels = true }
     end
 
     before do
@@ -445,7 +445,7 @@ describe Aypex::Shipment do
 
     context "without inventory tracking" do
       before do
-        Aypex.config { |config| config.track_inventory_levels = false }
+        Aypex.configure { |config| config.track_inventory_levels = false }
       end
 
       it "validates with no inventory" do
@@ -586,7 +586,7 @@ describe Aypex::Shipment do
     context "with Config.auto_capture_on_dispatch == false" do
       # Regression test for #2040
       it "cannot ready a shipment for an order if the order is unpaid" do
-        Aypex.config { |config| config.auto_capture_on_dispatch = false }
+        Aypex.configure { |config| config.auto_capture_on_dispatch = false }
         allow(order).to receive_messages(paid?: false)
         assert !shipment.can_ready?
       end
@@ -594,7 +594,7 @@ describe Aypex::Shipment do
 
     context "with Config.auto_capture_on_dispatch == true" do
       before do
-        Aypex.config { |config| config.auto_capture_on_dispatch = true }
+        Aypex.configure { |config| config.auto_capture_on_dispatch = true }
 
         @order = create(:completed_order_with_pending_payment)
         @shipment = @order.shipments.first
@@ -602,7 +602,7 @@ describe Aypex::Shipment do
       end
 
       after do
-        Aypex.config { |config| config.auto_capture_on_dispatch = false }
+        Aypex.configure { |config| config.auto_capture_on_dispatch = false }
       end
 
       it "shipments ready for an order if the order is unpaid" do

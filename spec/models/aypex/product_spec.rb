@@ -555,11 +555,11 @@ describe Aypex::Product do
     let(:product) { create(:product, stores: [store]) }
 
     after do
-      Aypex.config { |config| config.track_inventory_levels = true }
+      Aypex.configure { |config| config.track_inventory_levels = true }
     end
 
     it "is infinite if track_inventory_levels is false" do
-      Aypex.config { |config| config.track_inventory_levels = false }
+      Aypex.configure { |config| config.track_inventory_levels = false }
       expect(build(:product, variants_including_master: [build(:master_variant)]).total_on_hand).to eql(Float::INFINITY)
     end
 
@@ -717,14 +717,14 @@ describe Aypex::Product do
         let!(:variant_2) { create(:variant, product: product, position: 2) }
 
         before do
-          Aypex.config { |config| config.track_inventory_levels = false }
+          Aypex.configure { |config| config.track_inventory_levels = false }
 
           variant_1.stock_items.first.update(backorderable: false, count_on_hand: 0)
           variant_2.stock_items.first.update(backorderable: false, count_on_hand: 0)
         end
 
         after do
-          Aypex.config { |config| config.track_inventory_levels = true }
+          Aypex.configure { |config| config.track_inventory_levels = true }
         end
 
         it "returns first non-master variant" do
@@ -763,7 +763,7 @@ describe Aypex::Product do
     let(:key) { product.send(:default_variant_cache_key) }
 
     after do
-      Aypex.config { |config| config.track_inventory_levels = true }
+      Aypex.configure { |config| config.track_inventory_levels = true }
     end
 
     context "with inventory tracking" do
@@ -774,7 +774,7 @@ describe Aypex::Product do
 
     context "without inventory tracking" do
       it "returns proper key" do
-        Aypex.config { |config| config.track_inventory_levels = false }
+        Aypex.configure { |config| config.track_inventory_levels = false }
         expect(key).to eq("aypex/default-variant/#{product.cache_key_with_version}/false")
       end
     end
@@ -809,11 +809,11 @@ describe Aypex::Product do
 
       context "preference set" do
         before do
-          Aypex.config { |config| config.disable_store_presence_validation = true }
+          Aypex.configure { |config| config.disable_store_presence_validation = true }
         end
 
         after do
-          Aypex.config { |config| config.disable_store_presence_validation = false }
+          Aypex.configure { |config| config.disable_store_presence_validation = false }
         end
 
         it { expect(valid_record).to be_valid }

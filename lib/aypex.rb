@@ -37,27 +37,27 @@ module Aypex
   #
   # Example:
   #
-  #   Aypex.config do |config|
+  #   Aypex.configure do |config|
   #     config.track_inventory_levels = false
   #   end
   #
   # This method is defined within the core gem on purpose.
   # Some people may only wish to use the Core part of Aypex.
-  def self.config
+  def self.configure
     yield(Aypex::Config)
   end
 
-  # Used to set dependencies for Aypex.
+  # Used to set a new dependency for Aypex.
   #
   # Example:
   #
-  #   Aypex.dependencies do |dependency|
+  #   Aypex.set_dependency do |dependency|
   #     dependency.cart_add_item_service = MyCustomAddToCart
   #   end
   #
   # This method is defined within the core gem on purpose.
   # Some people may only wish to use the Core part of Aypex.
-  def self.dependencies
+  def self.set_dependency
     yield(Aypex::Dependency)
   end
 end

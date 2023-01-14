@@ -232,11 +232,11 @@ describe Aypex::StockItem do
 
     context "binary_inventory_cache is set to true" do
       before do
-        Aypex.config { |config| config.binary_inventory_cache = true }
+        Aypex.configure { |config| config.binary_inventory_cache = true }
       end
 
       after do
-        Aypex.config { |config| config.binary_inventory_cache = false }
+        Aypex.configure { |config| config.binary_inventory_cache = false }
       end
 
       context "in_stock? changes" do
