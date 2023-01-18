@@ -1,12 +1,4 @@
-# Aypex Configurations
-# Note: Setting a config here will NOT be stored in the database.
-#       removing a config entry from this initializer will make the setting
-#       revert back it's default value.
-#
-Aypex.configure do |config|
-  config.user_class = <%= (options[:user_class].blank? ? "Aypex::LegacyUser" : options[:user_class]).inspect %>
-end
-
+# frozen_string_literal: true
 
 # Aypex Dependencies
 # Note: If a dependency is set here it will NOT be stored within the cache & database upon initialization.
@@ -21,3 +13,11 @@ Aypex.set_dependency do |dependency|
   # dependency.storefront_cart_serializer = "MyRailsApp::CartSerializer"
 end
 
+# Aypex Configurations
+# Note: Setting a config here will NOT be stored in the database.
+#       removing a config entry from this initializer will make the setting
+#       revert back it's default value.
+#
+Aypex.configure do |config|
+  config.user_class = <%= (options[:user_class].blank? ? "Aypex::LegacyUser" : options[:user_class]).inspect %>
+end
