@@ -19,5 +19,5 @@ end
 #       revert back it's default value.
 #
 Aypex.configure do |config|
-  config.searcher_class = <%= (options[:user_class].blank? ? "Aypex::LegacyUser" : options[:user_class]).inspect %>
+  config.user_class = <%= (options[:user_class].blank? ? "Aypex::LegacyUser" : options[:user_class]).inspect %>
 end
