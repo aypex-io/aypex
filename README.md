@@ -21,7 +21,7 @@ gem "aypex-auth_devise"
 ```
 
 ### Full Rails Stack
-```bash
+```ruby
 gem "aypex"
 
 gem "aypex-admin"
@@ -35,7 +35,7 @@ gem "aypex-storefront"
 ## Documentation
 
 Create a new rails app (Rails >=7.0 using Propshaft)
-```bash
+```ruby
 rails new [app_name] --database=postgresql -a propshaft
 ```
 
