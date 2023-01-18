@@ -12,7 +12,7 @@ you can choose form any custom UI: Checkout, Storefront, Admin combination, you 
 Below are some example setups.
 ### Headless
 
-```bash
+```ruby
 gem "aypex"
 
 gem "aypex-api"
