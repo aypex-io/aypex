@@ -26,9 +26,9 @@ module Aypex
 
           ams = []
           matched_line_items.each do |i|
-            unless i.equal?(matched_line_items.last)
-              ams << i.amount
-            end
+            next if i.equal?(matched_line_items.last)
+
+            ams << i.amount
           end
 
           actionable_items_total = matched_line_items.sum(&:amount)

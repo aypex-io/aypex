@@ -18,7 +18,12 @@ module Aypex
         last_actionable_item = kwargs[:last_actionable_item]
         ams = kwargs[:ams]
 
+        # Return 0 if the following are not met.
         return 0 unless target_item && currency.casecmp(target_item.currency.upcase).zero?
+
+        # If the order only has one item return the full amount, there is no need
+        # for anything more complex to be carried out.
+        return amount if target_item == last_actionable_item && ams.empty?
 
         # if there is more than one item in the order have the last applicable
         # line item eat the remainder of the discount, to pick up any rounding

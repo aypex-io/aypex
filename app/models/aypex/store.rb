@@ -1,11 +1,7 @@
 module Aypex
   class Store < Aypex::Base
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
-    if defined?(Aypex::Security::Stores)
-      include Aypex::Security::Stores
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
+    include Aypex::Security::Stores if defined?(Aypex::Security::Stores)
 
     typed_store :settings, coder: ActiveRecord::TypedStore::IdentityCoder do |s|
       s.boolean :address_require_phone_number, default: false, null: false
