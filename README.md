@@ -11,16 +11,26 @@ you can choose form any custom UI: Checkout, Storefront, Admin combination, you 
 
 Below are some example setups.
 ### Headless
-- Aypex
-- Aypex API
+
+```bash
+gem "aypex"
+
+gem "aypex-api"
+gem "aypex-emails"
+gem "aypex-auth_devise"
+```
 
 ### Full Rails Stack
-- Aypex
-- Aypex::Api
-- Aypex::Emails
-- Aypex::Storefront
-- Aypex::Admin
-- Aypex::Checkout
+```bash
+gem "aypex"
+
+gem "aypex-admin"
+gem "aypex-api"
+gem "aypex-auth_devise"
+gem "aypex-checkout"
+gem "aypex-emails"
+gem "aypex-storefront"
+```
 
 ## Documentation
 
