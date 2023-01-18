@@ -35,7 +35,7 @@ module Aypex
       end
 
       # Include any abilities registered by extensions, etc.
-      # this is legacy behaviour and should be removed in Aypex 5.0
+      # this is legacy behavior and should be removed in Aypex 5.0
       Ability.abilities.merge(abilities_to_register).each do |clazz|
         merge clazz.new(user)
       end
