@@ -1,0 +1,20 @@
+base_locale: en
+data:
+  yaml:
+    write:
+      line_width: -1
+
+search:
+  paths:
+    - 'app'
+    - 'lib'
+
+  exclude:
+    - 'app/assets/*'
+    - 'app/javascript/*'
+    - 'lib/generators'
+
+ignore:
+  - 'activerecord*'
+  - 'activemodel*'
+  - "activerecord.models*"

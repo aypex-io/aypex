@@ -157,7 +157,7 @@ describe Aypex::Refund do
       end
 
       it "raises Aypex::GatewayError" do
-        expect { subject }.to raise_error(Aypex::GatewayError, Aypex.t(:unable_to_connect_to_gateway))
+        expect { subject }.to raise_error(Aypex::GatewayError, I18n.t(:unable_to_connect_to_gateway, scope: :aypex))
       end
     end
 

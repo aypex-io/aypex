@@ -22,7 +22,7 @@ describe Aypex::ReturnItem::EligibilityValidator::ReturnAuthorizationRequired do
 
       it "sets an error" do
         subject
-        expect(validator.errors[:rma_required]).to eq Aypex.t("return_item_rma_ineligible")
+        expect(validator.errors[:rma_required]).to eq I18n.t("aypex.return_item_rma_ineligible")
       end
     end
   end

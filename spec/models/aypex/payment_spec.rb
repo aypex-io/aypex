@@ -543,7 +543,7 @@ describe Aypex::Payment do
       end
 
       specify do
-        expect { payment.process! }.to raise_error(Aypex::GatewayError, Aypex.t(:payment_processing_failed))
+        expect { payment.process! }.to raise_error(Aypex::GatewayError, I18n.t(:payment_processing_failed, scope: :aypex))
       end
     end
   end

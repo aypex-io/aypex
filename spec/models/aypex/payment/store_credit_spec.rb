@@ -24,7 +24,7 @@ describe "Payment" do
       let(:successful_response) do
         ActiveMerchant::Billing::Response.new(
           true,
-          Aypex.t("store_credit_payment_method.successful_action", action: :cancel),
+          I18n.t("aypex.store_credit_payment_method.successful_action", action: :cancel),
           {},
           authorization: payment.response_code
         )
@@ -33,7 +33,7 @@ describe "Payment" do
       let(:failed_response) do
         ActiveMerchant::Billing::Response.new(
           false,
-          Aypex.t("store_credit_payment_method.unable_to_find_for_action", action: :cancel,
+          I18n.t("aypex.store_credit_payment_method.unable_to_find_for_action", action: :cancel,
             auth_code: payment.response_code),
           {},
           {}

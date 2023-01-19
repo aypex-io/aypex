@@ -228,7 +228,7 @@ describe Aypex::StoreCredit do
 
       it "adds an error to the model" do
         subject
-        text = Aypex.t("store_credit_payment_method.insufficient_funds")
+        text = I18n.t("aypex.store_credit_payment_method.insufficient_funds")
         expect(store_credit.errors.full_messages).to include(text)
       end
     end
@@ -242,7 +242,7 @@ describe Aypex::StoreCredit do
 
       it "adds an error to the model" do
         subject
-        text = Aypex.t("store_credit_payment_method.currency_mismatch")
+        text = I18n.t("aypex.store_credit_payment_method.currency_mismatch")
         expect(store_credit.errors.full_messages).to include(text)
       end
     end
@@ -285,7 +285,7 @@ describe Aypex::StoreCredit do
 
       it "adds an error to the model" do
         subject
-        text = Aypex.t("store_credit_payment_method.insufficient_authorized_amount")
+        text = I18n.t("aypex.store_credit_payment_method.insufficient_authorized_amount")
         expect(store_credit.errors.full_messages).to include(text)
       end
 
@@ -303,7 +303,7 @@ describe Aypex::StoreCredit do
 
       it "adds an error to the model" do
         subject
-        text = Aypex.t("store_credit_payment_method.currency_mismatch")
+        text = I18n.t("aypex.store_credit_payment_method.currency_mismatch")
         expect(store_credit.errors.full_messages).to include(text)
       end
 
@@ -363,7 +363,7 @@ describe Aypex::StoreCredit do
 
       it "adds an error to the model" do
         subject
-        text = Aypex.t("store_credit_payment_method.unable_to_void", auth_code: auth_code)
+        text = I18n.t("aypex.store_credit_payment_method.unable_to_void", auth_code: auth_code)
         expect(store_credit.errors.full_messages).to include(text)
       end
     end
@@ -444,7 +444,7 @@ describe Aypex::StoreCredit do
 
       it "adds an error message about the currency mismatch" do
         subject
-        text = Aypex.t("store_credit_payment_method.currency_mismatch")
+        text = I18n.t("aypex.store_credit_payment_method.currency_mismatch")
         expect(store_credit.errors.full_messages).to include(text)
       end
     end
@@ -461,7 +461,7 @@ describe Aypex::StoreCredit do
 
       it "adds an error message about the currency mismatch" do
         subject
-        text = Aypex.t("store_credit_payment_method.unable_to_credit", auth_code: auth_code)
+        text = I18n.t("aypex.store_credit_payment_method.unable_to_credit", auth_code: auth_code)
         expect(store_credit.errors.full_messages).to include(text)
       end
     end
@@ -478,7 +478,7 @@ describe Aypex::StoreCredit do
 
       it "adds an error message about the currency mismatch" do
         subject
-        text = Aypex.t("store_credit_payment_method.unable_to_credit", auth_code: auth_code)
+        text = I18n.t("aypex.store_credit_payment_method.unable_to_credit", auth_code: auth_code)
         expect(store_credit.errors.full_messages).to include(text)
       end
     end

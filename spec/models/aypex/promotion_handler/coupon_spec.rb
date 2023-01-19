@@ -27,7 +27,7 @@ module Aypex
 
           it "has success message" do
             subject
-            expect(coupon.success).to eq(Aypex.t(status))
+            expect(coupon.success).to eq(I18n.t(status, scope: :aypex))
           end
         end
 
@@ -43,7 +43,7 @@ module Aypex
 
           it "has error message" do
             subject
-            expect(coupon.error).to eq(Aypex.t(status))
+            expect(coupon.error).to eq(I18n.t(status, scope: :aypex))
           end
         end
       end
@@ -60,7 +60,7 @@ module Aypex
 
           it "populates error message" do
             subject.apply
-            expect(subject.error).to eq Aypex.t(:coupon_code_not_found)
+            expect(subject.error).to eq I18n.t(:coupon_code_not_found, scope: :aypex)
           end
         end
       end
@@ -94,7 +94,7 @@ module Aypex
                 subject.apply
                 expect(subject.success).to be_present
                 subject.apply
-                expect(subject.error).to eq Aypex.t(:coupon_code_already_applied)
+                expect(subject.error).to eq I18n.t(:coupon_code_already_applied, scope: :aypex)
               end
             end
 
@@ -155,7 +155,7 @@ module Aypex
               subject.apply
               expect(subject.success).to be_present
               subject.apply
-              expect(subject.error).to eq Aypex.t(:coupon_code_already_applied)
+              expect(subject.error).to eq I18n.t(:coupon_code_already_applied, scope: :aypex)
             end
           end
         end

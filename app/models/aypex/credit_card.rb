@@ -125,7 +125,7 @@ module Aypex
     end
 
     def display_brand
-      brand.present? ? brand.upcase : Aypex.t(:no_cc_type)
+      brand.present? ? brand.upcase : I18n.t(:no_cc_type, scope: :aypex)
     end
 
     def actions

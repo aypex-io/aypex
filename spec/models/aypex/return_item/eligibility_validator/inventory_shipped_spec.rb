@@ -24,7 +24,7 @@ describe Aypex::ReturnItem::EligibilityValidator::InventoryShipped do
 
       it "sets an error" do
         subject
-        expect(validator.errors[:inventory_unit_shipped]).to eq Aypex.t("return_item_inventory_unit_ineligible")
+        expect(validator.errors[:inventory_unit_shipped]).to eq I18n.t("aypex.return_item_inventory_unit_ineligible")
       end
     end
   end

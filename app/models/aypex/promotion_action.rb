@@ -19,7 +19,7 @@ module Aypex
     protected
 
     def label
-      Aypex.t(:promotion_label, name: promotion.name)
+      I18n.t("aypex.promotion_label", name: promotion.name)
     end
   end
 end

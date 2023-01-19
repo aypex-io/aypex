@@ -27,7 +27,7 @@ module Aypex
     end
 
     def locale_full_name(locale)
-      Aypex.t("i18n.this_file_language", locale: locale)
+      I18n.t("aypex.i18n.this_file_language", locale: locale)
     end
 
     def should_render_locale_dropdown?

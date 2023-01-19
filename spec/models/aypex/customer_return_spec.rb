@@ -31,7 +31,7 @@ describe Aypex::CustomerReturn do
 
         it "adds an error message" do
           subject
-          expect(customer_return.errors.full_messages).to include(Aypex.t(:missing_return_authorization, item_name: inventory_unit.variant.name))
+          expect(customer_return.errors.full_messages).to include(I18n.t("aypex.missing_return_authorization", item_name: inventory_unit.variant.name))
         end
       end
 

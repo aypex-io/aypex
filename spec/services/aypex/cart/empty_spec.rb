@@ -19,7 +19,7 @@ module Aypex
 
         it "returns failure" do
           expect(subject.success?).to be false
-          expect(subject.value).to eq Aypex.t(:cannot_empty)
+          expect(subject.value).to eq I18n.t(:cannot_empty, scope: :aypex)
         end
       end
 
@@ -50,7 +50,7 @@ module Aypex
 
       it "returns failure" do
         expect(subject.success?).to be false
-        expect(subject.value).to eq Aypex.t(:cannot_empty)
+        expect(subject.value).to eq I18n.t(:cannot_empty, scope: :aypex)
       end
     end
   end

@@ -233,7 +233,7 @@ describe Aypex::Order do
 
       it "has error message" do
         subject
-        expect(order.errors[:base]).to include(Aypex.t(:discontinued_variants_present))
+        expect(order.errors[:base]).to include(I18n.t(:discontinued_variants_present, scope: :aypex))
       end
 
       it "is false" do
@@ -270,7 +270,7 @@ describe Aypex::Order do
 
     it "has error message" do
       subject
-      expect(order.errors[:base]).to include(Aypex.t(:insufficient_stock_lines_present))
+      expect(order.errors[:base]).to include(I18n.t(:insufficient_stock_lines_present, scope: :aypex))
     end
 
     it "is false" do

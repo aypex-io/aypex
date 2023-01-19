@@ -79,7 +79,7 @@ describe "i18n" do
   end
 
   it "returns reasonable string for missing translations" do
-    expect(Aypex.t(:missing_entry)).to include("<span")
+    expect(I18n.t(:missing_entry, scope: :aypex)).to include("<span")
   end
 
   context "missed + unused translations" do
@@ -99,7 +99,7 @@ describe "i18n" do
       end
 
       it "logs missing translations" do
-        Aypex.t(:missing, scope: [:else, :where])
+        I18n.t("aypex.missing", scope: [:else, :where])
         Aypex.check_missing_translations
         assert_missing_translation("else")
         assert_missing_translation("else.where")
@@ -107,7 +107,7 @@ describe "i18n" do
       end
 
       it "does not log present translations" do
-        Aypex.t(:foo)
+        I18n.t(:foo, scope: :aypex)
         Aypex.check_missing_translations
         expect(Aypex.missing_translation_messages).to be_empty
       end
@@ -139,7 +139,7 @@ describe "i18n" do
       end
 
       it "does not log used translations" do
-        Aypex.t(:foo)
+        I18n.t(:foo, scope: :aypex)
         Aypex.check_unused_translations
         assert_used_translation("foo")
       end

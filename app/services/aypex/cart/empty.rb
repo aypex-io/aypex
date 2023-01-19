@@ -11,7 +11,7 @@ module Aypex
       private
 
       def check_if_can_be_empty(order:)
-        return failure(Aypex.t(:cannot_empty)) if order.nil? || order.completed?
+        return failure(I18n.t(:cannot_empty, scope: :aypex)) if order.nil? || order.completed?
 
         success(order: order)
       end

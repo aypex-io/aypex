@@ -28,7 +28,7 @@ describe Aypex::ReturnItem::EligibilityValidator::TimeSincePurchase do
 
       it "sets an error" do
         subject
-        expect(validator.errors[:number_of_days]).to eq Aypex.t("return_item_time_period_ineligible")
+        expect(validator.errors[:number_of_days]).to eq I18n.t("aypex.return_item_time_period_ineligible")
       end
     end
   end

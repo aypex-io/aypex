@@ -125,7 +125,7 @@ module Aypex
       context "variant has a blank description" do
         let(:description) { nil }
 
-        it { is_expected.to eq(Aypex.t(:product_has_no_description)) }
+        it { is_expected.to eq(I18n.t(:product_has_no_description, scope: :aypex)) }
       end
 
       context "variant has a description" do
@@ -298,7 +298,7 @@ module Aypex
 
       context "product is available" do
         it "has available status" do
-          expect(status).to eq(Aypex.t(:active))
+          expect(status).to eq(I18n.t(:active, scope: :aypex))
         end
       end
 
@@ -308,7 +308,7 @@ module Aypex
         end
 
         it "has deleted status" do
-          expect(status).to eq(Aypex.t(:deleted))
+          expect(status).to eq(I18n.t(:deleted, scope: :aypex))
         end
       end
 
@@ -318,7 +318,7 @@ module Aypex
         end
 
         it "has discontinued status" do
-          expect(status).to eq(Aypex.t(:archived))
+          expect(status).to eq(I18n.t(:archived, scope: :aypex))
         end
       end
 
@@ -329,7 +329,7 @@ module Aypex
         end
 
         it "has pending sale status" do
-          expect(status).to eq(Aypex.t(:pending_sale))
+          expect(status).to eq(I18n.t(:pending_sale, scope: :aypex))
         end
       end
 
@@ -339,7 +339,7 @@ module Aypex
         end
 
         it "has draft status" do
-          expect(status).to eq(Aypex.t(:draft))
+          expect(status).to eq(I18n.t(:draft, scope: :aypex))
         end
       end
     end

@@ -16,7 +16,7 @@ describe Aypex::ReturnItem::EligibilityValidator::NoReimbursements do
 
       it "sets an error" do
         subject
-        expect(validator.errors[:inventory_unit_reimbursed]).to eq Aypex.t("return_item_inventory_unit_reimbursed")
+        expect(validator.errors[:inventory_unit_reimbursed]).to eq I18n.t("aypex.return_item_inventory_unit_reimbursed")
       end
     end
 
