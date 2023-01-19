@@ -18,3 +18,4 @@ ignore:
   - 'activerecord*'
   - 'activemodel*'
   - "activerecord.models*"
+  - "number.currency.format.separator"
