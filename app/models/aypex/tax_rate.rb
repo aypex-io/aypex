@@ -105,10 +105,13 @@ module Aypex
     private
 
     def label
-      Aypex.t included_in_price? ? :including_tax : :excluding_tax,
-        scope: "adjustment_labels.tax_rates",
+      # i18n-tasks-use I18n.t('aypex.adjustment_labels.tax_rates.including_tax')
+      # i18n-tasks-use I18n.t('aypex.adjustment_labels.tax_rates.excluding_tax')
+      I18n.t(
+        "aypex.adjustment_labels.tax_rates.#{included_in_price? ? "including_tax" : "excluding_tax"}",
         name: name.presence || tax_category.name,
         amount: amount_for_label
+      )
     end
 
     def amount_for_label

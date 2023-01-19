@@ -19,3 +19,4 @@ ignore:
   - 'activemodel*'
   - "activerecord.models*"
   - "number.currency.format.separator"
+  - "aypex.credit_card"

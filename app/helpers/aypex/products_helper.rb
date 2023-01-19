@@ -21,6 +21,9 @@ module Aypex
       diff = variant.amount_in(current_currency) - product_amount
       amount = Aypex::Money.new(diff.abs, currency: current_currency).to_html
       label = (diff > 0) ? :add : :subtract
+
+      # i18n-tasks-use I18n.t('aypex.add')
+      # i18n-tasks-use I18n.t('aypex.subtract')
       "(#{I18n.t(label, scope: :aypex)}: #{amount})".html_safe
     end
 

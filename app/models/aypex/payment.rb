@@ -234,6 +234,7 @@ module Aypex
     end
 
     def add_source_error(field, message)
+      # i18n-tasks-use I18n.t('aypex.credit_card')
       field_name = I18n.t("activerecord.attributes.#{source.class.to_s.underscore}.#{field}")
       errors.add(I18n.t(source.class.to_s.demodulize.underscore, scope: :aypex), "#{field_name} #{message}")
     end

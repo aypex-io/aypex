@@ -413,12 +413,18 @@ en:
         other: Zones
   aypex:
     active: Active
+    add: Add
+    adjustment_labels:
+      tax_rates:
+        excluding_tax: "%{name}%{amount}"
+        including_tax: "%{name}%{amount} (Included in Price)"
     archived: Archived
     base_category_brands_name: Brands
     base_category_categories_name: Categories
     cannot_be_destroyed: Order cannot be destroyed.
     cannot_empty: Cannot empty order.
     cannot_return_more_than_bought_quantity: Cannot return more than bought quantity.
+    credit_card: Credit Card
     default_refund_amount: Default Refund Amount
     default_tax: Default Tax
     default_wishlist_name: Default Wishlist Name
@@ -494,6 +500,10 @@ en:
     shipping_flat_rate_per_order: Flat rate
     shipping_flexible_rate: Flexible Rate per package item
     shipping_price_sack: Price sack
+    shipping_rates:
+      display_price:
+        excluding_tax: "%{price} (+ %{tax_amount} %{tax_rate_name})"
+        including_tax: "%{price} (incl. %{tax_amount} %{tax_rate_name})"
     store_credit:
       allocated: Added
       authorized: Authorized
@@ -508,6 +518,7 @@ en:
       unable_to_find: Could not find store credit
       unable_to_find_for_action: 'Could not find store credit for auth code: %{auth_code} for action: %{action}'
       unable_to_void: 'Unable to void code: %{auth_code}'
+    subtract: Subtract
     there_are_no_items_for_this_order: There are no items for this order. Please add an item to the order to continue.
     unable_to_connect_to_gateway: Unable to connect to gateway.
     under_price: Under %{price}
@@ -516,4 +527,4 @@ en:
       unpaid_amount_not_zero: 'Amount was not fully reimbursed. Still due: %{amount}'
   errors:
     messages:
-      not_a_number: Not a number
+      not_a_number: is not a number
