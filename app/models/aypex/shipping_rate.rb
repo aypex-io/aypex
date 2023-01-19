@@ -16,9 +16,8 @@ module Aypex
 
       return price if tax_rate.nil? || tax_amount.zero?
 
-      Aypex.t(
-        tax_rate.included_in_price? ? :including_tax : :excluding_tax,
-        scope: "shipping_rates.display_price",
+      I18n.t(
+        "aypex.shipping_rates.display_price.#{tax_rate.included_in_price? ? :including_tax : :excluding_tax}",
         price: price,
         tax_amount: display_tax_amount,
         tax_rate_name: tax_rate.name

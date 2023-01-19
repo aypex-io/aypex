@@ -66,7 +66,7 @@ module Aypex
 
     def must_have_shipped_units
       if order.nil? || order.inventory_units.shipped.none?
-        errors.add(:order, Aypex.t(:has_no_shipped_units))
+        errors.add(:order, I18n.t(:has_no_shipped_units, scope: :aypex))
       end
     end
 

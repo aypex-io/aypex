@@ -17,11 +17,11 @@ module Aypex
         if variant.available?
           line_item.errors.add(:quantity,
             :selected_quantity_not_available,
-            message: Aypex.t(:selected_quantity_not_available, item: display_name.inspect))
+            message: I18n.t("aypex.selected_quantity_not_available", item: display_name.inspect))
         else
           line_item.errors.add(:base,
             :only_active_products_can_be_added_to_cart,
-            message: Aypex.t(:only_active_products_can_be_added_to_cart))
+            message: I18n.t(:only_active_products_can_be_added_to_cart, scope: :aypex))
         end
       end
 

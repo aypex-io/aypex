@@ -14,7 +14,7 @@ module Aypex
 
     def authorize(amount_in_cents, store_credit, gateway_options = {})
       if store_credit.nil?
-        ActiveMerchant::Billing::Response.new(false, Aypex.t("store_credit_payment_method.unable_to_find"), {}, {})
+        ActiveMerchant::Billing::Response.new(false, I18n.t("aypex.store_credit_payment_method.unable_to_find"), {}, {})
       else
         action = lambda do |store_credit|
           store_credit.authorize(
@@ -50,7 +50,7 @@ module Aypex
       end
 
       if event.blank?
-        ActiveMerchant::Billing::Response.new(false, Aypex.t("store_credit_payment_method.unable_to_find"), {}, {})
+        ActiveMerchant::Billing::Response.new(false, I18n.t("aypex.store_credit_payment_method.unable_to_find"), {}, {})
       else
         capture(amount_in_cents, event.authorization_code, gateway_options)
       end
@@ -105,7 +105,7 @@ module Aypex
           # note that we only need to return the auth code on an 'auth', but it's innocuous to always return
           ActiveMerchant::Billing::Response.new(
             true,
-            Aypex.t("store_credit_payment_method.successful_action", action: action_name),
+            I18n.t("aypex.store_credit_payment_method.successful_action", action: action_name),
             {},
             authorization: auth_code || response
           )
@@ -122,7 +122,7 @@ module Aypex
       if store_credit.nil?
         ActiveMerchant::Billing::Response.new(
           false,
-          Aypex.t("store_credit_payment_method.unable_to_find_for_action", auth_code: auth_code, action: action_name),
+          I18n.t("aypex.store_credit_payment_method.unable_to_find_for_action", auth_code: auth_code, action: action_name),
           {},
           {}
         )

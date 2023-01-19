@@ -204,7 +204,7 @@ module Aypex
       return unless customer_return && inventory_unit
 
       if customer_return.order_id != inventory_unit.order_id
-        errors.add(:base, Aypex.t(:return_items_cannot_be_associated_with_multiple_orders))
+        errors.add(:base, I18n.t(:return_items_cannot_be_associated_with_multiple_orders, scope: :aypex))
       end
     end
 
@@ -212,7 +212,7 @@ module Aypex
       return unless exchange_variant && exchange_variant_id_changed?
 
       unless eligible_exchange_variants.include?(exchange_variant)
-        errors.add(:base, Aypex.t(:invalid_exchange_variant))
+        errors.add(:base, I18n.t(:invalid_exchange_variant, scope: :aypex))
       end
     end
 
@@ -230,7 +230,7 @@ module Aypex
       # Only perform the check if everything is good so far
       return unless errors.empty? && return_quantity > inventory_unit.quantity
 
-      errors.add(:return_quantity, Aypex.t(:cannot_return_more_than_bought_quantity))
+      errors.add(:return_quantity, I18n.t(:cannot_return_more_than_bought_quantity, scope: :aypex))
     end
 
     def extract_inventory_unit

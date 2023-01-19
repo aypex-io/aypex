@@ -67,7 +67,7 @@ describe Aypex::CustomerReturn do
 
         it "adds an error message" do
           subject
-          expect(customer_return.errors.full_messages).to include(Aypex.t(:return_items_cannot_be_associated_with_multiple_orders))
+          expect(customer_return.errors.full_messages).to include(I18n.t(:return_items_cannot_be_associated_with_multiple_orders, scope: :aypex))
         end
       end
 

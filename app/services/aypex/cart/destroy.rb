@@ -13,7 +13,7 @@ module Aypex
       private
 
       def check_if_can_be_destroyed(order:)
-        return failure(Aypex.t(:cannot_be_destroyed)) unless order&.can_be_destroyed?
+        return failure(I18n.t(:cannot_be_destroyed, scope: :aypex)) unless order&.can_be_destroyed?
 
         success(order: order)
       end

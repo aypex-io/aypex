@@ -115,7 +115,7 @@ module Aypex
       else
         errored!
         reimbursement_failure_hooks.each { |h| h.call self }
-        raise IncompleteReimbursementError, Aypex.t("validation.unpaid_amount_not_zero", amount: unpaid_amount)
+        raise IncompleteReimbursementError, I18n.t("aypex.validation.unpaid_amount_not_zero", amount: unpaid_amount)
       end
     end
 

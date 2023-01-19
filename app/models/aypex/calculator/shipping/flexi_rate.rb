@@ -11,7 +11,7 @@ module Aypex
       end
 
       def self.description
-        Aypex.t(:shipping_flexible_rate)
+        I18n.t(:shipping_flexible_rate, scope: :aypex)
       end
 
       def compute_package(package)

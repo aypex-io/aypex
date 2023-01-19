@@ -9,7 +9,7 @@ module Aypex
       end
 
       def self.description
-        Aypex.t(:shipping_flat_rate_per_item)
+        I18n.t(:shipping_flat_rate_per_item, scope: :aypex)
       end
 
       def compute_package(package)

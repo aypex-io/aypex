@@ -70,7 +70,7 @@ module Aypex
 
     def default_wishlist_for_store(current_store)
       wishlists.find_or_create_by(is_default: true, store_id: current_store.id) do |wishlist|
-        wishlist.name = Aypex.t(:default_wishlist_name)
+        wishlist.name = I18n.t(:default_wishlist_name, scope: :aypex)
         wishlist.save
       end
     end

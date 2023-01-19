@@ -9,7 +9,7 @@ module Aypex
       end
 
       def self.description
-        Aypex.t(:flexible_rate)
+        I18n.t(:flexible_rate, scope: :aypex)
       end
 
       def self.available?(_object)

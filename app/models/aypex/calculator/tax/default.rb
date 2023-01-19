@@ -6,7 +6,7 @@ module Aypex
       include VatPriceCalculation
 
       def self.description
-        Aypex.t(:default_tax)
+        I18n.t(:default_tax, scope: :aypex)
       end
 
       def compute_order(order)

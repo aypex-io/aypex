@@ -6,7 +6,7 @@ module Aypex
       end
 
       def self.description
-        Aypex.t(:percent_per_item)
+        I18n.t(:percent_per_item, scope: :aypex)
       end
 
       def compute(target_item = nil, **kwargs)

@@ -10,7 +10,7 @@ module Aypex
       end
 
       def self.description
-        Aypex.t(:fixed_amount_line_items)
+        I18n.t(:fixed_amount_line_items, scope: :aypex)
       end
 
       def compute(target_item = nil, **kwargs)

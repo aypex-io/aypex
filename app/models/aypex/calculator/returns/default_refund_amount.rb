@@ -6,7 +6,7 @@ module Aypex
       attr_reader :inventory_unit
 
       def self.description
-        Aypex.t(:default_refund_amount)
+        I18n.t(:default_refund_amount, scope: :aypex)
       end
 
       def compute(return_item)

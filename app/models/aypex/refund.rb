@@ -67,15 +67,15 @@ module Aypex
       end
 
       unless response.success?
-        Rails.logger.error(Aypex.t(:gateway_error) + "  #{response.to_yaml}")
+        Rails.logger.error(I18n.t(:gateway_error, scope: :aypex) + "  #{response.to_yaml}")
         text = response.params["message"] || response.params["response_reason_text"] || response.message
         raise GatewayError, text
       end
 
       response
     rescue ActiveMerchant::ConnectionError => e
-      Rails.logger.error(Aypex.t(:gateway_error) + "  #{e.inspect}")
-      raise GatewayError, Aypex.t(:unable_to_connect_to_gateway)
+      Rails.logger.error(I18n.t(:gateway_error, scope: :aypex) + "  #{e.inspect}")
+      raise GatewayError, I18n.t(:unable_to_connect_to_gateway, scope: :aypex)
     end
 
     def create_log_entry

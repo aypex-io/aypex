@@ -9,7 +9,7 @@ module Aypex
       end
 
       def self.description
-        Aypex.t("digital.digital_delivery")
+        I18n.t("aypex.digital.digital_delivery")
       end
 
       def compute_package(_package = nil)

@@ -40,7 +40,7 @@ module Aypex
     end
 
     def eligibility_error_message(key, options = {})
-      Aypex.t("aypex.eligibility_errors.messages.#{key}", options)
+      I18n.t("aypex.eligibility_errors.messages.#{key}", **options)
     end
   end
 end
