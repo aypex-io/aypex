@@ -2,12 +2,8 @@ module Aypex
   class DigitalLink < Aypex::Base
     has_secure_token
 
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
-    if defined?(Aypex::Security::DigitalLinks)
-      include Aypex::Security::DigitalLinks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
+    include Aypex::Security::DigitalLinks if defined?(Aypex::Security::DigitalLinks)
 
     belongs_to :digital
     belongs_to :line_item

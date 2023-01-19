@@ -2,9 +2,7 @@ module Aypex
   class StoreCredit < Aypex::Base
     include SingleStoreResource
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     acts_as_paranoid
 

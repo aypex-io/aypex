@@ -5,9 +5,7 @@ module Aypex
     include Aypex::CalculatedAdjustments
     include Aypex::AdjustmentSource
     include Aypex::Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     with_options inverse_of: :tax_rates do
       belongs_to :zone, class_name: "Aypex::Zone", optional: true

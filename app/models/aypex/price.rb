@@ -1,9 +1,7 @@
 module Aypex
   class Price < Aypex::Base
     include VatPriceCalculation
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     acts_as_paranoid
 

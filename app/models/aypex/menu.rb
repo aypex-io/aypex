@@ -1,9 +1,7 @@
 module Aypex
   class Menu < Aypex::Base
     include SingleStoreResource
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     MENU_LOCATIONS = ["Header", "Footer"]
     MENU_LOCATIONS_PARAMETERIZED = []

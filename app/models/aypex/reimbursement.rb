@@ -2,9 +2,7 @@ module Aypex
   class Reimbursement < Aypex::Base
     include Aypex::NumberGenerator.new(prefix: "RI", length: 9)
     include NumberIdentifier
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     class IncompleteReimbursementError < StandardError; end
 

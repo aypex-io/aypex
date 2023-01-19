@@ -1,12 +1,8 @@
 module Aypex
   class Refund < Aypex::Base
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
-    if defined?(Aypex::Security::Refunds)
-      include Aypex::Security::Refunds
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
+    include Aypex::Security::Refunds if defined?(Aypex::Security::Refunds)
 
     with_options inverse_of: :refunds do
       belongs_to :payment

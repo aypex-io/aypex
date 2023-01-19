@@ -1,9 +1,7 @@
 module Aypex
   class LineItem < Aypex::Base
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     before_validation :ensure_valid_quantity
 

@@ -1,9 +1,7 @@
 module Aypex
   class StockLocation < Aypex::Base
     include UniqueName
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
     if defined?(Aypex::Security::StockLocations)
       include Aypex::Security::StockLocations
     end

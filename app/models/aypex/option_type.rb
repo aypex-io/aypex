@@ -2,9 +2,7 @@ module Aypex
   class OptionType < Aypex::Base
     include UniqueName
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     acts_as_list
     auto_strip_attributes :name, :presentation

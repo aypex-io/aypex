@@ -19,21 +19,14 @@ module Aypex
     include Aypex::Order::Emails
     include Aypex::NumberGenerator.new(prefix: "R")
     include Aypex::TokenGenerator
-
     include NumberIdentifier
     include NumberAsParam
     include SingleStoreResource
     include MemoizedData
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
-    if defined?(Aypex::Security::Orders)
-      include Aypex::Security::Orders
-    end
-    if defined?(Aypex::VendorConcern)
-      include Aypex::VendorConcern
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
+    include Aypex::Security::Orders if defined?(Aypex::Security::Orders)
+    include Aypex::VendorConcern if defined?(Aypex::VendorConcern)
 
     MEMOIZED_METHODS = %w[tax_zone]
 

@@ -2,9 +2,7 @@ module Aypex
   class ReturnItem < Aypex::Base
     COMPLETED_RECEPTION_STATUSES = %w[received given_to_customer]
 
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     class_attribute :return_eligibility_validator
     self.return_eligibility_validator = ReturnItem::EligibilityValidator::Default

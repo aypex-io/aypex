@@ -1,8 +1,6 @@
 module Aypex
   class InventoryUnit < Aypex::Base
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     with_options inverse_of: :inventory_units do
       belongs_to :variant, -> { with_deleted }, class_name: "Aypex::Variant"

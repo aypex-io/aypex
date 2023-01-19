@@ -2,9 +2,7 @@ module Aypex
   class ReturnAuthorization < Aypex::Base
     include Aypex::NumberGenerator.new(prefix: "RA", length: 9)
     include NumberIdentifier
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     belongs_to :order, class_name: "Aypex::Order", inverse_of: :return_authorizations
 

@@ -3,9 +3,7 @@ module Aypex
     acts_as_paranoid
     include Aypex::CalculatedAdjustments
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
     if defined?(Aypex::VendorConcern)
       include Aypex::VendorConcern
     end

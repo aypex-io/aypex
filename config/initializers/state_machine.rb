@@ -22,7 +22,7 @@ module MachineDecorator
 
     # Generate the list of modules that *only* occur in the owner class, but
     # were included *prior* to the helper modules, in addition to the
-    # superclasses
+    # super classes
     ancestors = current.ancestors - superclass.ancestors + superclasses
     ancestors = ancestors[ancestors.index(@helper_modules[scope])..-1].reverse
 

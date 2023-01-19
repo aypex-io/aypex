@@ -6,13 +6,8 @@ module Aypex
     include NumberIdentifier
     include NumberAsParam
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
-    if defined?(Aypex::Security::Payments)
-      include Aypex::Security::Payments
-    end
-
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
+    include Aypex::Security::Payments if defined?(Aypex::Security::Payments)
     include Aypex::Payment::Processing
 
     NON_RISKY_AVS_CODES = ["B", "D", "H", "J", "M", "Q", "T", "V", "X", "Y"].freeze

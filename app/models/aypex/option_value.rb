@@ -1,9 +1,7 @@
 module Aypex
   class OptionValue < Aypex::Base
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     belongs_to :option_type, class_name: "Aypex::OptionType", touch: true, inverse_of: :option_values
 

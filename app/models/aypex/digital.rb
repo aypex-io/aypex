@@ -3,9 +3,7 @@ module Aypex
     belongs_to :variant
     has_many :digital_links, dependent: :destroy
 
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     if Aypex::Config.private_storage_service_name
       has_one_attached :attachment, service: Aypex::Config.private_storage_service_name

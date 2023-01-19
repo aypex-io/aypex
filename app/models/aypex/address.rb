@@ -3,12 +3,8 @@ module Aypex
     require "validates_zipcode"
 
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
-    if defined?(Aypex::Security::Addresses)
-      include Aypex::Security::Addresses
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
+    include Aypex::Security::Addresses if defined?(Aypex::Security::Addresses)
 
     NO_ZIPCODE_ISO_CODES = [
       "AO", "AG", "AW", "BS", "BZ", "BJ", "BM", "BO", "BW", "BF", "BI", "CM", "CF", "KM", "CG",

@@ -1,8 +1,6 @@
 module Aypex
   class TaxCategory < Aypex::Base
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     acts_as_paranoid
     validates :name, presence: true, uniqueness: {case_sensitive: false, scope: aypex_base_uniqueness_scope.push(:deleted_at)}

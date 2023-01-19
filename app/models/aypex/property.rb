@@ -2,9 +2,7 @@ module Aypex
   class Property < Aypex::Base
     include Aypex::FilterParam
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     auto_strip_attributes :name, :presentation
 

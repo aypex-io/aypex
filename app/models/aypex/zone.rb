@@ -1,9 +1,7 @@
 module Aypex
   class Zone < Aypex::Base
     include UniqueName
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     with_options dependent: :destroy, inverse_of: :zone do
       has_many :zone_members, class_name: "Aypex::ZoneMember"

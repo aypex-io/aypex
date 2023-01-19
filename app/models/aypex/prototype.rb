@@ -1,9 +1,7 @@
 module Aypex
   class Prototype < Aypex::Base
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     has_many :property_prototypes, class_name: "Aypex::PropertyPrototype"
     has_many :properties, through: :property_prototypes, class_name: "Aypex::Property"

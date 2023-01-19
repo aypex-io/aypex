@@ -5,9 +5,7 @@ module Aypex
 
     include MemoizedData
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     MEMOIZED_METHODS = %w[purchasable in_stock backorderable tax_category options_text compare_at_price]
 

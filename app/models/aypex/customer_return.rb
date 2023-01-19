@@ -3,9 +3,7 @@ module Aypex
     include Aypex::NumberGenerator.new(prefix: "CR", length: 9)
     include NumberIdentifier
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     belongs_to :stock_location
     belongs_to :store, class_name: "Aypex::Store", inverse_of: :customer_returns

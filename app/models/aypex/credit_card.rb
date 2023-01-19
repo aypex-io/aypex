@@ -2,12 +2,8 @@ module Aypex
   class CreditCard < Aypex::Base
     include ActiveMerchant::Billing::CreditCardMethods
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
-    if defined?(Aypex::Security::CreditCards)
-      include Aypex::Security::CreditCards
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
+    include Aypex::Security::CreditCards if defined?(Aypex::Security::CreditCards)
 
     acts_as_paranoid
 
