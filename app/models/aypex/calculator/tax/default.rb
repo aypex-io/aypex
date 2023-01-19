@@ -4,6 +4,7 @@ module Aypex
   module Calculator::Tax
     class Default < Calculator
       include VatPriceCalculation
+
       def self.description
         Aypex.t(:default_tax)
       end
