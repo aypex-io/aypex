@@ -1,5 +1,5 @@
 module Aypex
-  class ReturnItem::EligibilityValidator::RMARequired < Aypex::ReturnItem::EligibilityValidator::BaseValidator
+  class ReturnItem::EligibilityValidator::ReturnAuthorizationRequired < Aypex::ReturnItem::EligibilityValidator::BaseValidator
     def eligible_for_return?
       if @return_item.return_authorization.present?
         true

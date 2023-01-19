@@ -592,7 +592,7 @@ en:
     backordered: Backordered
     back_to_resource_list: 'Back To %{resource} List'
     back_to_payment: Back To Payment
-    back_to_rma_reason_list: Back To RMA Reason List
+    back_to_rma_reason_list: Back To Return Authorization Reason List
     back_to_store: Back to Store
     back_to_users_list: Back To Users List
     backorderable: Backorderable
@@ -783,7 +783,7 @@ en:
     draft_mode: Draft Mode
     edit: Edit
     editing_resource: 'Editing %{resource}'
-    editing_rma_reason: Editing RMA Reason
+    editing_rma_reason: Editing Return Authorization Reason
     editing_user: Edit Your account
     eligibility_errors:
       messages:
@@ -1060,7 +1060,7 @@ en:
     new_refund: New Refund
     new_refund_reason: New Refund Reason
     new_reimbursement_type: New Reimbursement Type
-    new_rma_reason: New RMA Reason
+    new_rma_reason: New Return Authorization Reason
     new_return_authorization: New Return Authorization
     new_role: New Role
     new_shipping_category: New Shipping Category
@@ -1426,7 +1426,7 @@ en:
     return_item_inventory_unit_ineligible: Return item's inventory unit must be shipped
     return_item_inventory_unit_reimbursed: Return item's inventory unit is already reimbursed
     return_item_order_not_completed: Return item's order must be completed
-    return_item_rma_ineligible: Return item requires an RMA
+    return_item_rma_ineligible: Return item requires an Return Authorization
     return_item_time_period_ineligible: Return item is outside the eligible time period
     return_items: Return Items
     return_items_cannot_be_associated_with_multiple_orders: Return items cannot be associated with multiple orders.
@@ -1449,9 +1449,9 @@ en:
     risk: Risk
     risk_analysis: Risk Analysis
     risky: Risky
-    rma_credit: RMA Credit
-    rma_number: RMA Number
-    rma_value: RMA Value
+    rma_credit: Return Authorization Credit
+    rma_number: Return Authorization Number
+    rma_value: Return Authorization Value
     role_id: Role ID
     roles: Roles
     rules: Rules
