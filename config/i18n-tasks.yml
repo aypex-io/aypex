@@ -6,17 +6,17 @@ data:
 
 search:
   paths:
-    - 'app'
-    - 'lib'
+    - "app"
+    - "lib"
 
   exclude:
-    - 'app/assets/*'
-    - 'app/javascript/*'
-    - 'lib/generators'
+    - "app/assets/*"
+    - "app/javascript/*"
+    - "lib/generators"
 
 ignore:
-  - 'activerecord*'
-  - 'activemodel*'
+  - "activerecord*"
+  - "activemodel*"
   - "activerecord.models*"
   - "number.currency.format.separator"
   - "aypex.credit_card"
