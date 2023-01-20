@@ -66,13 +66,13 @@ module Aypex
 
     def self.price_filter
       v = Aypex::Price.arel_table
-      conds = [[Aypex.t(:under_price, price: format_price(10)), v[:amount].lteq(10)],
+      conds = [[I18n.t("aypex.under_price", price: format_price(10)), v[:amount].lteq(10)],
         ["#{format_price(10)} - #{format_price(15)}", v[:amount].between(10..15)],
         ["#{format_price(15)} - #{format_price(18)}", v[:amount].between(15..18)],
         ["#{format_price(18)} - #{format_price(20)}", v[:amount].between(18..20)],
-        [Aypex.t(:or_over_price, price: format_price(20)), v[:amount].gteq(20)]]
+        [I18n.t("aypex.or_over_price", price: format_price(20)), v[:amount].gteq(20)]]
       {
-        name: Aypex.t(:price_range),
+        name: I18n.t(:price_range, scope: :aypex),
         scope: :price_range_any,
         conds: Hash[*conds.flatten],
         labels: conds.map { |k, _v| [k, k] }

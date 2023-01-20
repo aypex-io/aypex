@@ -16,13 +16,13 @@ module Aypex
     def display_action
       case action
       when Aypex::StoreCredit::CAPTURE_ACTION
-        Aypex.t("store_credit.captured")
+        I18n.t("aypex.store_credit.captured")
       when Aypex::StoreCredit::AUTHORIZE_ACTION
-        Aypex.t("store_credit.authorized")
+        I18n.t("aypex.store_credit.authorized")
       when Aypex::StoreCredit::ALLOCATION_ACTION
-        Aypex.t("store_credit.allocated")
+        I18n.t("aypex.store_credit.allocated")
       when Aypex::StoreCredit::VOID_ACTION, Aypex::StoreCredit::CREDIT_ACTION
-        Aypex.t("store_credit.credit")
+        I18n.t("aypex.store_credit.credit")
       end
     end
 

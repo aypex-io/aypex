@@ -19,21 +19,14 @@ module Aypex
     include Aypex::Order::Emails
     include Aypex::NumberGenerator.new(prefix: "R")
     include Aypex::TokenGenerator
-
     include NumberIdentifier
     include NumberAsParam
     include SingleStoreResource
     include MemoizedData
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
-    if defined?(Aypex::Security::Orders)
-      include Aypex::Security::Orders
-    end
-    if defined?(Aypex::VendorConcern)
-      include Aypex::VendorConcern
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
+    include Aypex::Security::Orders if defined?(Aypex::Security::Orders)
+    include Aypex::VendorConcern if defined?(Aypex::VendorConcern)
 
     MEMOIZED_METHODS = %w[tax_zone]
 
@@ -431,7 +424,7 @@ module Aypex
     def ensure_line_item_variants_are_not_discontinued
       if line_items.any? { |li| !li.variant || li.variant.discontinued? }
         restart_checkout_flow
-        errors.add(:base, Aypex.t(:discontinued_variants_present))
+        errors.add(:base, I18n.t(:discontinued_variants_present, scope: :aypex))
         false
       else
         true
@@ -441,7 +434,7 @@ module Aypex
     def ensure_line_items_are_in_stock
       if insufficient_stock_lines.present?
         restart_checkout_flow
-        errors.add(:base, Aypex.t(:insufficient_stock_lines_present))
+        errors.add(:base, I18n.t(:insufficient_stock_lines_present, scope: :aypex))
         false
       else
         true
@@ -690,7 +683,7 @@ module Aypex
 
     def ensure_line_items_present
       unless line_items.present?
-        errors.add(:base, Aypex.t(:there_are_no_items_for_this_order)) && (return false)
+        errors.add(:base, I18n.t(:there_are_no_items_for_this_order, scope: :aypex)) && (return false)
       end
     end
 
@@ -699,7 +692,7 @@ module Aypex
         # After this point, order redirects back to 'address' state and asks user to pick a proper address
         # Therefore, shipments are not necessary at this point.
         shipments.destroy_all
-        errors.add(:base, Aypex.t(:items_cannot_be_shipped)) && (return false)
+        errors.add(:base, I18n.t(:items_cannot_be_shipped, scope: :aypex)) && (return false)
       end
     end
 

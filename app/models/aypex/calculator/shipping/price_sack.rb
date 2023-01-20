@@ -11,7 +11,7 @@ module Aypex
       end
 
       def self.description
-        Aypex.t(:shipping_price_sack)
+        I18n.t(:shipping_price_sack, scope: :aypex)
       end
 
       def compute_package(package)

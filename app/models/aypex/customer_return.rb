@@ -3,9 +3,7 @@ module Aypex
     include Aypex::NumberGenerator.new(prefix: "CR", length: 9)
     include NumberIdentifier
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     belongs_to :stock_location
     belongs_to :store, class_name: "Aypex::Store", inverse_of: :customer_returns
@@ -61,7 +59,7 @@ module Aypex
 
     def must_have_return_authorization
       if (item = return_items.find { |ri| ri.return_authorization.blank? })
-        errors.add(:base, Aypex.t(:missing_return_authorization, item_name: item.inventory_unit.variant.name))
+        errors.add(:base, I18n.t("aypex.missing_return_authorization", item_name: item.inventory_unit.variant.name))
       end
     end
 
@@ -72,7 +70,7 @@ module Aypex
 
     def return_items_belong_to_same_order
       if return_items.any? { |return_item| return_item.inventory_unit.order_id != order_id }
-        errors.add(:base, Aypex.t(:return_items_cannot_be_associated_with_multiple_orders))
+        errors.add(:base, I18n.t(:return_items_cannot_be_associated_with_multiple_orders, scope: :aypex))
       end
     end
   end

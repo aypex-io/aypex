@@ -45,7 +45,7 @@ module Aypex
           # Don't run if there is nothing to pay.
           return if payment_total >= total
           # Prevent orders from transitioning to complete without a successfully processed payment.
-          raise GatewayError, Aypex.t(:no_payment_found) if unprocessed_payments.empty?
+          raise GatewayError, I18n.t(:no_payment_found, scope: :aypex) if unprocessed_payments.empty?
 
           unprocessed_payments.each do |payment|
             break if payment_total >= total

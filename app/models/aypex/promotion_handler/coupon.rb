@@ -43,12 +43,12 @@ module Aypex
 
       def set_success_code(code)
         @status_code = code
-        @success = Aypex.t(code)
+        @success = I18n.t(code, scope: :aypex)
       end
 
       def set_error_code(code)
         @status_code = code
-        @error = Aypex.t(code)
+        @error = I18n.t(code, scope: :aypex)
       end
 
       def promotion

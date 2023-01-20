@@ -4,9 +4,7 @@ module Aypex
     include NumberIdentifier
     include NumberAsParam
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     has_many :stock_movements, as: :originator
 

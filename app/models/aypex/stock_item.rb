@@ -3,9 +3,7 @@ module Aypex
     acts_as_paranoid
 
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     with_options inverse_of: :stock_items do
       belongs_to :stock_location, class_name: "Aypex::StockLocation"

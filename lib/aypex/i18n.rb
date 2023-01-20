@@ -15,6 +15,7 @@ module Aypex
 
       TranslationHelperWrapper.new.translate(key, **options)
     end
+    alias_method :t, :translate
 
     def available_locales
       locales_from_i18n = I18n.available_locales
@@ -27,7 +28,5 @@ module Aypex
 
       (locales + locales_from_i18n).uniq.compact
     end
-
-    alias_method :t, :translate
   end
 end

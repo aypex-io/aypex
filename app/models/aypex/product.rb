@@ -333,11 +333,11 @@ module Aypex
     end
 
     def brand
-      @brand ||= categories.joins(:base_category).find_by(aypex_base_categories: {name: Aypex.t(:base_category_brands_name)})
+      @brand ||= categories.joins(:base_category).find_by(aypex_base_categories: {name: I18n.t(:base_category_brands_name, scope: :aypex)})
     end
 
     def category
-      @category ||= categories.joins(:base_category).order(depth: :desc).find_by(aypex_base_categories: {name: Aypex.t(:base_category_categories_name)})
+      @category ||= categories.joins(:base_category).order(depth: :desc).find_by(aypex_base_categories: {name: I18n.t(:base_category_categories_name, scope: :aypex)})
     end
 
     def categories_for_store(store)

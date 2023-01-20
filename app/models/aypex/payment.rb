@@ -6,13 +6,8 @@ module Aypex
     include NumberIdentifier
     include NumberAsParam
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
-    if defined?(Aypex::Security::Payments)
-      include Aypex::Security::Payments
-    end
-
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
+    include Aypex::Security::Payments if defined?(Aypex::Security::Payments)
     include Aypex::Payment::Processing
 
     NON_RISKY_AVS_CODES = ["B", "D", "H", "J", "M", "Q", "T", "V", "X", "Y"].freeze
@@ -239,8 +234,9 @@ module Aypex
     end
 
     def add_source_error(field, message)
+      # i18n-tasks-use I18n.t('aypex.credit_card')
       field_name = I18n.t("activerecord.attributes.#{source.class.to_s.underscore}.#{field}")
-      errors.add(Aypex.t(source.class.to_s.demodulize.underscore), "#{field_name} #{message}")
+      errors.add(I18n.t(source.class.to_s.demodulize.underscore, scope: :aypex), "#{field_name} #{message}")
     end
 
     def profiles_supported?

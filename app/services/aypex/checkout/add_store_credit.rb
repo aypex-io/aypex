@@ -9,7 +9,7 @@ module Aypex
 
         remaining_total = amount ? [amount, @order.outstanding_balance].min : @order.outstanding_balance
 
-        return failure(nil, Aypex.t(:error_user_does_not_have_any_store_credits)) unless @order.user&.store_credits&.any?
+        return failure(nil, I18n.t(:error_user_does_not_have_any_store_credits, scope: :aypex)) unless @order.user&.store_credits&.any?
 
         ApplicationRecord.transaction do
           @order.payments.store_credits.where(state: :checkout).map(&:invalidate!)

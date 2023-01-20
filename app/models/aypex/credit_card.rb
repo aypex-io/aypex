@@ -2,12 +2,8 @@ module Aypex
   class CreditCard < Aypex::Base
     include ActiveMerchant::Billing::CreditCardMethods
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
-    if defined?(Aypex::Security::CreditCards)
-      include Aypex::Security::CreditCards
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
+    include Aypex::Security::CreditCards if defined?(Aypex::Security::CreditCards)
 
     acts_as_paranoid
 
@@ -129,7 +125,7 @@ module Aypex
     end
 
     def display_brand
-      brand.present? ? brand.upcase : Aypex.t(:no_cc_type)
+      brand.present? ? brand.upcase : I18n.t(:no_cc_type, scope: :aypex)
     end
 
     def actions

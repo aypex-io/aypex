@@ -13,7 +13,7 @@ module Aypex
     def must_have_one_store
       return if stores.any?
 
-      errors.add(:stores, Aypex.t(:must_have_one_store))
+      errors.add(:stores, I18n.t(:must_have_one_store, scope: :aypex))
     end
 
     # this can be overridden on model basis

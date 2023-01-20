@@ -12,7 +12,7 @@ module Aypex
 
     def ensure_store_association_is_not_changed
       if store_id_changed? && persisted?
-        errors.add(:store, Aypex.t("errors.messages.store_association_can_not_be_changed"))
+        errors.add(:store, I18n.t("aypex.errors.messages.store_association_can_not_be_changed"))
       end
     end
   end

@@ -8,7 +8,7 @@ module Aypex
       end
 
       def self.description
-        Aypex.t(:flat_percent)
+        I18n.t(:flat_percent, scope: :aypex)
       end
 
       def compute_package(package)

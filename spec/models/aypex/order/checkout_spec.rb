@@ -175,7 +175,7 @@ describe Aypex::Order do
 
       it "cannot transition to address without any line items" do
         expect(order.line_items).to be_blank
-        expect { order.next! }.to raise_error(StateMachines::InvalidTransition, /#{Aypex.t(:there_are_no_items_for_this_order)}/)
+        expect { order.next! }.to raise_error(StateMachines::InvalidTransition, /#{I18n.t(:there_are_no_items_for_this_order, scope: :aypex)}/)
       end
     end
 
@@ -242,7 +242,7 @@ describe Aypex::Order do
 
           context "if there are no shipping rates for any shipment" do
             it "raises an InvalidTransitionError" do
-              expect { order.next! }.to raise_error(StateMachines::InvalidTransition, /#{Aypex.t(:items_cannot_be_shipped)}/)
+              expect { order.next! }.to raise_error(StateMachines::InvalidTransition, /#{I18n.t(:items_cannot_be_shipped, scope: :aypex)}/)
             end
 
             it "deletes all the shipments" do
@@ -422,9 +422,9 @@ describe Aypex::Order do
           it "raises a StateMachine::InvalidTransition" do
             expect do
               order.next!
-            end.to raise_error(StateMachines::InvalidTransition, /#{Aypex.t(:no_payment_found)}/)
+            end.to raise_error(StateMachines::InvalidTransition, /#{I18n.t(:no_payment_found, scope: :aypex)}/)
 
-            expect(order.errors[:base]).to include(Aypex.t(:no_payment_found))
+            expect(order.errors[:base]).to include(I18n.t(:no_payment_found, scope: :aypex))
           end
         end
       end
@@ -702,7 +702,7 @@ describe Aypex::Order do
 
         expect do
           order.update_from_params(params, permitted_params)
-        end.to raise_error(Aypex.t(:invalid_credit_card))
+        end.to raise_error(I18n.t(:invalid_credit_card, scope: :aypex))
       end
     end
 

@@ -1,9 +1,7 @@
 module Aypex
   class LineItem < Aypex::Base
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     before_validation :ensure_valid_quantity
 
@@ -28,7 +26,7 @@ module Aypex
     #   https://github.com/aypex/aypex/issues/2695#issuecomment-143314161
     validates :quantity, numericality: {
       less_than_or_equal_to: DatabaseTypeUtilities.maximum_value_for(:integer),
-      only_integer: true, message: Aypex.t("validation.must_be_int")
+      only_integer: true, message: I18n.t("aypex.validation.must_be_int")
     }
 
     validates :price, numericality: true

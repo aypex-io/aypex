@@ -1,8 +1,6 @@
 module Aypex
   class PaymentCaptureEvent < Aypex::Base
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     belongs_to :payment, class_name: "Aypex::Payment"
 

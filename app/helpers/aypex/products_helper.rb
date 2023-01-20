@@ -21,7 +21,10 @@ module Aypex
       diff = variant.amount_in(current_currency) - product_amount
       amount = Aypex::Money.new(diff.abs, currency: current_currency).to_html
       label = (diff > 0) ? :add : :subtract
-      "(#{Aypex.t(label)}: #{amount})".html_safe
+
+      # i18n-tasks-use I18n.t('aypex.add')
+      # i18n-tasks-use I18n.t('aypex.subtract')
+      "(#{I18n.t(label, scope: :aypex)}: #{amount})".html_safe
     end
 
     # returns the formatted full price for the variant, if at least one variant price differs from product price
@@ -49,7 +52,7 @@ module Aypex
       if description_text.present?
         truncate(strip_tags(description_text.gsub("&nbsp;", " ").squish), length: 100)
       else
-        Aypex.t(:product_has_no_description)
+        I18n.t(:product_has_no_description, scope: :aypex)
       end
     end
 
@@ -77,15 +80,15 @@ module Aypex
 
     # will return a human readable string
     def available_status(product)
-      return Aypex.t(:archived) if product.discontinued?
-      return Aypex.t(:deleted) if product.deleted?
+      return I18n.t(:archived, scope: :aypex) if product.discontinued?
+      return I18n.t(:deleted, scope: :aypex) if product.deleted?
 
       if product.available?
-        Aypex.t(:active)
+        I18n.t(:active, scope: :aypex)
       elsif product.make_active_at&.future?
-        Aypex.t(:pending_sale)
+        I18n.t(:pending_sale, scope: :aypex)
       else
-        Aypex.t(:draft)
+        I18n.t(:draft, scope: :aypex)
       end
     end
 

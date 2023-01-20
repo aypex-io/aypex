@@ -2,12 +2,8 @@ module Aypex
   class Promotion < Aypex::Base
     include MultiStoreResource
     include Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
-    if defined?(Aypex::Security::Promotions)
-      include Aypex::Security::Promotions
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
+    include Aypex::Security::Promotions if defined?(Aypex::Security::Promotions)
 
     MATCH_POLICIES = %w[all any]
     UNACTIVATABLE_ORDER_STATES = ["complete", "awaiting_return", "returned"]

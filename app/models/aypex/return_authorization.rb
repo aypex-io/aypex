@@ -2,9 +2,7 @@ module Aypex
   class ReturnAuthorization < Aypex::Base
     include Aypex::NumberGenerator.new(prefix: "RA", length: 9)
     include NumberIdentifier
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     belongs_to :order, class_name: "Aypex::Order", inverse_of: :return_authorizations
 
@@ -68,7 +66,7 @@ module Aypex
 
     def must_have_shipped_units
       if order.nil? || order.inventory_units.shipped.none?
-        errors.add(:order, Aypex.t(:has_no_shipped_units))
+        errors.add(:order, I18n.t(:has_no_shipped_units, scope: :aypex))
       end
     end
 

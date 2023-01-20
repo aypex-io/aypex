@@ -4,6 +4,6 @@ module Aypex
     belongs_to :variant, class_name: "Aypex::Variant"
 
     validates :promotion_action, :variant, :quantity, presence: true
-    validates :quantity, numericality: {only_integer: true, message: Aypex.t("validation.must_be_int")}
+    validates :quantity, numericality: {only_integer: true, message: I18n.t("aypex.validation.must_be_int")}
   end
 end

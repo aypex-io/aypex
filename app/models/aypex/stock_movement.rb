@@ -5,9 +5,7 @@ module Aypex
       min: -2**31
     }.freeze
 
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     belongs_to :stock_item, class_name: "Aypex::StockItem", inverse_of: :stock_movements
     belongs_to :originator, polymorphic: true

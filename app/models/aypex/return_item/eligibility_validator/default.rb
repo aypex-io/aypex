@@ -4,7 +4,7 @@ module Aypex
     self.permitted_eligibility_validators = [
       ReturnItem::EligibilityValidator::OrderCompleted,
       ReturnItem::EligibilityValidator::TimeSincePurchase,
-      ReturnItem::EligibilityValidator::RMARequired,
+      ReturnItem::EligibilityValidator::ReturnAuthorizationRequired,
       ReturnItem::EligibilityValidator::InventoryShipped,
       ReturnItem::EligibilityValidator::NoReimbursements
     ]

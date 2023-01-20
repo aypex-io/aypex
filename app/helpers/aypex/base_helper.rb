@@ -4,7 +4,7 @@ module Aypex
       countries = current_store.countries_available_for_checkout
 
       countries.collect do |country|
-        country.name = Aypex.t(country.iso, scope: "country_names", default: country.name)
+        country.name = I18n.t("aypex.country_names.#{country.iso}", default: country.name)
         country
       end.sort_by { |c| c.name.parameterize }
     end
@@ -13,7 +13,7 @@ module Aypex
       countries = Aypex::Country.all
 
       countries.collect do |country|
-        country.name = Aypex.t(country.iso, scope: "country_names", default: country.name)
+        country.name = I18n.t("aypex.country_names.#{country.iso}", default: country.name)
         country
       end.sort_by { |c| c.name.parameterize }
     end

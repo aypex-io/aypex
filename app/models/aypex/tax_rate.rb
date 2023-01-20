@@ -5,9 +5,7 @@ module Aypex
     include Aypex::CalculatedAdjustments
     include Aypex::AdjustmentSource
     include Aypex::Metadata
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     with_options inverse_of: :tax_rates do
       belongs_to :zone, class_name: "Aypex::Zone", optional: true
@@ -107,10 +105,13 @@ module Aypex
     private
 
     def label
-      Aypex.t included_in_price? ? :including_tax : :excluding_tax,
-        scope: "adjustment_labels.tax_rates",
+      # i18n-tasks-use I18n.t('aypex.adjustment_labels.tax_rates.including_tax')
+      # i18n-tasks-use I18n.t('aypex.adjustment_labels.tax_rates.excluding_tax')
+      I18n.t(
+        "aypex.adjustment_labels.tax_rates.#{included_in_price? ? "including_tax" : "excluding_tax"}",
         name: name.presence || tax_category.name,
         amount: amount_for_label
+      )
     end
 
     def amount_for_label

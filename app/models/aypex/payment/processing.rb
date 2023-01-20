@@ -108,11 +108,11 @@ module Aypex
                 yield
               else
                 invalidate!
-                raise GatewayError, Aypex.t(:payment_method_not_supported)
+                raise GatewayError, I18n.t(:payment_method_not_supported, scope: :aypex)
               end
             end
           else
-            raise GatewayError, Aypex.t(:payment_processing_failed)
+            raise GatewayError, I18n.t(:payment_processing_failed, scope: :aypex)
           end
         end
       end
@@ -161,11 +161,11 @@ module Aypex
         text = if error.is_a? ActiveMerchant::Billing::Response
           error.params["message"] || error.params["response_reason_text"] || error.message
         elsif error.is_a? ActiveMerchant::ConnectionError
-          Aypex.t(:unable_to_connect_to_gateway)
+          I18n.t(:unable_to_connect_to_gateway, scope: :aypex)
         else
           error.to_s
         end
-        Rails.logger.error(Aypex.t(:gateway_error))
+        Rails.logger.error(I18n.t(:gateway_error, scope: :aypex))
         Rails.logger.error("  #{error.to_yaml}")
         raise GatewayError, text
       end

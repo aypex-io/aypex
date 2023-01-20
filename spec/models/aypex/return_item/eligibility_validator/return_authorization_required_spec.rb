@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Aypex::ReturnItem::EligibilityValidator::RMARequired do
+describe Aypex::ReturnItem::EligibilityValidator::ReturnAuthorizationRequired do
   let(:return_item) { create(:return_item) }
-  let(:validator) { Aypex::ReturnItem::EligibilityValidator::RMARequired.new(return_item) }
+  let(:validator) { Aypex::ReturnItem::EligibilityValidator::ReturnAuthorizationRequired.new(return_item) }
 
   describe "#eligible_for_return?" do
     subject { validator.eligible_for_return? }
@@ -22,7 +22,7 @@ describe Aypex::ReturnItem::EligibilityValidator::RMARequired do
 
       it "sets an error" do
         subject
-        expect(validator.errors[:rma_required]).to eq Aypex.t("return_item_rma_ineligible")
+        expect(validator.errors[:rma_required]).to eq I18n.t("aypex.return_item_rma_ineligible")
       end
     end
   end

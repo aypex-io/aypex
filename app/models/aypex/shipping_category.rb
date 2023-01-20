@@ -1,9 +1,7 @@
 module Aypex
   class ShippingCategory < Aypex::Base
     include UniqueName
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     with_options inverse_of: :shipping_category do
       has_many :products

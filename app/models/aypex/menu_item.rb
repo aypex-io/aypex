@@ -1,9 +1,7 @@
 module Aypex
   class MenuItem < Aypex::Base
     include Aypex::DisplayLink
-    if defined?(Aypex::Webhooks)
-      include Aypex::Webhooks::HasWebhooks
-    end
+    include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
     acts_as_nested_set dependent: :destroy
 
