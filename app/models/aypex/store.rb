@@ -5,6 +5,7 @@ module Aypex
 
     typed_store :settings, coder: ActiveRecord::TypedStore::IdentityCoder do |s|
       s.boolean :address_require_phone_number, default: false, null: false
+      s.boolean :address_require_alt_phone_number, default: false, null: false
       s.boolean :address_show_company_address_field, default: false, null: false
 
       s.boolean :checkout_allow_guest_checkout, default: true, null: false
