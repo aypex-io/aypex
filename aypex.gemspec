@@ -53,5 +53,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "state_machines-activerecord"
   spec.add_dependency "state_machines-activemodel"
   spec.add_dependency "stringex"
-  spec.add_dependency "validates_zipcode"
+  spec.add_dependency "twitter_cldr"
 end

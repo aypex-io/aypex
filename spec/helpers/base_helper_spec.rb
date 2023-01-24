@@ -6,6 +6,7 @@ describe Aypex::BaseHelper do
   let(:current_store) { create(:store) }
 
   before do
+    allow_any_instance_of(Aypex::BaseHelper).to receive(:current_locale).and_return("en")
     allow(controller).to receive(:controller_name).and_return("test")
   end
 

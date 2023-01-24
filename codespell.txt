@@ -21,3 +21,4 @@ nam
 sur
 connexion
 mot
+spanisch

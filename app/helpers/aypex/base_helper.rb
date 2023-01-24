@@ -1,21 +1,36 @@
 module Aypex
   module BaseHelper
+    require "twitter_cldr"
+
     def available_countries
       countries = current_store.countries_available_for_checkout
 
-      countries.collect do |country|
-        country.name = I18n.t("aypex.country_names.#{country.iso}", default: country.name)
+      localized_countries = countries.collect do |country|
+        country.name = localized_country_name(country.iso)
+
         country
-      end.sort_by { |c| c.name.parameterize }
+      end
+
+      localized_countries.sort_by { |c| c.name.parameterize }
     end
 
-    def all_countries
-      countries = Aypex::Country.all
+    def all_country_options
+      Aypex::Country.all.map { |country| country_presentation(country) }
+    end
 
-      countries.collect do |country|
-        country.name = I18n.t("aypex.country_names.#{country.iso}", default: country.name)
-        country
-      end.sort_by { |c| c.name.parameterize }
+    def country_presentation(country)
+      [localized_country_name(country.iso), country.id]
+    end
+
+    def localized_country_name(country_iso)
+      country_iso_formatted = country_iso.to_s.downcase.to_sym
+      locale_formatted = current_locale.to_s.downcase.to_sym
+
+      if I18n.exists?("aypex.country_name_overide.#{country_iso_formatted}", locale: locale_formatted.to_s, fallback: false)
+        return I18n.t("aypex.country_name_overide.#{country_iso_formatted}", locale: locale_formatted.to_s)
+      end
+
+      country_iso_formatted.localize(locale_formatted).as_territory || Aypex::Country.by_iso(country_iso)
     end
 
     def aypex_resource_path(resource)
@@ -138,6 +153,30 @@ module Aypex
 
     def seo_url(category, options = {})
       aypex.nested_categories_path(category.permalink, options.merge(locale: locale_param))
+    end
+
+    def admin_available?
+      Aypex::Engine.admin_available?
+    end
+
+    def api_available?
+      Aypex::Engine.api_available?
+    end
+
+    def checkout_available?
+      Aypex::Engine.checkout_available?
+    end
+
+    def cli_available?
+      Aypex::Engine.cli_available?
+    end
+
+    def emails_available?
+      Aypex::Engine.emails_available?
+    end
+
+    def sample_available?
+      Aypex::Engine.sample_available?
     end
 
     def storefront_available?

@@ -19,7 +19,11 @@ module Aypex
     protected
 
     def label
-      I18n.t("aypex.promotion_label", name: promotion.name)
+      "Override this method to set the Promotion Action Label"
+    end
+
+    def description
+      "Override this method to set the Promotion Action Description"
     end
   end
 end

@@ -182,6 +182,13 @@ describe Aypex::Address do
         expect(address.errors["zipcode"]).to include("is invalid")
       end
 
+      it "validates the zipcode when lower case input" do
+        allow(address.country).to receive(:iso).and_return("CA")
+        address.zipcode = "V0H 1z6"
+        address.valid?
+        expect(address.errors["zipcode"]).to be_empty
+      end
+
       it "accepts a zip code with surrounding white space" do
         allow(address.country).to receive(:iso).and_return("US")
         address.zipcode = " 12345 "
