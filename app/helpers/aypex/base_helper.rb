@@ -140,6 +140,30 @@ module Aypex
       aypex.nested_categories_path(category.permalink, options.merge(locale: locale_param))
     end
 
+    def admin_available?
+      Aypex::Engine.admin_available?
+    end
+
+    def api_available?
+      Aypex::Engine.api_available?
+    end
+
+    def checkout_available?
+      Aypex::Engine.checkout_available?
+    end
+
+    def cli_available?
+      Aypex::Engine.cli_available?
+    end
+
+    def emails_available?
+      Aypex::Engine.emails_available?
+    end
+
+    def sample_available?
+      Aypex::Engine.sample_available?
+    end
+
     def storefront_available?
       Aypex::Engine.storefront_available?
     end

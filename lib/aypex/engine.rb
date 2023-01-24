@@ -17,7 +17,6 @@ module Aypex
     AypexCalculators = Struct.new(
       :shipping_methods,
       :tax_rates,
-      :promotion_actions_create_adjustments,
       :promotion_actions_create_item_adjustments
     )
 
@@ -35,7 +34,7 @@ module Aypex
 
     initializer "aypex.environment", before: :load_config_initializers do |app|
       app.config.aypex = Environment.new(AypexCalculators.new, Aypex::Configuration.new, Aypex::Dependencies.new)
-      app.config.active_record.yaml_column_permitted_classes = [Symbol, BigDecimal]
+      app.config.active_record.yaml_column_permitted_classes = [Symbol, BigDecimal, ActiveSupport::HashWithIndifferentAccess]
       Aypex::Config = app.config.aypex.preferences
       Aypex::Dependency = app.config.aypex.dependencies
     end

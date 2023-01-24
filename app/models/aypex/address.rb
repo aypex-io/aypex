@@ -1,6 +1,6 @@
 module Aypex
   class Address < Aypex::Base
-    require "validates_zipcode"
+    require "twitter_cldr"
 
     include Metadata
     include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
@@ -205,14 +205,10 @@ module Aypex
 
     def postal_code_validate
       return if country.blank? || country_iso.blank? || !require_zipcode? || zipcode.blank?
-      return unless ::ValidatesZipcode::CldrRegexpCollection::ZIPCODES_REGEX.key?(country_iso.upcase.to_sym)
+      return unless TwitterCldr::Shared::PostalCodes.territories.include?(country_iso.downcase.to_sym)
 
-      formatted_zip = ::ValidatesZipcode::Formatter.new(
-        zipcode: zipcode.to_s.strip,
-        country_alpha2: country_iso.upcase
-      ).format
-
-      errors.add(:zipcode, :invalid) unless ::ValidatesZipcode.valid?(formatted_zip, country_iso.upcase)
+      postal_code = TwitterCldr::Shared::PostalCodes.for_territory(country_iso)
+      errors.add(:zipcode, :invalid) unless postal_code.valid?(zipcode.upcase.to_s.strip)
     end
 
     def assign_new_default_address_to_user
