@@ -1,6 +1,6 @@
 module Aypex
   module BaseHelper
-    require 'twitter_cldr'
+    require "twitter_cldr"
 
     def available_countries
       countries = current_store.countries_available_for_checkout
