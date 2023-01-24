@@ -67,7 +67,7 @@ ignore:
   - Lint/Syntax
 - lib/testing_support/i18n.rb:
   - Lint/IneffectiveAccessModifier
-- spec/lib/aypex/core/token_generator_spec.rb:
+- spec/lib/aypex/token_generator_spec.rb:
   - Lint/ConstantDefinitionInBlock
 - spec/lib/aypex/service_module_spec.rb:
   - Lint/ConstantDefinitionInBlock
