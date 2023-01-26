@@ -418,12 +418,21 @@ en:
       tax_rates:
         excluding_tax: "%{name}%{amount}"
         including_tax: "%{name}%{amount} (Included in Price)"
+    adjustments_deleted: Adjustments deleted
     archived: Archived
     base_category_brands_name: Brands
     base_category_categories_name: Categories
     cannot_be_destroyed: Order cannot be destroyed.
     cannot_empty: Cannot empty order.
     cannot_return_more_than_bought_quantity: Cannot return more than bought quantity.
+    coupon_code_already_applied: Coupon code already applied
+    coupon_code_applied: Coupon code applied
+    coupon_code_better_exists: Coupon code better exists
+    coupon_code_expired: Coupon code expired
+    coupon_code_max_usage: Coupon code max usage
+    coupon_code_not_eligible: Coupon code not eligible
+    coupon_code_not_found: The coupon code you entered doesn't exist. Please try again.
+    coupon_code_unknown_error: Coupon code unknown error
     credit_card: Credit Card
     default_refund_amount: Default Refund Amount
     default_tax: Default Tax
@@ -483,7 +492,6 @@ en:
     percent_per_item: Percent Per Item
     price_range: Price Range
     product_has_no_description: This product has no description
-    promotion_label: Promotion (%{name})
     return_item_inventory_unit_ineligible: Return item's inventory unit must be shipped
     return_item_inventory_unit_reimbursed: Return item's inventory unit is already reimbursed
     return_item_order_not_completed: Return item's order must be completed
