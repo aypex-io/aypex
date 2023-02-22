@@ -71,12 +71,12 @@ using the correct naming conventions to generate the mountable engine type you r
 
 For `Aypex::Shipping`
 ```bash
-rails plugin new [aypex-shipping] --mountable
+rails plugin new aypex-shipping --mountable
 ```
 
 For `AypexShipping`
 ```bash
-rails plugin new [aypex_shipping] --mountable
+rails plugin new aypex_shipping --mountable
 ```
 
 ## License
