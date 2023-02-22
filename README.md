@@ -64,6 +64,21 @@ bundle exec rake test_app
 bundle exec rspec spec
 ```
 
+## Creating Extensions
+
+To keep Aypex as close to the Rails framework as possible Aypex extensions are just mountable Rails Engines, run the following Rails Plugin command,
+using the correct naming conventions to generate the mountable engine type you require.
+
+For `Aypex::Shipping`
+```bash
+rails plugin new [aypex-shipping] --mountable
+```
+
+For `AypexShipping`
+```bash
+rails plugin new [aypex_shipping] --mountable
+```
+
 ## License
 
 Aypex is released under the [New MIT License](https://github.com/aypex-io/aypex/blob/main/MIT-LICENSE).
