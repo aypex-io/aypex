@@ -191,7 +191,7 @@ describe Aypex::Payment do
         payment.process!
       end
 
-      it "invalidates if payment method doesnt support source" do
+      it "invalidates if payment method doesn't support source" do
         expect(payment.payment_method).to receive(:supports?).with(payment.source).and_return(false)
         expect { payment.process! }.to raise_error(Aypex::GatewayError)
         expect(payment.state).to eq("invalid")

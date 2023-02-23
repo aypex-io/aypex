@@ -320,7 +320,7 @@ module Aypex
       end
 
       it "raises if can't find stock location" do
-        params[:shipments_attributes][0][:stock_location] = "doesnt exist"
+        params[:shipments_attributes][0][:stock_location] = "doesn't exist"
         expect { Importer::Order.import(user, params) }.to raise_error(StandardError)
       end
 

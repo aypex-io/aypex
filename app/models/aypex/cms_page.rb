@@ -6,9 +6,7 @@ module Aypex
 
     acts_as_paranoid
 
-    TYPES = ["Aypex::Cms::Pages::StandardPage",
-      "Aypex::Cms::Pages::FeaturePage",
-      "Aypex::Cms::Pages::Homepage"]
+    TYPES = ["Aypex::Cms::Pages::StandardPage", "Aypex::Cms::Pages::FeaturePage", "Aypex::Cms::Pages::Homepage"]
 
     belongs_to :store, touch: true
 

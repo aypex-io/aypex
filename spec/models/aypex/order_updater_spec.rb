@@ -260,17 +260,17 @@ module Aypex
       let(:shipment) { create(:shipment) }
       let(:shipments) { [shipment] }
 
-      it "doesnt update payment state" do
+      it "doesn't update payment state" do
         expect(updater).not_to receive(:update_payment_state)
         updater.update
       end
 
-      it "doesnt update shipment state" do
+      it "doesn't update shipment state" do
         expect(updater).not_to receive(:update_shipment_state)
         updater.update
       end
 
-      it "doesnt update each shipment" do
+      it "doesn't update each shipment" do
         allow(order).to receive_messages shipments: shipments
         allow(shipments).to receive_messages states: []
         allow(shipments).to receive_messages ready: []

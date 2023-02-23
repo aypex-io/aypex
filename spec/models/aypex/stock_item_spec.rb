@@ -184,7 +184,7 @@ describe Aypex::StockItem do
   context "with stock movements" do
     before { Aypex::StockMovement.create(stock_item: subject, quantity: 1) }
 
-    it "doesnt raise ReadOnlyRecord error" do
+    it "doesn't raise ReadOnlyRecord error" do
       expect { subject.destroy }.not_to raise_error
     end
   end
@@ -198,7 +198,7 @@ describe Aypex::StockItem do
       end.not_to raise_error
     end
 
-    it "doesnt allow recreating more than one stock item at once" do
+    it "doesn't allow recreating more than one stock item at once" do
       stock_location.stock_items.create!(variant: subject.variant)
 
       expect do
