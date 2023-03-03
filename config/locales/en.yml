@@ -434,6 +434,7 @@ en:
     coupon_code_not_found: The coupon code you entered doesn't exist. Please try again.
     coupon_code_unknown_error: Coupon code unknown error
     credit_card: Credit Card
+    default: Default
     default_refund_amount: Default Refund Amount
     default_tax: Default Tax
     default_wishlist_name: Default Wishlist Name
@@ -466,6 +467,7 @@ en:
         get_shipping_rates:
           no_line_items: To generate Shipping Rates you need to add some Line Items to Order
           no_shipping_address: To generate Shipping Rates Order needs to have a Shipping Address
+    expiring: Expiring
     fixed_amount_line_items: Fixed amount line items
     flat_percent: Flat Percent
     flat_rate_per_order: Flat Rate
@@ -484,6 +486,7 @@ en:
     must_have_one_store: The resource must belong to a store.
     no_cc_type: N/A
     no_payment_found: No payment found
+    none_expiring: None expiring
     only_active_products_can_be_added_to_cart: Draft and archived products cannot be added to cart, please mark the product as active before.
     or_over_price: "%{price} or over"
     payment_method_not_supported: That payment method is unsupported. Please choose another one.

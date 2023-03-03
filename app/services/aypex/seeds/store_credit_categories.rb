@@ -4,10 +4,9 @@ module Aypex
       prepend Aypex::ServiceModule::Base
 
       def call
-        # FIXME: we should use translations here
-        Aypex::StoreCreditCategory.find_or_create_by!(name: "Default")
-        Aypex::StoreCreditCategory.find_or_create_by!(name: "Non-expiring")
-        Aypex::StoreCreditCategory.find_or_create_by!(name: "Expiring")
+        Aypex::StoreCreditCategory.find_or_create_by!(name: I18n.t("aypex.default"))
+        Aypex::StoreCreditCategory.find_or_create_by!(name: I18n.t("aypex.none_expiring"))
+        Aypex::StoreCreditCategory.find_or_create_by!(name: I18n.t("aypex.expiring"))
       end
     end
   end
