@@ -41,7 +41,7 @@ describe Aypex::OrderInventory do
       end
     end
 
-    context "store doesnt track inventory" do
+    context "store doesn't track inventory" do
       let(:variant) { create(:variant) }
 
       before do
@@ -64,7 +64,7 @@ describe Aypex::OrderInventory do
       end
     end
 
-    context "variant doesnt track inventory" do
+    context "variant doesn't track inventory" do
       let(:variant) { create(:variant) }
 
       before { variant.update(track_inventory: false) }

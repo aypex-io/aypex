@@ -1,4 +1,5 @@
 require "cancan"
+
 require_dependency "aypex/controller_helpers/strong_parameters"
 
 class Aypex::BaseController < ApplicationController

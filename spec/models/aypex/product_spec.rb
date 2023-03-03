@@ -209,7 +209,7 @@ describe Aypex::Product do
       let(:variant) { product.master }
       let(:stock_item) { variant.stock_items.first }
 
-      it "doesnt raise ReadOnlyRecord error" do
+      it "doesn't raise ReadOnlyRecord error" do
         Aypex::StockMovement.create!(stock_item: stock_item, quantity: 1)
         expect { product.destroy }.not_to raise_error
       end

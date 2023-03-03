@@ -260,7 +260,7 @@ describe Aypex::LineItem do
         expect(line_item.errors).to be_empty
       end
 
-      it "doesnt allow to increase item quantity" do
+      it "doesn't allow to increase item quantity" do
         line_item = order.line_items.first
         line_item.quantity += 2
         line_item.target_shipment = order.shipments.first
@@ -289,7 +289,7 @@ describe Aypex::LineItem do
         expect(line_item.errors).to be_empty
       end
 
-      it "doesnt allow to increase quantity over stock availability" do
+      it "doesn't allow to increase quantity over stock availability" do
         line_item = order.line_items.first
         line_item.quantity += 3
         line_item.target_shipment = order.shipments.first

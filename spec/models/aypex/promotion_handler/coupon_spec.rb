@@ -48,10 +48,10 @@ module Aypex
         end
       end
 
-      context "coupon code promotion doesnt exist" do
+      context "coupon code promotion doesn't exist" do
         before { create(:promotion, name: "promo", code: nil) }
 
-        it "doesnt fetch any promotion" do
+        it "doesn't fetch any promotion" do
           expect(subject.promotion).to be_blank
         end
 

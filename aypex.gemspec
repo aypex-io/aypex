@@ -10,10 +10,6 @@ Gem::Specification.new do |spec|
   spec.description = "Aypex Models, Helpers, Services and libraries"
   spec.license = "MIT"
 
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  # spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
-
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/aypex-io/aypex/tree/v#{spec.version}"
   spec.metadata["changelog_uri"] = "https://github.com/aypex-io/aypex/releases/tag/v#{spec.version}"
@@ -21,8 +17,8 @@ Gem::Specification.new do |spec|
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   end
-  spec.require_path = "lib"
 
+  spec.require_path = "lib"
   spec.required_ruby_version = ">= 3.2"
 
   %w[

@@ -33,7 +33,7 @@ describe Aypex::LegacyUser do # rubocop:disable RSpec/MultipleDescribes
         expect(user.ship_address).to eq order.ship_address
       end
 
-      it "doesnt create new addresses if user has already" do
+      it "doesn't create new addresses if user has already" do
         user.update_column(:bill_address_id, create(:address).id)
         user.update_column(:ship_address_id, create(:address).id)
         user.reload

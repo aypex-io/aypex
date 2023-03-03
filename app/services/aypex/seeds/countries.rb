@@ -13,11 +13,13 @@ module Aypex
             # Skip the creation of some territories, uninhabited islands and the Antarctic.
             next if EXCLUDED_COUNTRIES.include?(country.alpha_2_code)
 
-            {name: country.name,
-             iso3: country.alpha_3_code,
-             iso: country.alpha_2_code,
-             iso_name: country.name.upcase,
-             numcode: country.numeric_code}
+            {
+              name: country.name,
+              iso3: country.alpha_3_code,
+              iso: country.alpha_2_code,
+              iso_name: country.name.upcase,
+              numcode: country.numeric_code
+            }
           end.compact.uniq
           Aypex::Country.insert_all(new_countries)
 
