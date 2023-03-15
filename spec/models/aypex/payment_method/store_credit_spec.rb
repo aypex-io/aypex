@@ -26,7 +26,7 @@ describe Aypex::PaymentMethod::StoreCredit do
       end
     end
 
-    context "with insuffient funds" do
+    context "with insufficient funds" do
       let(:auth_amount) { (store_credit.amount_remaining * 100) + 1 }
 
       it "declines a store credit" do
