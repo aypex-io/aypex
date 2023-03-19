@@ -58,7 +58,7 @@ module Aypex
 
           it "splits and keeps splitting until all packages are underweight" do
             # formula: [2*100 + 4*49] [2*49, 4*100]
-            # first package was splited to 3, 2nd to 4
+            # first package was split to 3, 2nd to 4
             expect(result.size).to eq 7
 
             result.each do |pack|
