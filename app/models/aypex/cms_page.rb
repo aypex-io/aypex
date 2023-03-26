@@ -46,6 +46,14 @@ module Aypex
       type == "Aypex::Cms::Pages::Homepage"
     end
 
+    def standard?
+      type == "Aypex::Cms::Pages::StandardPage"
+    end
+
+    def feature?
+      type == "Aypex::Cms::Pages::FeaturePage"
+    end
+
     def draft_mode?
       !visible
     end
