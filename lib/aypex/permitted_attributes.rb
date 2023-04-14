@@ -147,7 +147,7 @@ module Aypex
 
     # TODO: Should probably use something like Aypex::Config.user_class.attributes
     @@user_attributes = [:email, :bill_address_id, :ship_address_id, :password, :first_name, :last_name,
-      :password_confirmation, {public_metadata: {}, private_metadata: {}}, :selected_locale]
+      :password_confirmation, :store_id, {public_metadata: {}, private_metadata: {}}, :selected_locale]
 
     @@variant_attributes = [
       :name, :presentation, :cost_price, :discontinue_on, :lock_version,

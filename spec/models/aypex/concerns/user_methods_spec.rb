@@ -21,13 +21,6 @@ describe Aypex::UserMethods do
     end
   end
 
-  describe "#admin?" do
-    it do
-      expect(create(:admin_user).admin?).to be true
-      expect(create(:user).admin?).to be false
-    end
-  end
-
   describe "#aypex_admin?" do
     it do
       expect(create(:admin_user).aypex_admin?).to be true
@@ -35,27 +28,15 @@ describe Aypex::UserMethods do
     end
   end
 
-  describe ".admin_created?" do
-    it "returns true when admin exists" do
-      create(:admin_user)
-
-      expect(Aypex::Config.user_class).to be_admin_created
-    end
-
-    it "returns false when admin does not exist" do
-      expect(Aypex::Config.user_class).not_to be_admin_created
-    end
-  end
-
   describe ".aypex_admin_created?" do
     it "returns true when admin exists" do
       create(:admin_user)
 
-      expect(Aypex::Config.user_class).to be_admin_created
+      expect(Aypex::Config.user_class).to be_aypex_admin_created
     end
 
     it "returns false when admin does not exist" do
-      expect(Aypex::Config.user_class).not_to be_admin_created
+      expect(Aypex::Config.user_class).not_to be_aypex_admin_created
     end
   end
 
@@ -82,7 +63,7 @@ describe Aypex::UserMethods do
   describe "#check_completed_orders" do
     let(:possible_promotion) { create(:promotion, advertise: true, starts_at: 1.day.ago) }
 
-    context "rstrict t delete dependent destroyed" do
+    context "restrict delete dependent destroyed" do
       before do
         test_user.promotion_rules.create!(promotion: possible_promotion)
         create(:order, user: test_user, completed_at: Time.current)

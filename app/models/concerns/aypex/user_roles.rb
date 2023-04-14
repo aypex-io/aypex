@@ -13,24 +13,6 @@ module Aypex
         aypex_roles.exists?(name: role_name)
       end
 
-      def self.admin
-        ActiveSupport::Deprecation.warn("`User#admin` is deprecated and will be removed in Aypex 5. Please use `User#aypex_admin`")
-
-        aypex_admin
-      end
-
-      def self.admin_created?
-        ActiveSupport::Deprecation.warn("`User#admin_created?` is deprecated and will be removed in Aypex 5. Please use `User#aypex_admin_created?`")
-
-        aypex_admin_created?
-      end
-
-      def admin?
-        ActiveSupport::Deprecation.warn("`User#admin?` is deprecated and will be removed in Aypex 5. Please use `User#aypex_admin?`")
-
-        aypex_admin?
-      end
-
       def self.aypex_admin_created?
         aypex_admin.exists?
       end
