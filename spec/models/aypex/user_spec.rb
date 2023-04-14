@@ -3,9 +3,9 @@ require "spec_helper"
 describe Aypex::LegacyUser do # rubocop:disable RSpec/MultipleDescribes
   # Regression test for #2844 + #3346
   describe "#last_incomplete_order" do
-    let!(:user) { create(:user) }
-    let!(:order) { create(:order, bill_address: create(:address), ship_address: create(:address)) }
     let(:store) { create(:store) }
+    let!(:user) { create(:user, store: store) }
+    let!(:order) { create(:order, bill_address: create(:address), ship_address: create(:address)) }
 
     let(:order_1) { create(:order, created_at: 1.day.ago, user: user, created_by: user, store: store) }
     let(:order_2) { create(:order, user: user, created_by: user, store: store) }
@@ -70,17 +70,20 @@ describe Aypex::LegacyUser do # rubocop:disable RSpec/MultipleDescribes
 end
 
 describe Aypex::Config.user_class do
-  context "reporting" do
-    let!(:orders) { create_list(:order, order_count, user: subject, store: store, total: order_value, completed_at: Date.today, currency: currency) }
+  let(:store) { create(:store) }
+
+  context "when reporting" do
+    subject(:user) { described_class.new(store: store) }
+
+    let!(:orders) { create_list(:order, order_count, user: user, store: store, total: order_value, completed_at: Date.today, currency: currency) }
     let(:currency) { "USD" }
-    let(:store) { create(:store) }
     let(:order_value) { BigDecimal("80.94") }
     let(:order_count) { 4 }
 
     describe "#lifetime_value" do
       context "with orders" do
         it "returns the total of completed orders for the user" do
-          expect(subject.lifetime_value(store: store, currency: currency)).to eq(order_count * order_value)
+          expect(user.lifetime_value(store: store, currency: currency)).to eq(order_count * order_value)
         end
       end
 
@@ -88,27 +91,27 @@ describe Aypex::Config.user_class do
         let(:orders) {}
 
         it "returns 0.00" do
-          expect(subject.lifetime_value(store: store, currency: currency)).to eq BigDecimal("0.00")
+          expect(user.lifetime_value(store: store, currency: currency)).to eq BigDecimal("0.00")
         end
       end
     end
 
     describe "#display_lifetime_value" do
       it "returns a Aypex::Money version of lifetime_value" do
-        expect(subject.display_lifetime_value(store: store, currency: currency).money.fractional).to eq(order_count * order_value * 100)
+        expect(user.display_lifetime_value(store: store, currency: currency).money.fractional).to eq(order_count * order_value * 100)
       end
     end
 
     describe "#order_count" do
       it "returns the count of completed orders for the user" do
-        expect(subject.order_count(store)).to eq order_count
+        expect(user.order_count(store)).to eq order_count
       end
     end
 
     describe "#average_order_value" do
       context "with orders" do
         it "returns the average completed order price for the user" do
-          expect(subject.average_order_value(store: store, currency: currency)).to eq order_value
+          expect(user.average_order_value(store: store, currency: currency)).to eq order_value
         end
       end
 
@@ -116,7 +119,7 @@ describe Aypex::Config.user_class do
         let(:orders) {}
 
         it "returns 0.00" do
-          expect(subject.average_order_value(store: store, currency: currency)).to eq BigDecimal("0.00")
+          expect(user.average_order_value(store: store, currency: currency)).to eq BigDecimal("0.00")
         end
       end
     end
@@ -124,8 +127,8 @@ describe Aypex::Config.user_class do
     describe "#display_average_order_value" do
       it "returns a Aypex::Money version of average_order_value" do
         value = BigDecimal("500.05")
-        allow(subject).to receive(:average_order_value).and_return(value)
-        expect(subject.display_average_order_value(store: store, currency: currency).money.fractional).to eq(value * 100)
+        allow(user).to receive(:average_order_value).and_return(value)
+        expect(user.display_average_order_value(store: store, currency: currency).money.fractional).to eq(value * 100)
       end
     end
 
@@ -136,12 +139,12 @@ describe Aypex::Config.user_class do
         let(:eur_order_count) { 2 }
 
         before do
-          create_list(:order, eur_order_count, user: subject, store: store, total: eur_order_value, completed_at: Date.today, currency: eur_currency)
+          create_list(:order, eur_order_count, user: user, store: store, total: eur_order_value, completed_at: Date.today, currency: eur_currency)
         end
 
         context "lifetime_value" do
           it "returns a list of store lifetime values" do
-            expect(subject.report_values_for(:lifetime_value, store)).to eq([Aypex::Money.new((order_count * order_value), currency: currency),
+            expect(user.report_values_for(:lifetime_value, store)).to eq([Aypex::Money.new((order_count * order_value), currency: currency),
               Aypex::Money.new((eur_order_count * eur_order_value), currency: eur_currency)])
           end
         end
@@ -149,7 +152,7 @@ describe Aypex::Config.user_class do
         context "average_order_value" do
           context "with orders" do
             it "returns a list of average completed order prices for the user" do
-              expect(subject.report_values_for(:average_order_value, store)).to eq([Aypex::Money.new(order_value, currency: currency),
+              expect(user.report_values_for(:average_order_value, store)).to eq([Aypex::Money.new(order_value, currency: currency),
                 Aypex::Money.new(eur_order_value, currency: eur_currency)])
             end
           end
@@ -270,10 +273,12 @@ describe Aypex::Config.user_class do
   end
 
   context "address book" do
+    let(:store) { create(:store) }
     let(:address) { create(:address) }
     let(:address2) { create(:address) }
 
     before do
+      subject.store = store
       address.user = subject
       address.save
       address2.user = subject

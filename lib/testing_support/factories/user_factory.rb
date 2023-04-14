@@ -29,5 +29,15 @@ FactoryBot.define do
         user.save
       end
     end
+
+    # Users must belong to a store.
+    before(:create) do |user|
+      if user.store.nil?
+        default_store = Aypex::Store.default.persisted? ? Aypex::Store.default : nil
+        store = default_store || create(:store)
+
+        user.store = store
+      end
+    end
   end
 end

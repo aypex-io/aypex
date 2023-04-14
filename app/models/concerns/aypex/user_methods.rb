@@ -22,10 +22,13 @@ module Aypex
       has_many :orders, foreign_key: :user_id, class_name: "Aypex::Order"
       has_many :store_credits, foreign_key: :user_id, class_name: "Aypex::StoreCredit"
 
+      belongs_to :store, class_name: "Aypex::Store", optional: false
       belongs_to :ship_address, class_name: "Aypex::Address", optional: true
       belongs_to :bill_address, class_name: "Aypex::Address", optional: true
 
       has_many :wishlists, class_name: "Aypex::Wishlist", foreign_key: :user_id
+
+      validates :email, uniqueness: {scope: :store}
 
       self.whitelisted_ransackable_associations = %w[bill_address ship_address addresses]
       self.whitelisted_ransackable_attributes = %w[id email]

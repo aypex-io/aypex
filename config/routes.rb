@@ -16,25 +16,15 @@ Rails.application.routes.draw do
         :rails_service_blob_proxy,
         model.signed_id,
         model.filename,
-        options.merge(
-          host: Aypex::Config.cdn_host || Rails.application.routes.default_url_options[:host],
-          port: Rails.application.routes.default_url_options[:port]
-        )
+        options
       )
     else
-      signed_blob_id = model.blob.signed_id
-      variation_key = model.variation.key
-      filename = model.blob.filename
-
       route_for(
         :rails_blob_representation_proxy,
-        signed_blob_id,
-        variation_key,
-        filename,
-        options.merge(
-          host: Aypex::Config.cdn_host || Rails.application.routes.default_url_options[:host],
-          port: Rails.application.routes.default_url_options[:port]
-        )
+        model.blob.signed_id,
+        model.variation.key,
+        model.blob.filename,
+        options
       )
     end
   end

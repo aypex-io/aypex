@@ -3,7 +3,7 @@ require "spec_helper"
 module Aypex
   describe Account::Create do
     subject { described_class }
-
+    let(:store) { create(:store) }
     let(:result) { subject.call(user_params: user_params) }
     let(:value) { result.value }
 
@@ -13,7 +13,8 @@ module Aypex
           {
             email: "new_email@email.com",
             password: "password123",
-            password_confirmation: "password123"
+            password_confirmation: "password123",
+            store_id: store.id
           }
         end
 
