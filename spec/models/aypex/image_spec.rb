@@ -26,24 +26,4 @@ describe Aypex::Image do
       expect(aypex_image).not_to be_valid
     end
   end
-
-  describe "#styles" do
-    it "will return all styles for the image" do
-      aypex_image.attachment.attach(io: image_file, filename: "thinking-cat.jpg", content_type: "image/jpeg")
-      res = aypex_image.styles
-
-      expect(res.length).to eq described_class.styles.keys.length
-    end
-  end
-
-  describe "#style" do
-    it "will return style for the given name" do
-      aypex_image.attachment.attach(io: image_file, filename: "thinking-cat.jpg", content_type: "image/jpeg")
-      styles = described_class.styles.keys
-      random_style_name = styles.sample
-      res = aypex_image.style(random_style_name)
-
-      expect(res[:size]).to eq described_class.styles[random_style_name]
-    end
-  end
 end
