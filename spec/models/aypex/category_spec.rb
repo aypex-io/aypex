@@ -121,7 +121,7 @@ describe Aypex::Category do
     let!(:parent) { create(:category, base_category: base_category) }
     let(:category) { build(:category, parent: parent, base_category: nil) }
 
-    it { expect(category.valid?).to eq(true) }
+    it { expect(category.valid?).to be(true) }
     it { expect { category.save }.to change(category, :base_category).to(base_category) }
   end
 
