@@ -141,8 +141,8 @@ module Aypex
     @@base_category_attributes = [:name]
 
     @@category_attributes = [
-      :name, :parent_id, :position, :icon, :description, :permalink, :hide_from_nav,
-      :base_category_id, :meta_description, :meta_keywords, :meta_title, :child_index
+      :name, :parent_id, :position, :description, :permalink, :hide_from_nav,
+      :base_category_id, :meta_description, :meta_keywords, :meta_title, :child_index, {image_attributes: {}}
     ]
 
     # TODO: Should probably use something like Aypex::Config.user_class.attributes

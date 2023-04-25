@@ -3,7 +3,7 @@ FactoryBot.define do
     sequence(:name) { |n| "category_#{n}" }
 
     association :base_category, strategy: :create
-    association :icon, factory: :category_image
+    association :image, strategy: :create
     parent_id { base_category.root.id }
   end
 end

@@ -1,55 +1,44 @@
 module Aypex
   class Image < Asset
-    include Configuration::ActiveStorage
     include Rails.application.routes.url_helpers
-    include ::Aypex::ImageMethods
 
-    # In Rails 5.x class constants are being undefined/redefined during the code reloading process
-    # in a rails development environment, after which the actual ruby objects stored in those class constants
-    # are no longer equal (subclass == self) what causes error ActiveRecord::SubclassNotFound
-    # Invalid single-table inheritance type: Aypex::Image is not a subclass of Aypex::Image.
-    # The line below prevents the error.
-    self.inheritance_column = nil
+    if Aypex::Config.public_storage_service_name
+      has_one_attached :attachment, service: Aypex::Config.public_storage_service_name
+    else
+      has_one_attached :attachment
+    end
 
-    def styles
-      self.class.styles.map do |_, size|
-        width, height = size.chop.split("x").map(&:to_i)
+    validates :attachment, attached: true, content_type: /\Aimage\/.*\z/
 
-        {
-          url: generate_url(size: size),
-          size: size,
-          width: width,
-          height: height
-        }
+    default_scope { includes(attachment_attachment: :blob) }
+
+    def generate_url(size:, gravity: "centre", quality: 80, background: [0, 0, 0])
+      return if size.blank?
+
+      size = size.gsub(/\s+/, "")
+
+      return unless /(\d+)x(\d+)/.match?(size)
+
+      width, height = size.split("x").map(&:to_i)
+      gravity = translate_gravity(gravity)
+
+      cdn_image_url(attachment.variant(resize_and_pad: [width, height, {gravity: gravity}], saver: {quality: quality}), only_path: true)
+    end
+
+    def original_url
+      cdn_image_url(attachment)
+    end
+
+    private
+
+    def translate_gravity(gravity)
+      variant_processor = Rails.application.config.active_storage.variant_processor
+
+      if gravity.downcase == "centre" && [:mini_magick, nil].include?(variant_processor)
+        "center"
+      else
+        gravity
       end
-    end
-
-    def style(name)
-      size = self.class.styles[name]
-      return unless size
-
-      width, height = size.chop.split("x").map(&:to_i)
-
-      {
-        url: generate_url(size: size),
-        size: size,
-        width: width,
-        height: height
-      }
-    end
-
-    def style_dimensions(name)
-      size = self.class.styles[name]
-      width, height = size.chop.split("x").map(&:to_i)
-
-      {
-        width: width,
-        height: height
-      }
-    end
-
-    def plp_url
-      generate_url(size: self.class.styles[:plp_and_carousel])
     end
   end
 end

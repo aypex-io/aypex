@@ -18,7 +18,7 @@ module Aypex
     def images
       @product.images.map do |image|
         {
-          url_product: rails_representation_url(image.url(:product), only_path: true)
+          url_product: image.generate_url(size: "240x240")
         }
       end
     end

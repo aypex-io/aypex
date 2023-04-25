@@ -194,7 +194,7 @@ describe Aypex::MenuItem do
   end
 
   describe "touch menu and store" do
-    let(:menu_item) { build(:menu_item, menu: menu, icon: nil) }
+    let(:menu_item) { build(:menu_item, menu: menu, image: nil) }
 
     it "touches menu" do
       expect(menu).to receive(:touch)

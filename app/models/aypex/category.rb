@@ -29,7 +29,7 @@ module Aypex
     validates :base_category, presence: true
     validates :permalink, uniqueness: {case_sensitive: false, scope: [:parent_id, :base_category_id]}
     validates :hide_from_nav, inclusion: {in: [true, false]}
-    validates_associated :icon
+
     validate :check_for_root, on: :create
     validate :parent_belongs_to_same_base_category
     with_options length: {maximum: 255}, allow_blank: true do
@@ -43,7 +43,8 @@ module Aypex
     after_update :sync_base_category_name
     after_touch :touch_ancestors_and_base_category
 
-    has_one :icon, as: :viewable, dependent: :destroy, class_name: "Aypex::CategoryImage"
+    has_one :image, as: :viewable, dependent: :destroy, class_name: "Aypex::Image"
+    accepts_nested_attributes_for :image
 
     scope :for_store, ->(store) { joins(:base_category).where(aypex_base_categories: {store_id: store.id}) }
 
