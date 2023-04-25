@@ -3,6 +3,6 @@ FactoryBot.define do
     viewable_type {}
     viewable_id {}
     position { 1 }
-    alt {"Image Alt Text!"}
+    alt { "Image Alt Text!" }
   end
 end
