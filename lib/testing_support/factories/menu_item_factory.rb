@@ -5,6 +5,6 @@ FactoryBot.define do
     linked_resource_type { "Aypex::Linkable::Uri" }
 
     menu
-    icon
+    image
   end
 end

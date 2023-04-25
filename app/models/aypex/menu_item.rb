@@ -21,8 +21,8 @@ module Aypex
     validates :item_type, inclusion: {in: ITEM_TYPE}
     validates :linked_resource_type, inclusion: {in: LINKED_RESOURCE_TYPE}
 
-    has_one :icon, as: :viewable, dependent: :destroy, class_name: "Aypex::Icon"
-    accepts_nested_attributes_for :icon, reject_if: :all_blank
+    has_one :image, as: :viewable, dependent: :destroy, class_name: "Aypex::Image"
+    accepts_nested_attributes_for :image, reject_if: :all_blank
 
     def container?
       item_type == "Container"
