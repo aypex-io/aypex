@@ -181,7 +181,7 @@ describe Aypex::BaseHelper do
     let(:current_currency) { "USD" }
     let(:image) { create(:image, position: 1) }
     let(:product) do
-      create(:product, stores: [current_store]).tap { |product| product.master.images << image }
+      create(:product, stores: [current_store]).tap { |product| product.images << image }
     end
 
     it "renders open graph meta data tags for PDP" do
@@ -292,72 +292,6 @@ describe Aypex::BaseHelper do
         it "returns the price adding the VAT" do
           expect(display_price(product)).to eq("$23.32")
         end
-      end
-    end
-  end
-
-  describe "#default_image_for_product_or_variant" do
-    subject(:default_image) { default_image_for_product_or_variant(product_or_variant) }
-
-    let(:product) { build(:product, stores: [current_store]) }
-    let(:variant) { build(:variant, product: product) }
-
-    context "when Product passed" do
-      let(:product_or_variant) { product }
-
-      it { is_expected.to be_nil }
-
-      context "with master and variants" do
-        context "master and variants with images" do
-          let!(:master_image_1) { create(:image, viewable: product.master) }
-          let!(:master_image_2) { create(:image, viewable: product.master) }
-          let!(:variant_image_1) { create(:image, viewable: variant) }
-          let!(:variant_image_2) { create(:image, viewable: variant) }
-
-          it { is_expected.to eq(master_image_1) }
-        end
-
-        context "master without images" do
-          let!(:variant_image_1) { create(:image, viewable: variant) }
-          let!(:variant_image_2) { create(:image, viewable: variant) }
-
-          it { is_expected.to eq(variant_image_1) }
-        end
-
-        context "variants without images" do
-          let!(:master_image_1) { create(:image, viewable: product.master) }
-          let!(:master_image_2) { create(:image, viewable: product.master) }
-
-          it { is_expected.to eq(master_image_1) }
-        end
-      end
-
-      context "only with master" do
-        let!(:image_1) { create(:image, viewable: product.master) }
-        let!(:image_2) { create(:image, viewable: product.master) }
-
-        it { is_expected.to eq(image_1) }
-      end
-    end
-
-    context "when Variant passed" do
-      let(:product_or_variant) { variant }
-
-      it { is_expected.to eq(nil) }
-
-      context "and Variant has images" do
-        let!(:image_1) { create(:image, viewable: variant) }
-        let!(:image_2) { create(:image, viewable: variant) }
-
-        it { is_expected.to eq(image_1) }
-      end
-
-      context "and another Variant of the Product has images" do
-        let(:variant_2) { build(:variant, product: product) }
-        let!(:image_1) { create(:image, viewable: variant_2) }
-        let!(:image_2) { create(:image, viewable: variant_2) }
-
-        it { is_expected.to eq(image_1) }
       end
     end
   end

@@ -86,8 +86,8 @@ module Aypex
     has_many :line_items, through: :variants_including_master
     has_many :orders, through: :line_items
 
-    has_many :variant_images, -> { order(:position) }, source: :images, through: :variants_including_master
-    has_many :variant_images_without_master, -> { order(:position) }, source: :images, through: :variants
+    has_many :images, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: "Aypex::Image"
+    accepts_nested_attributes_for :images
 
     has_many :store_products, class_name: "Aypex::StoreProduct"
     has_many :stores, through: :store_products, class_name: "Aypex::Store"
@@ -142,10 +142,7 @@ module Aypex
       delegate method_name, :"#{method_name}=", to: :find_or_build_master
     end
 
-    delegate :display_amount, :display_price, :has_default_price?,
-      :display_compare_at_price, :images, to: :find_or_build_master
-
-    alias_method :master_images, :images
+    delegate :display_amount, :display_price, :has_default_price?, :display_compare_at_price, to: :find_or_build_master
 
     state_machine :status, initial: :draft do
       event :activate do

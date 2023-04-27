@@ -34,6 +34,7 @@ module Aypex
         new_product.updated_at = nil
         new_product.product_properties = reset_properties
         new_product.master = duplicate_master
+        new_product.images = product.images.map { |image| duplicate_image image } if @include_images
         new_product.variants = product.variants.map { |variant| duplicate_variant variant }
       end
     end
@@ -43,7 +44,6 @@ module Aypex
       master.dup.tap do |new_master|
         new_master.sku = sku_generator(master.sku)
         new_master.deleted_at = nil
-        new_master.images = master.images.map { |image| duplicate_image image } if @include_images
         new_master.price = master.price
         new_master.currency = master.currency
       end
