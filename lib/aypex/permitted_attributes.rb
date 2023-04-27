@@ -47,6 +47,13 @@ module Aypex
        state: [:name, :abbr]}
     ]
 
+    @@base_category_attributes = [:name]
+
+    @@category_attributes = [
+      :name, :parent_id, :position, :description, :permalink, :hide_from_nav,
+      :base_category_id, :meta_description, :meta_keywords, :meta_title, :child_index, {image_attributes: {}}
+    ]
+
     @@checkout_attributes = [
       :coupon_code, :email, :shipping_method_id, :special_instructions, :use_billing,
       :use_shipping, :user_id, :bill_address_id, :ship_address_id
@@ -69,7 +76,7 @@ module Aypex
 
     @@digital_link_attributes = [:access_counter]
 
-    @@image_attributes = [:alt, :attachment, :position, :viewable_type, :viewable_id]
+    @@image_attributes = [:alt, :attachment, :position, :viewable_type, :viewable_id, {public_metadata: {}, private_metadata: {}}]
 
     @@inventory_unit_attributes = [:shipment, :shipment_id, :variant_id]
 
@@ -94,7 +101,11 @@ module Aypex
       :option_values_hash, :weight, :height, :width, :depth,
       :shipping_category_id, :tax_category_id,
       :cost_currency, :cost_price, :compare_at_price,
-      {option_type_ids: [], category_ids: []}
+      {
+        option_type_ids: [],
+        category_ids: [],
+        image_attributes: []
+      }
     ]
 
     @@property_attributes = [:name, :presentation]
@@ -137,13 +148,6 @@ module Aypex
       {mailer_logo_attributes: {}, favicon_image_attributes: {}, logo_attributes: {}}]
 
     @@store_credit_attributes = %i[amount currency category_id memo]
-
-    @@base_category_attributes = [:name]
-
-    @@category_attributes = [
-      :name, :parent_id, :position, :description, :permalink, :hide_from_nav,
-      :base_category_id, :meta_description, :meta_keywords, :meta_title, :child_index, {image_attributes: {}}
-    ]
 
     # TODO: Should probably use something like Aypex::Config.user_class.attributes
     @@user_attributes = [:email, :bill_address_id, :ship_address_id, :password, :first_name, :last_name,

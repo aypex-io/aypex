@@ -40,8 +40,6 @@ module Aypex
     has_many :option_value_variants, class_name: "Aypex::OptionValueVariant"
     has_many :option_values, through: :option_value_variants, dependent: :destroy, class_name: "Aypex::OptionValue"
 
-    has_many :images, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: "Aypex::Image"
-
     has_many :prices,
       class_name: "Aypex::Price",
       dependent: :destroy,

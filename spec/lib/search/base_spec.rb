@@ -24,14 +24,14 @@ describe Aypex::Search::Base do
     let(:params) { {include_images: true, keyword: product1.name, category: category} }
 
     before do
-      product1.master.images << create(:image, position: 2)
-      product1.master.images << create(:image, position: 1)
+      product1.images << create(:image, position: 2)
+      product1.images << create(:image, position: 1)
       product1.reload
     end
 
     it "returns images in correct order" do
       expect(subject.first).to eq product1
-      expect(subject.first.images).to eq product1.master.images
+      expect(subject.first.images).to eq product1.images
     end
   end
 

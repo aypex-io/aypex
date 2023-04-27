@@ -10,8 +10,8 @@ module Aypex
     let(:file) { File.open(File.expand_path("../../fixtures/thinking-cat.jpg", __dir__)) }
     let(:params) do
       {
-        viewable_id: product.master.id,
-        viewable_type: "Aypex::Variant",
+        viewable_id: product.id,
+        viewable_type: "Aypex::Product",
         alt: "position 1",
         position: 1
       }

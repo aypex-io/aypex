@@ -54,12 +54,10 @@ module Aypex
       def add_eagerload_scopes(scope)
         scope.includes(
           :tax_category,
-          variants: [
-            {images: {attachment_attachment: :blob}}
-          ],
+          images: {attachment_attachment: :blob},
+          variants: [],
           master: [
-            :prices,
-            {images: {attachment_attachment: :blob}}
+            :prices
           ]
         )
       end

@@ -24,20 +24,10 @@ module Aypex
           is_product_available_in_currency: @is_product_available_in_currency,
           backorderable: backorderable?(variant),
           in_stock: in_stock?(variant),
-          images: images(variant),
           option_values: option_values(variant)
         }.merge(
           variant_attributes(variant)
         )
-      end
-    end
-
-    def images(variant)
-      variant.images.map do |image|
-        {
-          alt: image.alt,
-          url_product: rails_representation_url(image.url(:product), only_path: true)
-        }
       end
     end
 
