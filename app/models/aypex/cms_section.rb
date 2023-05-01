@@ -75,22 +75,6 @@ module Aypex
       ]
     end
 
-    def boundaries
-      ["Fit to Container", "Fit to Screen"]
-    end
-
-    def gutters_sizes
-      ["With Gutters", "Without Gutters"]
-    end
-
-    def gutters?
-      gutters == "With Gutters"
-    end
-
-    def full_screen?
-      fit == "Fit to Screen"
-    end
-
     # Builds the select array for each section
     def sections_for_select
       array = []

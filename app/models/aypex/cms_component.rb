@@ -10,6 +10,7 @@ module Aypex
     belongs_to :cms_section, class_name: "Aypex::CmsSection"
 
     validate :reset_link_attributes
+    validates :cms_section, :type, presence: true
 
     default_scope { order(position: :asc) }
 
