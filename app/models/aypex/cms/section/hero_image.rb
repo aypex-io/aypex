@@ -1,7 +1,8 @@
 module Aypex::Cms::Section
   class HeroImage < Aypex::CmsSection
-    def default_number_of_components
-      1
+    typed_store :settings, coder: ActiveRecord::TypedStore::IdentityCoder do |s|
+      s.string :fit, default: "Fit to Container", null: false
+      s.string :gutters, default: "Without Gutters", null: false
     end
   end
 end

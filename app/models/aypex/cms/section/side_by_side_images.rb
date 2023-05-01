@@ -1,7 +1,8 @@
 module Aypex::Cms::Section
   class SideBySideImages < Aypex::CmsSection
-    def default_number_of_components
-      2
+    typed_store(:settings, coder: ActiveRecord::TypedStore::IdentityCoder) do |s|
+      s.string :fit, default: "Fit to Container", null: false
+      s.string :gutters, default: "With Gutters", null: false
     end
   end
 end

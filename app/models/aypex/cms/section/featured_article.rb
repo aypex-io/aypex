@@ -1,22 +1,8 @@
 module Aypex::Cms::Section
   class FeaturedArticle < Aypex::CmsSection
-    after_initialize :default_values
-
-    store :content, accessors: [:title, :subtitle, :button_text, :rte_content], coder: JSON
-    store :settings, accessors: [:gutters], coder: JSON
-
-    LINKED_RESOURCE_TYPES = ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"]
-
-    def gutters?
-      gutters == "Gutters"
-    end
-
-    private
-
-    def default_values
-      self.gutters ||= "No Gutters"
-      self.fit ||= "Screen"
-      self.linked_resource_type ||= "Aypex::Category"
+    typed_store :settings, coder: ActiveRecord::TypedStore::IdentityCoder do |s|
+      s.string :fit, default: "Fit to Container", null: false
+      s.string :gutters, default: "Without Gutters", null: false
     end
   end
 end

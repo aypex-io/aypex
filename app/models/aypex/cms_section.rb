@@ -14,11 +14,6 @@ module Aypex
 
     LINKED_RESOURCE_TYPES = []
 
-    typed_store :settings, coder: ActiveRecord::TypedStore::IdentityCoder do |s|
-      s.string :fit, default: "Fit to Container", null: false
-      s.string :gutters, default: "Has Gutters", null: false
-    end
-
     # cms_section_types_data
     #
     # Because cms_sections and cms_components are so closely related
@@ -57,7 +52,7 @@ module Aypex
           name: "Image Gallery",
           type: "Aypex::Cms::Section::ImageGallery",
           component_defaults: {
-            count: 1,
+            count: 3,
             linked_resource_type: "Aypex::Category"
           }
         },
@@ -89,10 +84,10 @@ module Aypex
     end
 
     def gutters?
-      gutters == "Has Gutters"
+      gutters == "With Gutters"
     end
 
-    def fullscreen?
+    def full_screen?
       fit == "Fit to Screen"
     end
 
