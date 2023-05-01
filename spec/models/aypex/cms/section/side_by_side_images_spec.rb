@@ -1,4 +1,3 @@
-
 require "spec_helper"
 
 describe Aypex::Cms::Section::SideBySideImages do
