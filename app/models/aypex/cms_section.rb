@@ -109,7 +109,7 @@ module Aypex
 
     def ensure_components
       component_type = "Aypex::Cms::Component::#{type.demodulize}"
-      section_data = cms_section_types_data.select { |section| section[:type] == type }.first
+      section_data = cms_section_types_data.find { |section| section[:type] == type }
 
       raise StandardError unless section_data[:component_defaults][:count].is_a? Integer
 
