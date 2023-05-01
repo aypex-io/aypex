@@ -6,7 +6,7 @@ module Aypex
 
     acts_as_paranoid
 
-    TYPES = ["Aypex::Cms::Pages::StandardPage", "Aypex::Cms::Pages::FeaturePage", "Aypex::Cms::Pages::Homepage"]
+    TYPES = ["Aypex::Cms::Page::StandardPage", "Aypex::Cms::Page::FeaturePage", "Aypex::Cms::Page::Homepage"]
 
     belongs_to :store, touch: true
 
@@ -23,9 +23,9 @@ module Aypex
     scope :by_locale, ->(locale) { where(locale: locale) }
     scope :by_slug, ->(slug) { where(slug: slug) }
 
-    scope :home, -> { where(type: "Aypex::Cms::Pages::Homepage") }
-    scope :standard, -> { where(type: "Aypex::Cms::Pages::StandardPage") }
-    scope :feature, -> { where(type: "Aypex::Cms::Pages::FeaturePage") }
+    scope :home, -> { where(type: "Aypex::Cms::Page::Homepage") }
+    scope :standard, -> { where(type: "Aypex::Cms::Page::StandardPage") }
+    scope :feature, -> { where(type: "Aypex::Cms::Page::FeaturePage") }
 
     self.whitelisted_ransackable_attributes = %w[title type locale]
 
@@ -43,15 +43,15 @@ module Aypex
     end
 
     def homepage?
-      type == "Aypex::Cms::Pages::Homepage"
+      type == "Aypex::Cms::Page::Homepage"
     end
 
     def standard?
-      type == "Aypex::Cms::Pages::StandardPage"
+      type == "Aypex::Cms::Page::StandardPage"
     end
 
     def feature?
-      type == "Aypex::Cms::Pages::FeaturePage"
+      type == "Aypex::Cms::Page::FeaturePage"
     end
 
     def draft_mode?

@@ -79,7 +79,7 @@ module Aypex
       @order_sorter = "Aypex::BaseSorter"
       @products_sorter = "Aypex::Products::Sort"
 
-      # paginator
+      # pagination
       @collection_paginator = "Aypex::Shared::Paginate"
 
       # coupons

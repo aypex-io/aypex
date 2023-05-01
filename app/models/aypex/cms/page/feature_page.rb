@@ -1,4 +1,4 @@
-module Aypex::Cms::Pages
+module Aypex::Cms::Page
   class FeaturePage < Aypex::CmsPage
     def sections?
       true

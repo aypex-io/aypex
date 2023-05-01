@@ -20,7 +20,7 @@ describe Aypex::CmsPage do
     let!(:homepage) { create(:cms_homepage, store: store_a, locale: "en") }
 
     it "valid" do
-      expect(described_class.new(title: "Got Name", store: store_a, locale: "en", type: "Aypex::Cms::Pages::Homepage")).not_to be_valid
+      expect(described_class.new(title: "Got Name", store: store_a, locale: "en", type: "Aypex::Cms::Page::Homepage")).not_to be_valid
     end
   end
 
@@ -29,12 +29,12 @@ describe Aypex::CmsPage do
       let!(:page) { create(:cms_standard_page, store: store_a, slug: "got-name", locale: "en") }
 
       it "valid" do
-        expect(described_class.new(title: "Another Name", store: store_a, locale: "en", type: "Aypex::Cms::Pages::StandardPage")).to be_valid
+        expect(described_class.new(title: "Another Name", store: store_a, locale: "en", type: "Aypex::Cms::Page::StandardPage")).to be_valid
       end
 
       it "omits previously deleted page" do
         expect { page.destroy }.to change(page, :deleted_at).from(nil).to(Time)
-        expect(described_class.new(title: "Got Name", store: store_a, slug: "got-name", locale: "en", type: "Aypex::Cms::Pages::StandardPage")).to be_valid
+        expect(described_class.new(title: "Got Name", store: store_a, slug: "got-name", locale: "en", type: "Aypex::Cms::Page::StandardPage")).to be_valid
       end
     end
 
@@ -42,16 +42,16 @@ describe Aypex::CmsPage do
       let!(:page) { create(:cms_standard_page, store: store_a, slug: "got-name", locale: "en") }
 
       it "invalid" do
-        expect(described_class.new(title: "Got Name", store: store_a, slug: "got-name", locale: "en", type: "Aypex::Cms::Pages::StandardPage")).not_to be_valid
+        expect(described_class.new(title: "Got Name", store: store_a, slug: "got-name", locale: "en", type: "Aypex::Cms::Page::StandardPage")).not_to be_valid
       end
     end
   end
 
-  describe "Aypex::Cms::Pages::Homepage" do
+  describe "Aypex::Cms::Page::Homepage" do
     let(:homepage) { create(:cms_homepage, store: store_a, locale: "en") }
 
-    it "has a type of Aypex::Cms::Pages::Homepage" do
-      expect(homepage.type).to eq("Aypex::Cms::Pages::Homepage")
+    it "has a type of Aypex::Cms::Page::Homepage" do
+      expect(homepage.type).to eq("Aypex::Cms::Page::Homepage")
     end
 
     it "has a slug with nil value" do
@@ -75,11 +75,11 @@ describe Aypex::CmsPage do
     end
   end
 
-  describe "Aypex::Cms::Pages::FeaturePage" do
+  describe "Aypex::Cms::Page::FeaturePage" do
     let(:feature_page) { create(:cms_feature_page, title: "This New Product", store: store_a) }
 
-    it "has a type of Aypex::Cms::Pages::FeaturePage" do
-      expect(feature_page.type).to eq("Aypex::Cms::Pages::FeaturePage")
+    it "has a type of Aypex::Cms::Page::FeaturePage" do
+      expect(feature_page.type).to eq("Aypex::Cms::Page::FeaturePage")
     end
 
     it "has a slug that is the title parameterized" do
@@ -103,11 +103,11 @@ describe Aypex::CmsPage do
     end
   end
 
-  describe "Aypex::Cms::Pages::StandardPage" do
+  describe "Aypex::Cms::Page::StandardPage" do
     let(:standard_page) { create(:cms_standard_page, title: "About Us", store: store_a) }
 
-    it "has a type of Aypex::Cms::Pages::FeaturePage" do
-      expect(standard_page.type).to eq("Aypex::Cms::Pages::StandardPage")
+    it "has a type of Aypex::Cms::Page::FeaturePage" do
+      expect(standard_page.type).to eq("Aypex::Cms::Page::StandardPage")
     end
 
     it "has a slug that is the title parameterized" do

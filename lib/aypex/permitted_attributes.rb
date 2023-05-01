@@ -63,9 +63,17 @@ module Aypex
       :position, :category_id, :product_id
     ]
 
+    @@cms_component_attributes = [:settings, :destination]
+
     @@cms_page_attributes = [:title, :meta_title, :content, :meta_description, :visible, :slug, :locale]
 
-    @@cms_section_attributes = [:name, :cms_page_id, :fit, :destination, {content: {}, settings: {}}]
+    @@cms_section_attributes = [:name, :cms_page_id,
+      {
+        settings: {},
+        cms_component_attributes: [{
+          image_attributes: []
+        }]
+      }]
 
     @@customer_return_attributes = [:stock_location_id, {
       return_items_attributes: [:id, :inventory_unit_id, :return_authorization_id, :returned, :pre_tax_amount,

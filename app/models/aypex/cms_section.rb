@@ -1,68 +1,126 @@
 module Aypex
-  class CmsSection < Base
-    include DisplayLink
-
+  class CmsSection < Aypex::Base
     acts_as_list scope: :cms_page
     belongs_to :cms_page, touch: true
 
-    validate :reset_link_attributes
-
-    has_one :image_one, class_name: "Aypex::CmsSectionImageOne", dependent: :destroy, as: :viewable
-    accepts_nested_attributes_for :image_one, reject_if: :all_blank
-
-    has_one :image_two, class_name: "Aypex::CmsSectionImageTwo", dependent: :destroy, as: :viewable
-    accepts_nested_attributes_for :image_two, reject_if: :all_blank
-
-    has_one :image_three, class_name: "Aypex::CmsSectionImageThree", dependent: :destroy, as: :viewable
-    accepts_nested_attributes_for :image_three, reject_if: :all_blank
-
-    Aypex::CmsSectionImage::IMAGE_COUNT.each do |count|
-      Aypex::CmsSectionImage::IMAGE_SIZE.each do |size|
-        define_method("img_#{count}_#{size}") do |dimensions = nil|
-          image = send("image_#{count}")&.attachment
-          return if !image&.attached? || dimensions.nil?
-
-          image.variant(resize_to_limit: dimensions.split("x").map(&:to_i))
-        end
-      end
-    end
+    has_many :cms_components, class_name: "Aypex::CmsComponent", foreign_key: "cms_section_id"
+    accepts_nested_attributes_for :cms_components
 
     default_scope { order(position: :asc) }
 
     validates :name, :cms_page, :type, presence: true
 
-    LINKED_RESOURCE_TYPE = []
+    after_create :ensure_components
 
-    TYPES = ["Aypex::Cms::Sections::HeroImage",
-      "Aypex::Cms::Sections::FeaturedArticle",
-      "Aypex::Cms::Sections::ProductCarousel",
-      "Aypex::Cms::Sections::ImageGallery",
-      "Aypex::Cms::Sections::SideBySideImages",
-      "Aypex::Cms::Sections::RichTextContent"]
+    LINKED_RESOURCE_TYPES = []
 
-    def boundaries
-      ["Container", "Screen"]
+    # cms_section_types_data
+    #
+    # Because cms_sections and cms_components are so closely related
+    # we set basic data for the cms_sections and the corresponding cms_components
+    # allowing us to build the default cms_components on create if needed.
+    # if you do not require a component on creating your section, set count to 0
+    #
+    # Append new section types to this method.
+    def cms_section_types_data
+      [
+        {
+          name: "Hero Image",
+          type: "Aypex::Cms::Section::HeroImage",
+          component_defaults: {
+            count: 1,
+            linked_resource_type: "Aypex::Category"
+          }
+        },
+        {
+          name: "Featured Article",
+          type: "Aypex::Cms::Section::FeaturedArticle",
+          component_defaults: {
+            count: 1,
+            linked_resource_type: "Aypex::Category"
+          }
+        },
+        {
+          name: "Product Carousel",
+          type: "Aypex::Cms::Section::ProductCarousel",
+          component_defaults: {
+            count: 1,
+            linked_resource_type: "Aypex::Category"
+          }
+        },
+        {
+          name: "Image Gallery",
+          type: "Aypex::Cms::Section::ImageGallery",
+          component_defaults: {
+            count: 3,
+            linked_resource_type: "Aypex::Category"
+          }
+        },
+        {
+          name: "Side By Side Images",
+          type: "Aypex::Cms::Section::SideBySideImages",
+          component_defaults: {
+            count: 2,
+            linked_resource_type: "Aypex::Category"
+          }
+        },
+        {
+          name: "Rich Text Content",
+          type: "Aypex::Cms::Section::RichTextContent",
+          component_defaults: {
+            count: 1,
+            linked_resource_type: "Aypex::Category"
+          }
+        }
+      ]
     end
 
-    def css_classes
-      ["row", "section-row"].compact
+    def boundaries
+      ["Fit to Container", "Fit to Screen"]
     end
 
     def gutters_sizes
-      ["Gutters", "No Gutters"]
+      ["With Gutters", "Without Gutters"]
     end
 
-    def fullscreen?
-      fit == "Screen"
+    def gutters?
+      gutters == "With Gutters"
     end
 
-    private
+    def full_screen?
+      fit == "Fit to Screen"
+    end
 
-    def reset_link_attributes
-      if linked_resource_type_changed?
-        return if linked_resource_id_was.nil?
+    # Builds the select array for each section
+    def sections_for_select
+      array = []
 
-        self.linked_resource_id = nil
+      cms_section_types_data.each do |data|
+        array << [data[:name], data[:type]]
+      end
+
+      array
+    end
+
+    def ensure_components
+      component_type = "Aypex::Cms::Component::#{type.demodulize}"
+      section_data = cms_section_types_data.find { |section| section[:type] == type }
+
+      raise StandardError unless section_data[:component_defaults][:count].is_a? Integer
+
+      i = 0
+      loop do
+        break if section_data[:component_defaults][:count] <= 0
+
+        i += 1
+
+        CmsComponent.create!(
+          cms_section_id: id,
+          type: component_type,
+          linked_resource_type: section_data[:component_defaults][:linked_resource_type]
+        )
+
+        break if i == section_data[:component_defaults][:count]
       end
     end
   end
