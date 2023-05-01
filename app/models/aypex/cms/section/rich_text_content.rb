@@ -1,4 +1,4 @@
-module Aypex::Cms::Sections
+module Aypex::Cms::Section
   class RichTextContent < Aypex::CmsSection
     after_initialize :default_values
 

@@ -10,7 +10,7 @@ module Aypex
       let(:menu_b) { create(:menu, location: "footer") }
 
       it "allows creation of a new instance, update the store then save without triggering validation error" do
-        object = Aypex::CmsPage.new(title: "Got Name", locale: "de", type: "Aypex::Cms::Pages::StandardPage")
+        object = Aypex::CmsPage.new(title: "Got Name", locale: "de", type: "Aypex::Cms::Page::StandardPage")
         object.update(store: store)
 
         expect(object.save!).to be true

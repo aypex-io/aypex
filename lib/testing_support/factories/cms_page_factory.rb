@@ -6,15 +6,15 @@ FactoryBot.define do
     store
 
     factory :cms_homepage do
-      type { "Aypex::Cms::Pages::Homepage" }
+      type { "Aypex::Cms::Page::Homepage" }
     end
 
     factory :cms_standard_page do
-      type { "Aypex::Cms::Pages::StandardPage" }
+      type { "Aypex::Cms::Page::StandardPage" }
     end
 
     factory :cms_feature_page do
-      type { "Aypex::Cms::Pages::FeaturePage" }
+      type { "Aypex::Cms::Page::FeaturePage" }
     end
   end
 end

@@ -1,9 +1,9 @@
-module Aypex::Cms::Sections
+module Aypex::Cms::Section
   class ImageGallery < Aypex::CmsSection
     after_initialize :default_values
     validate :reset_multiple_link_attributes
 
-    LINKED_RESOURCE_TYPE = ["Aypex::Category", "Aypex::Product"].freeze
+    LINKED_RESOURCE_TYPES = ["Aypex::Category", "Aypex::Product"].freeze
 
     LAYOUT_OPTIONS = ["Default", "Reversed"].freeze
     LABEL_OPTIONS = ["Show", "Hide"].freeze

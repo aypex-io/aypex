@@ -1,4 +1,4 @@
-module Aypex::Cms::Pages
+module Aypex::Cms::Page
   class Homepage < Aypex::CmsPage
     before_create :empty_slug
     after_save :empty_slug

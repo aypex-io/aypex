@@ -134,9 +134,9 @@ module Aypex
     end
 
     def homepage(requested_locale)
-      cms_pages.by_locale(requested_locale).find_by(type: "Aypex::Cms::Pages::Homepage") ||
-        cms_pages.by_locale(default_locale).find_by(type: "Aypex::Cms::Pages::Homepage") ||
-        cms_pages.find_by(type: "Aypex::Cms::Pages::Homepage")
+      cms_pages.by_locale(requested_locale).find_by(type: "Aypex::Cms::Page::Homepage") ||
+        cms_pages.by_locale(default_locale).find_by(type: "Aypex::Cms::Page::Homepage") ||
+        cms_pages.find_by(type: "Aypex::Cms::Page::Homepage")
     end
 
     def seo_meta_description

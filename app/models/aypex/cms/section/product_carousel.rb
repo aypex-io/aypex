@@ -1,8 +1,8 @@
-module Aypex::Cms::Sections
+module Aypex::Cms::Section
   class ProductCarousel < Aypex::CmsSection
     after_initialize :default_values
 
-    LINKED_RESOURCE_TYPE = ["Aypex::Category"]
+    LINKED_RESOURCE_TYPES = ["Aypex::Category"]
 
     private
 

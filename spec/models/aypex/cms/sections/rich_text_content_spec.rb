@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Cms::Sections::RichTextContent do
+describe Aypex::Cms::Section::RichTextContent do
   let!(:store) { create(:store) }
   let!(:homepage) { create(:cms_homepage, store: store) }
 

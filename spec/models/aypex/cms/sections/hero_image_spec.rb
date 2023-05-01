@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Cms::Sections::HeroImage do
+describe Aypex::Cms::Section::HeroImage do
   let!(:store) { create(:store) }
   let!(:homepage) { create(:cms_homepage, store: store) }
 

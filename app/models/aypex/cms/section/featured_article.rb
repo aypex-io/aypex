@@ -1,11 +1,11 @@
-module Aypex::Cms::Sections
+module Aypex::Cms::Section
   class FeaturedArticle < Aypex::CmsSection
     after_initialize :default_values
 
     store :content, accessors: [:title, :subtitle, :button_text, :rte_content], coder: JSON
     store :settings, accessors: [:gutters], coder: JSON
 
-    LINKED_RESOURCE_TYPE = ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"]
+    LINKED_RESOURCE_TYPES = ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"]
 
     def gutters?
       gutters == "Gutters"

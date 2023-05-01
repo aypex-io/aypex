@@ -6,7 +6,7 @@ module Aypex
     acts_as_nested_set dependent: :destroy
 
     ITEM_TYPE = %w[Link Container]
-    LINKED_RESOURCE_TYPE = ["Aypex::Linkable::Uri", "Aypex::Linkable::Homepage", "Aypex::Product", "Aypex::Category", "Aypex::CmsPage"]
+    LINKED_RESOURCE_TYPES = ["Aypex::Linkable::Uri", "Aypex::Linkable::Homepage", "Aypex::Product", "Aypex::Category", "Aypex::CmsPage"]
 
     belongs_to :menu, touch: true
 
@@ -19,7 +19,7 @@ module Aypex
 
     validates :name, :menu, presence: true
     validates :item_type, inclusion: {in: ITEM_TYPE}
-    validates :linked_resource_type, inclusion: {in: LINKED_RESOURCE_TYPE}
+    validates :linked_resource_type, inclusion: {in: LINKED_RESOURCE_TYPES}
 
     has_one :image, as: :viewable, dependent: :destroy, class_name: "Aypex::Image"
     accepts_nested_attributes_for :image, reject_if: :all_blank

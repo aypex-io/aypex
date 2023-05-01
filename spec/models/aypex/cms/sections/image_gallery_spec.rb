@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Cms::Sections::ImageGallery do
+describe Aypex::Cms::Section::ImageGallery do
   let!(:store) { create(:store) }
   let!(:homepage) { create(:cms_homepage, store: store) }
 

@@ -198,7 +198,7 @@ module Aypex
         "#{current_store.formatted_url + localize}/#{Aypex::Config.storefront_products_path}/#{resource.slug}"
       elsif resource.instance_of?(Aypex::Category)
         "#{current_store.formatted_url + localize}/#{Aypex::Config.storefront_categories_path}/#{resource.permalink}"
-      elsif resource.instance_of?(Aypex::Cms::Pages::FeaturePage) || resource.instance_of?(Aypex::Cms::Pages::StandardPage)
+      elsif resource.instance_of?(Aypex::Cms::Page::FeaturePage) || resource.instance_of?(Aypex::Cms::Page::StandardPage)
         "#{current_store.formatted_url + localize}/#{Aypex::Config.storefront_pages_path}/#{resource.slug}"
       elsif localize.blank?
         current_store.formatted_url
