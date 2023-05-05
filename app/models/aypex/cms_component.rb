@@ -2,8 +2,6 @@ module Aypex
   class CmsComponent < Aypex::Base
     include DisplayLink
 
-    validate :component_count
-
     acts_as_list scope: :cms_section
 
     has_one :image, as: :viewable, dependent: :destroy, class_name: "Aypex::Image"
@@ -12,7 +10,7 @@ module Aypex
     belongs_to :cms_section, class_name: "Aypex::CmsSection"
 
     validates :cms_section, :type, presence: true
-    validate :reset_link_attributes
+    validate :reset_link_attributes, :component_count
 
     default_scope { order(position: :asc) }
 
@@ -25,8 +23,7 @@ module Aypex
 
       section_type = cms_section.type
       section_count = cms_section.cms_components.count
-      data = cms_section.types_data.find { |section| section[:type] == section_type }
-      max_number_of_components_allowed = data[:component_defaults][:count]
+      max_number_of_components_allowed = cms_section.component_defaults[:count]
 
       return if max_number_of_components_allowed.nil?
 

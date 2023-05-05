@@ -75,10 +75,16 @@ module Aypex
       ]
     end
 
+    def component_defaults
+      section_data = types_data.find { |section| section[:type] == type }
+      section_data[:component_defaults]
+    end
+
+    private
+
     def ensure_components
       component_type = "Aypex::Cms::Component::#{type.demodulize}"
-      section_data = types_data.find { |section| section[:type] == type }
-      number_of_components_allowed = section_data[:component_defaults][:count]
+      number_of_components_allowed = component_defaults[:count]
 
       return if number_of_components_allowed.nil?
 
@@ -86,14 +92,14 @@ module Aypex
 
       i = 0
       loop do
-        break if section_data[:component_defaults][:count] <= 0
+        break if number_of_components_allowed <= 0
 
         i += 1
 
         CmsComponent.create!(
           cms_section_id: id,
           type: component_type,
-          linked_resource_type: section_data[:component_defaults][:linked_resource_type]
+          linked_resource_type: component_defaults[:linked_resource_type]
         )
 
         break if i == number_of_components_allowed
