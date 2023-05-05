@@ -14,6 +14,8 @@ module Aypex
 
     default_scope { order(position: :asc) }
 
+    has_rich_text :body
+
     private
 
     def reset_link_attributes
