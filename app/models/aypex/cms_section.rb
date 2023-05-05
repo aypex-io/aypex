@@ -14,7 +14,7 @@ module Aypex
 
     LINKED_RESOURCE_TYPES = []
 
-    # cms_section_types_data
+    # types_data
     #
     # Because cms_sections and cms_components are so closely related
     # we set basic data for the cms_sections and the corresponding cms_components
@@ -22,7 +22,7 @@ module Aypex
     # if you do not require a component on creating your section, set count to 0
     #
     # Append new section types to this method.
-    def cms_section_types_data
+    def types_data
       [
         {
           name: "Hero Image",
@@ -75,20 +75,9 @@ module Aypex
       ]
     end
 
-    # Builds the select array for each section
-    def sections_for_select
-      array = []
-
-      cms_section_types_data.each do |data|
-        array << [data[:name], data[:type]]
-      end
-
-      array
-    end
-
     def ensure_components
       component_type = "Aypex::Cms::Component::#{type.demodulize}"
-      section_data = cms_section_types_data.find { |section| section[:type] == type }
+      section_data = types_data.find { |section| section[:type] == type }
 
       raise StandardError unless section_data[:component_defaults][:count].is_a? Integer
 
