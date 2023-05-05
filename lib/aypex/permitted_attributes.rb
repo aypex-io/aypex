@@ -63,7 +63,7 @@ module Aypex
       :position, :category_id, :product_id
     ]
 
-    @@cms_component_attributes = [:settings, :destination]
+    @@cms_component_attributes = [:destination]
 
     @@cms_page_attributes = [:title, :meta_title, :content, :meta_description, :visible, :slug, :locale]
 
