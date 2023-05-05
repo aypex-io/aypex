@@ -19,16 +19,10 @@ describe Aypex::Cms::Section::Hero do
       expect(section.is_full_screen).to be true
     end
 
-    it "creates cms_component with 'Aypex::Cms::Component::Hero'" do
+    it "creates no cms_component" do
       section = Aypex::CmsSection.find(target_section.id)
 
-      expect(section.cms_components.first.type).to match("Aypex::Cms::Component::Hero")
-    end
-
-    it "creates 1 cms_component" do
-      section = Aypex::CmsSection.find(target_section.id)
-
-      expect(section.cms_components.count).to eq 1
+      expect(section.cms_components.count).to eq 0
     end
   end
 end

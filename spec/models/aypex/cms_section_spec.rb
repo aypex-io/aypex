@@ -24,7 +24,7 @@ describe Aypex::CmsSection do
   end
 
   describe "#ensure_components" do
-    let(:section_b) { build(:cms_hero_section) }
+    let(:section_b) { build(:cms_side_by_side_images_section) }
 
     before {
       section_b.save
@@ -32,7 +32,7 @@ describe Aypex::CmsSection do
     }
 
     it "sets the component type" do
-      expect(section_b.cms_components.first.type).to match("Aypex::Cms::Component::Hero")
+      expect(section_b.cms_components.first.type).to match("Aypex::Cms::Component::SideBySideImages")
     end
 
     it "sets the cms_section_id" do
