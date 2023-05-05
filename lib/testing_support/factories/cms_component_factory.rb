@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :base_cms_component, class: Aypex::CmsComponent do
-    association :cms_section, factory: :cms_hero_image_section
+    association :cms_section, factory: :cms_hero_section
 
-    factory :cms_hero_image_component do
-      type { "Aypex::Cms::Component::HeroImage" }
+    factory :cms_hero_component do
+      type { "Aypex::Cms::Component::Hero" }
     end
 
     factory :cms_featured_article_component do

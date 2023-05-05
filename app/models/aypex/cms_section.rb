@@ -25,10 +25,10 @@ module Aypex
     def types_data
       [
         {
-          name: "Hero Image",
-          type: "Aypex::Cms::Section::HeroImage",
+          name: "Hero",
+          type: "Aypex::Cms::Section::Hero",
           component_defaults: {
-            count: 1,
+            count: nil,
             linked_resource_type: "Aypex::Category"
           }
         },
@@ -78,8 +78,11 @@ module Aypex
     def ensure_components
       component_type = "Aypex::Cms::Component::#{type.demodulize}"
       section_data = types_data.find { |section| section[:type] == type }
+      number_of_components_allowed = section_data[:component_defaults][:count]
 
-      raise StandardError unless section_data[:component_defaults][:count].is_a? Integer
+      return if number_of_components_allowed.nil?
+
+      raise StandardError unless number_of_components_allowed.is_a? Integer
 
       i = 0
       loop do
@@ -93,7 +96,7 @@ module Aypex
           linked_resource_type: section_data[:component_defaults][:linked_resource_type]
         )
 
-        break if i == section_data[:component_defaults][:count]
+        break if i == number_of_components_allowed
       end
     end
   end

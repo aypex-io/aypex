@@ -4,8 +4,8 @@ FactoryBot.define do
 
     association :cms_page, factory: :cms_feature_page
 
-    factory :cms_hero_image_section do
-      type { "Aypex::Cms::Section::HeroImage" }
+    factory :cms_hero_section do
+      type { "Aypex::Cms::Section::Hero" }
     end
 
     factory :cms_featured_article_section do
