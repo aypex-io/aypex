@@ -23,12 +23,6 @@ describe Aypex::CmsSection do
     end
   end
 
-  describe "#sections_for_select" do
-    it "returns a valid array of sections formatted for select" do
-      expect(section.sections_for_select).to contain_exactly(["Hero Image", "Aypex::Cms::Section::HeroImage"], ["Featured Article", "Aypex::Cms::Section::FeaturedArticle"], ["Product Carousel", "Aypex::Cms::Section::ProductCarousel"], ["Image Gallery", "Aypex::Cms::Section::ImageGallery"], ["Side By Side Images", "Aypex::Cms::Section::SideBySideImages"], ["Rich Text Content", "Aypex::Cms::Section::RichTextContent"])
-    end
-  end
-
   describe "#ensure_components" do
     let(:section_b) { build(:cms_hero_image_section) }
 

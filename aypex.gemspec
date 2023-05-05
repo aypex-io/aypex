@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency "activemerchant"
+  spec.add_dependency "active_text"
   spec.add_dependency "active_storage_validations"
   spec.add_dependency "activerecord-typedstore"
   spec.add_dependency "acts_as_list"
