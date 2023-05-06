@@ -10,11 +10,12 @@ module Aypex
     belongs_to :cms_section, class_name: "Aypex::CmsSection"
 
     validates :cms_section, :type, presence: true
-    validate :reset_link_attributes, :component_count
+    validate :reset_link_attributes
+    validate :component_count, on: :create
 
     default_scope { order(position: :asc) }
 
-    has_rich_text :body
+    has_rich_text :content
 
     private
 
