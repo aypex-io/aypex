@@ -5,7 +5,7 @@ describe Aypex::Cms::Section::ProductCarousel do
   let(:homepage) { create(:cms_homepage, store: store) }
 
   context "when a new Featured Article section is created" do
-    let(:target_section) { create(:cms_product_carousel_section, cms_page: homepage) }
+    let(:target_section) { create(:cms_section_product_carousel, cms_page: homepage) }
 
     it "sets .has_gutters to be false" do
       section = Aypex::CmsSection.find(target_section.id)

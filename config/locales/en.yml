@@ -425,6 +425,13 @@ en:
     cannot_be_destroyed: Order cannot be destroyed.
     cannot_empty: Cannot empty order.
     cannot_return_more_than_bought_quantity: Cannot return more than bought quantity.
+    cms_section:
+      featured_article_description: Featured article description
+      hero_description: A ImageHero Section can have a single static image, or add multiple images to make your ImageHero Section a slider.
+      mosaic_description: A ImageMosaic Section contains three
+      product_carousel_description: Product carousel description
+      rich_text_description: Rich text description
+      side_by_side_description: Side by side description
     cms_section_only_allows: The CMS Section of type %{section_type} allows a maximum of %{max_number_of_components_allowed} CMS Component(s), no new CMS Components can be added to this CMS Section.
     coupon_code_already_applied: Coupon code already applied
     coupon_code_applied: Coupon code applied
