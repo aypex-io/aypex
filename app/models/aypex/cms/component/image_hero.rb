@@ -1,5 +1,5 @@
 module Aypex::Cms::Component
-  class Hero < Aypex::CmsComponent
+  class ImageHero < Aypex::CmsComponent
     LINKED_RESOURCE_TYPES = ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"]
 
     typed_store :settings, coder: ActiveRecord::TypedStore::IdentityCoder do |s|

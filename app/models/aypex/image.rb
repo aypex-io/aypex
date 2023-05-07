@@ -17,7 +17,7 @@ module Aypex
     end
 
     def original_url
-      cdn_image_url(attachment)
+      cdn_image_url(attachment, only_path: true)
     end
   end
 end

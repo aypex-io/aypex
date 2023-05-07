@@ -4,28 +4,28 @@ FactoryBot.define do
 
     association :cms_page, factory: :cms_feature_page
 
-    factory :cms_hero_section do
-      type { "Aypex::Cms::Section::Hero" }
+    factory :cms_section_image_hero do
+      type { "Aypex::Cms::Section::ImageHero" }
     end
 
-    factory :cms_featured_article_section do
+    factory :cms_section_featured_article do
       type { "Aypex::Cms::Section::FeaturedArticle" }
     end
 
-    factory :cms_product_carousel_section do
+    factory :cms_section_product_carousel do
       type { "Aypex::Cms::Section::ProductCarousel" }
     end
 
-    factory :cms_image_gallery_section do
-      type { "Aypex::Cms::Section::ImageGallery" }
+    factory :cms_section_image_mosaic do
+      type { "Aypex::Cms::Section::ImageMosaic" }
     end
 
-    factory :cms_side_by_side_images_section do
-      type { "Aypex::Cms::Section::SideBySideImages" }
+    factory :cms_section_image_pair do
+      type { "Aypex::Cms::Section::ImagePair" }
     end
 
-    factory :cms_rich_text_content_section do
-      type { "Aypex::Cms::Section::RichTextContent" }
+    factory :cms_section_rich_text do
+      type { "Aypex::Cms::Section::RichText" }
     end
   end
 end

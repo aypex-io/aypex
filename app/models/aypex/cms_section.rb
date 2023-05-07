@@ -25,8 +25,9 @@ module Aypex
     def types_data
       [
         {
-          name: "Hero",
-          type: "Aypex::Cms::Section::Hero",
+          name: "ImageHero",
+          type: "Aypex::Cms::Section::ImageHero",
+          description: I18n.t("aypex.cms_section.hero_description"),
           component_defaults: {
             count: nil,
             linked_resource_type: "Aypex::Category"
@@ -35,6 +36,7 @@ module Aypex
         {
           name: "Featured Article",
           type: "Aypex::Cms::Section::FeaturedArticle",
+          description: I18n.t("aypex.cms_section.featured_article_description"),
           component_defaults: {
             count: 1,
             linked_resource_type: "Aypex::Category"
@@ -43,6 +45,7 @@ module Aypex
         {
           name: "Product Carousel",
           type: "Aypex::Cms::Section::ProductCarousel",
+          description: I18n.t("aypex.cms_section.product_carousel_description"),
           component_defaults: {
             count: 1,
             linked_resource_type: "Aypex::Category"
@@ -50,15 +53,17 @@ module Aypex
         },
         {
           name: "Image Gallery",
-          type: "Aypex::Cms::Section::ImageGallery",
+          type: "Aypex::Cms::Section::ImageMosaic",
+          description: I18n.t("aypex.cms_section.mosaic_description"),
           component_defaults: {
             count: 3,
             linked_resource_type: "Aypex::Category"
           }
         },
         {
-          name: "Side By Side Images",
-          type: "Aypex::Cms::Section::SideBySideImages",
+          name: "Side By Side",
+          type: "Aypex::Cms::Section::ImagePair",
+          description: I18n.t("aypex.cms_section.side_by_side_description"),
           component_defaults: {
             count: 2,
             linked_resource_type: "Aypex::Category"
@@ -66,7 +71,8 @@ module Aypex
         },
         {
           name: "Rich Text Content",
-          type: "Aypex::Cms::Section::RichTextContent",
+          type: "Aypex::Cms::Section::RichText",
+          description: I18n.t("aypex.cms_section.rich_text_description"),
           component_defaults: {
             count: 1,
             linked_resource_type: "Aypex::Category"

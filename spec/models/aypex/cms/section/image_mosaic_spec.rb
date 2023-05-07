@@ -1,11 +1,11 @@
 require "spec_helper"
 
-describe Aypex::Cms::Section::SideBySideImages do
+describe Aypex::Cms::Section::ImageMosaic do
   let(:store) { create(:store) }
   let(:homepage) { create(:cms_homepage, store: store) }
 
   context "when a new Featured Article section is created" do
-    let(:target_section) { create(:cms_side_by_side_images_section, cms_page: homepage) }
+    let(:target_section) { create(:cms_section_image_mosaic, cms_page: homepage) }
 
     it "sets .has_gutters to be false" do
       section = Aypex::CmsSection.find(target_section.id)
@@ -19,16 +19,16 @@ describe Aypex::Cms::Section::SideBySideImages do
       expect(section.is_full_screen).to be false
     end
 
-    it "creates cms_component with 'Aypex::Cms::Component::SideBySideImages'" do
+    it "creates cms_component with 'Aypex::Cms::Component::ImageMosaic'" do
       section = Aypex::CmsSection.find(target_section.id)
 
-      expect(section.cms_components.first.type).to match("Aypex::Cms::Component::SideBySideImages")
+      expect(section.cms_components.first.type).to match("Aypex::Cms::Component::ImageMosaic")
     end
 
-    it "creates 2 cms_components" do
+    it "creates 3 cms_components" do
       section = Aypex::CmsSection.find(target_section.id)
 
-      expect(section.cms_components.count).to eq 2
+      expect(section.cms_components.count).to eq 3
     end
   end
 end

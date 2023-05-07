@@ -1,11 +1,11 @@
 require "spec_helper"
 
-describe Aypex::Cms::Section::Hero do
+describe Aypex::Cms::Section::ImageHero do
   let(:store) { create(:store) }
   let(:homepage) { create(:cms_homepage, store: store) }
 
-  context "when a new Hero Image section is created" do
-    let(:target_section) { create(:cms_hero_section, cms_page: homepage) }
+  context "when a new ImageHero Image section is created" do
+    let(:target_section) { create(:cms_section_image_hero, cms_page: homepage) }
 
     it "sets .has_gutters to be false" do
       section = Aypex::CmsSection.find(target_section.id)
