@@ -22,38 +22,38 @@ end
 describe Aypex::Ability do
   let(:store) { create(:store) }
   let(:user) { build(:user) }
-  let(:ability) { Aypex::Ability.new(user) }
+  let(:ability) { described_class.new(user) }
   let(:token) { nil }
 
   after do
-    Aypex::Ability.abilities = Set.new
+    described_class.abilities = Set.new
   end
 
-  context "register_ability" do
+  describe ".register_ability" do
     it "adds the ability to the list of abilities" do
-      Aypex::Ability.register_ability(FooAbility)
-      expect(Aypex::Ability.new(user).abilities).not_to be_empty
+      described_class.register_ability(FooAbility)
+      expect(described_class.new(user).abilities).not_to be_empty
     end
 
     it "applies the registered abilities permissions" do
-      Aypex::Ability.register_ability(FooAbility)
-      expect(Aypex::Ability.new(user).can?(:update, create(:order, number: FooAbility::ORDER_NUMBER))).to be true
+      described_class.register_ability(FooAbility)
+      expect(described_class.new(user).can?(:update, create(:order, number: FooAbility::ORDER_NUMBER))).to be true
     end
   end
 
   describe "#abilities_to_register" do
     it "adds the ability to the list of abilities" do
-      allow_any_instance_of(Aypex::Ability).to receive(:abilities_to_register).and_return([FooAbility])
-      expect(Aypex::Ability.new(user).abilities).to include FooAbility
+      allow_any_instance_of(described_class).to receive(:abilities_to_register).and_return([FooAbility])
+      expect(described_class.new(user).abilities).to include FooAbility
     end
 
     it "applies the registered abilities permissions" do
-      allow_any_instance_of(Aypex::Ability).to receive(:abilities_to_register).and_return([FooAbility])
-      expect(Aypex::Ability.new(user).can?(:update, create(:order, number: FooAbility::ORDER_NUMBER))).to be true
+      allow_any_instance_of(described_class).to receive(:abilities_to_register).and_return([FooAbility])
+      expect(described_class.new(user).can?(:update, create(:order, number: FooAbility::ORDER_NUMBER))).to be true
     end
   end
 
-  context "for general resource" do
+  context "when general resource" do
     let(:resource) { Object.new }
 
     context "with admin user" do
@@ -72,14 +72,14 @@ describe Aypex::Ability do
     end
   end
 
-  context "for admin protected resources" do
+  context "when admin protected resources" do
     let(:resource) { Object.new }
     let(:resource_shipment) { Aypex::Shipment.new }
     let(:resource_product) { store.products.new }
     let(:resource_user) { create(:user) }
     let(:resource_order) { create(:order, user: resource_user) }
     let(:fakedispatch_user) { create(:user) }
-    let(:fakedispatch_ability) { Aypex::Ability.new(fakedispatch_user) }
+    let(:fakedispatch_ability) { described_class.new(fakedispatch_user) }
 
     context "with admin user" do
       context "admin user role" do
@@ -93,7 +93,7 @@ describe Aypex::Ability do
         end
       end
 
-      context "admin user class" do
+      context "when admin user class" do
         let(:user) { Aypex::DummyModel.create(name: "admin") }
 
         before { Aypex::Config.admin_user_class = "Aypex::DummyModel" }
@@ -111,19 +111,18 @@ describe Aypex::Ability do
       end
     end
 
-    context "with fakedispatch user" do
+    context "with fake dispatch user" do
       it "is able to admin on the order and shipment pages" do
         allow(user).to receive(:has_aypex_role?).with("admin").and_return(false)
         allow(user).to receive(:has_aypex_role?).with("bar").and_return(true)
 
-        Aypex::Ability.register_ability(BarAbility)
+        described_class.register_ability(BarAbility)
 
         expect(ability).not_to be_able_to :admin, resource
 
         expect(ability).to be_able_to :admin, resource_order
         expect(ability).to be_able_to :index, resource_order
         expect(ability).not_to be_able_to :update, resource_order
-        # ability.should_not be_able_to :create, resource_order # Fails
 
         expect(ability).to be_able_to :admin, resource_shipment
         expect(ability).to be_able_to :index, resource_shipment
@@ -131,18 +130,17 @@ describe Aypex::Ability do
 
         expect(ability).not_to be_able_to :admin, resource_product
         expect(ability).not_to be_able_to :update, resource_product
-        # ability.should_not be_able_to :show, resource_product # Fails
 
         expect(ability).not_to be_able_to :admin, resource_user
         expect(ability).not_to be_able_to :update, resource_user
         expect(ability).to be_able_to :update, user
-        # ability.should_not be_able_to :create, resource_user # Fails
+
         # It can create new users if is has access to the :admin, User!!
         expect(ability).to be_able_to :create, user
 
         # TODO: change the Ability class so only users and customers get the extra permissions?
 
-        Aypex::Ability.remove_ability(BarAbility)
+        described_class.remove_ability(BarAbility)
       end
     end
 
@@ -289,7 +287,7 @@ describe Aypex::Ability do
     context "for Zone" do
       let(:resource) { Aypex::Zone.new }
 
-      context "requested by any user" do
+      context "when requested by any user" do
         it_behaves_like "read only"
       end
     end

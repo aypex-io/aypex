@@ -13,11 +13,11 @@ module Aypex
     default_scope { includes(attachment_attachment: :blob) }
 
     def generate_url(width: 250, height: nil, quality: 80, format: :webp)
-      cdn_image_url(attachment.variant(resize_to_limit: [width, height], saver: {quality: quality}, convert: format, format: format), only_path: true)
+      cdn_image_url(attachment.variant(resize_to_limit: [width, height], saver: {quality: quality}, convert: format, format: format), only_path: Rails.application.routes.default_url_options[:host].empty?)
     end
 
     def original_url
-      cdn_image_url(attachment, only_path: true)
+      cdn_image_url(attachment, only_path: Rails.application.routes.default_url_options[:host].empty?)
     end
   end
 end

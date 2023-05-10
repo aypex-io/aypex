@@ -38,7 +38,7 @@ describe Aypex::Image do
     context "when format is not set to jpeg" do
       let(:gravity) { "north" }
 
-      it "attachment.variant should receive the unchanged value of gravity" do
+      it "receives the unchanged value of gravity" do
         expect(image.attachment).to receive(:variant).with(resize_to_limit: [48, nil], saver: anything, format: :jpeg, convert: :jpeg)
         image.generate_url(width: 48, format: :jpeg)
       end

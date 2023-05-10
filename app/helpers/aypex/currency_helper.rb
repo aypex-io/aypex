@@ -15,7 +15,7 @@ module Aypex
       current_store.supported_currencies_list.map(&:iso_code).map { |currency| currency_presentation(currency) }
     end
 
-    def should_render_currency_dropdown?
+    def render_currency_dropdown?
       return false if current_store.nil?
 
       current_store.supported_currencies_list.size > 1

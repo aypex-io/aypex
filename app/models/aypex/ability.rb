@@ -1,4 +1,4 @@
-# Implementation class for Cancan gem. Instead of overriding this class, consider adding new permissions
+# Implementation class for CanCan gem. Instead of overriding this class, consider adding new permissions
 # using the special +register_ability+ method which allows extensions to add their own abilities.
 #
 # See https://github.com/CanCanCommunity/cancancan for more details.

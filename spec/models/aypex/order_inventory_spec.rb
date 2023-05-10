@@ -86,7 +86,8 @@ describe Aypex::OrderInventory do
 
       stock_item = shipment.stock_location.stock_item(subject.variant)
       movement = stock_item.stock_movements.last
-      # movement.originator.should == shipment
+
+      expect(movement.originator).to eql(shipment)
       expect(movement.quantity).to eq(-5)
     end
   end

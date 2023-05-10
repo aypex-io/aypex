@@ -4,7 +4,7 @@ module Aypex
     belongs_to :cms_page, touch: true
 
     has_many :cms_components, class_name: "Aypex::CmsComponent", foreign_key: "cms_section_id"
-    accepts_nested_attributes_for :cms_components
+    accepts_nested_attributes_for :cms_components, reject_if: :all_blank
 
     default_scope { order(position: :asc) }
 
@@ -25,7 +25,7 @@ module Aypex
     def types_data
       [
         {
-          name: "ImageHero",
+          name: "Hero Image(s)",
           type: "Aypex::Cms::Section::ImageHero",
           description: I18n.t("aypex.cms_section.hero_description"),
           component_defaults: {
