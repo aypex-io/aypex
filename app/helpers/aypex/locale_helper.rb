@@ -25,7 +25,7 @@ module Aypex
       I18n.t("aypex.i18n.this_file_language", locale: locale)
     end
 
-    def should_render_locale_dropdown?
+    def render_locale_dropdown?
       return false if current_store.nil?
 
       current_store.supported_locales_list.size > 1

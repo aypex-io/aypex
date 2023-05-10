@@ -6,6 +6,7 @@ module Aypex
     let!(:country) { store.default_country }
     let!(:state) { country.states.first || create(:state, country: country) }
     let!(:stock_location) { create(:stock_location, admin_name: "Admin Name") }
+    let(:country_not_requiring_state) { create(:country, states_required: false) }
 
     let(:user) { create(:user) }
     let(:shipping_method) { create(:shipping_method) }
@@ -34,7 +35,7 @@ module Aypex
 
     it "can import an order number" do
       params = {number: "123-456-789"}
-      order = Importer::Order.import(user, params)
+      order = described_class.import(user, params)
       expect(order.number).to eq "123-456-789"
     end
 
@@ -45,14 +46,14 @@ module Aypex
         line_items_attributes: line_items
       }
 
-      order = Importer::Order.import(user, params)
+      order = described_class.import(user, params)
       expect(order).to be_completed
       expect(order.state).to eq "complete"
     end
 
     it "assigns order[email] over user email to order" do
       params = {email: "wooowww@test.com"}
-      order = Importer::Order.import(user, params)
+      order = described_class.import(user, params)
       expect(order.email).to eq params[:email]
     end
 
@@ -64,9 +65,9 @@ module Aypex
 
         context "a user's id is not provided" do
           # this is a regression spec for an issue we ran into at Bonobos
-          it "doesn't unassociate the admin from the order" do
+          it "doesn't un-associate the admin from the order" do
             params = {}
-            order = Importer::Order.import(user, params)
+            order = described_class.import(user, params)
             expect(order.user_id).to eq(user.id)
           end
         end
@@ -77,7 +78,7 @@ module Aypex
 
         it "does not assign the order to the other user" do
           params = {user_id: other_user.id}
-          order = Importer::Order.import(user, params)
+          order = described_class.import(user, params)
           expect(order.user_id).to eq(user.id)
         end
       end
@@ -86,9 +87,9 @@ module Aypex
     it "can build an order from API with just line items" do
       params = {line_items_attributes: line_items}
 
-      expect(Importer::Order).to receive(:ensure_variant_id_from_params).and_return(variant_id: variant.id,
+      expect(described_class).to receive(:ensure_variant_id_from_params).and_return(variant_id: variant.id,
         quantity: 5)
-      order = Importer::Order.import(user, params)
+      order = described_class.import(user, params)
       line_item = order.line_items.first
       expect(line_item.quantity).to eq(5)
       expect(line_item.variant_id).to eq(variant_id)
@@ -98,20 +99,20 @@ module Aypex
       line_items.first[:variant_id] = "XXX"
       params = {line_items_attributes: line_items}
 
-      expect { Importer::Order.import(user, params) }.to raise_error(/XXX/)
+      expect { described_class.import(user, params) }.to raise_error(/XXX/)
     end
 
     it "handles line_item updating exceptions" do
       line_items.first[:currency] = "GBP"
       params = {line_items_attributes: line_items}
 
-      expect { Importer::Order.import(user, params) }.to raise_error(/Validation failed/)
+      expect { described_class.import(user, params) }.to raise_error(/Validation failed/)
     end
 
     it "can build an order from API with variant sku" do
       params = {line_items_attributes: [{sku: sku, quantity: 5}]}
 
-      order = Importer::Order.import(user, params)
+      order = described_class.import(user, params)
 
       line_item = order.line_items.first
       expect(line_item.variant_id).to eq(variant_id)
@@ -120,7 +121,7 @@ module Aypex
 
     it "handles exceptions when sku is not found" do
       params = {line_items_attributes: [{sku: "XXX", quantity: 5}]}
-      expect { Importer::Order.import(user, params) }.to raise_error(/XXX/)
+      expect { described_class.import(user, params) }.to raise_error(/XXX/)
     end
 
     it "can build an order from API shipping address" do
@@ -129,7 +130,7 @@ module Aypex
         line_items_attributes: line_items
       }
 
-      order = Importer::Order.import(user, params)
+      order = described_class.import(user, params)
       expect(order.ship_address.address1).to eq "123 Testable Way"
     end
 
@@ -141,7 +142,7 @@ module Aypex
         line_items_attributes: line_items
       }
 
-      order = Importer::Order.import(user, params)
+      order = described_class.import(user, params)
       expect(order.ship_address.country.iso).to eq "US"
     end
 
@@ -153,7 +154,7 @@ module Aypex
         line_items_attributes: line_items
       }
 
-      expect { Importer::Order.import(user, params) }.to raise_error(/XXX/)
+      expect { described_class.import(user, params) }.to raise_error(/XXX/)
     end
 
     it "can build an order from API with state attributes" do
@@ -164,7 +165,7 @@ module Aypex
         line_items_attributes: line_items
       }
 
-      order = Importer::Order.import(user, params)
+      order = described_class.import(user, params)
       expect(order.ship_address.state.name).to eq state.name
     end
 
@@ -173,7 +174,7 @@ module Aypex
 
       it "sets the order currency" do
         params = {currency: "GBP"}
-        order = Importer::Order.import(user, params)
+        order = described_class.import(user, params)
         expect(order.currency).to eq "GBP"
       end
 
@@ -183,14 +184,14 @@ module Aypex
           line_items_attributes: line_items
         }
         line_items.first.merge! currency: "GBP", price: 1.99
-        order = Importer::Order.import(user, params)
+        order = described_class.import(user, params)
         expect(order.currency).to eq "GBP"
         expect(order.line_items.first.price).to eq 1.99
         expect(order.line_items.first.currency).to eq "GBP"
       end
     end
 
-    xcontext "state passed is not associated with country" do
+    context "state passed is not associated with country" do
       let(:params) do
         {
           ship_address_attributes: ship_address,
@@ -201,23 +202,22 @@ module Aypex
       let(:other_state) { create(:state, name: "Uhuhuh", country: create(:country)) }
 
       before do
+        ship_address.update(country_id: country_not_requiring_state.id)
         ship_address.delete(:state_id)
         ship_address[:state] = {"name" => other_state.name}
       end
 
       it "sets states name instead of state id" do
-        order = Importer::Order.import(user, params)
+        order = described_class.import(user, params)
         expect(order.ship_address.state_name).to eq other_state.name
       end
     end
 
-    xit "sets state name if state record not found" do
+    it "sets state name if state record not found" do
+      ship_address.update(country_id: country_not_requiring_state.id)
       ship_address.delete(:state_id)
       ship_address[:state] = {"name" => "XXX"}
-      params = {
-        ship_address_attributes: ship_address,
-        line_items_attributes: line_items
-      }
+      params = {ship_address_attributes: ship_address, line_items_attributes: line_items}
 
       order = described_class.import(user, params)
       expect(order.ship_address.state_name).to eq "XXX"
@@ -226,7 +226,7 @@ module Aypex
     context "variant not deleted" do
       it "ensures variant id from api" do
         hash = {sku: variant.sku}
-        Importer::Order.ensure_variant_id_from_params(hash)
+        described_class.ensure_variant_id_from_params(hash)
         expect(hash[:variant_id]).to eq variant.id
       end
     end
@@ -235,27 +235,27 @@ module Aypex
       it "raise error as variant shouldn't be found" do
         variant.product.destroy
         hash = {sku: variant.sku}
-        expect { Importer::Order.ensure_variant_id_from_params(hash) }.to raise_error("Ensure order import variant: Variant w/SKU #{hash[:sku]} not found.")
+        expect { described_class.ensure_variant_id_from_params(hash) }.to raise_error("Ensure order import variant: Variant w/SKU #{hash[:sku]} not found.")
       end
     end
 
     it "ensures_country_id for country fields" do
       [:name, :iso, :iso_name, :iso3].each do |field|
         address = {country: {field => country.send(field)}}
-        Importer::Order.ensure_country_id_from_params(address)
+        described_class.ensure_country_id_from_params(address)
         expect(address[:country_id]).to eq country.id
       end
     end
 
     it "raises with proper message when can't find country" do
       address = {country: {"name" => "NoNoCountry"}}
-      expect { Importer::Order.ensure_country_id_from_params(address) }.to raise_error(/NoNoCountry/)
+      expect { described_class.ensure_country_id_from_params(address) }.to raise_error(/NoNoCountry/)
     end
 
     it "ensures_state_id for state fields" do
       [:name, :abbr].each do |field|
         address = {country_id: country.id, state: {field => state.send(field)}}
-        Importer::Order.ensure_state_id_from_params(address)
+        described_class.ensure_state_id_from_params(address)
         expect(address[:state_id]).to eq state.id
       end
     end
@@ -284,12 +284,12 @@ module Aypex
       end
 
       it "ensures variant exists and is not deleted" do
-        expect(Importer::Order).to receive(:ensure_variant_id_from_params).exactly(6).times { line_items.first }
-        Importer::Order.import(user, params)
+        expect(described_class).to receive(:ensure_variant_id_from_params).exactly(6).times { line_items.first }
+        described_class.import(user, params)
       end
 
       it "builds them properly" do
-        order = Importer::Order.import(user, params)
+        order = described_class.import(user, params)
         shipment = order.shipments.first
 
         expect(shipment.cost.to_f).to eq 14.99
@@ -302,7 +302,7 @@ module Aypex
       end
 
       it "allocates inventory units to the correct shipments" do
-        order = Importer::Order.import(user, params)
+        order = described_class.import(user, params)
 
         expect(order.inventory_units.count).to eq 2
         expect(order.shipments.first.inventory_units.count).to eq 1
@@ -313,7 +313,7 @@ module Aypex
 
       it "accepts admin name for stock location" do
         params[:shipments_attributes][0][:stock_location] = stock_location.admin_name
-        order = Importer::Order.import(user, params)
+        order = described_class.import(user, params)
         shipment = order.shipments.first
 
         expect(shipment.stock_location).to eq stock_location
@@ -321,14 +321,14 @@ module Aypex
 
       it "raises if can't find stock location" do
         params[:shipments_attributes][0][:stock_location] = "doesn't exist"
-        expect { Importer::Order.import(user, params) }.to raise_error(StandardError)
+        expect { described_class.import(user, params) }.to raise_error(StandardError)
       end
 
       context "when a shipping adjustment is present" do
         it "creates the shipping adjustment" do
           adjustment_attributes = [{label: "Shipping Discount", amount: -5.00}]
           params[:shipments_attributes][0][:adjustments_attributes] = adjustment_attributes
-          order = Importer::Order.import(user, params)
+          order = described_class.import(user, params)
           shipment = order.shipments.first
 
           expect(shipment.adjustments.first.label).to eq("Shipping Discount")
@@ -355,7 +355,7 @@ module Aypex
         end
 
         it "builds them properly" do
-          order = Importer::Order.import(user, params)
+          order = described_class.import(user, params)
           shipment = order.shipments.first
 
           expect(shipment.cost.to_f).to eq 4.99
@@ -384,7 +384,7 @@ module Aypex
           }
         ]
       }
-      expect { Importer::Order.import(user, params) }.to raise_error(/XXX/)
+      expect { described_class.import(user, params) }.to raise_error(/XXX/)
     end
 
     it "adds adjustments" do
@@ -401,7 +401,7 @@ module Aypex
         ]
       }
 
-      order = Importer::Order.import(user, params)
+      order = described_class.import(user, params)
       expect(order.adjustments.all?(&:closed?)).to be true
       expect(order.adjustments.first.label).to eq "Shipping Discount"
       expect(order.adjustments.first.amount).to eq(-4.99)
@@ -422,7 +422,7 @@ module Aypex
         ]
       }
 
-      order = Importer::Order.import(user, params)
+      order = described_class.import(user, params)
       line_item_adjustment = order.line_item_adjustments.first
       expect(line_item_adjustment.closed?).to be true
       expect(line_item_adjustment.label).to eq "Line Item Discount"
@@ -442,7 +442,7 @@ module Aypex
         additional_tax_total: 0
       }
 
-      order = Importer::Order.import(user, params)
+      order = described_class.import(user, params)
 
       line_item_adjustment = order.line_item_adjustments.first
       expect(line_item_adjustment.closed?).to be true
@@ -464,7 +464,7 @@ module Aypex
         ]
       }
 
-      order = Importer::Order.import(user, params)
+      order = described_class.import(user, params)
       expect(order.item_total).to eq(166.1)
       expect(order.total).to eq(163.1) # = item_total (166.1) - adjustment_total (3.00)
     end
@@ -482,7 +482,7 @@ module Aypex
         ]
       }
 
-      expect { Importer::Order.import(user, params) }.to raise_error(/XXX/)
+      expect { described_class.import(user, params) }.to raise_error(/XXX/)
     end
 
     it "builds a payment using state" do
@@ -495,7 +495,7 @@ module Aypex
           }
         ]
       }
-      order = Importer::Order.import(user, params)
+      order = described_class.import(user, params)
       expect(order.payments.first.amount).to eq 4.99
     end
 
@@ -509,7 +509,7 @@ module Aypex
           }
         ]
       }
-      order = Importer::Order.import(user, params)
+      order = described_class.import(user, params)
       expect(order.payments.first.amount).to eq 4.99
     end
 
@@ -522,7 +522,7 @@ module Aypex
           }
         ]
       }
-      expect { Importer::Order.import(user, params) }.to raise_error(/XXX/)
+      expect { described_class.import(user, params) }.to raise_error(/XXX/)
     end
 
     it "build a source payment using years and month" do
@@ -543,7 +543,7 @@ module Aypex
         ]
       }
 
-      order = Importer::Order.import(user, params)
+      order = described_class.import(user, params)
       expect(order.payments.first.source.last_digits).to eq "7424"
     end
 
@@ -563,7 +563,7 @@ module Aypex
         ]
       }
 
-      expect { Importer::Order.import(user, params) }
+      expect { described_class.import(user, params) }
         .to raise_error(/Validation failed: Credit card Month is not a number, Credit card Year is not a number/)
     end
 
@@ -579,7 +579,7 @@ module Aypex
           }
         ]
       }
-      order = Importer::Order.import(user, params)
+      order = described_class.import(user, params)
       expect(order.payments.first.created_at).to be_within(1).of created_at
     end
 
@@ -588,7 +588,7 @@ module Aypex
         params = {payments_attributes: [{payment_method: "XXX"}]}
         count = Order.count
 
-        expect { Importer::Order.import(user, params) }.to raise_error(StandardError)
+        expect { described_class.import(user, params) }.to raise_error(StandardError)
         expect(Order.count).to eq count
       end
     end

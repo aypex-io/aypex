@@ -26,7 +26,7 @@ describe Aypex::Variant do
     end
 
     context "SKU" do
-      context "default behaviour" do
+      context "default behavior" do
         context "invalid" do
           let(:variant_2) { build(:variant, sku: variant.sku) }
 
