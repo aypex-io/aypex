@@ -234,8 +234,8 @@ module Aypex
       price_in(currency).try(:amount)
     end
 
-    def compare_at_amount_in(currency)
-      price_in(currency).try(:compare_at_amount)
+    def compared_amount_in(currency)
+      price_in(currency).try(:compared_amount)
     end
 
     def price_modifier_amount_in(currency, options = {})
@@ -265,7 +265,7 @@ module Aypex
     end
 
     def compare_at_price
-      @compare_at_price ||= price_in(cost_currency).try(:compare_at_amount)
+      @compare_at_price ||= price_in(cost_currency).try(:compared_amount)
     end
 
     def name_and_sku

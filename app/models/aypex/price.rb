@@ -16,16 +16,17 @@ module Aypex
       less_than_or_equal_to: MAXIMUM_AMOUNT
     }
 
-    validates :compare_at_amount, allow_nil: true, numericality: {
+    validates :compared_amount, allow_nil: true, numericality: {
       greater_than_or_equal_to: 0,
       less_than_or_equal_to: MAXIMUM_AMOUNT
     }
 
     extend DisplayMoney
-    money_methods :amount, :price, :compare_at_amount
-    alias_method :display_compare_at_price, :display_compare_at_amount
+    money_methods :amount, :price, :compared_amount
 
-    self.whitelisted_ransackable_attributes = ["amount", "compare_at_amount"]
+    alias_method :display_compare_at_price, :display_compared_amount
+
+    self.whitelisted_ransackable_attributes = ["amount", "compared_amount"]
 
     def money
       Aypex::Money.new(amount || 0, currency: currency.upcase)
@@ -36,32 +37,44 @@ module Aypex
     end
 
     def compare_at_money
-      Aypex::Money.new(compare_at_amount || 0, currency: currency)
+      Aypex::Money.new(compared_amount || 0, currency: currency)
     end
 
-    def compare_at_amount=(compare_at_amount)
-      self[:compare_at_amount] = Aypex::LocalizedNumber.parse(compare_at_amount)
+    def compared_amount=(compared_amount)
+      self[:compared_amount] = Aypex::LocalizedNumber.parse(compared_amount)
     end
 
     alias_attribute :price, :amount
-    alias_attribute :compare_at_price, :compare_at_amount
+    alias_attribute :compare_at_price, :compared_amount
 
     def price_including_vat_for(price_options)
+      amount_including_vat(price_options)
+    end
+    def amount_including_vat(price_options)
       options = price_options.merge(tax_category: variant.tax_category)
       gross_amount(price, options)
     end
 
     def compare_at_price_including_vat_for(price_options)
+      compared_amount_including_vat(price_options)
+    end
+    def compared_amount_including_vat(price_options)
       options = price_options.merge(tax_category: variant.tax_category)
       gross_amount(compare_at_price, options)
     end
 
     def display_price_including_vat_for(price_options)
-      Aypex::Money.new(price_including_vat_for(price_options), currency: currency)
+      display_amount_including_vat(price_options)
+    end
+    def display_amount_including_vat(price_options)
+      Aypex::Money.new(amount_including_vat(price_options), currency: currency)
     end
 
     def display_compare_at_price_including_vat_for(price_options)
-      Aypex::Money.new(compare_at_price_including_vat_for(price_options), currency: currency)
+      display_compared_amount_including_vat(price_options)
+    end
+    def display_compared_amount_including_vat(price_options)
+      Aypex::Money.new(compared_amount_including_vat(price_options), currency: currency)
     end
 
     private

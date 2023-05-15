@@ -137,7 +137,7 @@ module Aypex
 
     [
       :sku, :barcode, :price, :currency, :weight, :height, :width, :depth, :is_master,
-      :cost_currency, :price_in, :amount_in, :cost_price, :compare_at_price, :compare_at_amount_in
+      :cost_currency, :price_in, :amount_in, :cost_price, :compare_at_price, :compared_amount_in
     ].each do |method_name|
       delegate method_name, :"#{method_name}=", to: :find_or_build_master
     end

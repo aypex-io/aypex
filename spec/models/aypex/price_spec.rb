@@ -14,16 +14,16 @@ describe Aypex::Price do
     end
   end
 
-  describe "#compare_at_amount=" do
+  describe "#compared_amount=" do
     let(:price) { build(:price) }
-    let(:compare_at_amount) { "169.99" }
+    let(:compared_amount) { "169.99" }
 
     before do
-      price.compare_at_amount = compare_at_amount
+      price.compared_amount = compared_amount
     end
 
     it "is expected to equal to localized number" do
-      expect(price.compare_at_amount).to eq(Aypex::LocalizedNumber.parse(compare_at_amount))
+      expect(price.compared_amount).to eq(Aypex::LocalizedNumber.parse(compared_amount))
     end
   end
 
@@ -44,15 +44,15 @@ describe Aypex::Price do
 
   describe "#compare_at_price" do
     let(:price) { build(:price) }
-    let(:compare_at_amount) { 3000.00 }
+    let(:compared_amount) { 3000.00 }
 
     context "when amount is changed" do
       before do
-        price.compare_at_amount = compare_at_amount
+        price.compared_amount = compared_amount
       end
 
       it "is expected to equal to price" do
-        expect(price.compare_at_amount).to eq(price.compare_at_price)
+        expect(price.compared_amount).to eq(price.compare_at_price)
       end
     end
   end
@@ -160,9 +160,9 @@ describe Aypex::Price do
     let(:default_zone) { Aypex::Zone.new }
     let(:zone) { Aypex::Zone.new }
     let(:amount) { 10 }
-    let(:compare_at_amount) { 100 }
+    let(:compared_amount) { 100 }
     let(:tax_category) { Aypex::TaxCategory.new }
-    let(:price) { build(:price, variant: variant, amount: amount, compare_at_amount: compare_at_amount) }
+    let(:price) { build(:price, variant: variant, amount: amount, compared_amount: compared_amount) }
     let(:price_options) { {tax_zone: zone} }
 
     context "when called with a non-default zone" do
@@ -214,7 +214,7 @@ describe Aypex::Price do
   end
 
   describe "#display_compare_at_price_including_vat_for(zone)" do
-    subject { build(:price, amount: 10, compare_at_amount: 100) }
+    subject { build(:price, amount: 10, compared_amount: 100) }
 
     it "calls #price_including_vat_for" do
       expect(subject).to receive(:compare_at_price_including_vat_for)
