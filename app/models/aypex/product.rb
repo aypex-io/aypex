@@ -79,7 +79,7 @@ module Aypex
       class_name: "Aypex::Variant",
       dependent: :destroy
 
-    has_many :prices, -> { order("aypex_variants.position, aypex_variants.id, currency") }, through: :variants
+    has_many :prices, -> { order("aypex_variants.position, aypex_variants.id, currency") }, through: :master
 
     has_many :stock_items, through: :variants_including_master
 
