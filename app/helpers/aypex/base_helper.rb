@@ -50,10 +50,10 @@ module Aypex
         .to_html
     end
 
-    def display_compare_at_price(product_or_variant)
+    def display_compared_price(product_or_variant)
       product_or_variant
         .price_in(current_currency)
-        .display_compare_at_price_including_vat_for(current_price_options)
+        .display_compared_price_including_vat_for(current_price_options)
         .to_html
     end
 

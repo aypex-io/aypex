@@ -137,12 +137,12 @@ module Aypex
 
     [
       :sku, :barcode, :price, :currency, :weight, :height, :width, :depth, :is_master,
-      :cost_currency, :price_in, :amount_in, :cost_price, :compare_at_price, :compared_amount_in
+      :cost_currency, :price_in, :amount_in, :cost_price, :compared_price, :compared_amount_in
     ].each do |method_name|
       delegate method_name, :"#{method_name}=", to: :find_or_build_master
     end
 
-    delegate :display_amount, :display_price, :has_default_price?, :display_compare_at_price, to: :find_or_build_master
+    delegate :display_amount, :display_price, :has_default_price?, :display_compared_price, to: :find_or_build_master
 
     state_machine :status, initial: :draft do
       event :activate do

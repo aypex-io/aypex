@@ -39,7 +39,7 @@ module Aypex
       variants_option_types_presenter(variants, product).default_variant || product.default_variant
     end
 
-    def should_display_compare_at_price?(default_variant)
+    def should_display_compared_price?(default_variant)
       default_variant_price = default_variant.price_in(current_currency)
       default_variant_price.compared_amount.present? && (default_variant_price.compared_amount > default_variant_price.amount)
     end

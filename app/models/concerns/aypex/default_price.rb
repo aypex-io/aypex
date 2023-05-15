@@ -9,8 +9,8 @@ module Aypex
         dependent: :destroy
 
       delegate :display_price, :display_amount, :price, :currency, :price=,
-        :price_including_vat_for, :currency=, :display_compare_at_price,
-        :compare_at_price, :compare_at_price=, to: :find_or_build_default_price
+        :price_including_vat_for, :currency=, :display_compared_price,
+        :compared_price, :compared_price=, to: :find_or_build_default_price
 
       after_save :save_default_price
 
