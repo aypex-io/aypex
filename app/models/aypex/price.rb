@@ -50,6 +50,7 @@ module Aypex
     def price_including_vat_for(price_options)
       amount_including_vat(price_options)
     end
+
     def amount_including_vat(price_options)
       options = price_options.merge(tax_category: variant.tax_category)
       gross_amount(price, options)
@@ -58,6 +59,7 @@ module Aypex
     def compared_price_including_vat_for(price_options)
       compared_amount_including_vat(price_options)
     end
+
     def compared_amount_including_vat(price_options)
       options = price_options.merge(tax_category: variant.tax_category)
       gross_amount(compared_price, options)
@@ -66,6 +68,7 @@ module Aypex
     def display_price_including_vat_for(price_options)
       display_amount_including_vat(price_options)
     end
+
     def display_amount_including_vat(price_options)
       Aypex::Money.new(amount_including_vat(price_options), currency: currency)
     end
@@ -73,6 +76,7 @@ module Aypex
     def display_compared_price_including_vat_for(price_options)
       display_compared_amount_including_vat(price_options)
     end
+
     def display_compared_amount_including_vat(price_options)
       Aypex::Money.new(compared_amount_including_vat(price_options), currency: currency)
     end
