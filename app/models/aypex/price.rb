@@ -21,6 +21,9 @@ module Aypex
       less_than_or_equal_to: MAXIMUM_AMOUNT
     }
 
+    validates :variant, :currency, presence: true
+    validates :currency, presence: true, uniqueness: {case_sensitive: false, scope: :variant}
+
     extend DisplayMoney
     money_methods :amount, :price, :compared_amount
 
@@ -29,7 +32,7 @@ module Aypex
 
     alias_method :display_compared_price, :display_compared_amount
 
-    self.whitelisted_ransackable_attributes = ["amount", "compared_amount"]
+    self.whitelisted_ransackable_attributes = ["amount", "currency", "compared_amount"]
 
     def money
       Aypex::Money.new(amount || 0, currency: currency.upcase)

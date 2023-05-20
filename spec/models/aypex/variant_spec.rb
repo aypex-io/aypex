@@ -200,7 +200,7 @@ describe Aypex::Variant do
 
       context "when multiple prices for same currency present" do
         let!(:price_1) { create(:price, currency: currency, variant: variant) }
-        let!(:price_2) { create(:price, currency: currency, variant: variant) }
+        let!(:price_2) { create(:price, currency: "GBP", variant: variant) }
 
         it "does not duplicate variant" do
           expect(Aypex::Variant.for_currency_and_available_price_amount(currency)).to eq([variant])
