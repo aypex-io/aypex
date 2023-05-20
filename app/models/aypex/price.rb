@@ -21,6 +21,9 @@ module Aypex
       less_than_or_equal_to: MAXIMUM_AMOUNT
     }
 
+    validates :variant, :currency, presence: true
+    validates :currency, presence: true, uniqueness: {case_sensitive: false, scope: :variant}
+
     extend DisplayMoney
     money_methods :amount, :price, :compared_amount
 
