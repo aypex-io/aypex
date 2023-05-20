@@ -111,7 +111,7 @@ module Aypex
       :meta_keywords, :price, :sku, :deleted_at, :prototype_id,
       :option_values_hash, :weight, :height, :width, :depth,
       :shipping_category_id, :tax_category_id,
-      :cost_currency, :cost_price, :compare_at_price,
+      :cost_currency, :cost_price, :compared_price,
       {
         option_type_ids: [],
         category_ids: [],
@@ -167,7 +167,7 @@ module Aypex
     @@variant_attributes = [
       :name, :presentation, :cost_price, :discontinue_on, :lock_version,
       :position, :track_inventory,
-      :product_id, :product, :option_values_attributes, :price, :compare_at_price,
+      :product_id, :product, :option_values_attributes, :price, :compared_price,
       :weight, :height, :width, :depth, :sku, :barcode, :cost_currency,
       {options: [:name, :value], option_value_ids: []}
     ]

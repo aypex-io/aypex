@@ -19,8 +19,8 @@ module Aypex
         {
           display_price: display_price(variant),
           price: variant.price_in(current_currency),
-          display_compare_at_price: display_compare_at_price(variant),
-          should_display_compare_at_price: should_display_compare_at_price?(variant),
+          display_compared_price: display_compared_price(variant),
+          should_display_compared_price: should_display_compared_price?(variant),
           is_product_available_in_currency: @is_product_available_in_currency,
           backorderable: backorderable?(variant),
           in_stock: in_stock?(variant),

@@ -7,7 +7,7 @@ module Aypex
     include Metadata
     include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
-    MEMOIZED_METHODS = %w[purchasable in_stock backorderable tax_category options_text compare_at_price]
+    MEMOIZED_METHODS = %w[purchasable in_stock backorderable tax_category options_text compared_price]
 
     belongs_to :product, -> { with_deleted }, touch: true, class_name: "Aypex::Product", inverse_of: :variants
     belongs_to :tax_category, class_name: "Aypex::TaxCategory", optional: true
@@ -234,8 +234,8 @@ module Aypex
       price_in(currency).try(:amount)
     end
 
-    def compare_at_amount_in(currency)
-      price_in(currency).try(:compare_at_amount)
+    def compared_amount_in(currency)
+      price_in(currency).try(:compared_amount)
     end
 
     def price_modifier_amount_in(currency, options = {})
@@ -264,8 +264,8 @@ module Aypex
       end.sum
     end
 
-    def compare_at_price
-      @compare_at_price ||= price_in(cost_currency).try(:compare_at_amount)
+    def compared_price
+      @compared_price ||= price_in(cost_currency).try(:compared_amount)
     end
 
     def name_and_sku

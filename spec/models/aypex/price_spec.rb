@@ -14,16 +14,16 @@ describe Aypex::Price do
     end
   end
 
-  describe "#compare_at_amount=" do
+  describe "#compared_amount=" do
     let(:price) { build(:price) }
-    let(:compare_at_amount) { "169.99" }
+    let(:compared_amount) { "169.99" }
 
     before do
-      price.compare_at_amount = compare_at_amount
+      price.compared_amount = compared_amount
     end
 
     it "is expected to equal to localized number" do
-      expect(price.compare_at_amount).to eq(Aypex::LocalizedNumber.parse(compare_at_amount))
+      expect(price.compared_amount).to eq(Aypex::LocalizedNumber.parse(compared_amount))
     end
   end
 
@@ -42,17 +42,17 @@ describe Aypex::Price do
     end
   end
 
-  describe "#compare_at_price" do
+  describe "#compared_price" do
     let(:price) { build(:price) }
-    let(:compare_at_amount) { 3000.00 }
+    let(:compared_amount) { 3000.00 }
 
     context "when amount is changed" do
       before do
-        price.compare_at_amount = compare_at_amount
+        price.compared_amount = compared_amount
       end
 
       it "is expected to equal to price" do
-        expect(price.compare_at_amount).to eq(price.compare_at_price)
+        expect(price.compared_amount).to eq(price.compared_price)
       end
     end
   end
@@ -153,16 +153,16 @@ describe Aypex::Price do
     end
   end
 
-  describe "#compare_at_price_including_vat_for(zone)" do
-    subject(:compare_at_price_with_vat) { price.compare_at_price_including_vat_for(price_options) }
+  describe "#compared_price_including_vat_for(zone)" do
+    subject(:compared_price_with_vat) { price.compared_price_including_vat_for(price_options) }
 
     let(:variant) { create(:variant) }
     let(:default_zone) { Aypex::Zone.new }
     let(:zone) { Aypex::Zone.new }
     let(:amount) { 10 }
-    let(:compare_at_amount) { 100 }
+    let(:compared_amount) { 100 }
     let(:tax_category) { Aypex::TaxCategory.new }
-    let(:price) { build(:price, variant: variant, amount: amount, compare_at_amount: compare_at_amount) }
+    let(:price) { build(:price, variant: variant, amount: amount, compared_amount: compared_amount) }
     let(:price_options) { {tax_zone: zone} }
 
     context "when called with a non-default zone" do
@@ -175,7 +175,7 @@ describe Aypex::Price do
       end
 
       it "returns the correct price including another VAT to two digits" do
-        expect(compare_at_price_with_vat).to eq(105.04)
+        expect(compared_price_with_vat).to eq(105.04)
       end
     end
 
@@ -186,8 +186,8 @@ describe Aypex::Price do
       end
 
       it "returns the correct price" do
-        expect(price).to receive(:compare_at_price).and_call_original
-        expect(compare_at_price_with_vat).to eq(100.00)
+        expect(price).to receive(:compared_price).and_call_original
+        expect(compared_price_with_vat).to eq(100.00)
       end
     end
 
@@ -198,27 +198,27 @@ describe Aypex::Price do
       end
 
       it "returns the correct price" do
-        expect(price).to receive(:compare_at_price).and_call_original
-        expect(price.compare_at_price_including_vat_for(tax_zone: zone)).to eq(100.00)
+        expect(price).to receive(:compared_price).and_call_original
+        expect(price.compared_price_including_vat_for(tax_zone: zone)).to eq(100.00)
       end
     end
   end
 
-  describe "#display_price_including_vat_for(zone)" do
+  describe "#display_amount_inc_vat(zone)" do
     subject { build(:price, amount: 10) }
 
-    it "calls #price_including_vat_for" do
-      expect(subject).to receive(:price_including_vat_for)
-      subject.display_price_including_vat_for(nil)
+    it "calls #amount_inc_vat" do
+      expect(subject).to receive(:amount_inc_vat)
+      subject.display_amount_inc_vat(nil)
     end
   end
 
-  describe "#display_compare_at_price_including_vat_for(zone)" do
-    subject { build(:price, amount: 10, compare_at_amount: 100) }
+  describe "#display_compared_amount_inc_vat(zone)" do
+    subject { build(:price, amount: 10, compared_amount: 100) }
 
-    it "calls #price_including_vat_for" do
-      expect(subject).to receive(:compare_at_price_including_vat_for)
-      subject.display_compare_at_price_including_vat_for(nil)
+    it "calls #compared_amount_inc_vat" do
+      expect(subject).to receive(:compared_amount_inc_vat)
+      subject.display_compared_amount_inc_vat(nil)
     end
   end
 end
