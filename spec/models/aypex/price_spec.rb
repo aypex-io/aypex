@@ -204,21 +204,21 @@ describe Aypex::Price do
     end
   end
 
-  describe "#display_price_including_vat_for(zone)" do
+  describe "#display_amount_inc_vat(zone)" do
     subject { build(:price, amount: 10) }
 
-    it "calls #price_including_vat_for" do
-      expect(subject).to receive(:price_including_vat_for)
-      subject.display_price_including_vat_for(nil)
+    it "calls #amount_inc_vat" do
+      expect(subject).to receive(:amount_inc_vat)
+      subject.display_amount_inc_vat(nil)
     end
   end
 
-  describe "#display_compared_price_including_vat_for(zone)" do
+  describe "#display_compared_amount_inc_vat(zone)" do
     subject { build(:price, amount: 10, compared_amount: 100) }
 
-    it "calls #price_including_vat_for" do
-      expect(subject).to receive(:compared_price_including_vat_for)
-      subject.display_compared_price_including_vat_for(nil)
+    it "calls #compared_amount_inc_vat" do
+      expect(subject).to receive(:compared_amount_inc_vat)
+      subject.display_compared_amount_inc_vat(nil)
     end
   end
 end
