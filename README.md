@@ -1,5 +1,6 @@
-[![Aypex CI](https://github.com/aypex-io/aypex/actions/workflows/ci.yml/badge.svg)](https://github.com/aypex-io/aypex/actions/workflows/ci.yml)
-[![Standard RB](https://github.com/aypex-io/aypex/actions/workflows/standard_rb_core.yml/badge.svg)](https://github.com/aypex-io/aypex/actions/workflows/standard_rb_core.yml)
+[![CI Tests](https://github.com/aypex-io/aypex/actions/workflows/ci.yml/badge.svg)](https://github.com/aypex-io/aypex/actions/workflows/ci.yml)
+[![Standard Ruby Format](https://github.com/aypex-io/aypex/actions/workflows/standard_rb.yml/badge.svg)](https://github.com/aypex-io/aypex/actions/workflows/standard_rb_core.yml)
+[![SNYK Gem Dependency](https://github.com/aypex-io/aypex/actions/workflows/snyk.yml/badge.svg)](https://github.com/aypex-io/aypex/actions/workflows/snyk.yml)
 
 ## Aypex eCommerce Kit
 
