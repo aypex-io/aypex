@@ -1,6 +1,7 @@
 module Aypex
   module Calculator::Promotion
     # FixedAmount
+    #
     # Creates a fixed amount discount taken off
     # the actionable line items proportionally
     class FixedAmount < Calculator
@@ -28,7 +29,7 @@ module Aypex
         # if there is more than one item in the order have the last applicable
         # line item eat the remainder of the discount, to pick up any rounding
         # errors from the previous items calculations. This ensures the adjustment
-        # total always matched the specified preffered_amount.
+        # total always matched the specified amount.
         if target_item == last_actionable_item
           discounts_used = []
           ams.each do |i|
