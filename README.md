@@ -4,11 +4,7 @@
 
 ## Aypex eCommerce Kit
 
-**Aypex** is an open source e-commerce platform built using Ruby on Rails, intentionally designed to be
-plug-able allowing you to build the platform you need, and leave out the stuff you don't.
-
-The benefits of a plug-able e-commerce kit are that it allows you can use customize your setup to your requirements
-you can choose form any custom UI: Checkout, Storefront, Admin combination, you can pick your own Email pack, choose your API version or build your own custom set from scratch.
+Aypex is an open-source e-commerce platform built using Ruby on Rails, intentionally designed to be plug-able, allowing you to create the platform you need and leave out the stuff you don't.
 
 Below are some example setups.
 ### Headless
