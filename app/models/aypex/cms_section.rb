@@ -8,7 +8,7 @@ module Aypex
 
     default_scope { order(position: :asc) }
 
-    validates :name, :cms_page, :type, presence: true
+    validates :cms_page, :type, presence: true
 
     after_create :ensure_components
 
@@ -84,6 +84,10 @@ module Aypex
     def component_defaults
       section_data = types_data.find { |section| section[:type] == type }
       section_data[:component_defaults]
+    end
+
+    def section_details
+      types_data.find { |section| section[:type] == type }
     end
 
     private
