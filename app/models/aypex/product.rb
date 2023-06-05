@@ -63,6 +63,8 @@ module Aypex
     belongs_to :tax_category, class_name: "Aypex::TaxCategory"
     belongs_to :shipping_category, class_name: "Aypex::ShippingCategory", inverse_of: :products
 
+    has_rich_text :content
+
     has_one :master,
       -> { where is_master: true },
       inverse_of: :product,

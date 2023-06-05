@@ -57,5 +57,4 @@ group :development do
   gem "solargraph"
   gem "erb_lint"
 end
-
 gemspec

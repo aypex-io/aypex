@@ -1,5 +1,6 @@
 class RemoveColumsFromCmsSections < ActiveRecord::Migration[7.0]
   def change
+    remove_column :aypex_cms_sections, :name, :string
     remove_column :aypex_cms_sections, :content, :text
     remove_column :aypex_cms_sections, :settings, :text
     remove_column :aypex_cms_sections, :fit, :string

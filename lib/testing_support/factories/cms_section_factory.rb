@@ -1,7 +1,5 @@
 FactoryBot.define do
   factory :base_cms_section, class: Aypex::CmsSection do
-    name { generate(:random_string) }
-
     association :cms_page, factory: :cms_feature_page
 
     factory :cms_section_image_hero do

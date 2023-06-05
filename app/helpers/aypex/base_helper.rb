@@ -200,6 +200,8 @@ module Aypex
         "#{current_store.formatted_url + localize}/#{Aypex::Config.storefront_categories_path}/#{resource.permalink}"
       elsif resource.instance_of?(Aypex::Cms::Page::FeaturePage) || resource.instance_of?(Aypex::Cms::Page::StandardPage)
         "#{current_store.formatted_url + localize}/#{Aypex::Config.storefront_pages_path}/#{resource.slug}"
+      elsif resource.instance_of?(Aypex::Cms::Section::ImageHero)
+        "#{current_store.formatted_url + localize}/sections/#{resource.id}"
       elsif localize.blank?
         current_store.formatted_url
       else

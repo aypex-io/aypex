@@ -7,19 +7,15 @@ describe Aypex::CmsSection do
 
   describe "validations" do
     it "Valid Example" do
-      expect(described_class.new(name: "Got Name", type: "Aypex::Cms::Section::ImageHero", cms_page: homepage)).to be_valid
-    end
-
-    it "validates presence of name" do
-      expect(described_class.new(type: "Aypex::Cms::Section::ImageHero", cms_page: homepage)).not_to be_valid
+      expect(described_class.new(type: "Aypex::Cms::Section::ImageHero", cms_page: homepage)).to be_valid
     end
 
     it "validates presence of type" do
-      expect(described_class.new(name: "Got Name", cms_page: homepage)).not_to be_valid
+      expect(described_class.new(cms_page: homepage)).not_to be_valid
     end
 
     it "validates presence of cms_page" do
-      expect(described_class.new(name: "Got Name", type: "Aypex::Cms::Section::ImageHero")).not_to be_valid
+      expect(described_class.new(type: "Aypex::Cms::Section::ImageHero")).not_to be_valid
     end
   end
 
