@@ -39,7 +39,7 @@ module Aypex
       opts[:skip_spring] = true
       opts[:skip_test] = true
       opts[:skip_bootsnap] = true
-      opts[:propshaft] = true
+      opts[:asset_pipeline] = "propshaft"
 
       puts "Generating dummy Rails application..."
       invoke Rails::Generators::AppGenerator,
@@ -85,6 +85,7 @@ module Aypex
         remove_file "test"
         remove_file "vendor"
         remove_file "spec"
+        remove_file "config/initializers/assets.rb"
       end
     end
 
