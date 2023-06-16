@@ -1,4 +1,4 @@
-class AddSettingsToAypexStores < ActiveRecord::Migration[5.2]
+class AddSettingsToAypexStores < ActiveRecord::Migration[7.0]
   def change
     change_table :aypex_stores do |t|
       if t.respond_to? :jsonb

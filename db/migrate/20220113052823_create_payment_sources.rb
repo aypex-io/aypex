@@ -1,4 +1,4 @@
-class CreatePaymentSources < ActiveRecord::Migration[5.2]
+class CreatePaymentSources < ActiveRecord::Migration[7.0]
   def change
     create_table :aypex_payment_sources do |t|
       t.string :gateway_payment_profile_id

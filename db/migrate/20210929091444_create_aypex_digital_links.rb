@@ -1,4 +1,4 @@
-class CreateAypexDigitalLinks < ActiveRecord::Migration[5.2]
+class CreateAypexDigitalLinks < ActiveRecord::Migration[7.0]
   def change
     create_table :aypex_digital_links, if_not_exists: true do |t|
       t.belongs_to :digital

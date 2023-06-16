@@ -1,4 +1,4 @@
-class UpdateLinkableResourceTypes < ActiveRecord::Migration[5.2]
+class UpdateLinkableResourceTypes < ActiveRecord::Migration[7.0]
   def change
     change_column_default :aypex_menu_items, :linked_resource_type, "Aypex::Linkable::Uri"
 

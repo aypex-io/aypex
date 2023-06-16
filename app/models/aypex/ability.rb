@@ -79,7 +79,7 @@ module Aypex
       can :read, ::Aypex::ProductProperty
       can :read, ::Aypex::Property
       can :create, ::Aypex::Config.user_class
-      can [:show, :update, :destroy], ::Aypex::Config.user_class, id: user.id
+      can [:show, :update, :update_password], ::Aypex::Config.user_class, id: user.id
       can :read, ::Aypex::State
       can :read, ::Aypex::Store
       can :read, ::Aypex::Category

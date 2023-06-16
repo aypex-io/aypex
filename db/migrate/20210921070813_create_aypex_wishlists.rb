@@ -1,4 +1,4 @@
-class CreateAypexWishlists < ActiveRecord::Migration[5.2]
+class CreateAypexWishlists < ActiveRecord::Migration[7.0]
   def change
     create_table :aypex_wishlists, if_not_exists: true do |t|
       t.belongs_to :user

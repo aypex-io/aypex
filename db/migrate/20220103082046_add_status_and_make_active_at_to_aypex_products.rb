@@ -1,4 +1,4 @@
-class AddStatusAndMakeActiveAtToAypexProducts < ActiveRecord::Migration[5.2]
+class AddStatusAndMakeActiveAtToAypexProducts < ActiveRecord::Migration[7.0]
   def change
     add_column :aypex_products, :status, :string, null: false, default: 'draft'
     add_index :aypex_products, :status

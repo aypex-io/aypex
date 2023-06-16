@@ -1,4 +1,4 @@
-class AddMetadataToAypexLineItems < ActiveRecord::Migration[5.2]
+class AddMetadataToAypexLineItems < ActiveRecord::Migration[7.0]
   def change
     change_table :aypex_line_items do |t|
       if t.respond_to? :jsonb

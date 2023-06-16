@@ -1,4 +1,4 @@
-class AddMetadataToAypexVariants < ActiveRecord::Migration[5.2]
+class AddMetadataToAypexVariants < ActiveRecord::Migration[7.0]
   def change
     change_table :aypex_variants do |t|
       if t.respond_to? :jsonb

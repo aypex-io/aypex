@@ -1,8 +1,7 @@
-class AddSelectedLocaleToAypexUsers < ActiveRecord::Migration[6.1]
+class AddSelectedLocaleToAypexUsers < ActiveRecord::Migration[7.0]
   def change
     if Aypex::Config.user_class.present?
-      users_table_name = Aypex::Config.user_class.table_name
-      add_column users_table_name, :selected_locale, :string unless column_exists?(users_table_name, :selected_locale)
+      add_column Aypex::Config.user_class.table_name, :selected_locale, :string, if_not_exists: true
     end
   end
 end

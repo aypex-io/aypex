@@ -1,4 +1,4 @@
-class AddMetadataToAypexStockItems < ActiveRecord::Migration[5.2]
+class AddMetadataToAypexStockItems < ActiveRecord::Migration[7.0]
   def change
     change_table :aypex_stock_items do |t|
       if t.respond_to? :jsonb

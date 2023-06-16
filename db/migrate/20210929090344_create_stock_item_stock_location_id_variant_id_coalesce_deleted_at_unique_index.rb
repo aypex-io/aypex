@@ -1,4 +1,4 @@
-class CreateStockItemStockLocationIdVariantIdCoalesceDeletedAtUniqueIndex < ActiveRecord::Migration[5.2]
+class CreateStockItemStockLocationIdVariantIdCoalesceDeletedAtUniqueIndex < ActiveRecord::Migration[7.0]
   def change
     remove_index :aypex_stock_items, name: :stock_item_by_loc_var_id_deleted_at
     reversible do |dir|

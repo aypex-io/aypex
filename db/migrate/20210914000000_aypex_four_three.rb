@@ -1,4 +1,4 @@
-class AypexFourThree < ActiveRecord::Migration[5.2]
+class AypexFourThree < ActiveRecord::Migration[7.0]
   def up
     # This migration is just a compressed version of all the previous
     # migrations for aypex_core. Do not run it if one of the core tables
@@ -1126,31 +1126,18 @@ class AypexFourThree < ActiveRecord::Migration[5.2]
       t.index ["active"], name: "index_aypex_trackers_on_active"
     end
 
-    create_table "aypex_users", force: :cascade do |t|
+    create_table Aypex::Config.user_class.table_name, force: :cascade do |t|
       t.string "encrypted_password", limit: 128
       t.string "password_salt", limit: 128
       t.string "email"
-      t.string "remember_token"
-      t.string "persistence_token"
-      t.string "reset_password_token"
-      t.string "perishable_token"
-      t.integer "sign_in_count", default: 0, null: false
-      t.integer "failed_attempts", default: 0, null: false
-      t.datetime "last_request_at"
-      t.datetime "current_sign_in_at"
-      t.datetime "last_sign_in_at"
-      t.string "current_sign_in_ip"
-      t.string "last_sign_in_ip"
+      t.string "phone"
       t.string "login"
       t.bigint "ship_address_id"
       t.bigint "bill_address_id"
       t.string "authentication_token"
-      t.string "unlock_token"
-      t.datetime "locked_at"
-      t.datetime "remember_created_at"
-      t.datetime "reset_password_sent_at"
       t.datetime "created_at", precision: 6, null: false
       t.datetime "updated_at", precision: 6, null: false
+      t.datetime "deleted_at", precision: 6
     end
 
     create_table "aypex_variants", force: :cascade do |t|
