@@ -11,7 +11,6 @@ class AddMetadataToAypexMultipleTables < ActiveRecord::Migration[7.0]
       aypex_prototypes
       aypex_refunds
       aypex_customer_returns
-      aypex_users
       aypex_addresses
       aypex_credit_cards
       aypex_store_credits
