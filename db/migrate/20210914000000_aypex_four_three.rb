@@ -1127,16 +1127,18 @@ class AypexFourThree < ActiveRecord::Migration[7.0]
     end
 
     create_table Aypex::Config.user_class.table_name, force: :cascade do |t|
-      t.string "encrypted_password", limit: 128
-      t.string "password_salt", limit: 128
-      t.string "email"
-      t.string "phone"
-      t.bigint "ship_address_id"
-      t.bigint "bill_address_id"
-      t.string "authentication_token"
-      t.datetime "created_at", precision: 6, null: false
-      t.datetime "updated_at", precision: 6, null: false
-      t.datetime "deleted_at", precision: 6
+      t.string :email, null: false, default: ""
+      t.string :encrypted_password, null: false, default: ""
+      t.string :password_salt
+      t.string :phone
+      t.bigint :ship_address_id
+      t.bigint :bill_address_id
+      t.string :authentication_token
+      t.datetime :created_at, precision: 6, null: false
+      t.datetime :updated_at, precision: 6, null: false
+      t.datetime :deleted_at, precision: 6
+      t.index [:ship_address_id], name: "index_#{Aypex::Config.user_class.table_name}_on_ship_address_id"
+      t.index [:bill_address_id], name: "index_#{Aypex::Config.user_class.table_name}_on_bill_address_id"
     end
 
     create_table "aypex_variants", force: :cascade do |t|
