@@ -1,11 +1,11 @@
-class CreatePaymentSources < ActiveRecord::Migration[5.2]
+class CreatePaymentSources < ActiveRecord::Migration[7.0]
   def change
     create_table :aypex_payment_sources do |t|
       t.string :gateway_payment_profile_id
       t.string :type, index: true
 
       t.references :payment_method, index: true, foreign_key: {to_table: :aypex_payment_methods}
-      t.references :user, index: true, foreign_key: {to_table: :aypex_users}
+      t.references :user, index: true, foreign_key: {to_table: Aypex::Config.user_class.table_name}
 
       if t.respond_to? :jsonb
         t.jsonb :public_metadata

@@ -1,4 +1,4 @@
-class AddMetadataToAypexCategoriesAndBaseCategories < ActiveRecord::Migration[5.2]
+class AddMetadataToAypexCategoriesAndBaseCategories < ActiveRecord::Migration[7.0]
   def change
     %i[
       aypex_categories

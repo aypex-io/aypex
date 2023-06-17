@@ -1,4 +1,4 @@
-class CreateAypexWishedProducts < ActiveRecord::Migration[5.2]
+class CreateAypexWishedProducts < ActiveRecord::Migration[7.0]
   def change
     create_table :aypex_wished_products, if_not_exists: true do |t|
       t.references :variant

@@ -1,4 +1,4 @@
-class AddMakeActiveAtToAypexProducts < ActiveRecord::Migration[5.2]
+class AddMakeActiveAtToAypexProducts < ActiveRecord::Migration[7.0]
   def change
     add_column :aypex_products, :make_active_at, :datetime
     add_index :aypex_products, :make_active_at

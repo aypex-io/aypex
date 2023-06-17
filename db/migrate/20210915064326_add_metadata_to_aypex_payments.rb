@@ -1,4 +1,4 @@
-class AddMetadataToAypexPayments < ActiveRecord::Migration[5.2]
+class AddMetadataToAypexPayments < ActiveRecord::Migration[7.0]
   def change
     change_table :aypex_payments do |t|
       if t.respond_to? :jsonb

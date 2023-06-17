@@ -1,4 +1,4 @@
-class AddMetadataToAypexProducts < ActiveRecord::Migration[5.2]
+class AddMetadataToAypexProducts < ActiveRecord::Migration[7.0]
   def change
     change_table :aypex_products do |t|
       if t.respond_to? :jsonb

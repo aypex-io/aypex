@@ -1,4 +1,4 @@
-class AddSettingsToPaymentMethods < ActiveRecord::Migration[5.2]
+class AddSettingsToPaymentMethods < ActiveRecord::Migration[7.0]
   def change
     change_table :aypex_payment_methods do |t|
       if t.respond_to? :jsonb

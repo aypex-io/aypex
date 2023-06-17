@@ -1,4 +1,4 @@
-class FixCmsPagesUniqueIndexes < ActiveRecord::Migration[5.2]
+class FixCmsPagesUniqueIndexes < ActiveRecord::Migration[7.0]
   def change
     remove_index :aypex_cms_pages, [:slug, :store_id, :deleted_at]
     remove_index :aypex_cms_pages, [:slug, :store_id], unique: true

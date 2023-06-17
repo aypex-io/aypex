@@ -1,4 +1,4 @@
-class AddMetadataToAypexTaxRates < ActiveRecord::Migration[5.2]
+class AddMetadataToAypexTaxRates < ActiveRecord::Migration[7.0]
   def change
     change_table :aypex_tax_rates do |t|
       if t.respond_to? :jsonb

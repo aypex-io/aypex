@@ -1,4 +1,4 @@
-class AddMetadataToAypexMultipleTables < ActiveRecord::Migration[5.2]
+class AddMetadataToAypexMultipleTables < ActiveRecord::Migration[7.0]
   def change
     %i[
       aypex_assets
@@ -11,7 +11,6 @@ class AddMetadataToAypexMultipleTables < ActiveRecord::Migration[5.2]
       aypex_prototypes
       aypex_refunds
       aypex_customer_returns
-      aypex_users
       aypex_addresses
       aypex_credit_cards
       aypex_store_credits
