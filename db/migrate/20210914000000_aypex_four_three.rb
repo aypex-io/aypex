@@ -1131,7 +1131,6 @@ class AypexFourThree < ActiveRecord::Migration[7.0]
       t.string "password_salt", limit: 128
       t.string "email"
       t.string "phone"
-      t.string "login"
       t.bigint "ship_address_id"
       t.bigint "bill_address_id"
       t.string "authentication_token"

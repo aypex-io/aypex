@@ -5,7 +5,6 @@ FactoryBot.define do
 
   factory :user, class: Aypex::Config.user_class do
     email { generate(:random_email) }
-    login { email }
     password { "secret" }
     password_confirmation { password }
     authentication_token { generate(:user_authentication_token) } if Aypex::Config.user_class.attribute_method? :authentication_token
