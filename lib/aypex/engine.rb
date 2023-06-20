@@ -163,5 +163,4 @@ module Aypex
   end
 end
 
-require "aypex/routes"
 require "aypex/components"
