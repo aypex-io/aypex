@@ -14,6 +14,20 @@ module Aypex
       localized_countries.sort_by { |c| c.name.parameterize }
     end
 
+    def store_logo(image_path = nil, options = {})
+      logo_attachment = if defined?(Aypex::StoreLogo) && current_store.logo.is_a?(Aypex::StoreLogo)
+        current_store.logo.attachment
+      end
+
+      image_path ||= if logo_attachment&.attached? && logo_attachment&.variable?
+        main_app.cdn_image_url(logo_attachment.variant(resize_to_limit: [244, 104]))
+      else
+        asset_path("aypex/logo.svg")
+      end
+
+      image_tag image_path, alt: current_store.name, title: current_store.name, class: "mw-100"
+    end
+
     def all_country_options
       Aypex::Country.all.map { |country| country_presentation(country) }
     end
