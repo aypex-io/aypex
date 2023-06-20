@@ -77,14 +77,6 @@ module Aypex
     validates :code, uniqueness: {case_sensitive: false, conditions: -> { with_deleted }}
     validates :mail_from_address, email: {allow_blank: false}
 
-    # FIXME: we should remove this condition in v5
-    if !ENV["AYPEX_DISABLE_DB_CONNECTION"] &&
-        connected? &&
-        table_exists? &&
-        connection.column_exists?(:aypex_stores, :new_order_notifications_email)
-      validates :new_order_notifications_email, email: {allow_blank: true}
-    end
-
     default_scope { order(created_at: :asc) }
 
     has_one :logo, class_name: "Aypex::StoreLogo", dependent: :destroy, as: :viewable
