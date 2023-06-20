@@ -1,6 +1,5 @@
 module Aypex
   class Asset < Aypex::Base
-    include Support::ActiveStorage
     include Metadata
     include Aypex::Webhooks::HasWebhooks if defined?(Aypex::Webhooks)
 
