@@ -29,5 +29,3 @@ Rails.application.routes.draw do
     end
   end
 end
-
-Aypex::Engine.draw_routes
