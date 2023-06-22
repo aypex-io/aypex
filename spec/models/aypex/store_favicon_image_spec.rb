@@ -12,7 +12,7 @@ describe Aypex::StoreFaviconImage do
     context "file size" do
       let(:favicon_image) do
         favicon_image = build(:favicon_image)
-        favicon_image.attachment.attach(io: file, filename: "favicon.png")
+        favicon_image.favicon_attachment.attach(io: file, filename: "favicon.png")
         favicon_image
       end
 
