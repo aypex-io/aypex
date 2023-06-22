@@ -6,6 +6,7 @@ module Aypex
 
       included do
         before_action :set_token
+
         if defined?(helper_method)
           helper_method :try_aypex_current_user
         end

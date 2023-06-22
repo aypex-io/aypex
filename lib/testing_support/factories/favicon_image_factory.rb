@@ -4,6 +4,6 @@ FactoryBot.define do
       filepath { Aypex::Engine.root.join("spec", "fixtures", "favicon.ico") }
     end
 
-    attachment { Rack::Test::UploadedFile.new(filepath) }
+    favicon_attachment { Rack::Test::UploadedFile.new(filepath) }
   end
 end

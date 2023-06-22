@@ -175,9 +175,9 @@ module Aypex
     end
 
     def favicon
-      return unless favicon_image&.attachment&.attached?
+      return unless favicon_image&.favicon_attachment&.attached?
 
-      favicon_image.attachment.variant(resize_to_limit: [32, 32])
+      favicon_image.favicon_attachment.variant(resize_to_limit: [32, 32])
     end
 
     def can_be_deleted?
