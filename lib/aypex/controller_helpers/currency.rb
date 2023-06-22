@@ -30,12 +30,9 @@ module Aypex
       end
 
       def supported_currencies_for_all_stores
-        @supported_currencies_for_all_stores ||= begin
-          (
-            Aypex::Store.pluck(:supported_currencies).map { |c| c&.split(',') }.flatten + Aypex::Store.pluck(:default_currency)
-          ).
-            compact.uniq.map { |code| ::Money::Currency.find(code.strip) }
-        end
+        @supported_currencies_for_all_stores ||= (
+            Aypex::Store.pluck(:supported_currencies).map { |c| c&.split(",") }.flatten + Aypex::Store.pluck(:default_currency)
+          ).compact.uniq.map { |code| ::Money::Currency.find(code.strip) }
       end
 
       def supported_currency?(currency_iso_code)
