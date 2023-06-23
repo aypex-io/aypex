@@ -1,13 +1,16 @@
 module Aypex
-  class StoreMailerLogo < Asset
-    if Aypex::Config.public_storage_service_name
-      has_one_attached :mailer_attachment, service: Aypex::Config.public_storage_service_name
-    else
-      has_one_attached :mailer_attachment
+  class StoreMailerLogo < Aypex::Base
+    belongs_to :store, inverse_of: :mailer_logo
+
+    after_initialize :find_or_build_image
+
+    has_one :image, class_name: "Aypex::Asset::Image::Email", dependent: :destroy, as: :viewable
+    accepts_nested_attributes_for :image, reject_if: :all_blank
+
+    private
+
+    def find_or_build_image
+      image || build_image
     end
-
-    VALID_CONTENT_TYPES = ["image/png", "image/jpg", "image/jpeg"].freeze
-
-    validates :mailer_attachment, content_type: VALID_CONTENT_TYPES
   end
 end

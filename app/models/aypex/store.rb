@@ -79,14 +79,14 @@ module Aypex
 
     default_scope { order(created_at: :asc) }
 
-    has_one :logo, class_name: "Aypex::StoreLogo", dependent: :destroy, as: :viewable
+    has_one :logo, class_name: "Aypex::StoreLogo", dependent: :destroy
     accepts_nested_attributes_for :logo, reject_if: :all_blank
 
-    has_one :mailer_logo, class_name: "Aypex::StoreMailerLogo", dependent: :destroy, as: :viewable
+    has_one :mailer_logo, class_name: "Aypex::StoreMailerLogo", dependent: :destroy
     accepts_nested_attributes_for :mailer_logo, reject_if: :all_blank
 
-    has_one :favicon_image, class_name: "Aypex::StoreFaviconImage", dependent: :destroy, as: :viewable
-    accepts_nested_attributes_for :favicon_image, reject_if: :all_blank
+    has_one :favicon, class_name: "Aypex::StoreFavicon", dependent: :destroy
+    accepts_nested_attributes_for :favicon, reject_if: :all_blank
 
     before_save :ensure_default_exists_and_is_unique
     before_save :ensure_supported_currencies, :ensure_supported_locales, :ensure_default_country
@@ -172,12 +172,6 @@ module Aypex
       ActiveSupport::Deprecation.warn("Store#checkout_zone_or_default is deprecated and will be removed in Aypex 5")
 
       @checkout_zone_or_default ||= checkout_zone || Aypex::Zone.default_checkout_zone
-    end
-
-    def favicon
-      return unless favicon_image&.favicon_attachment&.attached?
-
-      favicon_image.favicon_attachment.variant(resize_to_limit: [32, 32])
     end
 
     def can_be_deleted?

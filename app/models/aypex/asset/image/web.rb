@@ -1,5 +1,5 @@
 module Aypex
-  class Image < Asset
+  class Asset::Image::Web < Aypex::Asset
     include ImageMethods
 
     validates :attachment, attached: true, content_type: /\Aimage\/.*\z/

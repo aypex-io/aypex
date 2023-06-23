@@ -15,12 +15,10 @@ module Aypex
     end
 
     def store_logo(image_path = nil, options = {})
-      logo_attachment = if defined?(Aypex::StoreLogo) && current_store.logo.is_a?(Aypex::StoreLogo)
-        current_store.logo.attachment
-      end
+      logo = current_store.logo.image
 
-      image_path ||= if logo_attachment&.attached? && logo_attachment&.variable?
-        main_app.cdn_image_url(logo_attachment.variant(resize_to_limit: [244, 104]))
+      image_path ||= if logo.attachment&.attached?
+        logo.generate_url(width: 244, height: 104)
       else
         asset_path("aypex/logo.svg")
       end
@@ -84,8 +82,8 @@ module Aypex
     end
 
     def aypex_favicon_path
-      if current_store.favicon.present?
-        main_app.cdn_image_url(current_store.favicon)
+      if current_store.favicon&.image&.attachment&.attached?
+        current_store.favicon.image.generate_url
       else
         url_for("favicon.ico")
       end

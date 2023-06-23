@@ -14,13 +14,8 @@ FactoryBot.define do
     instagram { "aypex-commerce" }
 
     trait :with_favicon do
-      transient do
-        filepath { Aypex::Engine.root.join("spec", "fixtures", "favicon.ico") }
-        image_type { "image/x-icon" }
-      end
-
-      favicon_image do
-        create(:favicon_image, favicon_attachment: Rack::Test::UploadedFile.new(filepath, image_type))
+      favicon do
+        create(:favicon)
       end
     end
   end
