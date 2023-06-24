@@ -81,11 +81,15 @@ module Aypex
       end
     end
 
-    def aypex_favicon_path
+    def aypex_png_favicon_path(width: 48, height: 48, format: :png)
       if current_store.favicon&.image&.attachment&.attached?
-        current_store.favicon.image.generate_url
-      else
-        url_for("favicon.ico")
+        current_store.favicon.image.generate_url(width: width, height: height, format: format)
+      end
+    end
+
+    def aypex_svg_favicon_path
+      if current_store.square_svg_logo&.image&.attachment&.attached?
+        current_store.square_svg_logo.image.generate_url
       end
     end
 
