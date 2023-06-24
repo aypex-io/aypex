@@ -298,10 +298,10 @@ describe Aypex::BaseHelper do
 
   describe "#aypex_png_icon_path" do
     context "when a store has no default square logo" do
-      let(:current_store) { create(:store, :with_favicon) }
+      let(:current_store) { create(:store, :with_icon) }
 
       it "returns a square png" do
-        expect(aypex_png_icon_path).to end_with("icon_512x512.png")
+        expect(aypex_png_icon_path).to end_with("square.png")
       end
 
       it "returns the full url host present" do
