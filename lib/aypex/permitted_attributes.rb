@@ -156,7 +156,7 @@ module Aypex
       :new_order_notifications_email, :checkout_zone_id, :seo_robots,
       :digital_asset_authorized_clicks, :digital_asset_authorized_days,
       :limit_digital_download_count, :limit_digital_download_days, :digital_asset_link_expire_time,
-      {mailer_logo_attributes: {}, favicon_image_attributes: {}, logo_attributes: {}}]
+      {mailer_logo_attributes: {}, favicon_attributes: {}, logo_attributes: {}}]
 
     @@store_credit_attributes = %i[amount currency category_id memo]
 
