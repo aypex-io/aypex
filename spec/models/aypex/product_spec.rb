@@ -513,7 +513,7 @@ describe Aypex::Product do
 
   describe "#images" do
     let(:product) { create(:product, stores: [store]) }
-    let(:file) { File.open(File.expand_path("../../fixtures/thinking-cat.jpg", __dir__)) }
+    let(:file) { File.open(File.expand_path("../../fixtures/files/square.jpg", __dir__)) }
     let(:params) { {viewable_id: product.id, viewable_type: "Aypex::Product", alt: "position 2", position: 2} }
 
     before do

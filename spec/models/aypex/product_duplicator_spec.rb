@@ -7,7 +7,7 @@ module Aypex
     let!(:product) { create(:product, stores: [store]) }
     let!(:duplicator) { Aypex::ProductDuplicator.new(product) }
 
-    let(:file) { File.open(File.expand_path("../../fixtures/thinking-cat.jpg", __dir__)) }
+    let(:file) { File.open(File.expand_path("../../fixtures/files/square.jpg", __dir__)) }
     let(:params) do
       {
         viewable_id: product.id,

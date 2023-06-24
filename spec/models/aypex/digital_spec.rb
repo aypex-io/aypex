@@ -3,7 +3,7 @@ require "spec_helper"
 describe Aypex::Digital do
   include ActionDispatch::TestProcess::FixtureFile
 
-  let(:file_upload) { fixture_file_upload(file_fixture("icon_256x256.png"), "image/png") }
+  let(:file_upload) { fixture_file_upload(file_fixture("square.png"), "image/png") }
   let(:variant) { create(:variant) }
 
   it "validates presence of variant" do

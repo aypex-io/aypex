@@ -4,7 +4,7 @@ module Aypex
 
     after_initialize :find_or_build_image
 
-    has_one :image, class_name: "Aypex::Asset::Image::Web", dependent: :destroy, as: :viewable
+    has_one :image, class_name: "Aypex::Asset::Validate::Image", dependent: :destroy, as: :viewable
     accepts_nested_attributes_for :image, reject_if: :all_blank
 
     private

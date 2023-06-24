@@ -13,7 +13,7 @@ module Aypex
 
       default_scope { includes(attachment_attachment: :blob) }
 
-      def generate_url(width: nil, height: nil, quality: nil, format: nil)
+      def generate_url(width: nil, height: nil, quality: 100, format: nil)
         set_format = assess_format(attachment, format)
         set_width = width || attachment.metadata[:width]
         set_height = height || attachment.metadata[:height]

@@ -82,11 +82,11 @@ module Aypex
     has_one :logo, class_name: "Aypex::StoreLogo", dependent: :destroy
     accepts_nested_attributes_for :logo, reject_if: :all_blank
 
-    has_one :mailer_logo, class_name: "Aypex::StoreMailerLogo", dependent: :destroy
-    accepts_nested_attributes_for :mailer_logo, reject_if: :all_blank
+    has_one :square_logo, class_name: "Aypex::StoreSquareLogo", dependent: :destroy
+    accepts_nested_attributes_for :square_logo, reject_if: :all_blank
 
-    has_one :favicon, class_name: "Aypex::StoreFavicon", dependent: :destroy
-    accepts_nested_attributes_for :favicon, reject_if: :all_blank
+    has_one :icon, class_name: "Aypex::StoreIcon", dependent: :destroy
+    accepts_nested_attributes_for :icon, reject_if: :all_blank
 
     before_save :ensure_default_exists_and_is_unique
     before_save :ensure_supported_currencies, :ensure_supported_locales, :ensure_default_country
