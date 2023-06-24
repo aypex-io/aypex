@@ -1,26 +1,26 @@
-# Adjustments represent a change to the +item_total+ of an Order. Each adjustment
-# has an +amount+ that can be either positive or negative.
-#
-# Adjustments can be "opened" or "closed".
-# Once an adjustment is closed, it will not be automatically updated.
-#
-# Boolean attributes:
-#
-# +mandatory+
-#
-# If this flag is set to true then it means the the charge is required and will not
-# be removed from the order, even if the amount is zero. In other words a record
-# will be created even if the amount is zero. This is useful for representing things
-# such as shipping and tax charges where you may want to make it explicitly clear
-# that no charge was made for such things.
-#
-# +eligible?+
-#
-# This boolean attributes stores whether this adjustment is currently eligible
-# for its order. Only eligible adjustments count towards the order's adjustment
-# total. This allows an adjustment to be preserved if it becomes ineligible so
-# it might be reinstated.
 module Aypex
+  # Adjustments represent a change to the +item_total+ of an Order. Each adjustment
+  # has an +amount+ that can be either positive or negative.
+  #
+  # Adjustments can be "opened" or "closed".
+  # Once an adjustment is closed, it will not be automatically updated.
+  #
+  # Boolean attributes:
+  #
+  # +mandatory+
+  #
+  # If this flag is set to true then it means the the charge is required and will not
+  # be removed from the order, even if the amount is zero. In other words a record
+  # will be created even if the amount is zero. This is useful for representing things
+  # such as shipping and tax charges where you may want to make it explicitly clear
+  # that no charge was made for such things.
+  #
+  # +eligible?+
+  #
+  # This boolean attributes stores whether this adjustment is currently eligible
+  # for its order. Only eligible adjustments count towards the order's adjustment
+  # total. This allows an adjustment to be preserved if it becomes ineligible so
+  # it might be reinstated.
   class Adjustment < Aypex::Base
     with_options polymorphic: true do
       belongs_to :adjustable, touch: true
@@ -103,7 +103,6 @@ module Aypex
     private
 
     def update_adjustable_adjustment_total
-      # Cause adjustable's total to be recalculated
       Adjustable::AdjustmentsUpdater.update(adjustable)
     end
   end
