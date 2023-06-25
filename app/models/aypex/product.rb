@@ -88,7 +88,7 @@ module Aypex
     has_many :line_items, through: :variants_including_master
     has_many :orders, through: :line_items
 
-    has_many :images, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: "Aypex::Image"
+    has_many :images, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: "Aypex::Asset::Validate::Image"
     accepts_nested_attributes_for :images
 
     has_many :store_products, class_name: "Aypex::StoreProduct"

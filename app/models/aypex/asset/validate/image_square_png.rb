@@ -4,6 +4,6 @@ module Aypex
 
     VALID_CONTENT_TYPES = ["image/png"].freeze
 
-    validates :attachment, attached: true, content_type: VALID_CONTENT_TYPES, aspect_ratio: :square
+    validates :attachment, content_type: VALID_CONTENT_TYPES, aspect_ratio: :square
   end
 end

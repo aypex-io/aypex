@@ -5,14 +5,6 @@ module Aypex
     included do
       include Rails.application.routes.url_helpers
 
-      if Aypex::Config.public_storage_service_name
-        has_one_attached :attachment, service: Aypex::Config.public_storage_service_name
-      else
-        has_one_attached :attachment
-      end
-
-      default_scope { includes(attachment_attachment: :blob) }
-
       def generate_url(width: nil, height: nil, quality: 100, format: nil)
         set_format = assess_format(attachment, format)
         set_width = width || attachment.metadata[:width]

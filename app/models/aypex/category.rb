@@ -43,7 +43,7 @@ module Aypex
     after_update :sync_base_category_name
     after_touch :touch_ancestors_and_base_category
 
-    has_one :image, as: :viewable, dependent: :destroy, class_name: "Aypex::Image"
+    has_one :image, as: :viewable, dependent: :destroy, class_name: "Aypex::Asset::Validate::Image"
     accepts_nested_attributes_for :image, reject_if: :all_blank
 
     scope :for_store, ->(store) { joins(:base_category).where(aypex_base_categories: {store_id: store.id}) }

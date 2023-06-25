@@ -18,7 +18,7 @@ module Aypex
     end
 
     before do
-      new_image = Aypex::Image.new(params)
+      new_image = Aypex::Asset::Validate::Image.new(params)
       new_image.attachment.attach(io: file, filename: File.basename(file))
       new_image.save!
     end
@@ -35,7 +35,7 @@ module Aypex
 
     context "when image duplication enabled" do
       it "will duplicate the product images" do
-        expect { duplicator.duplicate }.to change { Aypex::Image.count }.by(1)
+        expect { duplicator.duplicate }.to change { Aypex::Asset::Validate::Image.count }.by(1)
       end
     end
 
@@ -43,14 +43,14 @@ module Aypex
       let!(:duplicator) { Aypex::ProductDuplicator.new(product, false) }
 
       it "will not duplicate the product images" do
-        expect { duplicator.duplicate }.not_to change { Aypex::Image.count }
+        expect { duplicator.duplicate }.not_to change { Aypex::Asset::Validate::Image.count }
       end
     end
 
     context "image duplication default" do
       context "when default is set to true" do
         it "clones images if no flag passed to initializer" do
-          expect { duplicator.duplicate }.to change { Aypex::Image.count }.by(1)
+          expect { duplicator.duplicate }.to change { Aypex::Asset::Validate::Image.count }.by(1)
         end
       end
 
@@ -64,7 +64,7 @@ module Aypex
         end
 
         it "does not clone images if no flag passed to initializer" do
-          expect { ProductDuplicator.new(product).duplicate }.not_to change { Aypex::Image.count }
+          expect { ProductDuplicator.new(product).duplicate }.not_to change { Aypex::Asset::Validate::Image.count }
         end
       end
     end

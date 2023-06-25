@@ -518,9 +518,9 @@ describe Aypex::Product do
 
     before do
       images = [
-        Aypex::Image.new(params),
-        Aypex::Image.new(params.merge(alt: "position 1", position: 1)),
-        Aypex::Image.new(params.merge(viewable_type: "ThirdParty::Extension", alt: "position 1", position: 2))
+        Aypex::Asset::Validate::Image.new(params),
+        Aypex::Asset::Validate::Image.new(params.merge(alt: "position 1", position: 1)),
+        Aypex::Asset::Validate::Image.new(params.merge(viewable_type: "ThirdParty::Extension", alt: "position 1", position: 2))
       ]
       images.each_with_index do |image, index|
         image.attachment.attach(io: file, filename: "thinking-cat-#{index + 1}.jpg", content_type: "image/jpeg")

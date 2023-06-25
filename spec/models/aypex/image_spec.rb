@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Aypex::Image do
+describe Aypex::Asset::Validate::Image do
   let(:aypex_image) { described_class.new }
   let(:image_file) { File.open("#{Aypex::Engine.root}/spec/fixtures/files/square.jpg") }
   let(:text_file) { File.open("#{Aypex::Engine.root}/spec/fixtures/files/text-file.txt") }
