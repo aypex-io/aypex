@@ -1,7 +1,7 @@
 FactoryBot.define do
-  factory :favicon, class: Aypex::StoreFavicon do
+  factory :store_square_logo, class: Aypex::StoreSquareLogo do
     image do
-      create(:favicon_asset)
+      create(:asset_image_square)
     end
 
     before(:create) do |resource|

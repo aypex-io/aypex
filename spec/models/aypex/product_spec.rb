@@ -513,14 +513,14 @@ describe Aypex::Product do
 
   describe "#images" do
     let(:product) { create(:product, stores: [store]) }
-    let(:file) { File.open(File.expand_path("../../fixtures/thinking-cat.jpg", __dir__)) }
+    let(:file) { File.open(File.expand_path("../../fixtures/files/square.jpg", __dir__)) }
     let(:params) { {viewable_id: product.id, viewable_type: "Aypex::Product", alt: "position 2", position: 2} }
 
     before do
       images = [
-        Aypex::Image.new(params),
-        Aypex::Image.new(params.merge(alt: "position 1", position: 1)),
-        Aypex::Image.new(params.merge(viewable_type: "ThirdParty::Extension", alt: "position 1", position: 2))
+        Aypex::Asset::Validate::Image.new(params),
+        Aypex::Asset::Validate::Image.new(params.merge(alt: "position 1", position: 1)),
+        Aypex::Asset::Validate::Image.new(params.merge(viewable_type: "ThirdParty::Extension", alt: "position 1", position: 2))
       ]
       images.each_with_index do |image, index|
         image.attachment.attach(io: file, filename: "thinking-cat-#{index + 1}.jpg", content_type: "image/jpeg")

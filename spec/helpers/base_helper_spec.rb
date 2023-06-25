@@ -296,19 +296,22 @@ describe Aypex::BaseHelper do
     end
   end
 
-  describe "#aypex_favicon_path" do
-    context "when a store has its own favicon" do
-      let(:current_store) { create(:store, :with_favicon) }
+  describe "#aypex_png_icon_path" do
+    context "when a store has no default square logo" do
+      let(:current_store) { create(:store, :with_icon) }
 
-      it do
-        expect(aypex_favicon_path).to end_with("favicon.ico")
-        expect(URI.parse(aypex_favicon_path).host).to be_present
+      it "returns a square png" do
+        expect(aypex_png_icon_path).to end_with("square.png")
+      end
+
+      it "returns the full url host present" do
+        expect(URI.parse(aypex_png_icon_path).host).to be_present
       end
     end
 
     context "when a store has no favicon" do
       it do
-        expect(aypex_favicon_path).to eq("favicon.ico")
+        expect(aypex_png_icon_path).to be_nil
       end
     end
   end

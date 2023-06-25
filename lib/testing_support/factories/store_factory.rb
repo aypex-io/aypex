@@ -13,9 +13,21 @@ FactoryBot.define do
     twitter { "aypex-commerce" }
     instagram { "aypex-commerce" }
 
-    trait :with_favicon do
-      favicon do
-        create(:favicon)
+    trait :with_logo do
+      logo do
+        create(:store_logo)
+      end
+    end
+
+    trait :with_square_logo do
+      square_logo do
+        create(:store_square_logo)
+      end
+    end
+
+    trait :with_icon do
+      icon do
+        create(:store_icon)
       end
     end
   end
