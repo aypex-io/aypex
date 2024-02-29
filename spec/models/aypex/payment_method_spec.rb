@@ -134,12 +134,12 @@ describe Aypex::PaymentMethod do
       expect(eligible).to be true
     end
 
-    it "returns false if currenct store id is not included" do
+    it "returns false if current store id is not included" do
       ineligible = pm.available_for_store?(store_1)
       expect(ineligible).to be false
     end
 
-    it "returns true if currenct store id is included" do
+    it "returns true if current store id is included" do
       eligible = pm.available_for_store?(store)
       expect(eligible).to be true
     end
