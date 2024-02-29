@@ -128,7 +128,7 @@ describe Aypex::Search::Base do
         end
 
         it "returns only products from EU store" do
-          expect(retrieved_products).to contain_exactly(*products_for_eu_store)
+          expect(retrieved_products).to match_array(products_for_eu_store)
         end
       end
 
@@ -140,7 +140,7 @@ describe Aypex::Search::Base do
         end
 
         it "returns only products from UK store" do
-          expect(retrieved_products).to contain_exactly(*products_for_uk_store)
+          expect(retrieved_products).to match_array(products_for_uk_store)
         end
       end
 

@@ -1,6 +1,7 @@
-## Base class for all types of promotion action.
-# PromotionActions perform the necessary tasks when a promotion is activated by an event and determined to be eligible.
 module Aypex
+  # Base class for all types of promotion action.
+  # PromotionActions perform the necessary tasks when a promotion
+  # is activated by an event and determined to be eligible.
   class PromotionAction < Aypex::Base
     acts_as_paranoid
 

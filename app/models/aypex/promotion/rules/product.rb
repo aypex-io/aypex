@@ -1,9 +1,9 @@
-# A rule to limit a promotion based on products in the order.
-# Can require all or any of the products to be present.
-# Valid products either come from assigned product group or are assigned directly to the rule.
 module Aypex
   class Promotion
     module Rules
+      # A rule to limit a promotion based on products in the order.
+      # Can require all or any of the products to be present.
+      # Valid products either come from assigned product group or are assigned directly to the rule.
       class Product < PromotionRule
         has_many :product_promotion_rules, class_name: "Aypex::ProductPromotionRule",
           foreign_key: :promotion_rule_id,

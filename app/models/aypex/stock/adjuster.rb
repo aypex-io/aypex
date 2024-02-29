@@ -1,7 +1,7 @@
-# Used by Prioritizer to adjust item quantities
-# see prioritizer_spec for use cases
 module Aypex
   module Stock
+    # Used by Prioritizer to adjust item quantities
+    # see prioritizer_spec for use cases
     class Adjuster
       attr_accessor :required_quantity, :received_quantity, :backorder_package,
         :backorder_item

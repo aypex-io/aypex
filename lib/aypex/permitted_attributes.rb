@@ -161,8 +161,9 @@ module Aypex
     @@store_credit_attributes = %i[amount currency category_id memo]
 
     # TODO: Should probably use something like Aypex::Config.user_class.attributes
-    @@user_attributes = [:email, :phone, :bill_address_id, :ship_address_id, :password, :first_name, :last_name,
-      :password_confirmation, :selected_locale, {public_metadata: {}, private_metadata: {}}]
+    @@user_attributes = [:email, :phone, :bill_address_id, :ship_address_id,
+      :current_password, :password, :password_confirmation, :first_name, :last_name,
+      :selected_locale, {public_metadata: {}, private_metadata: {}}]
 
     @@variant_attributes = [
       :name, :presentation, :cost_price, :discontinue_on, :lock_version,
