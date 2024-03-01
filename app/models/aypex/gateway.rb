@@ -19,11 +19,11 @@ module Aypex
       @provider ||= provider_class.new(gateway_options)
     end
 
-    def method_missing(method, *args)
+    def method_missing(method, *)
       if @provider.nil? || !@provider.respond_to?(method)
         super
       else
-        provider.send(method, *args)
+        provider.send(method, *)
       end
     end
 

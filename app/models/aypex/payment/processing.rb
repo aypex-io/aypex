@@ -139,7 +139,7 @@ module Aypex
               self.cvv_response_message = response.cvv_result["message"]
             end
           end
-          send("#{success_state}!")
+          send(:"#{success_state}!")
         else
           send(failure_state)
           gateway_error(response)

@@ -14,8 +14,8 @@ module Aypex
       module Controller
         include CustomAbility
 
-        def stub_authorization!(&block)
-          ability_class = build_ability(&block)
+        def stub_authorization!(&)
+          ability_class = build_ability(&)
           before do
             allow(controller).to receive(:current_ability).and_return(ability_class.new(nil))
           end
@@ -49,8 +49,8 @@ module Aypex
           end
         end
 
-        def custom_authorization!(&block)
-          ability = build_ability(&block)
+        def custom_authorization!(&)
+          ability = build_ability(&)
           ability_class = Aypex::Dependency.ability_class.constantize
 
           after(:all) do

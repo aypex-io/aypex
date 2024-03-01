@@ -10,7 +10,7 @@ module Aypex
     def compute(computable)
       # Aypex::LineItem -> :compute_line_item
       computable_name = computable.class.name.demodulize.underscore
-      method = "compute_#{computable_name}".to_sym
+      method = :"compute_#{computable_name}"
       calculator_class = self.class
       if respond_to?(method)
         send(method, computable)

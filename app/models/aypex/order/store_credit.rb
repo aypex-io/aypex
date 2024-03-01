@@ -29,7 +29,7 @@ module Aypex
         if payment? || confirm? || complete?
           total_applied_store_credit
         else
-          [total, (user.try(:total_available_store_credit) || 0.0)].min
+          [total, user.try(:total_available_store_credit) || 0.0].min
         end
       end
 

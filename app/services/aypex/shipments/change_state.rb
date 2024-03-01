@@ -4,7 +4,7 @@ module Aypex
       prepend Aypex::ServiceModule::Base
 
       def call(shipment:, state:)
-        shipment.send("#{state}!")
+        shipment.send(:"#{state}!")
         success(shipment.reload)
       rescue ActiveRecord::Rollback, ActiveRecord::RecordInvalid, StateMachines::InvalidTransition
         failure(shipment)

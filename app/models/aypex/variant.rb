@@ -108,7 +108,7 @@ module Aypex
     LOCALIZED_NUMBERS = %w[cost_price weight depth width height]
 
     LOCALIZED_NUMBERS.each do |m|
-      define_method("#{m}=") do |argument|
+      define_method(:"#{m}=") do |argument|
         self[m] = Aypex::LocalizedNumber.parse(argument) if argument.present?
       end
     end
@@ -242,7 +242,7 @@ module Aypex
       return 0 unless options.present?
 
       options.keys.map do |key|
-        m = "#{key}_price_modifier_amount_in".to_sym
+        m = :"#{key}_price_modifier_amount_in"
         if respond_to? m
           send(m, currency, options[key])
         else
@@ -255,7 +255,7 @@ module Aypex
       return 0 unless options.present?
 
       options.keys.map do |key|
-        m = "#{key}_price_modifier_amount".to_sym
+        m = :"#{key}_price_modifier_amount"
         if respond_to? m
           send(m, options[key])
         else

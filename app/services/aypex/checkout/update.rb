@@ -19,8 +19,8 @@ module Aypex
       private
 
       def address_with_country_iso_present?(params, address_kind = "ship")
-        return false unless params.dig(:order, "#{address_kind}_address_attributes".to_sym, :country_iso)
-        return false if params.dig(:order, "#{address_kind}_address_attributes".to_sym, :country_id)
+        return false unless params.dig(:order, :"#{address_kind}_address_attributes", :country_iso)
+        return false if params.dig(:order, :"#{address_kind}_address_attributes", :country_id)
 
         true
       end

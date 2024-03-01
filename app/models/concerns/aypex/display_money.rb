@@ -24,7 +24,7 @@ module Aypex
       args.each do |money_method|
         money_method = {money_method => {}} unless money_method.is_a? Hash
         money_method.each do |method_name, opts|
-          define_method("display_#{method_name}") do |**args_list|
+          define_method(:"display_#{method_name}") do |**args_list|
             default_opts = respond_to?(:currency) ? {currency: currency} : {}
 
             amount = args_list.blank? ? send(method_name) : send(method_name, **args_list)

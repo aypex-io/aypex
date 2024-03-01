@@ -21,7 +21,7 @@ module Aypex
 
     def initialize(amount, options = {})
       use_default_currency
-      @money = Monetize.parse([amount, (options[:currency] || Aypex::Store.default.default_currency)].join)
+      @money = Monetize.parse([amount, options[:currency] || Aypex::Store.default.default_currency].join)
       @options = Aypex::Money.default_formatting_rules.merge(options)
     end
 

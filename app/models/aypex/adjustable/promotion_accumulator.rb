@@ -39,8 +39,8 @@ module Aypex
         end.flatten
       end
 
-      def promo_total(*args)
-        promotions_adjustments(*args).map(&:amount).reduce(0, &:+)
+      def promo_total(*)
+        promotions_adjustments(*).map(&:amount).reduce(0, &:+)
       end
 
       def total_with_promotion(promotion_id)

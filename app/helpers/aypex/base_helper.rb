@@ -143,8 +143,8 @@ module Aypex
           meta.reverse_merge!(keywords: [object.name, current_store.meta_keywords].reject(&:blank?).join(", "),
             description: [object.name, current_store.meta_description].reject(&:blank?).join(", "))
         else
-          meta.reverse_merge!(keywords: (current_store.meta_keywords || current_store.seo_title),
-            description: (current_store.homepage(I18n.locale)&.seo_meta_description || current_store.seo_meta_description))
+          meta.reverse_merge!(keywords: current_store.meta_keywords || current_store.seo_title,
+            description: current_store.homepage(I18n.locale)&.seo_meta_description || current_store.seo_meta_description)
         end
       end
       meta

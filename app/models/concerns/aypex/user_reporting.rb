@@ -7,7 +7,7 @@ module Aypex
       store ||= Store.default
 
       completed_orders(store).pluck(:currency).uniq.each_with_object([]) do |currency, arr|
-        arr << send("display_#{report_name}", store: store, currency: currency)
+        arr << send(:"display_#{report_name}", store: store, currency: currency)
       end
     end
 

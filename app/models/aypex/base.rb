@@ -14,7 +14,7 @@ class Aypex::Base < ApplicationRecord
   end
 
   def self.for_store(store)
-    plural_model_name = model_name.plural.gsub(/aypex_/, "").to_sym
+    plural_model_name = model_name.plural.gsub("aypex_", "").to_sym
 
     if store.respond_to?(plural_model_name)
       store.send(plural_model_name)
