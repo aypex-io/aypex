@@ -67,7 +67,7 @@ module Aypex
 
             Aypex::Dependency.cart_remove_item_service.constantize.call(order: order,
               variant: item.variant,
-              quantity: (item.quantity || 1))
+              quantity: item.quantity || 1)
             action_taken = true
           end
 

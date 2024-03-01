@@ -1,4 +1,3 @@
-# https://github.com/aypex-contrib/aypex_address_book/blob/master/app/models/aypex/order_decorator.rb
 module Aypex
   class Order < Aypex::Base
     module AddressBook

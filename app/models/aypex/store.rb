@@ -30,6 +30,7 @@ module Aypex
 
     acts_as_paranoid
 
+    has_many :assets, class_name: "Aypex::Asset", dependent: :destroy
     has_many :orders, class_name: "Aypex::Order"
     has_many :line_items, through: :orders, class_name: "Aypex::LineItem"
     has_many :shipments, through: :orders, class_name: "Aypex::Shipment"
@@ -97,6 +98,8 @@ module Aypex
 
     after_commit :clear_cache
 
+    after_initialize :ensure_images
+
     alias_attribute :contact_email, :customer_support_email
 
     # FIXME: we need to drop `or_initialize` in v5
@@ -111,6 +114,18 @@ module Aypex
       Rails.cache.fetch("stores_available_locales") do
         Aypex::Store.all.map(&:supported_locales_list).flatten.uniq
       end
+    end
+
+    def logo_image
+      logo.image.asset
+    end
+
+    def square_logo_image
+      square_logo.image.asset
+    end
+
+    def icon_image
+      icon.image.asset
     end
 
     def default_menu(location)
@@ -179,6 +194,14 @@ module Aypex
     end
 
     private
+
+    def ensure_images
+      return unless id
+
+      logo || StoreLogo.create!(store_id: id)
+      square_logo || StoreSquareLogo.create!(store_id: id)
+      icon || StoreIcon.create!(store_id: id)
+    end
 
     def ensure_default_exists_and_is_unique
       if default

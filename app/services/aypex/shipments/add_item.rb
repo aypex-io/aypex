@@ -1,8 +1,8 @@
-# adds item to an existing shipment
-# if this variant is already added to the cart it will increase the quantity
-# if not it will create new line item
 module Aypex
   module Shipments
+    # Adds item to an existing shipment
+    # if this variant is already added to the cart it will increase the quantity
+    # if not it will create new line item
     class AddItem
       prepend Aypex::ServiceModule::Base
       include Helper

@@ -1,8 +1,8 @@
-# removes an item (variant) from shipment
-# quantity can be passed
-# if there is no quantity left for this item for this shipent, shipment itself will be removed
 module Aypex
   module Shipments
+    # removes an item (variant) from shipment
+    # quantity can be passed
+    # if there is no quantity left for this item for this shipment, shipment itself will be removed
     class RemoveItem
       prepend Aypex::ServiceModule::Base
       include Helper

@@ -1,5 +1,6 @@
-# Default implementation of User.  This class is intended to be modified by extensions (ex. aypex_auth_devise)
 module Aypex
+  # Default implementation of User.
+  # This class is intended to be modified by extensions (ex. aypex_auth_devise)
   class LegacyUser < Aypex::Base
     include UserAddress
     include UserPaymentSource

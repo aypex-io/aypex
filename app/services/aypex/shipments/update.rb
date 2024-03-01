@@ -1,6 +1,6 @@
-# Update Shipment and make sure Order states follow the shipment changes
 module Aypex
   module Shipments
+    # Updates Shipment and makes sure Order states follow the shipment changes
     class Update
       prepend Aypex::ServiceModule::Base
 

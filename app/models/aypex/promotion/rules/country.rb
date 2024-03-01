@@ -1,7 +1,7 @@
-# A rule to limit a promotion based on shipment country.
 module Aypex
   class Promotion
     module Rules
+      # A rule to limit a promotion based on shipment country.
       class Country < PromotionRule
         typed_store :settings, coder: ActiveRecord::TypedStore::IdentityCoder do |s|
           s.integer :country_id

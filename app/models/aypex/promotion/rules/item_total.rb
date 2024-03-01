@@ -1,8 +1,8 @@
-# A rule to apply to an order greater than (or greater than or equal to)
-# a specific amount
 module Aypex
   class Promotion
     module Rules
+      # A rule to apply to an order greater than (or greater than or equal to)
+      # a specific amount
       class ItemTotal < PromotionRule
         typed_store :settings, coder: ActiveRecord::TypedStore::IdentityCoder do |s|
           s.decimal :amount_min, default: 100.00, null: false

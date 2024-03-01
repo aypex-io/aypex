@@ -27,6 +27,7 @@ require "state_machines-activerecord"
 # invalid state of a Payment. In the future this should be removed.
 StateMachines::Machine.ignore_method_conflicts = true
 
+# Aypex eCommerce Platform
 module Aypex
   autoload :ProductFilters, "aypex/product_filters"
   autoload :TokenGenerator, "aypex/token_generator"

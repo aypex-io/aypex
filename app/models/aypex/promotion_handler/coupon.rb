@@ -86,7 +86,7 @@ module Aypex
 
         unless promotion.eligible?(order)
           self.error = promotion.eligibility_errors.full_messages.first unless promotion.eligibility_errors.blank?
-          return (error || ineligible_for_this_order)
+          return error || ineligible_for_this_order
         end
 
         # If any of the actions for the promotion return `true`,

@@ -195,7 +195,7 @@ describe Aypex::DigitalLink do
       expect { digital_link.authorize! }.to change(digital_link, :access_counter).from(2).to(3)
     end
 
-    it "touches the digital_link when autorized" do
+    it "touches the digital_link when authorized" do
       Timecop.travel Time.current + 1.day do
         expect do
           digital_link.authorize!

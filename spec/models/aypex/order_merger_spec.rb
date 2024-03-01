@@ -1,7 +1,7 @@
 require "spec_helper"
 
-# Regression tests for #2179
 module Aypex
+  # Regression tests for #2179
   describe OrderMerger do
     let(:variant) { create(:variant) }
     let(:order_1) { Aypex::Order.create }

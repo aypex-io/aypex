@@ -4,6 +4,7 @@ module Aypex
 
     included do
       validate :ensure_store_association_is_not_changed
+      validates :store_id, presence: true
 
       scope :for_store, ->(store) { where(store_id: store.id) }
     end

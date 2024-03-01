@@ -158,7 +158,7 @@ describe Aypex::Order do
           shared_examples "it cloned the default address" do
             it do
               default_attributes = default_address.attributes
-              order_attributes = order.send("#{address_kind}_address".to_sym).try(:attributes) || {}
+              order_attributes = order.send(:"#{address_kind}_address").try(:attributes) || {}
               expect(order_attributes.except("id", "created_at", "updated_at")).to eql(default_attributes.except("id", "created_at", "updated_at"))
             end
           end

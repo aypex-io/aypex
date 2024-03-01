@@ -15,8 +15,8 @@ module Aypex
     end
 
     def store_logo(image_path = nil, options = {})
-      image_path ||= if current_store.logo&.image&.attachment&.attached?
-        current_store.logo.image.generate_url(width: 244, height: 104)
+      image_path ||= if current_store.logo_image.attachment&.attached?
+        current_store.logo_image.generate_url(width: 244, height: 104, format: :webp)
       else
         asset_path("aypex/logo.svg")
       end
@@ -80,23 +80,23 @@ module Aypex
     end
 
     def aypex_png_icon_path(width: 48, height: 48)
-      asset = current_store.square_logo&.image&.attachment
-      raster_asset = current_store.icon&.image&.attachment
+      asset = current_store.square_logo_image&.attachment
+      raster_asset = current_store.icon_image&.attachment
 
-      if asset
-        current_store.square_logo.image.generate_url(width: width, height: height, format: :png) if asset.attached? && asset.content_type != "image/svg+xml"
-      elsif raster_asset
-        current_store.icon.image.generate_url(width: width, height: height, format: :png) if raster_asset.attached?
+      if asset&.attached? && asset.content_type != "image/svg+xml"
+        current_store.square_logo_image(width: width, height: height, format: :png)
+      elsif raster_asset&.attached?
+        current_store.icon_image.generate_url(width: width, height: height, format: :png)
       end
     end
 
     def aypex_svg_icon_path
-      asset = current_store.square_logo&.image&.attachment
+      asset = current_store.square_logo_image&.attachment
 
       return unless asset
 
       if asset.attached? && asset.content_type == "image/svg+xml"
-        current_store.square_logo.image.generate_url
+        current_store.square_logo_image.generate_url
       end
     end
 
@@ -143,8 +143,8 @@ module Aypex
           meta.reverse_merge!(keywords: [object.name, current_store.meta_keywords].reject(&:blank?).join(", "),
             description: [object.name, current_store.meta_description].reject(&:blank?).join(", "))
         else
-          meta.reverse_merge!(keywords: (current_store.meta_keywords || current_store.seo_title),
-            description: (current_store.homepage(I18n.locale)&.seo_meta_description || current_store.seo_meta_description))
+          meta.reverse_merge!(keywords: current_store.meta_keywords || current_store.seo_title,
+            description: current_store.homepage(I18n.locale)&.seo_meta_description || current_store.seo_meta_description)
         end
       end
       meta

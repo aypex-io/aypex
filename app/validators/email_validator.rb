@@ -3,7 +3,7 @@ class EmailValidator < ActiveModel::EachValidator
 
   def validate_each(record, attribute, value)
     unless EMAIL_REGEX.match?(value)
-      record.errors.add(attribute, :invalid, **{value: value}.merge!(options))
+      record.errors.add(attribute, :invalid, value: value, **options)
     end
   end
 end

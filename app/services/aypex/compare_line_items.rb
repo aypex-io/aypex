@@ -1,5 +1,5 @@
-# This class should be refactored
 module Aypex
+  # TODO: This class should be refactored
   class CompareLineItems
     prepend Aypex::ServiceModule::Base
 

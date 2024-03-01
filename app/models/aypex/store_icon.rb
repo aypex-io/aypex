@@ -2,15 +2,17 @@ module Aypex
   class StoreIcon < Aypex::Base
     belongs_to :store, inverse_of: :icon
 
-    after_initialize :find_or_build_image
+    after_initialize :ensure_image
 
-    has_one :image, class_name: "Aypex::Asset::Validate::ImageSquarePng", dependent: :destroy, as: :viewable
+    has_one :image, class_name: "Aypex::Image", dependent: :destroy, as: :viewable
     accepts_nested_attributes_for :image, reject_if: :all_blank
 
     private
 
-    def find_or_build_image
-      image || build_image
+    def ensure_image
+      return unless id
+
+      image || Image.create!(viewable_id: id, viewable_type: self.class.name)
     end
   end
 end

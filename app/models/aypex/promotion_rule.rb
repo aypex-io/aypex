@@ -1,5 +1,5 @@
-# Base class for all promotion rules
 module Aypex
+  # Base class for all promotion rules
   class PromotionRule < Aypex::Base
     belongs_to :promotion, class_name: "Aypex::Promotion", inverse_of: :promotion_rules
 

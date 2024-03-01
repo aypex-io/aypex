@@ -448,7 +448,7 @@ module Aypex
     def state_changed(name)
       state = "#{name}_state"
       if persisted?
-        old_state = send("#{state}_was")
+        old_state = send(:"#{state}_was")
         new_state = send(state)
         unless old_state == new_state
           log_state_changes(state_name: name, old_state: old_state, new_state: new_state)

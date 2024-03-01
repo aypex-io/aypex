@@ -12,9 +12,11 @@ module Aypex
     self.abilities = Set.new
 
     # Allows us to go beyond the standard cancan initialize method which makes it difficult for engines to
-    # modify the default +Ability+ of an application.  The +ability+ argument must be a class that includes
-    # the +CanCan::Ability+ module.  The registered ability should behave properly as a stand-alone class
-    # and therefore should be easy to test in isolation.
+    # modify the default +Ability+ of an application.
+    #
+    # The +ability+ argument must be a class that includes the +CanCan::Ability+ module.
+    # The registered ability should behave properly as a stand-alone class and therefore
+    # should be easy to test in isolation.
     def self.register_ability(ability)
       abilities.add(ability)
     end
@@ -32,12 +34,6 @@ module Aypex
         apply_admin_permissions(user)
       else
         apply_user_permissions(user)
-      end
-
-      # Include any abilities registered by extensions, etc.
-      # this is legacy behavior and should be removed in Aypex 5.0
-      Ability.abilities.merge(abilities_to_register).each do |clazz|
-        merge clazz.new(user)
       end
 
       protect_admin_role

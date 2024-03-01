@@ -1,8 +1,8 @@
-# creates new shipment record
-# if selected item (variant) is already added to order it will update line item
-# if not - it will create new line item record
 module Aypex
   module Shipments
+    # creates new shipment record
+    # if selected item (variant) is already added to order it will update line item
+    # if not - it will create new line item record
     class Create
       prepend Aypex::ServiceModule::Base
       include Helper

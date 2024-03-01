@@ -26,14 +26,14 @@ describe Aypex::Product do
             product.master.stock_items.where(variant: product.master).update_all(backorderable: true) if %w[purchasable backorderable].include?(method_name)
             product.master.stock_items.where(variant: product.master).update_all(count_on_hand: 10) if method_name == "in_stock"
 
-            expect(product.send("#{method_name}?")).to eq false
+            expect(product.send(:"#{method_name}?")).to eq false
           end
 
           it "returns true if variant is #{method_name.humanize.downcase}" do
             variant.stock_items.update_all(backorderable: true) if %w[purchasable backorderable].include?(method_name)
             variant.stock_items.update_all(count_on_hand: 10) if method_name == "in_stock"
 
-            expect(product.send("#{method_name}?")).to eq true
+            expect(product.send(:"#{method_name}?")).to eq true
           end
         end
 
@@ -42,14 +42,14 @@ describe Aypex::Product do
             product.master.stock_items.update_all(backorderable: false) if %w[purchasable backorderable].include?(method_name)
             product.master.stock_items.update_all(count_on_hand: 0) if method_name == "in_stock"
 
-            expect(product.send("#{method_name}?")).to eq false
+            expect(product.send(:"#{method_name}?")).to eq false
           end
 
           it "returns true if master is #{method_name.humanize.downcase}" do
             product.master.stock_items.update_all(backorderable: true) if %w[purchasable backorderable].include?(method_name)
             product.master.stock_items.update_all(count_on_hand: 10) if method_name == "in_stock"
 
-            expect(product.send("#{method_name}?")).to eq true
+            expect(product.send(:"#{method_name}?")).to eq true
           end
         end
       end
